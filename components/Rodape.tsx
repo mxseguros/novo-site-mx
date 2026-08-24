@@ -61,10 +61,6 @@ export default function Rodape() {
               <h4>Horário</h4>
               <p>Segunda a sexta, 08:00 às 18:00</p>
             </div>
-            <div>
-              <h4>Redes</h4>
-              <p><a href="https://instagram.com/mxsegurositapira">@mxsegurositapira</a> — Instagram e Facebook</p>
-            </div>
           </div>
         </div>
     
