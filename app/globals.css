@@ -97,7 +97,7 @@
   --f-card-vida: url("/fotos/card-vida.webp");
   --f-foto-equipe: url("/fotos/foto-equipe.webp");
 
-  --fonte: "DM Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fonte: var(--font-dm-sans), "DM Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 *, *::before, *::after{ box-sizing: border-box; }
@@ -108,7 +108,7 @@ html{ -webkit-text-size-adjust: 100%; }
 
 body{
   margin: 0;
-  background: #16171A;
+  background: var(--branco);
   color: var(--texto);
   font-family: var(--fonte);
   font-size: 1rem;
