@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
+import Icones from "@/components/Icones";
+import Topo from "@/components/Topo";
+import Rodape from "@/components/Rodape";
+import BarraMobile from "@/components/BarraMobile";
 
 /* DM Sans é a tipografia do design system — o "g" de andar único, escolhida
    por ser a família aberta mais próxima da referência visual aprovada.
@@ -38,7 +42,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           container-name: palco no CSS — o site inteiro para de responder,
           e nada acusa o erro.
         */}
-        <div className="palco">{children}</div>
+        <div className="palco">
+          <Icones />
+          <Topo />
+          <main id="conteudo">{children}</main>
+          <Rodape />
+          <BarraMobile />
+        </div>
       </body>
     </html>
   );
