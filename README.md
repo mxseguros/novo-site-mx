@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Site da MX Corretora de Seguros
 
-## Getting Started
+Redesign completo de [mxseguros.com.br](https://mxseguros.com.br), saindo de WordPress + Elementor
+para Next.js. Corretora de Itapira e Águas de Lindóia, no mercado desde 2002, com dez seguradoras
+parceiras.
 
-First, run the development server:
+**Status:** fundação. O design system e o conteúdo já foram portados do protótipo aprovado; as
+rotas ainda não existem.
+
+---
+
+## Como rodar
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`npm run build` para o build de produção, `npm run lint` e `npx tsc --noEmit` para as verificações.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Estrutura
 
-## Learn More
+```
+app/
+  globals.css        design system inteiro — 39 KB, portado do protótipo
+  layout.tsx
+content/
+  produtos.ts        os 27 seguros, tipados. Fonte única de conteúdo
+public/
+  fotos/             45 imagens WebP (headers de produto, cards, mapas)
+  mx-logo.webp       logo em WebP lossless, usado via mask-image
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Três convenções que não são óbvias
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 1. Sem Tailwind, e é de propósito
 
-## Deploy on Vercel
+O CSS em `app/globals.css` é o design system aprovado no Portão G2, com tokens, escala tipográfica
+e componentes já ajustados. Reescrever em classes utilitárias jogaria fora esse ajuste. Estilo novo
+entra como regra no design system, não como utilitária solta.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 2. `.palco` sustenta o responsivo inteiro
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+O site tem **16 `@container palco` e uma única `@media`**. Todo o comportamento responsivo pende de
+um elemento com:
+
+```css
+container-type: inline-size;
+container-name: palco;
+```
+
+Remover o `.palco` do layout, ou só o `container-name`, faz o site inteiro parar de responder — e
+isso não aparece como erro em lugar nenhum. É a armadilha número um deste repositório.
+
+### 3. `content/produtos.ts` é a fonte única
+
+Os 27 seguros vivem em um objeto tipado. O menu, o índice, o carrossel da home, o rodapé e a rota
+de produto leem dele. **Nenhum destino de produto é escrito à mão** — foi assim que o site antigo
+acumulou link quebrado.
+
+A interface `Produto` é validada em tempo de compilação por `satisfies`, então campo faltando
+quebra o build em vez de sumir da página.
+
+| Template | Uso | Quantos |
+|---|---|---|
+| T1 | Produto de massa | 12 |
+| T2 | Técnico e B2B | 12 |
+| T4 | Benefício (saúde, odonto, previdência) | 3 |
+
+Não existe T3: as páginas de consórcio saíram do site em 21/08/2026, porque a MX não representa
+nenhuma administradora.
+
+---
+
+## Conformidade
+
+A MX é **corretora**: não assume risco e não administra plano. Todo texto de produto precisa
+respeitar isso.
+
+- Consórcio nunca é investimento e nunca promete prazo de contemplação
+- Previdência sem projeção de rentabilidade
+- Em saúde, a MX é corretora e não administradora de benefícios — nada de prometer movimentação
+  cadastral
+- CNPJ, registro SUSEP e a Resolução CNSP 382/2020 ficam visíveis no rodapé
+
+---
+
+## Migração
+
+Todos os slugs do site antigo são preservados. Seis URLs mudam de destino e precisam de 301, a
+serem declarados no `vercel.json` antes da virada de DNS.
