@@ -12,7 +12,6 @@ export default function Rodape() {
         <div className="rodape__topo">
           <div className="pilha g16">
             <span className="logo logo--neg" role="img" aria-label="MX Corretora de Seguros"></span>
-            <p style={{ fontSize: '.9375rem', maxWidth: '34ch' }}>Corretora de seguros em Itapira e Águas de Lindóia, no mercado desde 2002.</p>
             <div className="pilha g12">
               <p className="rodape__linha"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg>
                 <span><span className="rodape__rot">WhatsApp</span><a href="https://wa.me/551938638150"><b className="num">(19) 3863-8150</b></a></span></p>
