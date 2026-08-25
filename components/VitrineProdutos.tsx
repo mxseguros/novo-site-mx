@@ -29,7 +29,7 @@ const CARDS = [
     chip: 'Sem exame na maioria dos planos',
     titulo: 'Seguro de Vida',
     texto: 'Proteção para quem depende de você, individual ou em grupo pela empresa.' },
-  { slug: 'residencial', cat: 'voce', foto: '--f-card-condominio', icone: 'i-casa',
+  { slug: 'residencial', cat: 'voce', foto: '--f-card-residencial', icone: 'i-casa',
     chip: 'Assistência 24h inclusa',
     titulo: 'Seguro Residencial',
     texto: 'Incêndio, roubo, danos elétricos e vendaval, com chaveiro e encanador de plantão.' },
