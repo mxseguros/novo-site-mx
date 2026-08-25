@@ -74,20 +74,43 @@ export default function Pagina() {
             </div>
             <p className="nota">Telefones conferidos na página de assistência da MX em 21/08/2026. Antes da publicação, cada linha é confirmada com a seguradora; as duas marcadas como <b>a confirmar</b> têm blocos sobrepostos na origem.</p>
             <p className="painel__vazio" id="assist-vazia" role="status">Não achamos essa seguradora na lista. Chame a MX no WhatsApp de sinistro que a gente localiza o número da sua apólice.</p>
+            {/* Os dois boxes se alinham por construção: mesma estrutura
+                olho → h3 → texto, e a ação empurrada para o rodapé do card
+                com margin-top auto, para os botões baterem mesmo quando os
+                textos tiverem alturas diferentes. */}
             <div className="grade grade--2">
               <div className="oferta oferta--faixa" style={{ minHeight: 'auto' }}>
                 <span className="olho">Suporte da MX</span>
                 <h3>Prefere escrever?</h3>
-                <p>Mande a documentação e o número da apólice por e-mail. Respondemos no próximo dia útil — para urgência, use a assistência 24h da seguradora acima.</p>
-                <div className="acoes" style={{ marginTop: '.8rem' }}>
-                  <a className="btn btn--azul" href="mailto:mxseguros@mxseguros.com.br">mxseguros@mxseguros.com.br</a>
+                <p>
+                  Mande a documentação e o número da apólice por e-mail. Respondemos no
+                  próximo dia útil — para urgência, use a assistência 24h da seguradora
+                  acima.
+                </p>
+                <div className="acoes" style={{ marginTop: 'auto', paddingTop: '.9rem' }}>
+                  <a className="btn btn--azul" href="mailto:mxseguros@mxseguros.com.br">
+                    mxseguros@mxseguros.com.br
+                  </a>
                 </div>
               </div>
-            <div className="oferta oferta--socorro oferta--faixa" style={{ minHeight: 'auto' }}>
-              <h3>Não achou a sua seguradora na lista?</h3>
-              <p>Chame a MX no WhatsApp de sinistro que a gente localiza o telefone da assistência pela sua apólice. Se o número que você tem em mãos não atender, avise — a tabela é conferida a cada seis meses.</p>
-              <div className="acoes" style={{ marginTop: '.7rem' }}><a className="btn btn--zap btn--peq num" href="https://wa.me/5519982036147"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><use href="#i-zap" /></svg> (19) 98203-6147</a></div>
-            </div>
+
+              <div className="oferta oferta--socorro oferta--faixa" style={{ minHeight: 'auto' }}>
+                <span className="olho">WhatsApp de sinistro</span>
+                <h3>Não achou a sua seguradora na lista?</h3>
+                <p>
+                  Chame a MX no WhatsApp de sinistro que a gente localiza o telefone da
+                  assistência pela sua apólice. Se o número que você tem em mãos não
+                  atender, avise — a tabela é conferida a cada seis meses.
+                </p>
+                <div className="acoes" style={{ marginTop: 'auto', paddingTop: '.9rem' }}>
+                  <a className="btn btn--zap num" href="https://wa.me/5519982036147">
+                    <svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true">
+                      <use href="#i-zap" />
+                    </svg>{' '}
+                    (19) 98203-6147
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </section>
