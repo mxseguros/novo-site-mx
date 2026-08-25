@@ -159,6 +159,8 @@ export default function Home() {
               <div className="logos__item"><img src="/seguradoras/seg_porto.webp" alt="Porto Seguro" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_chubb.webp" alt="Chubb Seguros" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_bradesco.webp" alt="Bradesco Seguros" /></div>
+              <div className="logos__item"><img src="/seguradoras/seg_itau.webp" alt="Itaú Seguros" /></div>
+              <div className="logos__item"><img src="/seguradoras/seg_mapfre.webp" alt="MAPFRE Seguros" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_norden.svg" alt="Norden" /></div>
             </div>
             <p className="nota">Nem toda seguradora opera todos os ramos. Na sua cotação entram as que trabalham com o produto que você procura.</p>
