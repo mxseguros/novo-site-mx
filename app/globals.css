@@ -614,7 +614,10 @@ a.card{ text-decoration: none; color: inherit; }
 
 .logos{ display: grid; grid-template-columns: repeat(2,1fr); gap: .5rem; }
 @container palco (min-width: 560px){ .logos{ grid-template-columns: repeat(3,1fr); } }
-@container palco (min-width: 900px){ .logos{ grid-template-columns: repeat(5,1fr); } }
+/* Seis, e não cinco: são doze seguradoras, e doze em cinco colunas deixa
+   a última fila com dois logos soltos. Doze divide por 2, 3 e 6, que são
+   exatamente as contagens dos três degraus — nenhuma fila fica órfã. */
+@container palco (min-width: 900px){ .logos{ grid-template-columns: repeat(6,1fr); } }
 .logos__item{
   display: grid; place-items: center; min-height: 68px; padding: .85rem 1rem;
   background: var(--cinza-2); border-radius: 8px;
