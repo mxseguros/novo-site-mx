@@ -612,16 +612,20 @@ a.card{ text-decoration: none; color: inherit; }
 .tab-comp thead .mx{ color: var(--azul); font-weight: 700; }
 .tab-comp .mx b{ color: var(--preto); font-weight: 500; }
 
-.logos{ display: grid; grid-template-columns: repeat(2,1fr); gap: .5rem; }
-@container palco (min-width: 560px){ .logos{ grid-template-columns: repeat(3,1fr); } }
-/* Seis, e não cinco: são doze seguradoras, e doze em cinco colunas deixa
-   a última fila com dois logos soltos. Doze divide por 2, 3 e 6, que são
-   exatamente as contagens dos três degraus — nenhuma fila fica órfã. */
-@container palco (min-width: 900px){ .logos{ grid-template-columns: repeat(6,1fr); } }
+/* Flex, e não grid, por causa da sobra da última fila. A lista de
+   seguradoras cresce a cada conversa com o cliente, e o número não
+   colabora: hoje são treze, que é primo — nenhuma contagem de coluna
+   divide. Numa grade a sobra encosta à esquerda e parece defeito; aqui
+   ela fica centrada e parece decisão. flex-grow tem de ser 0, senão os
+   dois ou três da última fila esticam para ocupar a linha inteira. */
+.logos{ display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
 .logos__item{
+  flex: 0 1 calc((100% - .5rem) / 2);
   display: grid; place-items: center; min-height: 68px; padding: .85rem 1rem;
   background: var(--cinza-2); border-radius: 8px;
 }
+@container palco (min-width: 560px){ .logos__item{ flex-basis: calc((100% - 1rem) / 3); } }
+@container palco (min-width: 900px){ .logos__item{ flex-basis: calc((100% - 2rem) / 5); } }
 .logos__item img{ max-height: 38px; max-width: 84%; width: auto;
   filter: grayscale(1); opacity: .78; }
 .logos__texto{ font-size: .875rem; color: var(--texto-fraco); }

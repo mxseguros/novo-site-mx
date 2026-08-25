@@ -152,12 +152,13 @@ export default function Home() {
               <div className="logos__item"><img src="/seguradoras/seg_mitsui.webp" alt="Mitsui Sumitomo Seguros" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_tokio.webp" alt="Tokio Marine Seguradora" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_hdi.webp" alt="HDI Seguros" /></div>
-              <div className="logos__item"><img src="/seguradoras/seg_yelum.webp" alt="Yelum Seguradora" /></div>
+              <div className="logos__item"><img src="/seguradoras/seg_yelum.svg" alt="Yelum Seguradora" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_allianz.webp" alt="Allianz Seguros" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_zurich.webp" alt="Zurich Seguros" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_sompo.webp" alt="Sompo Seguros" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_porto.webp" alt="Porto Seguro" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_chubb.webp" alt="Chubb Seguros" /></div>
+              <div className="logos__item"><img src="/seguradoras/seg_bradesco.webp" alt="Bradesco Seguros" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_norden.svg" alt="Norden" /></div>
             </div>
             <p className="nota">Nem toda seguradora opera todos os ramos. Na sua cotação entram as que trabalham com o produto que você procura.</p>
