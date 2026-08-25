@@ -294,14 +294,15 @@ ul,ol{ margin: 0; padding: 0; list-style: none; }
 @container palco (min-width: 1120px){ .topo__zap span{ display: inline; } }
 
 /* Painel de produtos */
-.painel{ display: none; background: #fff; border-bottom: 1px solid var(--linha);
+.painel{ display: none; position: relative; background: #fff; border-bottom: 1px solid var(--linha);
   box-shadow: var(--sombra-alta); max-height: min(70vh, 620px); overflow-y: auto; }
 .painel[data-aberto="1"]{ display: block; }
 .painel__busca{ position: sticky; top: 0; background: #fff; z-index: 2;
   padding: 1rem 0 .85rem; border-bottom: 1px solid var(--linha);
   display: flex; align-items: center; gap: 1rem; }
 .painel__fechar{
-  appearance: none; cursor: pointer; flex: 0 0 auto; margin-left: auto;
+  appearance: none; cursor: pointer;
+  position: absolute; top: 1rem; right: var(--gutter); z-index: 3;
   width: 38px; height: 38px; border-radius: 50%;
   display: inline-flex; align-items: center; justify-content: center;
   border: 1px solid var(--linha-forte); background: #fff; color: var(--preto);
@@ -315,7 +316,7 @@ ul,ol{ margin: 0; padding: 0; list-style: none; }
   border: 1px solid var(--linha-forte); border-radius: var(--raio);
   background: #fff; font: 400 1rem/1.4 var(--fonte); color: var(--preto);
 }
-.painel__grade{ display: grid; gap: 1.4rem 2rem; padding-block: 1.2rem 1.4rem; }
+.painel__grade{ display: grid; gap: 1.4rem 2rem; padding-block: 1.6rem 1.4rem; }
 @container palco (min-width: 760px){ .painel__grade{ grid-template-columns: repeat(3,1fr); } }
 /* Dois grupos na mesma coluna precisam de respiro entre eles. */
 .painel__bloco + .painel__bloco{ margin-top: 1.25rem; }

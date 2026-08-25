@@ -3,12 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { PRODUTOS, porGrupo, type Grupo, type Slug } from '@/content/produtos';
-
-/** Normaliza para busca: sem acento, minúsculo. "Automóvel" acha "automovel". */
-function normalizar(t: string) {
-  return t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
-}
+import { PRODUTOS, porGrupo, type Grupo } from '@/content/produtos';
 
 /* O painel tem três colunas, não um grupo por coluna: Consórcios fica
    embaixo de Saúde e previdência, na mesma coluna. */
@@ -21,21 +16,15 @@ const COLUNAS: Grupo[][] = [
 export default function Topo() {
   const rota = usePathname();
   const [aberto, setAberto] = useState(false);
-  const [busca, setBusca] = useState('');
   const painel = useRef<HTMLDivElement>(null);
-  const campo = useRef<HTMLInputElement>(null);
   const fechar = useRef<number | null>(null);
 
   // Esc fecha o painel de qualquer lugar da página.
   useEffect(() => {
     if (!aberto) return;
-    const t = setTimeout(() => campo.current?.focus(), 60);
     const esc = (e: KeyboardEvent) => e.key === 'Escape' && setAberto(false);
     document.addEventListener('keydown', esc);
-    return () => {
-      clearTimeout(t);
-      document.removeEventListener('keydown', esc);
-    };
+    return () => document.removeEventListener('keydown', esc);
   }, [aberto]);
 
   /* Recolhe sozinho ao tirar o mouse, com folga — e só em ponteiro fino.
@@ -62,15 +51,6 @@ export default function Topo() {
     const suave = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top: 0, behavior: suave ? 'smooth' : 'auto' });
   }
-
-  const termo = normalizar(busca.trim());
-  const casa = (s: Slug) =>
-    !termo ||
-    normalizar(PRODUTOS[s].rotuloMenu).includes(termo) ||
-    normalizar(PRODUTOS[s].nome).includes(termo) ||
-    normalizar(PRODUTOS[s].resumo).includes(termo);
-
-  const achados = COLUNAS.flat().flatMap((g) => porGrupo(g).filter(casa));
 
   return (
     <>
@@ -161,42 +141,26 @@ export default function Topo() {
           ref={painel}
         >
           <div className="env">
-            <div className="painel__busca">
-              <label className="campo-busca">
-                <span className="oculto">Buscar seguro pelo nome</span>
-                <svg viewBox="0 0 20 20" aria-hidden="true">
-                  <use href="#i-lupa" />
-                </svg>
-                <input
-                  ref={campo}
-                  type="search"
-                  value={busca}
-                  onChange={(e) => setBusca(e.target.value)}
-                  placeholder="Buscar seguro — ex.: caminhão, condomínio, vida"
-                  autoComplete="off"
+            <button
+              className="painel__fechar"
+              type="button"
+              aria-label="Fechar menu de seguros"
+              onClick={() => setAberto(false)}
+            >
+              <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+                <path
+                  d="M5 5l10 10M15 5L5 15"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
                 />
-              </label>
-              <button
-                className="painel__fechar"
-                type="button"
-                aria-label="Fechar menu de seguros"
-                onClick={() => setAberto(false)}
-              >
-                <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
-                  <path
-                    d="M5 5l10 10M15 5L5 15"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
-            </div>
+              </svg>
+            </button>
 
             <div className="painel__grade">
               {COLUNAS.map((coluna) => {
-                const comItens = coluna.filter((g) => porGrupo(g).filter(casa).length);
+                const comItens = coluna.filter((g) => porGrupo(g).length);
                 if (!comItens.length) return null;
                 return (
                   <div className="painel__col" key={coluna.join('+')}>
@@ -204,9 +168,7 @@ export default function Topo() {
                       <div className="painel__bloco" key={grupo}>
                         <h4>{grupo}</h4>
                         <ul>
-                          {porGrupo(grupo)
-                            .filter(casa)
-                            .map((slug) => (
+                          {porGrupo(grupo).map((slug) => (
                               <li key={slug}>
                                 <Link
                                   href={`/seguros/${slug}`}
@@ -214,12 +176,12 @@ export default function Topo() {
                                 >
                                   {PRODUTOS[slug].rotuloMenu}
                                 </Link>
-                              </li>
-                            ))}
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     ))}
-                    {coluna.includes('Consórcios') && !termo && (
+                    {coluna.includes('Consórcios') && (
                       <div className="painel__ajuda">
                         <h4>Não achou o que procura?</h4>
                         <p>
@@ -245,19 +207,6 @@ export default function Topo() {
               })}
             </div>
 
-            {termo && (
-              <p className="contador" aria-live="polite">
-                {achados.length === 1
-                  ? '1 seguro encontrado'
-                  : `${achados.length} seguros encontrados`}
-              </p>
-            )}
-            {termo && achados.length === 0 && (
-              <p className="painel__vazio" role="status">
-                Nenhum seguro com esse nome. Fale com a gente no WhatsApp — trabalhamos
-                com mais de 40 seguradoras e cotamos ramos que não estão nesta lista.
-              </p>
-            )}
           </div>
         </div>
       </header>
