@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { PRODUTOS, porGrupo, type Grupo } from '@/content/produtos';
 
 /* O painel tem três colunas, não um grupo por coluna: Consórcios fica
@@ -16,8 +16,25 @@ const COLUNAS: Grupo[][] = [
 export default function Topo() {
   const rota = usePathname();
   const [aberto, setAberto] = useState(false);
+  /** Altura máxima do painel, medida pelo espaço livre abaixo dele. */
+  const [alturaMax, setAlturaMax] = useState<string | undefined>();
   const painel = useRef<HTMLDivElement>(null);
   const fechar = useRef<number | null>(null);
+
+  /* O painel mostra tudo quando cabe, e só rola quando não cabe.
+     O header é sticky, então o topo do painel é estável na viewport:
+     basta medir o que sobra abaixo dele. Precisa ser layout effect —
+     antes de o painel abrir ele é display:none e mede zero. */
+  useLayoutEffect(() => {
+    if (!aberto) return;
+    const medir = () => {
+      const topo = painel.current?.getBoundingClientRect().top ?? 0;
+      setAlturaMax(`${Math.max(240, window.innerHeight - topo - 8)}px`);
+    };
+    medir();
+    window.addEventListener('resize', medir);
+    return () => window.removeEventListener('resize', medir);
+  }, [aberto]);
 
   // Esc fecha o painel de qualquer lugar da página.
   useEffect(() => {
@@ -139,6 +156,7 @@ export default function Topo() {
           id="painel-seguros"
           data-aberto={aberto ? '1' : '0'}
           ref={painel}
+          style={{ maxHeight: alturaMax }}
         >
           <div className="env">
             <button

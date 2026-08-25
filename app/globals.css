@@ -294,12 +294,12 @@ ul,ol{ margin: 0; padding: 0; list-style: none; }
 @container palco (min-width: 1120px){ .topo__zap span{ display: inline; } }
 
 /* Painel de produtos */
+/* O teto de altura vem do componente, que mede o espaco livre abaixo do
+   painel. O valor daqui e so o primeiro quadro, antes de a medida chegar. */
 .painel{ display: none; position: relative; background: #fff; border-bottom: 1px solid var(--linha);
-  box-shadow: var(--sombra-alta); max-height: min(70vh, 620px); overflow-y: auto; }
+  box-shadow: var(--sombra-alta); max-height: calc(100dvh - 7rem); overflow-y: auto;
+  overscroll-behavior: contain; }
 .painel[data-aberto="1"]{ display: block; }
-.painel__busca{ position: sticky; top: 0; background: #fff; z-index: 2;
-  padding: 1rem 0 .85rem; border-bottom: 1px solid var(--linha);
-  display: flex; align-items: center; gap: 1rem; }
 .painel__fechar{
   appearance: none; cursor: pointer;
   position: absolute; top: 1rem; right: var(--gutter); z-index: 3;
