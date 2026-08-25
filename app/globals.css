@@ -533,23 +533,41 @@ a.card{ text-decoration: none; color: inherit; }
   border-radius: 8px; background: var(--azul-tenue); color: var(--azul); }
 .card__icone svg{ width: 20px; height: 20px; }
 
-/* Depoimento — cartao de prova social. Sem hover: e caixa, nao controle. */
+/* Depoimento — cartao de prova social. Sem hover: e caixa, nao controle.
+   A citacao e o heroi do cartao: corpo maior que o texto comum, com a
+   aspa tipografica atras, em azul tenue. */
 .depo{
-  display: flex; flex-direction: column; gap: .85rem; margin: 0;
-  padding: 1.35rem; background: #fff;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; gap: .9rem; margin: 0;
+  padding: 1.5rem 1.5rem 1.3rem; background: #fff;
   border: 1px solid var(--linha); border-radius: var(--raio-card);
 }
-.depo--vazio{ border-style: dashed; border-color: var(--linha-forte); }
-.depo__aspas{ font-size: 1.9rem; line-height: .55; color: var(--linha-forte); }
-.depo blockquote{ margin: 0; font-size: 1rem; line-height: 1.55; color: var(--preto); }
-.depo__pe{ display: flex; align-items: center; gap: .7rem; margin-top: auto; padding-top: .35rem; }
+.depo::before{
+  content: "“"; position: absolute; z-index: 0; top: .55rem; right: .85rem;
+  font: 700 7.5rem/.78 var(--fonte); color: var(--azul); opacity: .12;
+  pointer-events: none;
+}
+.depo > *{ position: relative; z-index: 1; }
+.depo__ramo{
+  align-self: flex-start; padding: .26rem .72rem; border-radius: 999px;
+  background: var(--azul-tenue-leve); color: var(--azul);
+  font-size: .75rem; font-weight: 500; letter-spacing: -.005em;
+}
+.depo blockquote{
+  margin: 0; font-size: 1.125rem; line-height: 1.5;
+  color: var(--preto); letter-spacing: -.011em;
+}
+.depo__pe{
+  display: flex; align-items: center; gap: .75rem;
+  margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--linha);
+}
 .depo__av{
-  width: 40px; height: 40px; flex: 0 0 auto; border-radius: 50%;
+  width: 44px; height: 44px; flex: 0 0 auto; border-radius: 50%;
   display: grid; place-items: center;
   background: var(--azul-tenue); color: var(--azul);
-  font-size: .8125rem; font-weight: 500; letter-spacing: .03em;
+  font-size: .875rem; font-weight: 500; letter-spacing: .03em;
 }
-.depo__quem{ display: flex; flex-direction: column; }
+.depo__quem{ display: flex; flex-direction: column; gap: .05rem; }
 .depo__quem b{ font-size: .9375rem; font-weight: 500; color: var(--preto); }
 .depo__meta{ font-size: .8125rem; color: var(--texto-fraco); }
 

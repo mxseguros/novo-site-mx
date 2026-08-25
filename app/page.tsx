@@ -162,7 +162,9 @@ export default function Home() {
           </div>
         </section>
 
-      {/* Depoimentos */}
+      {/* Depoimentos — avaliações reais do perfil da MX no Google.
+          O texto é transcrito literalmente: não reescrever, não resumir,
+          não corrigir. São palavras de terceiros identificados. */}
         <section className="secao cinza">
           <div className="env pilha g20">
             <div className="pilha g8">
@@ -170,44 +172,47 @@ export default function Home() {
               <h2>Conheça alguns dos nossos milhares de clientes satisfeitos</h2>
             </div>
             <div className="grade grade--3">
-              <figure className="depo depo--vazio">
-                <span className="depo__aspas" aria-hidden="true">&ldquo;</span>
-                <blockquote>«DEPOIMENTO-1»</blockquote>
+              <figure className="depo">
+                <span className="depo__ramo">Avaliação no Google</span>
+                <blockquote>Trabalho de excelência, sempre superando as expectativas. Agradeço ao Natã pelo excelente atendimento.</blockquote>
                 <figcaption className="depo__pe">
-                  <span className="depo__av" aria-hidden="true">—</span>
+                  <span className="depo__av" aria-hidden="true">T</span>
                   <span className="depo__quem">
-                    <b>«CLIENTE-1»</b>
-                    <span className="depo__meta">«CIDADE» · «RAMO»</span>
+                    <b>Tammy</b>
+                    <span className="depo__meta">2 avaliações · há 2 anos</span>
                   </span>
                 </figcaption>
               </figure>
-              <figure className="depo depo--vazio">
-                <span className="depo__aspas" aria-hidden="true">&ldquo;</span>
-                <blockquote>«DEPOIMENTO-2»</blockquote>
+              <figure className="depo">
+                <span className="depo__ramo">Avaliação no Google</span>
+                <blockquote>Ótimos profissionais com muita atenção para com a gente.</blockquote>
                 <figcaption className="depo__pe">
-                  <span className="depo__av" aria-hidden="true">—</span>
+                  <span className="depo__av" aria-hidden="true">MV</span>
                   <span className="depo__quem">
-                    <b>«CLIENTE-2»</b>
-                    <span className="depo__meta">«CIDADE» · «RAMO»</span>
+                    <b>Marcos Vieira</b>
+                    <span className="depo__meta">Local Guide · 32 avaliações · há 2 anos</span>
                   </span>
                 </figcaption>
               </figure>
-              <figure className="depo depo--vazio">
-                <span className="depo__aspas" aria-hidden="true">&ldquo;</span>
-                <blockquote>«DEPOIMENTO-3»</blockquote>
+              <figure className="depo">
+                <span className="depo__ramo">Avaliação no Google</span>
+                <blockquote>Melhor atendimento, profissionais competentes e muito educados.</blockquote>
                 <figcaption className="depo__pe">
-                  <span className="depo__av" aria-hidden="true">—</span>
+                  <span className="depo__av" aria-hidden="true">RB</span>
                   <span className="depo__quem">
-                    <b>«CLIENTE-3»</b>
-                    <span className="depo__meta">«CIDADE» · «RAMO»</span>
+                    <b>Rubens Bozio</b>
+                    <span className="depo__meta">Local Guide · 17 avaliações · há 7 anos</span>
                   </span>
                 </figcaption>
               </figure>
             </div>
             <p className="nota">
-              <span className="token">«AVALIACOES-GOOGLE»</span> Os três cartões acima esperam
-              as avaliações reais do perfil da MX no Google. Não consegui lê-las
-              automaticamente — o Google bloqueia leitura por programa.
+              Avaliações publicadas no perfil da MX Corretora de Seguros no Google, por
+              clientes identificados.{' '}
+              <a href="https://share.google/ftBOp0uBpji8cZr16" target="_blank" rel="noopener">
+                Ver todas no Google
+              </a>
+              .
             </p>
           </div>
         </section>
