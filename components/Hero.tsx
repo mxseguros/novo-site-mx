@@ -24,8 +24,10 @@ const SLIDES = [
   },
   {
     slug: 'saude',
-    foto: 'var(--f-ph-saude)',
-    posicao: '60% center',
+    // corredor de hospital, CC0 do Wikimedia. A ph-saude ficou só no header
+    // do produto: repetir a mesma foto no hero e na página cansa.
+    foto: 'var(--f-hero-saude)',
+    posicao: '58% center',
     titulo: 'O plano mais barato não serve se o seu hospital estiver fora da rede',
     texto:
       'A MX compara operadoras, rede credenciada e carência antes de você assinar — e continua por perto na renovação.',
