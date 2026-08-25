@@ -236,7 +236,12 @@ ul,ol{ margin: 0; padding: 0; list-style: none; }
 .logo--sage{ background-color: var(--sage); }
 
 
-.util{ background: #fff; border-bottom: 1px solid var(--linha); font-size: .78rem; }
+/* A barra utilitaria e so de desktop. No celular a tela e estreita demais
+   para cinco atalhos, e o que ela carrega esta na barra fixa de baixo
+   (sinistro) e no rodape (A MX, unidades, trabalhe conosco, CNSP).
+   Some no mesmo ponto em que a .barra-mobile aparece. */
+.util{ display: none; background: #fff; border-bottom: 1px solid var(--linha); font-size: .78rem; }
+@container palco (min-width: 940px){ .util{ display: block; } }
 .util .env{ display: flex; flex-wrap: wrap; align-items: center; gap: .1rem 0; padding-block: .5rem; }
 .util a{ color: var(--texto-fraco); text-decoration: none; padding: .15rem .8rem;
   border-right: 1px solid var(--linha); line-height: 1.2; }
