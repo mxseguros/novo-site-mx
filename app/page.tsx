@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Hero from '@/components/Hero';
 import VitrineProdutos from '@/components/VitrineProdutos';
 import FormCotacao from '@/components/FormCotacao';
+import MapaUnidade from '@/components/MapaUnidade';
 
 /**
  * Home — portada do protótipo aprovado no Portão G2.
@@ -246,7 +247,10 @@ export default function Home() {
             </div>
             <div className="grade grade--2">
               <div className="unidade">
-                <div className="unidade__mapa" style={{ backgroundImage: 'var(--mapa-itapira)' }} role="img" aria-label="Mapa da matriz da MX na Avenida Rio Branco, no Centro de Itapira"></div>
+                <MapaUnidade
+                  endereco="Av. Rio Branco, 221 - Centro, Itapira - SP, 13970-070"
+                  descricao="Mapa da matriz da MX na Avenida Rio Branco, no Centro de Itapira"
+                />
                 <div className="unidade__corpo">
                   <span className="selo">Matriz</span>
                   <h3>Itapira / SP</h3>
@@ -260,7 +264,10 @@ export default function Home() {
                 </div>
               </div>
               <div className="unidade">
-                <div className="unidade__mapa" style={{ backgroundImage: 'var(--mapa-lindoia)' }} role="img" aria-label="Mapa da filial da MX na Rua Argentina, no Centro de Águas de Lindóia"></div>
+                <MapaUnidade
+                  endereco="Rua Argentina, 15 - Águas de Lindóia - SP"
+                  descricao="Mapa da filial da MX na Rua Argentina, em Águas de Lindóia"
+                />
                 <div className="unidade__corpo">
                   <span className="selo">Filial</span>
                   <h3>Águas de Lindóia / SP</h3>
