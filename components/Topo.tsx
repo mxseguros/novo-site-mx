@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { PRODUTOS, GRUPOS, porGrupo, type Slug } from '@/content/produtos';
 
@@ -10,6 +11,7 @@ function normalizar(t: string) {
 }
 
 export default function Topo() {
+  const rota = usePathname();
   const [aberto, setAberto] = useState(false);
   const [busca, setBusca] = useState('');
   const painel = useRef<HTMLDivElement>(null);
@@ -40,6 +42,17 @@ export default function Topo() {
   }
   function voltou() {
     if (fechar.current) window.clearTimeout(fechar.current);
+  }
+
+  /* O logo é sempre "voltar ao começo". Em outra página o Link já leva para
+     a home no topo; na própria home a navegação seria um no-op, então aqui
+     ele vira âncora e sobe a página. */
+  function clicouNoLogo(e: React.MouseEvent) {
+    setAberto(false);
+    if (rota !== '/') return;
+    e.preventDefault();
+    const suave = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: suave ? 'smooth' : 'auto' });
   }
 
   const termo = normalizar(busca.trim());
@@ -75,6 +88,7 @@ export default function Topo() {
               href="/"
               className="logo"
               aria-label="MX Corretora de Seguros — página inicial"
+              onClick={clicouNoLogo}
             />
             <nav className="topo__nav" aria-label="Principal">
               <button
