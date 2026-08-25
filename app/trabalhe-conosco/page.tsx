@@ -16,7 +16,7 @@ export const metadata: Metadata = {
  * é o que o site já afirma em outras páginas (duas unidades, desde 2002,
  * os cinco valores) mais o que é fato do ofício de corretor.
  *
- * Os «tokens» marcam o que depende de resposta da MX.
+ * O «EMAIL-RH» marca o que depende de resposta da MX.
  */
 export default function TrabalheConosco() {
   return (
@@ -59,22 +59,6 @@ export default function TrabalheConosco() {
               </div>
             </div>
           </article>
-        </div>
-      </section>
-
-      {/* O ponto mais honesto da página vem primeiro: não há mural de vagas. */}
-      <section className="secao--curta">
-        <div className="env">
-          <div className="oferta oferta--faixa" style={{ minHeight: 'auto' }}>
-            <span className="olho">Antes de tudo</span>
-            <h3>Não mantemos um mural de vagas</h3>
-            <p>
-              A MX é uma corretora regional e contrata pouco, quando a operação pede.
-              Currículo enviado fora de processo é guardado e consultado quando abre uma
-              posição — não some, mas também não recebe resposta automática.{' '}
-              <span className="token">«VAGAS»</span>
-            </p>
-          </div>
         </div>
       </section>
 
