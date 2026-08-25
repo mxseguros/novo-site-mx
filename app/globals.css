@@ -316,8 +316,9 @@ ul,ol{ margin: 0; padding: 0; list-style: none; }
   background: #fff; font: 400 1rem/1.4 var(--fonte); color: var(--preto);
 }
 .painel__grade{ display: grid; gap: 1.4rem 2rem; padding-block: 1.2rem 1.4rem; }
-@container palco (min-width: 760px){ .painel__grade{ grid-template-columns: repeat(2,1fr); } }
-@container palco (min-width: 1040px){ .painel__grade{ grid-template-columns: repeat(4,1fr); } }
+@container palco (min-width: 760px){ .painel__grade{ grid-template-columns: repeat(3,1fr); } }
+/* Dois grupos na mesma coluna precisam de respiro entre eles. */
+.painel__bloco + .painel__bloco{ margin-top: 1.25rem; }
 .painel__col h4{ font-size: .8125rem; font-weight: 500; color: var(--texto-fraco); margin-bottom: .5rem; }
 .painel__col ul{ display: flex; flex-direction: column; }
 .painel__col ul a{ display: block; padding: .34rem .5rem; margin-left: -.5rem; border-radius: 5px;

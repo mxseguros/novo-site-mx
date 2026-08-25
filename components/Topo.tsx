@@ -3,12 +3,20 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { PRODUTOS, GRUPOS, porGrupo, type Slug } from '@/content/produtos';
+import { PRODUTOS, porGrupo, type Grupo, type Slug } from '@/content/produtos';
 
 /** Normaliza para busca: sem acento, minúsculo. "Automóvel" acha "automovel". */
 function normalizar(t: string) {
   return t.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 }
+
+/* O painel tem três colunas, não um grupo por coluna: Consórcios fica
+   embaixo de Saúde e previdência, na mesma coluna. */
+const COLUNAS: Grupo[][] = [
+  ['Para você'],
+  ['Para sua empresa'],
+  ['Saúde e previdência', 'Consórcios'],
+];
 
 export default function Topo() {
   const rota = usePathname();
@@ -62,7 +70,7 @@ export default function Topo() {
     normalizar(PRODUTOS[s].nome).includes(termo) ||
     normalizar(PRODUTOS[s].resumo).includes(termo);
 
-  const achados = GRUPOS.flatMap((g) => porGrupo(g).filter(casa));
+  const achados = COLUNAS.flat().flatMap((g) => porGrupo(g).filter(casa));
 
   return (
     <>
@@ -187,22 +195,31 @@ export default function Topo() {
             </div>
 
             <div className="painel__grade">
-              {GRUPOS.map((grupo) => {
-                const itens = porGrupo(grupo).filter(casa);
-                if (!itens.length) return null;
+              {COLUNAS.map((coluna) => {
+                const comItens = coluna.filter((g) => porGrupo(g).filter(casa).length);
+                if (!comItens.length) return null;
                 return (
-                  <div className="painel__col" key={grupo}>
-                    <h4>{grupo}</h4>
-                    <ul>
-                      {itens.map((slug) => (
-                        <li key={slug}>
-                          <Link href={`/seguros/${slug}`} onClick={() => setAberto(false)}>
-                            {PRODUTOS[slug].rotuloMenu}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                    {grupo === 'Consórcios' && !termo && (
+                  <div className="painel__col" key={coluna.join('+')}>
+                    {comItens.map((grupo) => (
+                      <div className="painel__bloco" key={grupo}>
+                        <h4>{grupo}</h4>
+                        <ul>
+                          {porGrupo(grupo)
+                            .filter(casa)
+                            .map((slug) => (
+                              <li key={slug}>
+                                <Link
+                                  href={`/seguros/${slug}`}
+                                  onClick={() => setAberto(false)}
+                                >
+                                  {PRODUTOS[slug].rotuloMenu}
+                                </Link>
+                              </li>
+                            ))}
+                        </ul>
+                      </div>
+                    ))}
+                    {coluna.includes('Consórcios') && !termo && (
                       <div className="painel__ajuda">
                         <h4>Não achou o que procura?</h4>
                         <p>
