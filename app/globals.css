@@ -439,7 +439,14 @@ ul,ol{ margin: 0; padding: 0; list-style: none; }
 }
 .carrossel::-webkit-scrollbar{ display: none; }
 .foto-card{
-  position: relative; flex: 0 0 clamp(240px, 62cqi, 278px); scroll-snap-align: start;
+  /* O teto de 278px é o tamanho bom do card, mas a aba "Para sua empresa"
+     tem quatro: 4x278 + 3 vãos passa da faixa útil e o quarto ficava
+     cortado na borda, sem barra de rolagem à vista que explicasse por quê.
+     O min() faz o card ceder o suficiente para os quatro caberem quando há
+     largura. No celular a conta dá menos que o piso do clamp, que então
+     prevalece: lá o carrossel continua rolando, como deve. */
+  position: relative; scroll-snap-align: start;
+  flex: 0 0 clamp(240px, 62cqi, min(278px, (100% - 3rem) / 4));
   min-height: 348px; border-radius: var(--raio-card); overflow: hidden;
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: 1.1rem; text-decoration: none; color: #fff;
