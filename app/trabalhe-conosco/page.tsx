@@ -26,7 +26,10 @@ export default function TrabalheConosco() {
           <article
             className="hero__slide"
             style={{
-              backgroundImage: 'var(--f-foto-equipe)',
+              // foto-equipe é a mesma imagem do hero da home; aqui entra
+              // alguém trabalhando, que é o assunto desta página
+              backgroundImage: 'var(--f-ph-estagiario)',
+              backgroundPosition: '60% center',
               minHeight: 'clamp(280px,30cqi,340px)',
             }}
           >
@@ -59,59 +62,6 @@ export default function TrabalheConosco() {
               </div>
             </div>
           </article>
-        </div>
-      </section>
-
-      <section className="secao">
-        <div className="env pilha g24">
-          <div className="pilha g8">
-            <span className="olho">Como é o trabalho</span>
-            <h2>Seguro aqui não é venda por telefone</h2>
-            <p className="lide medida">
-              A corretora vive de renovação, não de primeira venda. Isso muda o dia a dia:
-              a mesma pessoa que faz a cotação atende o sinistro dois anos depois, e o
-              cliente lembra o nome de quem atendeu.
-            </p>
-          </div>
-
-          <div className="grade grade--3">
-            <div className="card">
-              <span className="card__icone">
-                <svg viewBox="0 0 20 20" aria-hidden="true">
-                  <use href="#i-pin" />
-                </svg>
-              </span>
-              <h4>Presencial, em duas cidades</h4>
-              <p>
-                Av. Rio Branco, 221, em Itapira, e Rua Argentina, 15, em Águas de Lindóia.
-                De segunda a sexta, das 08:00 às 18:00.
-              </p>
-            </div>
-            <div className="card">
-              <span className="card__icone">
-                <svg viewBox="0 0 20 20" aria-hidden="true">
-                  <use href="#i-escudo" />
-                </svg>
-              </span>
-              <h4>Dez seguradoras para comparar</h4>
-              <p>
-                Cada cotação sai comparada entre as parceiras. Quem trabalha aqui aprende a
-                ler apólice e a explicar a diferença entre elas em português.
-              </p>
-            </div>
-            <div className="card">
-              <span className="card__icone">
-                <svg viewBox="0 0 20 20" aria-hidden="true">
-                  <use href="#i-relogio" />
-                </svg>
-              </span>
-              <h4>O sinistro é a hora da verdade</h4>
-              <p>
-                Quando dá problema, é a corretora que liga para a seguradora. É o momento em
-                que o cliente decide se fica ou não — e o que mais ensina o ofício.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
