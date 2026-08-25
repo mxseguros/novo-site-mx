@@ -3,6 +3,11 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { PRODUTOS, GRUPOS, porGrupo, type Slug } from '@/content/produtos';
+import Campo from '@/components/Campo';
+import {
+  mascaraTelefone, mascaraMesAno, mascaraInteiro, mascaraIdades,
+  validaTelefone, validaNome, validaMesAno, validaVidas,
+} from '@/lib/mascaras';
 
 /**
  * Formulário da página de produto. O que ele pede muda com o template:
@@ -18,6 +23,12 @@ import { PRODUTOS, GRUPOS, porGrupo, type Slug } from '@/content/produtos';
 export default function FormProduto({ slug }: { slug: Slug }) {
   const p = PRODUTOS[slug];
   const [enviado, setEnviado] = useState(false);
+  const [tentou, setTentou] = useState(false);
+  const [erros, setErros] = useState<Record<string, string | null>>({});
+
+  const anota = (nome: string, erro: string | null) =>
+    setErros((e) => (e[nome] === erro ? e : { ...e, [nome]: erro }));
+  const temErro = Object.values(erros).some(Boolean);
 
   const conteudo =
     p.template === 2
@@ -80,6 +91,9 @@ export default function FormProduto({ slug }: { slug: Slug }) {
               noValidate
               onSubmit={(e) => {
                 e.preventDefault();
+                setTentou(true);
+                const form = e.currentTarget;
+                if (temErro || !form.checkValidity()) return;
                 setEnviado(true);
               }}
             >
@@ -99,63 +113,76 @@ export default function FormProduto({ slug }: { slug: Slug }) {
               </label>
 
               <div className="campos-2">
-                <label className="campo">
-                  <span>Nome</span>
-                  <input name="nome" required autoComplete="name" />
-                </label>
-                <label className="campo">
-                  <span>WhatsApp</span>
-                  <input
-                    name="fone"
-                    type="tel"
-                    inputMode="tel"
-                    placeholder="(19) 99999-9999"
-                    required
-                    autoComplete="tel"
-                  />
-                </label>
+                <Campo
+                  rotulo="Nome"
+                  nome="nome"
+                  required
+                  autoComplete="name"
+                  valida={validaNome}
+                  mostrarErro={tentou}
+                  aoValidar={anota}
+                />
+                <Campo
+                  rotulo="WhatsApp"
+                  nome="fone"
+                  type="tel"
+                  inputMode="numeric"
+                  placeholder="(19) 98765-4321"
+                  required
+                  autoComplete="tel"
+                  mascara={mascaraTelefone}
+                  valida={validaTelefone}
+                  mostrarErro={tentou}
+                  aoValidar={anota}
+                />
               </div>
 
               {p.template === 2 && (
                 <div className="campos-2">
-                  <label className="campo">
-                    <span>Empresa</span>
-                    <input name="org" />
-                  </label>
-                  <label className="campo">
-                    <span>Vencimento da apólice atual</span>
-                    <input name="venc" placeholder="mês/ano" />
-                  </label>
+                  <Campo rotulo="Empresa" nome="org" />
+                  <Campo
+                    rotulo="Vencimento da apólice atual"
+                    nome="venc"
+                    inputMode="numeric"
+                    placeholder="03/2027"
+                    dica="Mês e ano, como 03/2027."
+                    mascara={mascaraMesAno}
+                    valida={validaMesAno}
+                    mostrarErro={tentou}
+                    aoValidar={anota}
+                  />
                 </div>
               )}
 
               {p.template === 4 && (
                 <div className="campos-2">
-                  <label className="campo">
-                    <span>Quantas vidas</span>
-                    <input
-                      name="vidas"
-                      type="number"
-                      min={1}
-                      inputMode="numeric"
-                      placeholder="Ex.: 3"
-                    />
-                  </label>
-                  <label className="campo">
-                    <span>Idades</span>
-                    <input name="idades" placeholder="Ex.: 38, 35, 6" />
-                  </label>
+                  <Campo
+                    rotulo="Quantas vidas"
+                    nome="vidas"
+                    inputMode="numeric"
+                    placeholder="Ex.: 3"
+                    mascara={(v) => mascaraInteiro(v)}
+                    valida={validaVidas}
+                    mostrarErro={tentou}
+                    aoValidar={anota}
+                  />
+                  <Campo
+                    rotulo="Idades"
+                    nome="idades"
+                    inputMode="numeric"
+                    placeholder="Ex.: 38, 35, 6"
+                    dica="Separe por vírgula."
+                    mascara={mascaraIdades}
+                  />
                 </div>
               )}
 
               {p.template === 1 && (
-                <label className="campo">
-                  <span>Cidade</span>
-                  <input
-                    name="cidade"
-                    placeholder="Itapira, Águas de Lindóia, Mogi Guaçu…"
-                  />
-                </label>
+                <Campo
+                  rotulo="Cidade"
+                  nome="cidade"
+                  placeholder="Itapira, Águas de Lindóia, Mogi Guaçu…"
+                />
               )}
 
               <label className="consent">

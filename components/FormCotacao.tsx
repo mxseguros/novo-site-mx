@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { PRODUTOS, GRUPOS, porGrupo } from '@/content/produtos';
+import Campo from '@/components/Campo';
+import { mascaraTelefone, validaTelefone, validaNome } from '@/lib/mascaras';
 
 /**
  * Formulário único de cotação. Substitui os quatro formulários duplicados do
@@ -14,6 +16,13 @@ import { PRODUTOS, GRUPOS, porGrupo } from '@/content/produtos';
  */
 export default function FormCotacao() {
   const [enviado, setEnviado] = useState(false);
+  const [tentou, setTentou] = useState(false);
+  const [erros, setErros] = useState<Record<string, string | null>>({});
+
+  const anota = (nome: string, erro: string | null) =>
+    setErros((e) => (e[nome] === erro ? e : { ...e, [nome]: erro }));
+
+  const temErro = Object.values(erros).some(Boolean);
 
   return (
     <section className="secao cinza" id="cotar">
@@ -42,6 +51,10 @@ export default function FormCotacao() {
               noValidate
               onSubmit={(e) => {
                 e.preventDefault();
+                setTentou(true);
+                const form = e.currentTarget;
+                // o navegador cuida do obrigatório; as máscaras cuidam do formato
+                if (temErro || !form.checkValidity()) return;
                 setEnviado(true);
               }}
             >
@@ -63,27 +76,35 @@ export default function FormCotacao() {
               </label>
 
               <div className="campos-2">
-                <label className="campo">
-                  <span>Nome</span>
-                  <input name="nome" required autoComplete="name" />
-                </label>
-                <label className="campo">
-                  <span>WhatsApp</span>
-                  <input
-                    name="fone"
-                    type="tel"
-                    inputMode="tel"
-                    placeholder="(19) 99999-9999"
-                    required
-                    autoComplete="tel"
-                  />
-                </label>
+                <Campo
+                  rotulo="Nome"
+                  nome="nome"
+                  required
+                  autoComplete="name"
+                  valida={validaNome}
+                  mostrarErro={tentou}
+                  aoValidar={anota}
+                />
+                <Campo
+                  rotulo="WhatsApp"
+                  nome="fone"
+                  type="tel"
+                  inputMode="numeric"
+                  placeholder="(19) 98765-4321"
+                  required
+                  autoComplete="tel"
+                  mascara={mascaraTelefone}
+                  valida={validaTelefone}
+                  mostrarErro={tentou}
+                  aoValidar={anota}
+                />
               </div>
 
-              <label className="campo">
-                <span>Cidade</span>
-                <input name="cidade" placeholder="Itapira, Águas de Lindóia, Mogi Guaçu…" />
-              </label>
+              <Campo
+                rotulo="Cidade"
+                nome="cidade"
+                placeholder="Itapira, Águas de Lindóia, Mogi Guaçu…"
+              />
 
               <label className="consent">
                 <input type="checkbox" required />

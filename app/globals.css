@@ -597,6 +597,24 @@ a.card{ text-decoration: none; color: inherit; }
   background-repeat: no-repeat; background-position: right .85rem center; background-size: 12px 8px; }
 .campos-2{ display: grid; gap: .8rem; }
 @container palco (min-width: 620px){ .campos-2{ grid-template-columns: 1fr 1fr; } }
+/* Estado de erro do campo. O vermelho de socorro e o unico dono do erro:
+   e a mesma cor de sinistro, e aqui tambem significa "algo deu errado". */
+.campo__erro{
+  display: flex; align-items: flex-start; gap: .3rem;
+  font-size: .8125rem; line-height: 1.4; color: var(--socorro-alto);
+}
+.campo__erro::before{
+  content: "!"; flex: 0 0 auto;
+  width: 15px; height: 15px; margin-top: .1rem; border-radius: 50%;
+  background: var(--socorro); color: #fff;
+  font: 700 .625rem/15px var(--fonte); text-align: center;
+}
+.campo__dica{ font-size: .75rem; color: var(--texto-fraco); }
+.campo input[aria-invalid="true"], .campo select[aria-invalid="true"]{
+  border-color: var(--socorro);
+  box-shadow: 0 0 0 3px var(--socorro-tenue);
+}
+
 .consent{ display: flex; gap: .55rem; align-items: flex-start; font-size: .8125rem; color: var(--texto-fraco); }
 .consent input{ width: 19px; height: 19px; margin-top: .18rem; flex: 0 0 auto; accent-color: var(--azul); }
 .saida{ display: none; gap: .55rem; align-items: flex-start; padding: .8rem .95rem;
