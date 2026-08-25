@@ -3,31 +3,44 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-/** Os três destaques da home. Conteúdo aprovado no protótipo. */
+/**
+ * Os três destaques da home: vida, saúde e empresarial.
+ *
+ * A ordem é deliberada — vida e saúde falam com pessoa física, empresarial
+ * com CNPJ. Cada slide leva a cotação e a página do produto, e o texto sai
+ * da promessa que já está no produtos.ts, não de copy paralela que vai
+ * divergir na primeira revisão.
+ */
 const SLIDES = [
   {
-    foto: 'var(--f-hero-corretor)',
-    titulo: 'Uma corretora com endereço, não só com aplicativo',
+    slug: 'vida-individual',
+    foto: 'var(--f-ph-vida-individual)',
+    posicao: '62% center',
+    titulo: 'Seguro de vida também paga em vida',
     texto:
-      'Comparamos dez seguradoras, explicamos a diferença entre elas em português e, no dia do sinistro, é a MX que liga para a seguradora — não você.',
-    principal: 'Fazer cotação',
+      'Invalidez e doenças graves são cobertas enquanto você está aqui. E, na maioria dos planos, contratar não exige exame médico.',
+    principal: 'Cotar seguro de vida',
     secundario: { rotulo: 'Falar no WhatsApp', href: 'https://wa.me/5519971386794', zap: true },
   },
   {
-    foto: 'var(--f-hero-empresas)',
-    titulo: 'O seguro do seu negócio conferido item por item',
+    slug: 'saude',
+    foto: 'var(--f-ph-saude)',
+    posicao: '60% center',
+    titulo: 'O plano mais barato não serve se o seu hospital estiver fora da rede',
     texto:
-      'Patrimônio, responsabilidade civil, frota e lucros cessantes. A gente lê a apólice antes de você assinar e revisa todo ano, no vencimento.',
-    principal: 'Cotar seguro empresarial',
-    secundario: { rotulo: 'Ver coberturas', href: '/seguros/empresarial', zap: false },
+      'A MX compara operadoras, rede credenciada e carência antes de você assinar — e continua por perto na renovação.',
+    principal: 'Cotar plano de saúde',
+    secundario: { rotulo: 'Ver coberturas', href: '/seguros/saude', zap: false },
   },
   {
-    foto: 'var(--f-hero-condominio)',
-    titulo: 'Seguro de condomínio sem susto na assembleia',
+    slug: 'empresarial',
+    foto: 'var(--f-hero-empresas)',
+    posicao: 'center',
+    titulo: 'Seguro de empresa não é pacote de prateleira',
     texto:
-      'A cobertura que a lei exige, mais responsabilidade civil do síndico e equipamentos. Cotação comparada e laudo explicado para a administradora.',
-    principal: 'Cotar condomínio',
-    secundario: { rotulo: 'Falar com um corretor', href: '/contato', zap: false },
+      'Patrimônio, responsabilidade civil e lucros cessantes dimensionados pelo que a sua empresa realmente tem. A gente lê a apólice antes de você assinar.',
+    principal: 'Cotar seguro empresarial',
+    secundario: { rotulo: 'Ver coberturas', href: '/seguros/empresarial', zap: false },
   },
 ];
 
@@ -62,7 +75,7 @@ export default function Hero() {
           <article
             key={s.titulo}
             className="hero__slide"
-            style={{ backgroundImage: s.foto }}
+            style={{ backgroundImage: s.foto, backgroundPosition: s.posicao }}
             hidden={i !== atual}
           >
             <div className="hero__conteudo">
