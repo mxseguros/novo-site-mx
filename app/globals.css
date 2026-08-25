@@ -316,7 +316,8 @@ ul,ol{ margin: 0; padding: 0; list-style: none; }
   background: #fff; font: 400 1rem/1.4 var(--fonte); color: var(--preto);
 }
 .painel__grade{ display: grid; gap: 1.4rem 2rem; padding-block: 1.2rem 1.4rem; }
-@container palco (min-width: 760px){ .painel__grade{ grid-template-columns: repeat(3,1fr); } }
+@container palco (min-width: 760px){ .painel__grade{ grid-template-columns: repeat(2,1fr); } }
+@container palco (min-width: 1040px){ .painel__grade{ grid-template-columns: repeat(4,1fr); } }
 .painel__col h4{ font-size: .8125rem; font-weight: 500; color: var(--texto-fraco); margin-bottom: .5rem; }
 .painel__col ul{ display: flex; flex-direction: column; }
 .painel__col ul a{ display: block; padding: .34rem .5rem; margin-left: -.5rem; border-radius: 5px;
@@ -359,6 +360,34 @@ ul,ol{ margin: 0; padding: 0; list-style: none; }
 @container palco (max-width: 700px){
   .hero__slide::before{ background: linear-gradient(180deg, rgba(7,17,30,.86) 0%, rgba(7,17,30,.80) 55%, rgba(7,17,30,.90) 100%); }
 }
+/* Tratamento alternativo de slide, inspirado na referencia do cliente:
+   o fundo deixa de ser foto com veu e vira degrade da marca, com a foto
+   ancorada a direita e uma moldura fina em sage atras. O texto ganha
+   contraste sem depender de escurecer a imagem. */
+.hero__slide--faixa{ background-image: none !important; background-color: var(--navy); }
+.hero__slide--faixa::before{
+  background: linear-gradient(104deg, var(--navy) 0%, var(--navy-2) 52%, var(--navy-2) 100%);
+}
+.hero__slide--faixa .hero__arte{
+  position: absolute; inset: 0 0 0 auto; z-index: 0;
+  width: min(56%, 720px);
+  background-size: cover; background-position: 58% center;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 34%, #000 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 34%, #000 100%);
+}
+.hero__slide--faixa .hero__moldura{
+  position: absolute; z-index: 0; pointer-events: none;
+  right: clamp(2rem, 9cqi, 8rem); top: 16%; bottom: 12%;
+  width: min(34%, 420px);
+  border: 2px solid var(--sage); border-radius: 2px; opacity: .55;
+}
+@container palco (max-width: 760px){
+  .hero__slide--faixa .hero__arte{ width: 100%;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 46%);
+            mask-image: linear-gradient(180deg, transparent 0%, #000 46%); }
+  .hero__slide--faixa .hero__moldura{ display: none; }
+}
+
 .hero__conteudo{ position: relative; z-index: 1; width: 100%; padding-block: 2.5rem; }
 .hero__caixa{ max-width: 34rem; display: flex; flex-direction: column; gap: 1.1rem; }
 .hero h1{ color: #fff; }

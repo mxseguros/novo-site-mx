@@ -28,7 +28,10 @@ const SLIDES = [
     // do produto: repetir a mesma foto no hero e na página cansa.
     foto: 'var(--f-hero-saude)',
     posicao: '58% center',
-    titulo: 'O plano mais barato não serve se o seu hospital estiver fora da rede',
+    /* Tratamento da referência do cliente: fundo em degradê da marca, foto
+       ancorada à direita, moldura fina em sage. */
+    faixa: true,
+    titulo: 'O seu plano de saúde para todos os dias. A vida inteira.',
     texto:
       'A MX compara operadoras, rede credenciada e carência antes de você assinar — e continua por perto na renovação.',
     principal: 'Cotar plano de saúde',
@@ -146,13 +149,27 @@ export default function Hero() {
         {SLIDES.map((s, i) => (
           <article
             key={s.titulo}
-            className="hero__slide"
-            style={{ backgroundImage: s.foto, backgroundPosition: s.posicao }}
+            className={'hero__slide' + ('faixa' in s && s.faixa ? ' hero__slide--faixa' : '')}
+            style={
+              'faixa' in s && s.faixa
+                ? undefined
+                : { backgroundImage: s.foto, backgroundPosition: s.posicao }
+            }
             /* Os três ficam no DOM para o trilho poder deslizar. inert tira
                os inativos do foco e do leitor de tela — sem ele, o Tab cai
                em botão que está fora da tela. */
             inert={i !== atual}
           >
+            {'faixa' in s && s.faixa && (
+              <>
+                <div
+                  className="hero__arte"
+                  style={{ backgroundImage: s.foto, backgroundPosition: s.posicao }}
+                  aria-hidden="true"
+                />
+                <div className="hero__moldura" aria-hidden="true" />
+              </>
+            )}
             <div className="hero__conteudo">
               <div className="env">
                 <div className="hero__caixa">

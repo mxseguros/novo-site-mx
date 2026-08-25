@@ -202,7 +202,7 @@ export default function Topo() {
                         </li>
                       ))}
                     </ul>
-                    {grupo === 'Saúde e previdência' && !termo && (
+                    {grupo === 'Consórcios' && !termo && (
                       <div className="painel__ajuda">
                         <h4>Não achou o que procura?</h4>
                         <p>

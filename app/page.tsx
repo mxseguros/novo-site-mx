@@ -148,7 +148,7 @@ export default function Home() {
             </div>
             <div className="logos">
               <div className="logos__item"><img src="/seguradoras/seg_azul.webp" alt="Azul Seguros" /></div>
-              <div className="logos__item"><span className="logos__texto">SulAmérica</span></div>
+              <div className="logos__item"><img src="/seguradoras/seg_sulamerica.webp" alt="SulAmérica" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_msig.webp" alt="MSIG Seguros" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_tokio.webp" alt="Tokio Marine Seguradora" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_hdi.webp" alt="HDI Seguros" /></div>
@@ -156,11 +156,7 @@ export default function Home() {
               <div className="logos__item"><img src="/seguradoras/seg_allianz.webp" alt="Allianz Seguros" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_zurich.webp" alt="Zurich Seguros" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_sompo.webp" alt="Sompo Seguros" /></div>
-              <div className="logos__item"><span className="logos__texto">Bradesco Seguros</span></div>
-              <div className="logos__item"><span className="logos__texto">Porto Seguro</span></div>
               <div className="logos__item"><img src="/seguradoras/seg_norden.svg" alt="Norden" /></div>
-              <div className="logos__item"><span className="logos__texto">MetLife</span></div>
-              <div className="logos__item"><span className="logos__texto">Chubb</span></div>
             </div>
             <p className="nota">Nem toda seguradora opera todos os ramos. Na sua cotação entram as que trabalham com o produto que você procura.</p>
           </div>

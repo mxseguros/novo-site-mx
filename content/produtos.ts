@@ -11,7 +11,7 @@
  *  consórcio saíram do site em 21/08/2026 (a MX não representa administradora). */
 export type Template = 1 | 2 | 4;
 
-export type Grupo = 'Para você' | 'Para sua empresa' | 'Saúde e previdência';
+export type Grupo = 'Para você' | 'Para sua empresa' | 'Saúde e previdência' | 'Consórcios';
 
 export interface Item { titulo: string; descricao: string }
 export interface Pergunta { pergunta: string; resposta: string }
@@ -2422,13 +2422,251 @@ export const PRODUTOS = {
       "vida-em-grupo"
     ]
   }
+,
+  "consorcio-de-automoveis": {
+    "nome": "Consórcio de Automóveis",
+    "rotuloMenu": "Consórcio de Automóveis",
+    "grupo": "Consórcios",
+    "template": 2,
+    "foto": "hero-auto",
+    "url": "/consorcio-de-automoveis/",
+    "resumo": "Compra programada de carro ou moto, sem juros de financiamento.",
+    "promessa": "Você entra num grupo, paga parcelas e é contemplado por sorteio ou lance. Não tem juros de financiamento — tem taxa de administração, e a MX explica a diferença antes de você assinar.",
+    "chips": [
+      "Sem juros de financiamento",
+      "Sorteio ou lance",
+      "Carta de crédito"
+    ],
+    "gatilhoLegal": {
+      "titulo": "Quem administra é a administradora, autorizada pelo Banco Central",
+      "descricao": "Consórcio não é seguro e não é regulado pela SUSEP: quem autoriza e fiscaliza é o Banco Central, pela Lei 11.795/2008. A MX apresenta o grupo e acompanha você; o contrato, a carta de crédito e a assembleia são da administradora."
+    },
+    "coberturas": [
+      {
+        "titulo": "Carta de crédito",
+        "descricao": "Valor para comprar o veículo à vista na concessionária ou de particular, na contemplação."
+      },
+      {
+        "titulo": "Sorteio mensal",
+        "descricao": "Toda assembleia sorteia cotas do grupo. Sem data garantida — pode ser no primeiro mês ou perto do fim."
+      },
+      {
+        "titulo": "Lance",
+        "descricao": "Antecipa a contemplação oferecendo parte do crédito. Livre, fixo ou embutido, conforme o regulamento do grupo."
+      },
+      {
+        "titulo": "Taxa de administração",
+        "descricao": "É o custo do consórcio, diluído nas parcelas. É o número que você deve comparar entre administradoras."
+      },
+      {
+        "titulo": "Fundo de reserva",
+        "descricao": "Cobre inadimplência do grupo. Sobra é devolvida no encerramento, quando houver."
+      },
+      {
+        "titulo": "Seguro prestamista",
+        "descricao": "Quita o saldo em caso de morte ou invalidez do consorciado, quando contratado junto."
+      }
+    ],
+    "exclusoes": [
+      "Data de contemplação — não existe prazo garantido, nem por sorteio nem por lance",
+      "Rendimento sobre o valor pago: consórcio não remunera capital",
+      "Uso da carta de crédito para finalidade diferente da contratada",
+      "Desistência sem custo — quem sai recebe conforme o regulamento e o calendário do grupo",
+      "Escolha do veículo fora dos limites do crédito contratado"
+    ],
+    "dadosParaCotar": [
+      "Valor do veículo que você pretende comprar",
+      "Quanto cabe na parcela por mês",
+      "Prazo do grupo que você aceita",
+      "Se pretende dar lance, e de quanto",
+      "Se é para uso pessoal ou para a empresa"
+    ],
+    "faq": [
+      {
+        "pergunta": "Consórcio é investimento?",
+        "resposta": "Não. Consórcio é sistema de compra programada: você paga parcelas e é contemplado por sorteio ou lance, sem data garantida. Não há rendimento, não há juros a seu favor e não faz sentido comparar com aplicação financeira. Quem precisa do bem numa data certa deve olhar financiamento, não consórcio."
+      },
+      {
+        "pergunta": "Quanto tempo até ser contemplado?",
+        "resposta": "Não há resposta honesta para isso. A contemplação depende de sorteio ou de lance, e ninguém consegue prever. Qualquer promessa de prazo em consórcio é sinal de alerta."
+      },
+      {
+        "pergunta": "Posso usar a carta para comprar de particular?",
+        "resposta": "Em geral sim, respeitando as regras da administradora sobre estado do bem, documentação e avaliação. É um dos pontos que vale conferir no regulamento antes de assinar."
+      }
+    ],
+    "relacionados": [
+      "automovel",
+      "consorcio-de-imoveis",
+      "moto",
+      "caminhao"
+    ]
+  },
+  "consorcio-de-imoveis": {
+    "nome": "Consórcio de Imóveis",
+    "rotuloMenu": "Consórcio de Imóveis",
+    "grupo": "Consórcios",
+    "template": 2,
+    "foto": "hero-condominio",
+    "url": "/consorcio-de-imoveis/",
+    "resumo": "Compra programada de imóvel, sem juros de financiamento.",
+    "promessa": "Para quem tem tempo e não tem pressa: parcelas sem juros de financiamento, contemplação por sorteio ou lance, e a carta de crédito usada para comprar, construir ou quitar.",
+    "chips": [
+      "Sem juros de financiamento",
+      "Comprar, construir ou quitar",
+      "Prazo longo"
+    ],
+    "gatilhoLegal": {
+      "titulo": "Regulado pelo Banco Central, não pela SUSEP",
+      "descricao": "Consórcio de imóvel segue a Lei 11.795/2008 e é fiscalizado pelo Banco Central. A MX apresenta o grupo e acompanha o processo; o contrato e a carta de crédito são da administradora autorizada."
+    },
+    "coberturas": [
+      {
+        "titulo": "Carta de crédito",
+        "descricao": "Usada para comprar imóvel pronto, na planta, terreno, ou para construir e reformar, conforme o contratado."
+      },
+      {
+        "titulo": "Quitação de financiamento",
+        "descricao": "Boa parte das administradoras permite usar a carta para quitar financiamento imobiliário existente."
+      },
+      {
+        "titulo": "Sorteio e lance",
+        "descricao": "As duas formas de contemplação. Lance embutido usa parte da própria carta, quando o regulamento permite."
+      },
+      {
+        "titulo": "Taxa de administração",
+        "descricao": "O custo do consórcio. Em prazo longo, diferença de um ponto pesa muito no total pago."
+      },
+      {
+        "titulo": "Fundo de reserva",
+        "descricao": "Protege o grupo contra inadimplência ao longo do prazo."
+      },
+      {
+        "titulo": "Seguro prestamista",
+        "descricao": "Quita o saldo devedor em caso de morte ou invalidez, quando contratado."
+      }
+    ],
+    "exclusoes": [
+      "Data de contemplação — não existe prazo garantido",
+      "Rendimento sobre o valor pago: consórcio não é aplicação financeira",
+      "Imóvel fora dos critérios de avaliação e documentação da administradora",
+      "Uso da carta antes da contemplação",
+      "Devolução imediata em caso de desistência — segue o regulamento do grupo"
+    ],
+    "dadosParaCotar": [
+      "Valor aproximado do imóvel",
+      "Quanto cabe na parcela por mês",
+      "Se é para comprar pronto, construir ou quitar financiamento",
+      "Prazo que você aceita",
+      "Se pretende dar lance, e de quanto"
+    ],
+    "faq": [
+      {
+        "pergunta": "Consórcio é investimento?",
+        "resposta": "Não. Consórcio é sistema de compra programada: você paga parcelas e é contemplado por sorteio ou lance, sem data garantida. Não há rendimento, não há juros a seu favor e não faz sentido comparar com aplicação financeira. Quem precisa do bem numa data certa deve olhar financiamento, não consórcio."
+      },
+      {
+        "pergunta": "Consórcio sai mais barato que financiamento?",
+        "resposta": "Depende do prazo, da taxa de administração e de quando você é contemplado. Consórcio não tem juros, mas tem taxa; financiamento tem juros e entrega o imóvel agora. São produtos diferentes: quem precisa morar já não deve escolher consórcio."
+      },
+      {
+        "pergunta": "Posso usar a carta para reformar?",
+        "resposta": "Algumas administradoras permitem construção e reforma; outras restringem à aquisição. Precisa estar no regulamento do grupo, e é um dos pontos que a MX confere antes de indicar."
+      }
+    ],
+    "relacionados": [
+      "residencial",
+      "consorcio-de-automoveis",
+      "condominio",
+      "fianca-locaticia"
+    ]
+  },
+  "consorcio-de-servicos": {
+    "nome": "Consórcio de Serviços",
+    "rotuloMenu": "Consórcio de Serviços",
+    "grupo": "Consórcios",
+    "template": 2,
+    "foto": "h-documento",
+    "url": "/consorcio-de-servicos/",
+    "resumo": "Compra programada de serviço: reforma, cirurgia, formatura, viagem.",
+    "promessa": "Para o que não é bem material — reforma, procedimento de saúde, festa, curso, viagem. Mesma lógica do consórcio de bem, com a carta de crédito usada para contratar o serviço.",
+    "chips": [
+      "Sem juros de financiamento",
+      "Reforma, saúde, evento",
+      "Carta de crédito"
+    ],
+    "gatilhoLegal": {
+      "titulo": "Também é Banco Central, e o serviço é prestado por terceiro",
+      "descricao": "Segue a mesma Lei 11.795/2008. Vale lembrar que a administradora libera o crédito, mas quem presta o serviço é o fornecedor que você escolher — a qualidade dele não é responsabilidade da administradora nem da corretora."
+    },
+    "coberturas": [
+      {
+        "titulo": "Carta de crédito",
+        "descricao": "Valor liberado na contemplação para pagar o serviço contratado, conforme as regras do grupo."
+      },
+      {
+        "titulo": "Sorteio e lance",
+        "descricao": "As duas formas de contemplação, como em qualquer consórcio."
+      },
+      {
+        "titulo": "Uso flexível",
+        "descricao": "Reforma, procedimento estético ou de saúde, formatura, casamento, curso, viagem — conforme o objeto do grupo."
+      },
+      {
+        "titulo": "Taxa de administração",
+        "descricao": "O custo do consórcio, diluído nas parcelas."
+      },
+      {
+        "titulo": "Fundo de reserva",
+        "descricao": "Cobre inadimplência ao longo do prazo do grupo."
+      },
+      {
+        "titulo": "Prazos mais curtos",
+        "descricao": "Grupos de serviço costumam ter prazo menor que os de imóvel, o que muda a conta da parcela."
+      }
+    ],
+    "exclusoes": [
+      "Data de contemplação — não existe prazo garantido",
+      "Rendimento sobre o valor pago",
+      "Qualidade ou resultado do serviço prestado pelo fornecedor",
+      "Uso do crédito para finalidade diferente do objeto do grupo",
+      "Devolução imediata em caso de desistência"
+    ],
+    "dadosParaCotar": [
+      "Qual serviço você pretende contratar",
+      "Valor aproximado",
+      "Quanto cabe na parcela por mês",
+      "Para quando você precisa — e se aceita não ter data garantida",
+      "Se pretende dar lance"
+    ],
+    "faq": [
+      {
+        "pergunta": "Consórcio é investimento?",
+        "resposta": "Não. Consórcio é sistema de compra programada: você paga parcelas e é contemplado por sorteio ou lance, sem data garantida. Não há rendimento, não há juros a seu favor e não faz sentido comparar com aplicação financeira. Quem precisa do bem numa data certa deve olhar financiamento, não consórcio."
+      },
+      {
+        "pergunta": "Serve para cirurgia ou tratamento?",
+        "resposta": "Serve para pagar o procedimento, desde que esteja no objeto do grupo. Mas atenção: consórcio não substitui plano de saúde, porque não há data garantida de contemplação e emergência não espera assembleia."
+      },
+      {
+        "pergunta": "E se eu escolher um fornecedor ruim?",
+        "resposta": "A administradora libera o crédito; a execução do serviço é entre você e o fornecedor. Nem a administradora nem a MX respondem pela qualidade do serviço contratado."
+      }
+    ],
+    "relacionados": [
+      "consorcio-de-imoveis",
+      "consorcio-de-automoveis",
+      "festas-e-eventos",
+      "viagem"
+    ]
+  }
 } as const satisfies Record<string, Produto>;
 
 export type Slug = keyof typeof PRODUTOS;
 
 export const SLUGS = Object.keys(PRODUTOS) as Slug[];
 
-export const GRUPOS: Grupo[] = ['Para você', 'Para sua empresa', 'Saúde e previdência'];
+export const GRUPOS: Grupo[] = ['Para você', 'Para sua empresa', 'Saúde e previdência', 'Consórcios'];
 
 export function porGrupo(g: Grupo): Slug[] {
   return SLUGS.filter((s) => PRODUTOS[s].grupo === g)
