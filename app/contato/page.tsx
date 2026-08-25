@@ -16,7 +16,6 @@ export default function Pagina() {
               <ol><li><a href="/">Início</a></li><li aria-current="page">Contato</li></ol>
             </nav>
             <div className="pilha g12" style={{ paddingTop: '.4rem' }}>
-              <span className="olho">Contato</span>
               <h1>Fale com a MX</h1>
               <p className="lide medida">Três canais, cada um com um assunto. Escolha pelo motivo da sua ligação, não pelo número.</p>
             </div>
