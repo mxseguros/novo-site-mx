@@ -80,7 +80,7 @@ export default function Pagina() {
       
         <section className="secao--curta">
           <div className="env">
-            <p className="nota">MX Corretora de Seguros · CNPJ 45.154.654/0001-08.</p>
+            <p className="nota">MX Corretora de Seguros · CNPJ 07.499.352/0001-82.</p>
           </div>
         </section>
     </>

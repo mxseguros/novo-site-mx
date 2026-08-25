@@ -1879,7 +1879,7 @@ export const PRODUTOS = {
     "rotuloMenu": "Grandes Riscos",
     "grupo": "Para sua empresa",
     "template": 2,
-    "foto": "h-obra",
+    "foto": "ph-grandes-riscos",
     "url": "/grandes-riscos/",
     "resumo": "Apólice negociada cláusula a cláusula para operação industrial.",
     "promessa": "Apólice negociada cláusula a cláusula para operação industrial — onde o produto de prateleira não alcança.",
@@ -2257,6 +2257,169 @@ export const PRODUTOS = {
       "saude",
       "vida-em-grupo",
       "odontologico"
+    ]
+  }
+,
+  "responsabilidade-civil-profissional": {
+    "nome": "Seguro de Responsabilidade Civil Profissional",
+    "rotuloMenu": "RC Profissional",
+    "grupo": "Para sua empresa",
+    "template": 2,
+    "foto": "h-documento",
+    "url": "/responsabilidade-civil-profissional/",
+    "resumo": "Cobre o prejuízo que um erro seu no trabalho causa a um cliente.",
+    "promessa": "Engenheiro, contador, advogado, arquiteto, consultor: quando um erro técnico vira prejuízo para o cliente, é esta apólice que responde — inclusive pelo custo de se defender.",
+    "chips": [
+      "Erro e omissão",
+      "Custas de defesa",
+      "Retroatividade"
+    ],
+    "gatilhoLegal": {
+      "titulo": "Contrato, licitação e conselho de classe",
+      "descricao": "Não é obrigatório por lei geral, mas é exigido em contrato por boa parte dos clientes corporativos, aparece como requisito em licitação e, em algumas profissões regulamentadas, é cobrado pelo conselho. Quem presta serviço técnico costuma descobrir a exigência no meio da negociação."
+    },
+    "coberturas": [
+      {
+        "titulo": "Erro, omissão ou negligência",
+        "descricao": "Dano que o seu serviço causa ao cliente — cálculo errado, prazo perdido, projeto com falha, orientação equivocada."
+      },
+      {
+        "titulo": "Custas de defesa",
+        "descricao": "Honorários de advogado, perícia e custas processuais, mesmo quando a ação é julgada improcedente no fim."
+      },
+      {
+        "titulo": "Retroatividade",
+        "descricao": "Cobre serviço prestado antes da apólice, desde a data acordada. É o item que mais muda de preço entre seguradoras."
+      },
+      {
+        "titulo": "Prazo complementar",
+        "descricao": "Janela para reclamar depois do fim da apólice. Importante porque erro técnico costuma aparecer anos depois."
+      },
+      {
+        "titulo": "Danos morais",
+        "descricao": "Indenização por dano moral decorrente do erro profissional, quando contratada."
+      },
+      {
+        "titulo": "Sócios e empregados",
+        "descricao": "Estende a cobertura à equipe que assina tecnicamente pela empresa, não só ao titular."
+      }
+    ],
+    "exclusoes": [
+      "Ato doloso — erro é coberto, fraude não",
+      "Multa e penalidade administrativa aplicada por órgão regulador",
+      "Obrigação assumida em contrato além do que a lei exige",
+      "Serviço prestado sem o registro profissional exigido",
+      "Prejuízo que o segurado já sabia existir quando contratou",
+      "Perda de lucro do próprio segurado"
+    ],
+    "dadosParaCotar": [
+      "Qual profissão e qual o registro no conselho",
+      "Faturamento anual com prestação de serviço",
+      "Quantas pessoas assinam tecnicamente pela empresa",
+      "Desde quando você presta esse serviço — define a retroatividade",
+      "Se houve reclamação ou processo nos últimos cinco anos",
+      "Limite de indenização exigido em contrato, se houver"
+    ],
+    "faq": [
+      {
+        "pergunta": "Cobre erro que cometi antes de contratar o seguro?",
+        "resposta": "Só se a apólice tiver retroatividade e a data acordada alcançar aquele serviço. Sem isso o erro antigo fica de fora — por isso a data de retroatividade é o campo mais importante da proposta."
+      },
+      {
+        "pergunta": "E se a ação for julgada improcedente?",
+        "resposta": "A cobertura de custas de defesa vale mesmo assim. Boa parte do prejuízo de um processo é advogado e perícia, não indenização."
+      },
+      {
+        "pergunta": "Vale para pessoa física ou só para empresa?",
+        "resposta": "Existem apólices para os dois. Autônomo com registro no conselho contrata como pessoa física; escritório com CNPJ contrata como empresa e estende aos sócios."
+      }
+    ],
+    "relacionados": [
+      "empresarial",
+      "riscos-ciberneticos",
+      "responsabilidade-civil-medico-e-dentista",
+      "garantia"
+    ]
+  },
+  "responsabilidade-civil-medico-e-dentista": {
+    "nome": "Seguro de Responsabilidade Civil para Médicos e Dentistas",
+    "rotuloMenu": "RC Médico e Dentista",
+    "grupo": "Para sua empresa",
+    "template": 2,
+    "foto": "h-pessoas",
+    "url": "/responsabilidade-civil-medico-e-dentista/",
+    "resumo": "Defesa e indenização quando o paciente processa por erro no atendimento.",
+    "promessa": "Cobre a indenização ao paciente e, o que costuma pesar mais, o custo de se defender — no processo judicial e também no processo ético do conselho.",
+    "chips": [
+      "Erro no atendimento",
+      "Custas de defesa",
+      "Processo ético"
+    ],
+    "gatilhoLegal": {
+      "titulo": "Não é obrigatório, mas o processo não avisa",
+      "descricao": "Nenhuma lei obriga médico ou dentista a ter a apólice. O que existe é o prazo: o paciente pode reclamar anos depois do atendimento, e a defesa começa antes de qualquer decisão sobre culpa. É esse intervalo que a apólice cobre."
+    },
+    "coberturas": [
+      {
+        "titulo": "Erro no atendimento",
+        "descricao": "Dano ao paciente decorrente de diagnóstico, procedimento ou conduta no exercício da profissão."
+      },
+      {
+        "titulo": "Custas de defesa",
+        "descricao": "Advogado, perícia e custas — o gasto que aparece primeiro, com ou sem condenação no fim."
+      },
+      {
+        "titulo": "Processo ético no conselho",
+        "descricao": "Defesa em procedimento disciplinar no CRM ou no CRO, quando contratada."
+      },
+      {
+        "titulo": "Danos morais e estéticos",
+        "descricao": "Indenização por dano moral e estético reconhecido em juízo, dentro do limite contratado."
+      },
+      {
+        "titulo": "Retroatividade",
+        "descricao": "Alcança atendimento anterior à apólice, desde a data acordada."
+      },
+      {
+        "titulo": "Equipe e clínica",
+        "descricao": "Estende a cobertura a auxiliares e à pessoa jurídica da clínica, quando incluídas."
+      }
+    ],
+    "exclusoes": [
+      "Ato doloso, ou atendimento sob efeito de álcool e droga",
+      "Procedimento fora da especialidade registrada no conselho",
+      "Exercício sem registro ativo no CRM ou no CRO",
+      "Procedimento experimental ou sem respaldo em protocolo reconhecido",
+      "Obrigação de resultado estético, salvo cobertura específica contratada",
+      "Reclamação já conhecida antes da contratação"
+    ],
+    "dadosParaCotar": [
+      "Especialidade e número de registro no conselho",
+      "Se atende em consultório próprio, clínica ou hospital",
+      "Se realiza procedimento cirúrgico e de que porte",
+      "Quantos profissionais entram na apólice",
+      "Desde quando exerce — define a retroatividade",
+      "Se há reclamação ou processo em andamento"
+    ],
+    "faq": [
+      {
+        "pergunta": "A apólice cobre processo no conselho, e não só na Justiça?",
+        "resposta": "Cobre quando a garantia de processo ético e disciplinar está contratada. Não é padrão em toda apólice — é um dos itens que a MX compara entre as seguradoras."
+      },
+      {
+        "pergunta": "Por quanto tempo posso ser processado por um atendimento?",
+        "resposta": "O prazo varia conforme a natureza da ação e pode passar de cinco anos. Por isso a retroatividade e o prazo complementar pesam mais aqui do que em outros seguros."
+      },
+      {
+        "pergunta": "Cirurgia estética entra?",
+        "resposta": "Depende da apólice. Procedimento estético costuma ser tratado em condição separada, e obrigação de resultado geralmente é excluída. Precisa ser dito na cotação para não virar surpresa no sinistro."
+      }
+    ],
+    "relacionados": [
+      "responsabilidade-civil-profissional",
+      "empresarial",
+      "saude",
+      "vida-em-grupo"
     ]
   }
 } as const satisfies Record<string, Produto>;

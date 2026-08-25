@@ -65,7 +65,7 @@ export default function Rodape() {
         </div>
     
         <p className="rodape__legal">
-          MX Corretora de Seguros · CNPJ 45.154.654/0001-08.
+          MX Corretora de Seguros · CNPJ 07.499.352/0001-82.
         </p>
     
         <div className="rodape__base">
