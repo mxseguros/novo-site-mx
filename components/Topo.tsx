@@ -57,7 +57,7 @@ export default function Topo() {
         <div className="env">
           <Link href="/a-mx">A MX</Link>
           <Link href="/contato">Unidades</Link>
-          <Link href="/contato">Trabalhe conosco</Link>
+          <Link href="/trabalhe-conosco">Trabalhe conosco</Link>
           <Link href="/cnsp-382-2020">CNSP 382/2020</Link>
           <Link className="util__socorro" href="/sinistro">
             <svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true">
