@@ -27,7 +27,7 @@ export default function Home() {
                 <span className="numeros__d">Atuando em seguros desde 2002</span>
               </div>
               <div className="numeros__item">
-                <span className="numeros__n num">10</span>
+                <span className="numeros__n num">+40</span>
                 <span className="numeros__t">seguradoras parceiras</span>
                 <span className="numeros__d">Uma cotação, dezenas de propostas comparadas</span>
               </div>

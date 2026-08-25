@@ -36,7 +36,7 @@ export default function Pagina() {
           <div className="env">
             <div className="numeros__grade">
               <div className="numeros__item"><span className="numeros__n num">24</span><span className="numeros__t">anos de mercado</span><span className="numeros__d">Atuando em seguros desde 2002</span></div>
-              <div className="numeros__item"><span className="numeros__n num">10</span><span className="numeros__t">seguradoras parceiras</span><span className="numeros__d">Uma cotação, dezenas de propostas comparadas</span></div>
+              <div className="numeros__item"><span className="numeros__n num">+40</span><span className="numeros__t">seguradoras parceiras</span><span className="numeros__d">Uma cotação, dezenas de propostas comparadas</span></div>
               <div className="numeros__item"><span className="numeros__n num">2</span><span className="numeros__t">escritórios de porta aberta</span><span className="numeros__d">Itapira e Águas de Lindóia</span></div>
             </div>
           </div>
