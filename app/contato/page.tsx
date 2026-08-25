@@ -51,7 +51,7 @@ export default function Pagina() {
                 <div className="dados">
                   <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-mail" /></svg><span><span className="dados__rot">E-mail</span><a href="mailto:mxseguros@mxseguros.com.br">mxseguros@mxseguros.com.br</a></span></p>
                   <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio" /></svg><span><span className="dados__rot">Atendimento</span>Segunda a sexta, 08:00 às 18:00</span></p>
-                  <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin" /></svg><span><span className="dados__rot">Redes</span>@mxsegurositapira no Instagram e no Facebook</span></p>
+                  <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-instagram" /></svg><span><span className="dados__rot">Instagram</span><a href="https://www.instagram.com/mxseguros_/">@mxseguros_</a></span></p>
                 </div>
               </div>
               <div className="form-caixa">
