@@ -12,7 +12,7 @@ export default function Pagina() {
     <>
       <section className="hero">
           <div className="hero__trilho">
-            <article className="hero__slide" style={{ backgroundImage: 'var(--f-hero-corretor)', minHeight: 'clamp(300px,34cqi,382px)' }}>
+            <article className="hero__slide" style={{ backgroundImage: 'var(--f-predio-mx)', backgroundPosition: '58% 46%', minHeight: 'clamp(300px,34cqi,382px)' }}>
               <div className="hero__conteudo"><div className="env">
                 <nav className="migalhas" aria-label="Trilha de navegação" style={{ color: 'rgba(255,255,255,.72)' }}>
                   <ol><li><a href="/" style={{ color: 'rgba(255,255,255,.72)' }}>Início</a></li>
