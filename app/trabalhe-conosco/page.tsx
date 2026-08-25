@@ -15,8 +15,6 @@ export const metadata: Metadata = {
  * não há promessa de benefício e não há descrição do time. O que está aqui
  * é o que o site já afirma em outras páginas (duas unidades, desde 2002,
  * os cinco valores) mais o que é fato do ofício de corretor.
- *
- * O «EMAIL-RH» marca o que depende de resposta da MX.
  */
 export default function TrabalheConosco() {
   return (
@@ -126,7 +124,6 @@ export default function TrabalheConosco() {
               <ul className="checklist">
                 <li>Currículo em PDF</li>
                 <li>Em qual das duas unidades você teria condição de trabalhar</li>
-                <li>Se tem registro SUSEP, ou se está em processo</li>
                 <li>Experiência com seguros, se houver — e não é eliminatório se não houver</li>
               </ul>
               <div className="acoes" style={{ paddingTop: '.4rem' }}>
@@ -137,10 +134,6 @@ export default function TrabalheConosco() {
                   mxseguros@mxseguros.com.br
                 </a>
               </div>
-              <p className="nota">
-                Assunto sugerido: <b>Trabalhe conosco — currículo</b>. Ajuda a não se perder
-                no meio das apólices. <span className="token">«EMAIL-RH»</span>
-              </p>
             </div>
 
             <div className="oferta oferta--faixa" style={{ minHeight: 'auto' }}>
