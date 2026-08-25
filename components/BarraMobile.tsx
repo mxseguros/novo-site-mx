@@ -12,7 +12,7 @@ export default function BarraMobile() {
       <Link className="btn btn--azul" href="/#cotar">
         Fazer cotação
       </Link>
-      <a className="btn btn--zap" href="https://wa.me/5519971386794">
+      <a className="btn btn--zap" href="https://wa.me/551938638150">
         WhatsApp
       </a>
       <Link className="btn btn--socorro" href="/sinistro">

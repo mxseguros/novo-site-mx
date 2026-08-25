@@ -17,7 +17,7 @@ export default function Pagina() {
             <div className="pilha g16" style={{ paddingTop: '.4rem' }}>
               <span className="olho">Todos os produtos</span>
               <h1>Os 27 seguros que a MX cota</h1>
-              <p className="lide medida">Cada um deles é cotado em até dez seguradoras parceiras. Se o que você procura não estiver aqui, fale com a gente mesmo assim — cotamos ramos que não estão nesta lista.</p>
+              <p className="lide medida">Cada um deles é cotado em mais de 40 seguradoras parceiras. Se o que você procura não estiver aqui, fale com a gente mesmo assim — cotamos ramos que não estão nesta lista.</p>
               <label className="campo-busca" style={{ maxWidth: '26rem' }}>
                 <span className="oculto">Buscar seguro pelo nome</span>
                 <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-lupa" /></svg>
@@ -76,7 +76,7 @@ export default function Pagina() {
             </div>
       
             <p className="contador" id="indice-conta" aria-live="polite"></p>
-            <p className="painel__vazio" id="indice-vazia" role="status">Nenhum seguro com esse nome nesta lista. Chame a MX no WhatsApp — trabalhamos com dez seguradoras e cotamos ramos que não estão aqui.</p>
+            <p className="painel__vazio" id="indice-vazia" role="status">Nenhum seguro com esse nome nesta lista. Chame a MX no WhatsApp — trabalhamos com mais de 40 seguradoras e cotamos ramos que não estão aqui.</p>
           </div>
         </section>
       
@@ -85,9 +85,9 @@ export default function Pagina() {
             <div className="oferta oferta--azul oferta--faixa" style={{ minHeight: 'auto' }}>
               <span className="olho" style={{ color: 'var(--sage)' }}>Não achou?</span>
               <h3 style={{ maxWidth: 'none' }}>A lista não é a fronteira do que a MX cota</h3>
-              <p>Trabalhamos com dez seguradoras e acessamos ramos que não estão nesta página. Descreva o que você precisa proteger que a gente responde com o caminho.</p>
+              <p>Trabalhamos com mais de 40 seguradoras e acessamos ramos que não estão nesta página. Descreva o que você precisa proteger que a gente responde com o caminho.</p>
               <div className="acoes" style={{ marginTop: '.8rem' }}>
-                <a className="btn btn--zap" href="https://wa.me/5519971386794">Falar com um corretor</a>
+                <a className="btn btn--zap" href="https://wa.me/551938638150">Falar com um corretor</a>
                 <a className="btn btn--linha-neg" href="/contato">Ver todos os canais</a>
               </div>
             </div>

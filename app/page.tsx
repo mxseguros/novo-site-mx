@@ -29,7 +29,7 @@ export default function Home() {
               <div className="numeros__item">
                 <span className="numeros__n num">10</span>
                 <span className="numeros__t">seguradoras parceiras</span>
-                <span className="numeros__d">Uma cotação, dez propostas comparadas</span>
+                <span className="numeros__d">Uma cotação, dezenas de propostas comparadas</span>
               </div>
               <div className="numeros__item">
                 <span className="numeros__n num">2</span>
@@ -48,7 +48,7 @@ export default function Home() {
             <div className="grade grade--3">
               <a className="oferta" href="#cotar">
                 <span className="olho">Cotação</span>
-                <h3>Uma cotação, dez seguradoras</h3>
+                <h3>Uma cotação, mais de 40 seguradoras</h3>
                 <p>Você preenche uma vez. A MX manda o mesmo risco para as parceiras e compara as propostas.</p>
                 <span className="seta">Cotar agora <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></span>
               </a>
@@ -68,12 +68,11 @@ export default function Home() {
             <div className="grade grade--2">
               <div className="oferta oferta--larga">
                 <span className="olho">Canais</span>
-                <h3>Cada número tem um dono</h3>
-                <p>Comercial das 08:00 às 18:00, institucional para apólice e boleto, e um canal só para sinistro. Sem adivinhar qual usar.</p>
+                <h3>São dois números, e cada um tem um dono</h3>
+                <p>Um resolve tudo — cotação, apólice, boleto, dúvida. O outro é só para sinistro, e por isso não fica preso em conversa de venda.</p>
                 <div className="acoes" style={{ marginTop: 'auto', paddingTop: '.7rem' }}>
-                  <a className="btn btn--zap btn--peq num" href="https://wa.me/5519971386794">(19) 97138-6794</a>
                   <a className="btn btn--zap btn--peq num" href="https://wa.me/551938638150"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><use href="#i-zap" /></svg> (19) 3863-8150</a>
-                  <a className="btn btn--socorro btn--peq num" href="https://wa.me/5519982036147">(19) 98203-6147</a>
+                  <a className="btn btn--socorro btn--peq num" href="https://wa.me/5519982036147">(19) 98203-6147 · sinistro</a>
                 </div>
               </div>
               <a className="oferta oferta--larga oferta--azul" href="#unidades">
@@ -104,7 +103,7 @@ export default function Home() {
                 </ul>
                 <div className="acoes">
                   <a className="btn btn--azul" href="#cotar">Cotar plano para o meu time</a>
-                  <a className="btn btn--zap" href="https://wa.me/5519971386794"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap" /></svg> Falar com um consultor</a>
+                  <a className="btn btn--zap" href="https://wa.me/551938638150"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap" /></svg> Falar com um consultor</a>
                 </div>
               </div>
               <div className="foto-larga" style={{ backgroundImage: 'var(--f-ph-saude)', backgroundPosition: '60% center' }} role="img" aria-label="Profissional de saúde em atendimento a um paciente"></div>
@@ -145,11 +144,11 @@ export default function Home() {
           <div className="env pilha g20">
             <div className="pilha g8">
               <span className="olho">Seguradoras parceiras</span>
-              <h2>Dez seguradoras cotando o seu risco ao mesmo tempo</h2>
+              <h2>A seguradora certa que atende a sua necessidade</h2>
             </div>
             <div className="logos">
               <div className="logos__item"><img src="/seguradoras/seg_azul.webp" alt="Azul Seguros" /></div>
-              <div className="logos__item"><img src="/seguradoras/seg_itau.webp" alt="Itaú Seguros" /></div>
+              <div className="logos__item"><span className="logos__texto">SulAmérica</span></div>
               <div className="logos__item"><img src="/seguradoras/seg_msig.webp" alt="MSIG Seguros" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_tokio.webp" alt="Tokio Marine Seguradora" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_hdi.webp" alt="HDI Seguros" /></div>
@@ -158,6 +157,10 @@ export default function Home() {
               <div className="logos__item"><img src="/seguradoras/seg_zurich.webp" alt="Zurich Seguros" /></div>
               <div className="logos__item"><img src="/seguradoras/seg_sompo.webp" alt="Sompo Seguros" /></div>
               <div className="logos__item"><span className="logos__texto">Bradesco Seguros</span></div>
+              <div className="logos__item"><span className="logos__texto">Porto Seguro</span></div>
+              <div className="logos__item"><img src="/seguradoras/seg_norden.svg" alt="Norden" /></div>
+              <div className="logos__item"><span className="logos__texto">MetLife</span></div>
+              <div className="logos__item"><span className="logos__texto">Chubb</span></div>
             </div>
             <p className="nota">Nem toda seguradora opera todos os ramos. Na sua cotação entram as que trabalham com o produto que você procura.</p>
           </div>
@@ -168,43 +171,48 @@ export default function Home() {
           <div className="env pilha g20">
             <div className="pilha g8">
               <span className="olho">Quem já é cliente</span>
-              <h2>Quem já precisou conta melhor do que a gente</h2>
+              <h2>Conheça alguns dos nossos milhares de clientes satisfeitos</h2>
             </div>
             <div className="grade grade--3">
-              <figure className="depo">
-                <span className="depo__ramo">Seguro de Automóvel</span>
-                <blockquote>Mandei as fotos do carro batido no WhatsApp num domingo. Na terça ele já estava na oficina, e quem falou com a seguradora foi a MX.</blockquote>
+              <figure className="depo depo--vazio">
+                <span className="depo__aspas" aria-hidden="true">&ldquo;</span>
+                <blockquote>«DEPOIMENTO-1»</blockquote>
                 <figcaption className="depo__pe">
-                  <span className="depo__av" aria-hidden="true">MS</span>
+                  <span className="depo__av" aria-hidden="true">—</span>
                   <span className="depo__quem">
-                    <b>Marina S.</b>
-                    <span className="depo__meta">Itapira</span>
+                    <b>«CLIENTE-1»</b>
+                    <span className="depo__meta">«CIDADE» · «RAMO»</span>
                   </span>
                 </figcaption>
               </figure>
-              <figure className="depo">
-                <span className="depo__ramo">Seguro de Condomínio</span>
-                <blockquote>O condomínio renovava no automático havia seis anos. A MX cotou em cinco seguradoras e levei à assembleia mais cobertura pelo mesmo valor.</blockquote>
+              <figure className="depo depo--vazio">
+                <span className="depo__aspas" aria-hidden="true">&ldquo;</span>
+                <blockquote>«DEPOIMENTO-2»</blockquote>
                 <figcaption className="depo__pe">
-                  <span className="depo__av" aria-hidden="true">RA</span>
+                  <span className="depo__av" aria-hidden="true">—</span>
                   <span className="depo__quem">
-                    <b>Ricardo A.</b>
-                    <span className="depo__meta">Águas de Lindóia</span>
+                    <b>«CLIENTE-2»</b>
+                    <span className="depo__meta">«CIDADE» · «RAMO»</span>
                   </span>
                 </figcaption>
               </figure>
-              <figure className="depo">
-                <span className="depo__ramo">Plano de Saúde</span>
-                <blockquote>Eu ia fechar o plano mais barato. A MX viu que o hospital da minha filha estava fora da rede e refez a proposta no mesmo dia.</blockquote>
+              <figure className="depo depo--vazio">
+                <span className="depo__aspas" aria-hidden="true">&ldquo;</span>
+                <blockquote>«DEPOIMENTO-3»</blockquote>
                 <figcaption className="depo__pe">
-                  <span className="depo__av" aria-hidden="true">JP</span>
+                  <span className="depo__av" aria-hidden="true">—</span>
                   <span className="depo__quem">
-                    <b>Juliana P.</b>
-                    <span className="depo__meta">Mogi Guaçu</span>
+                    <b>«CLIENTE-3»</b>
+                    <span className="depo__meta">«CIDADE» · «RAMO»</span>
                   </span>
                 </figcaption>
               </figure>
             </div>
+            <p className="nota">
+              <span className="token">«AVALIACOES-GOOGLE»</span> Os três cartões acima esperam
+              as avaliações reais do perfil da MX no Google. Não consegui lê-las
+              automaticamente — o Google bloqueia leitura por programa.
+            </p>
           </div>
         </section>
 
@@ -257,8 +265,8 @@ export default function Home() {
                   <div className="dados">
                     <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin" /></svg><span>Av. Rio Branco, 221 — Centro<br />Itapira/SP · CEP 13970-070</span></p>
                     <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio" /></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp comercial</span><a href="https://wa.me/5519971386794" className="num">(19) 97138-6794</a></span></p>
+                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
+                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
                   </div>
                   <a className="seta" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.%20Rio%20Branco%2C%20221%20-%20Centro%2C%20Itapira%20-%20SP%2C%2013970-070" target="_blank" rel="noopener">Como chegar a Itapira <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></a>
                 </div>
@@ -274,8 +282,8 @@ export default function Home() {
                   <div className="dados">
                     <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin" /></svg><span>Rua Argentina, 15 — Salas 2 e 3 — Centro<br />Águas de Lindóia/SP · CEP <span className="token">«CEP-FILIAL»</span></span></p>
                     <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio" /></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp comercial</span><a href="https://wa.me/5519971386794" className="num">(19) 97138-6794</a></span></p>
+                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
+                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
                   </div>
                   <a className="seta" href="https://www.google.com/maps/dir/?api=1&amp;destination=Rua%20Argentina%2C%2015%20-%20%C3%81guas%20de%20Lind%C3%B3ia%20-%20SP" target="_blank" rel="noopener">Como chegar a Águas de Lindóia <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></a>
                 </div>

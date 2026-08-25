@@ -20,7 +20,7 @@ const SLIDES = [
     texto:
       'Invalidez e doenças graves são cobertas enquanto você está aqui. E, na maioria dos planos, contratar não exige exame médico.',
     principal: 'Cotar seguro de vida',
-    secundario: { rotulo: 'Falar no WhatsApp', href: 'https://wa.me/5519971386794', zap: true },
+    secundario: { rotulo: 'Falar no WhatsApp', href: 'https://wa.me/551938638150', zap: true },
   },
   {
     slug: 'saude',

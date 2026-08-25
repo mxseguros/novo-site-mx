@@ -14,11 +14,11 @@ export default function Rodape() {
             <span className="logo logo--neg" role="img" aria-label="MX Corretora de Seguros"></span>
             <div className="pilha g12">
               <p className="rodape__linha"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg>
-                <span><span className="rodape__rot">WhatsApp</span><a href="https://wa.me/551938638150"><b className="num">(19) 3863-8150</b></a></span></p>
+                <span><span className="rodape__rot">Cotação, apólice e dúvidas</span><a href="https://wa.me/551938638150"><b className="num">(19) 3863-8150</b></a></span></p>
               <p className="rodape__linha"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg>
-                <span><span className="rodape__rot">WhatsApp comercial</span><a href="https://wa.me/5519971386794"><b className="num">(19) 97138-6794</b></a></span></p>
+                <span><span className="rodape__rot">Cotação, apólice e dúvidas</span><a href="https://wa.me/551938638150"><b className="num">(19) 3863-8150</b></a></span></p>
               <p className="rodape__linha"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-alerta" /></svg>
-                <span><span className="rodape__rot">WhatsApp de sinistro</span><a href="https://wa.me/5519982036147"><b className="num">(19) 98203-6147</b></a></span></p>
+                <span><span className="rodape__rot">Só para sinistro</span><a href="https://wa.me/5519982036147"><b className="num">(19) 98203-6147</b></a></span></p>
               <p className="rodape__linha"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-mail" /></svg>
                 <span><span className="rodape__rot">E-mail</span><a href="mailto:mxseguros@mxseguros.com.br">mxseguros@mxseguros.com.br</a></span></p>
             </div>

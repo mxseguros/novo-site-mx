@@ -71,7 +71,6 @@ export default function Topo() {
           <Link href="/a-mx">A MX</Link>
           <Link href="/contato">Unidades</Link>
           <Link href="/trabalhe-conosco">Trabalhe conosco</Link>
-          <Link href="/cnsp-382-2020">CNSP 382/2020</Link>
           <Link className="util__socorro" href="/sinistro">
             <svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true">
               <use href="#i-alerta" />
@@ -115,8 +114,8 @@ export default function Topo() {
             <div className="topo__dir">
               <a
                 className="btn btn--zap btn--peq topo__cta topo__zap"
-                href="https://wa.me/5519971386794"
-                aria-label="Falar no WhatsApp comercial"
+                href="https://wa.me/551938638150"
+                aria-label="Falar no WhatsApp da MX"
               >
                 <svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true">
                   <use href="#i-zap" />
@@ -207,12 +206,12 @@ export default function Topo() {
                       <div className="painel__ajuda">
                         <h4>Não achou o que procura?</h4>
                         <p>
-                          Trabalhamos com dez seguradoras e cotamos ramos que não estão
+                          Trabalhamos com mais de 40 seguradoras e cotamos ramos que não estão
                           nesta lista.
                         </p>
                         <a
                           className="btn btn--zap btn--peq btn--largo"
-                          href="https://wa.me/5519971386794"
+                          href="https://wa.me/551938638150"
                         >
                           <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
                             <use href="#i-zap" />
@@ -220,7 +219,7 @@ export default function Topo() {
                           Contar o que preciso
                         </a>
                         <span className="painel__ajuda__rot">
-                          WhatsApp comercial · seg a sex, 08:00 às 18:00
+                          WhatsApp da MX · seg a sex, 08:00 às 18:00
                         </span>
                       </div>
                     )}
@@ -239,7 +238,7 @@ export default function Topo() {
             {termo && achados.length === 0 && (
               <p className="painel__vazio" role="status">
                 Nenhum seguro com esse nome. Fale com a gente no WhatsApp — trabalhamos
-                com dez seguradoras e cotamos ramos que não estão nesta lista.
+                com mais de 40 seguradoras e cotamos ramos que não estão nesta lista.
               </p>
             )}
           </div>

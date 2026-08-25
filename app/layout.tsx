@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   description:
     "Corretora de seguros com escritório em Itapira e Águas de Lindóia desde 2002. " +
-    "Uma cotação, dez seguradoras comparadas, e a MX junto no dia do sinistro.",
+    "Uma cotação, mais de 40 seguradoras comparadas, e a MX junto no dia do sinistro.",
   openGraph: {
     type: "website",
     locale: "pt_BR",

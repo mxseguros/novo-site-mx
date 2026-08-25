@@ -95,7 +95,7 @@ export default async function PaginaProduto({ params }: Props) {
                     <a className="btn btn--branco" href="#cotar-produto">
                       {ctaPrimario}
                     </a>
-                    <a className="btn btn--zap" href="https://wa.me/5519971386794">
+                    <a className="btn btn--zap" href="https://wa.me/551938638150">
                       <Icone id="i-zap" tamanho={17} /> WhatsApp
                     </a>
                   </div>
@@ -188,7 +188,7 @@ export default async function PaginaProduto({ params }: Props) {
                 <span className="olho">Para cotar</span>
                 <h2>O que a MX precisa saber</h2>
                 <p className="lide">
-                  Com estes dados em mãos, a cotação sai comparada em até dez seguradoras —
+                  Com estes dados em mãos, a cotação sai comparada em mais de 40 seguradoras —
                   sem uma rodada de e-mail para pedir informação faltando.
                 </p>
                 <ul className="checklist">

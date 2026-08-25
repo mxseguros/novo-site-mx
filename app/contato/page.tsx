@@ -27,21 +27,15 @@ export default function Pagina() {
           <div className="env pilha g16">
             <div className="grade grade--3">
               <div className="oferta">
-                <span className="olho">Cotar ou contratar</span>
-                <h3>WhatsApp comercial</h3>
-                <p>Segunda a sexta, das 08:00 às 18:00.</p>
-                <a className="btn btn--zap btn--peq num" href="https://wa.me/5519971386794" style={{ marginTop: 'auto' }}>(19) 97138-6794</a>
-              </div>
-              <div className="oferta">
-                <span className="olho">Apólice, boleto, dúvida</span>
-                <h3>WhatsApp da matriz</h3>
-                <p>Segunda a sexta, das 08:00 às 18:00.</p>
+                <span className="olho">Para tudo, menos sinistro</span>
+                <h3>WhatsApp da MX</h3>
+                <p>Cotação, apólice, boleto, segunda via, dúvida de cobertura. Segunda a sexta, das 08:00 às 18:00.</p>
                 <a className="btn btn--zap btn--peq num" href="https://wa.me/551938638150" style={{ marginTop: 'auto' }}><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><use href="#i-zap" /></svg> (19) 3863-8150</a>
               </div>
               <div className="oferta oferta--socorro">
-                <span className="olho">Sinistro</span>
+                <span className="olho">Exclusivo de sinistro</span>
                 <h3>WhatsApp de sinistro</h3>
-                <p>Assistência 24h sai pela seguradora — os telefones estão na página de sinistro.</p>
+                <p>Só sinistro entra aqui. Por isso não fica preso em conversa de venda quando você mais precisa. A assistência 24h sai pela seguradora — os telefones estão na página de sinistro.</p>
                 <a className="btn btn--socorro btn--peq num" href="https://wa.me/5519982036147" style={{ marginTop: 'auto' }}>(19) 98203-6147</a>
               </div>
             </div>
@@ -105,7 +99,7 @@ export default function Pagina() {
                   <div className="dados">
                     <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin" /></svg><span>Av. Rio Branco, 221 — Centro<br />Itapira/SP · CEP 13970-070</span></p>
                     <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio" /></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
+                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
                   </div>
                   <div className="foto-vazia" style={{ minHeight: '140px' }}><b>Foto real</b><small>Fachada da matriz — já existe no site atual</small></div>
                   <a className="seta" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.%20Rio%20Branco%2C%20221%20-%20Centro%2C%20Itapira%20-%20SP%2C%2013970-070" target="_blank" rel="noopener">Como chegar a Itapira <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></a>
@@ -119,7 +113,7 @@ export default function Pagina() {
                   <div className="dados">
                     <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin" /></svg><span>Rua Argentina, 15 — Salas 2 e 3 — Centro<br />Águas de Lindóia/SP · CEP <span className="token">«CEP-FILIAL»</span></span></p>
                     <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio" /></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
+                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
                   </div>
                   <div className="foto-vazia" style={{ minHeight: '140px' }}><b>Foto real</b><small>Fachada da filial — já existe no site atual</small></div>
                   <a className="seta" href="https://www.google.com/maps/dir/?api=1&amp;destination=Rua%20Argentina%2C%2015%20-%20%C3%81guas%20de%20Lind%C3%B3ia%20-%20SP" target="_blank" rel="noopener">Como chegar a Águas de Lindóia <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></a>

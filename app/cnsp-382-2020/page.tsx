@@ -55,7 +55,7 @@ export default function Pagina() {
                 <p>Basta solicitar pelo formulário ao lado, por e-mail ou pelo WhatsApp. Respondemos no próximo dia útil.</p>
                 <div className="dados">
                   <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-mail" /></svg><span><span className="dados__rot">E-mail</span><a href="mailto:mxseguros@mxseguros.com.br">mxseguros@mxseguros.com.br</a></span></p>
-                  <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
+                  <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
                 </div>
               </div>
               <div className="form-caixa form-caixa--branca">

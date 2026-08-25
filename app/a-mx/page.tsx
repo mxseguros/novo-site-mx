@@ -24,7 +24,7 @@ export default function Pagina() {
                   <div className="chip-lista">
                     <span className="chip chip--neg">Desde 2002</span>
                     <span className="chip chip--neg">Itapira e Águas de Lindóia</span>
-                    <span className="chip chip--neg">10 seguradoras parceiras</span>
+                    <span className="chip chip--neg">Mais de 40 seguradoras parceiras</span>
                   </div>
                 </div>
               </div></div>
@@ -36,7 +36,7 @@ export default function Pagina() {
           <div className="env">
             <div className="numeros__grade">
               <div className="numeros__item"><span className="numeros__n num">24</span><span className="numeros__t">anos de mercado</span><span className="numeros__d">Atuando em seguros desde 2002</span></div>
-              <div className="numeros__item"><span className="numeros__n num">10</span><span className="numeros__t">seguradoras parceiras</span><span className="numeros__d">Uma cotação, dez propostas comparadas</span></div>
+              <div className="numeros__item"><span className="numeros__n num">10</span><span className="numeros__t">seguradoras parceiras</span><span className="numeros__d">Uma cotação, dezenas de propostas comparadas</span></div>
               <div className="numeros__item"><span className="numeros__n num">2</span><span className="numeros__t">escritórios de porta aberta</span><span className="numeros__d">Itapira e Águas de Lindóia</span></div>
             </div>
           </div>
@@ -102,7 +102,7 @@ export default function Pagina() {
                   <div className="dados">
                     <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin" /></svg><span>Avenida Rio Branco, 221 — Centro<br />Itapira/SP · CEP 13970-070</span></p>
                     <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio" /></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
+                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
                   </div>
                   <a className="seta" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.%20Rio%20Branco%2C%20221%20-%20Centro%2C%20Itapira%20-%20SP%2C%2013970-070" target="_blank" rel="noopener">Como chegar a Itapira <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></a>
                 </div>
@@ -115,7 +115,7 @@ export default function Pagina() {
                   <div className="dados">
                     <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin" /></svg><span>Rua Argentina, 15 — Salas 2 e 3 — Centro<br />Águas de Lindóia/SP · CEP <span className="token">«CEP-FILIAL»</span></span></p>
                     <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio" /></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
+                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
                   </div>
                   <a className="seta" href="https://www.google.com/maps/dir/?api=1&amp;destination=Rua%20Argentina%2C%2015%20-%20%C3%81guas%20de%20Lind%C3%B3ia%20-%20SP" target="_blank" rel="noopener">Como chegar a Águas de Lindóia <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></a>
                 </div>

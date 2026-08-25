@@ -14,7 +14,7 @@ const digitos = (v: string) => v.replace(/\D/g, '');
  */
 export function mascaraTelefone(valor: string): string {
   let d = digitos(valor);
-  // Quem copia do WhatsApp cola "+55 19 97138-6794". Sem tirar o código do
+  // Quem copia do WhatsApp cola "+55 19 3863-8150". Sem tirar o código do
   // país, o 55 vira DDD e o número inteiro sai deslocado.
   if (d.length > 11 && d.startsWith('55')) d = d.slice(2);
   d = d.slice(0, 11);

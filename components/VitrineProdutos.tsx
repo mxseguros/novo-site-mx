@@ -22,7 +22,7 @@ const ABAS: { id: Cat; rotulo: string }[] = [
 
 const CARDS = [
   { slug: 'automovel', cat: 'voce', foto: '--f-card-auto', icone: 'i-etiqueta',
-    chip: 'Cotação em até 10 seguradoras',
+    chip: 'Cotação em mais de 40 seguradoras',
     titulo: 'Seguro de Automóvel',
     texto: 'Colisão, roubo, terceiros e assistência 24h — com carro reserva e vidros, se você quiser.' },
   { slug: 'vida-individual', cat: 'voce', foto: '--f-cd-vida-individual', icone: 'i-escudo',

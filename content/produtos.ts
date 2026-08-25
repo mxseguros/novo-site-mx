@@ -58,7 +58,7 @@ export const PRODUTOS = {
       "Assistência 24h",
       "Carro reserva",
       "Vidros",
-      "Cotação em até 10 seguradoras"
+      "Cotação em mais de 40 seguradoras"
     ],
     "perfis": [
       {

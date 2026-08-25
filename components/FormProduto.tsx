@@ -60,7 +60,7 @@ export default function FormProduto({ slug }: { slug: Slug }) {
             lide:
               'Sem custo, sem compromisso e sem repassar seus dados. Um corretor responde no horário comercial.',
             lista: [
-              'Comparamos até dez seguradoras com o mesmo risco',
+              'Comparamos mais de 40 seguradoras com o mesmo risco',
               'Explicamos franquia e cobertura antes de você decidir',
               'A MX guarda a data da renovação e avisa você',
             ],
@@ -209,7 +209,7 @@ export default function FormProduto({ slug }: { slug: Slug }) {
                 </svg>
                 <span>
                   {enviado
-                    ? 'O envio ainda não está ligado. Enquanto isso, chame a MX no WhatsApp — (19) 97138-6794.'
+                    ? 'O envio ainda não está ligado. Enquanto isso, chame a MX no WhatsApp — (19) 3863-8150.'
                     : 'Seus dados vão para a corretora, não para uma lista de disparo.'}
                 </span>
               </div>

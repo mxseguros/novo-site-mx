@@ -33,7 +33,7 @@ export default function FormCotacao() {
         >
           <div className="pilha g16">
             <span className="olho">Cotação</span>
-            <h2>Uma cotação, dez seguradoras comparadas</h2>
+            <h2>Uma cotação, mais de 40 seguradoras comparadas</h2>
             <p className="lide">
               Você preenche uma vez. A MX manda o mesmo risco para as parceiras, compara
               as propostas item por item e explica a diferença antes de você escolher.
@@ -130,7 +130,7 @@ export default function FormCotacao() {
                 </svg>
                 <span>
                   {enviado
-                    ? 'O envio ainda não está ligado. Enquanto isso, chame a MX no WhatsApp — (19) 97138-6794.'
+                    ? 'O envio ainda não está ligado. Enquanto isso, chame a MX no WhatsApp — (19) 3863-8150.'
                     : 'Seus dados vão para a corretora, não para uma lista de disparo.'}
                 </span>
               </div>
