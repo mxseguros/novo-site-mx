@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * Os três destaques da home: vida, saúde e empresarial.
@@ -48,9 +48,16 @@ const SLIDES = [
 
 const INTERVALO = 7000;
 
+/** Quanto do gesto precisa andar para valer troca de slide. */
+const LIMIAR = 0.14;
+
 export default function Hero() {
   const [atual, setAtual] = useState(0);
   const [parado, setParado] = useState(false);
+  /** Deslocamento do dedo em fração da largura, enquanto o gesto acontece. */
+  const [arrasto, setArrasto] = useState(0);
+  const trilho = useRef<HTMLDivElement>(null);
+  const gesto = useRef<{ x: number; y: number; eixo: 'indef' | 'x' | 'y'; id: number } | null>(null);
 
   useEffect(() => {
     if (parado) return;
@@ -62,6 +69,58 @@ export default function Hero() {
 
   const ir = (d: number) => setAtual((i) => (i + d + SLIDES.length) % SLIDES.length);
 
+  /* Arrastar com o dedo.
+     Dois cuidados que fazem a diferença entre carrossel e armadilha:
+     o eixo do gesto é decidido no primeiro movimento — se a pessoa está
+     rolando a página para baixo, soltamos o gesto e não sequestramos a
+     rolagem; e nas pontas o arrasto tem resistência, para o limite ficar
+     perceptível em vez de dar a impressão de travamento. */
+  function comecou(e: React.PointerEvent) {
+    if (e.pointerType === 'mouse') return; // no desktop as setas resolvem
+    gesto.current = { x: e.clientX, y: e.clientY, eixo: 'indef', id: e.pointerId };
+    setParado(true);
+  }
+
+  function moveu(e: React.PointerEvent) {
+    const g = gesto.current;
+    if (!g || e.pointerId !== g.id) return;
+    const dx = e.clientX - g.x;
+    const dy = e.clientY - g.y;
+
+    if (g.eixo === 'indef') {
+      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+      g.eixo = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      if (g.eixo === 'y') {
+        gesto.current = null;
+        setParado(false);
+        return;
+      }
+      e.currentTarget.setPointerCapture(g.id);
+    }
+
+    const largura = trilho.current?.offsetWidth || 1;
+    let f = dx / largura;
+    const naPonta = (f > 0 && atual === 0) || (f < 0 && atual === SLIDES.length - 1);
+    if (naPonta) f *= 0.32;
+    setArrasto(f);
+  }
+
+  function soltou(e: React.PointerEvent) {
+    const g = gesto.current;
+    if (!g) return;
+    if (g.eixo === 'x') {
+      if (arrasto <= -LIMIAR) ir(1);
+      else if (arrasto >= LIMIAR) ir(-1);
+      try { e.currentTarget.releasePointerCapture(g.id); } catch {}
+    }
+    gesto.current = null;
+    setArrasto(0);
+    setParado(false);
+  }
+
+  const arrastando = gesto.current?.eixo === 'x';
+  const deslocamento = (-atual + arrasto) * 100;
+
   return (
     <section
       className="hero"
@@ -72,13 +131,27 @@ export default function Hero() {
       onFocus={() => setParado(true)}
       onBlur={() => setParado(false)}
     >
-      <div className="hero__trilho">
+      <div
+        className="hero__trilho"
+        ref={trilho}
+        onPointerDown={comecou}
+        onPointerMove={moveu}
+        onPointerUp={soltou}
+        onPointerCancel={soltou}
+        style={{
+          transform: `translate3d(${deslocamento}%, 0, 0)`,
+          transition: arrastando ? 'none' : 'transform .38s cubic-bezier(.4,0,.2,1)',
+        }}
+      >
         {SLIDES.map((s, i) => (
           <article
             key={s.titulo}
             className="hero__slide"
             style={{ backgroundImage: s.foto, backgroundPosition: s.posicao }}
-            hidden={i !== atual}
+            /* Os três ficam no DOM para o trilho poder deslizar. inert tira
+               os inativos do foco e do leitor de tela — sem ele, o Tab cai
+               em botão que está fora da tela. */
+            inert={i !== atual}
           >
             <div className="hero__conteudo">
               <div className="env">

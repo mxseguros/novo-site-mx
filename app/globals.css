@@ -333,8 +333,16 @@ ul,ol{ margin: 0; padding: 0; list-style: none; }
 /* ==========================================================================
    6. HERO — carrossel de foto com veu a esquerda
    ========================================================================== */
-.hero{ position: relative; background: var(--navy); }
-.hero__trilho{ display: flex; overflow: hidden; }
+/* O recorte mora no .hero: quem se move e o trilho, e os tres slides
+   somam 300% da largura. Sem overflow aqui, os dois de fora vazam e a
+   pagina inteira ganha rolagem horizontal. */
+.hero{ position: relative; overflow: hidden; background: var(--navy); }
+.hero__trilho{
+  display: flex;
+  /* deixa a rolagem vertical com o navegador e o gesto horizontal conosco */
+  touch-action: pan-y;
+  will-change: transform;
+}
 .hero__slide{
   position: relative; flex: 0 0 100%;
   min-height: clamp(340px, 44cqi, 440px);
