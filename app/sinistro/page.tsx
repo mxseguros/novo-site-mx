@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import type { Metadata } from 'next';
+import TabelaAssistencia from '@/components/TabelaAssistencia';
 
 export const metadata: Metadata = {
   title: 'Sinistro e Assistência 24h',
@@ -49,32 +49,7 @@ export default function Pagina() {
               <h2>Telefone das seguradoras, aberto na tela</h2>
               <p className="lide medida">Sem acordeão, sem clique. Busque pelo nome da seguradora que está na sua apólice.</p>
             </div>
-            <label className="campo-busca" style={{ maxWidth: '24rem' }}>
-              <span className="oculto">Buscar seguradora</span>
-              <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-lupa" /></svg>
-              <input type="search" id="busca-seguradora" placeholder="Buscar seguradora — ex.: Tokio" autoComplete="off" />
-            </label>
-            <div className="rolagem" style={{ background: '#fff', border: '1px solid var(--linha)', borderRadius: 'var(--raio-card)' }}>
-              <table className="assist" id="tab-assist">
-                <thead><tr><th scope="col">Seguradora</th><th scope="col">Assistência 24h e sinistros</th></tr></thead>
-                <tbody>
-                  <tr><td>Allianz Seguros</td><td className="num"><a href="tel:+550800130700">0800 0130 700</a></td></tr>
-                  <tr><td>Azul Seguros</td><td className="num"><a href="tel:+5540043700">4004 3700 (grandes centros) · 0800 703 0203</a></td></tr>
-                  <tr><td>Bradesco Seguros</td><td className="num"><a href="tel:+5540042757">4004 2757 (grandes centros) · 0800 701 2757</a></td></tr>
-                  <tr><td>HDI Seguros</td><td className="num"><a href="tel:+5530035390">3003 5390 (grandes centros) · 0800 434 4340</a></td></tr>
-                  <tr><td>Itaú Seguros</td><td className="num"><a href="tel:+5530031010">3003 1010 (regiões metropolitanas) · 0800 720 1010</a></td></tr>
-                  <tr><td>Mapfre</td><td className="num"><a href="tel:+5540040101">4004 0101 (regiões metropolitanas) · 0800 775 4545</a></td></tr>
-                  <tr><td>Porto Seguro</td><td className="num"><a href="tel:+5508007270800">0800 727 0800</a></td><td className="num">—</td></tr>
-            <tr><td>MSIG · Mitsui Sumitomo</td><td className="num"><a href="tel:+5508007077883">0800 707 7883</a> · Central e sinistros 0300 772 6744</td></tr>
-                  <tr><td>Sompo Seguros</td><td className="num"><a href="tel:+5508000162727">0800 016 2727</a> · Central Brasil 0800 771 9119</td></tr>
-                  <tr><td>Tokio Marine</td><td className="num"><a href="tel:+5508003186546">0800 318 6546 (auto e residencial)</a> · Vidros 0800 707 8005</td></tr>
-                  <tr><td>Yelum Seguradora</td><td className="num"><a href="tel:+5540045423">4004 5423 (regiões metropolitanas) · 0800 701 4120</a></td></tr>
-                  <tr><td>Zurich Seguros</td><td className="num"><a href="tel:+5508007291400">0800 729 1400</a> · Sinistro 0800 777 2746 · Central 4000 1246</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <p className="nota">Telefones conferidos na página de assistência da MX em 21/08/2026. Antes da publicação, cada linha é confirmada com a seguradora.</p>
-            <p className="painel__vazio" id="assist-vazia" role="status">Não achamos essa seguradora na lista. Chame a MX no WhatsApp de sinistro que a gente localiza o número da sua apólice.</p>
+            <TabelaAssistencia />
             {/* Os dois boxes se alinham por construção: mesma estrutura
                 olho → h3 → texto, e a ação empurrada para o rodapé do card
                 com margin-top auto, para os botões baterem mesmo quando os
