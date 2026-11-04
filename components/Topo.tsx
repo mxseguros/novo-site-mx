@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { PRODUTOS, porGrupo } from '@/content/produtos';
 import { PILARES } from '@/content/pilares';
-import { LEMA, WHATSAPP } from '@/content/empresa';
+import { WHATSAPP } from '@/content/empresa';
 
 /* O menu principal são os pilares, não a lista de produtos: 32 itens com o
    mesmo peso comunicavam "vendemos de tudo". No desktop cada pilar é um link, e
@@ -56,7 +56,6 @@ export default function Topo() {
     <>
       <div className="util">
         <div className="env">
-          <span className="util__lema">{LEMA}</span>
           <Link href="/a-mx">A MX</Link>
           <Link href="/contato">Unidades</Link>
           <Link href="/seguros">Todos os seguros</Link>

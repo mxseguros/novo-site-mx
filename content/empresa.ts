@@ -27,9 +27,6 @@ export const CARTAS_CONTEMPLADAS = '«CARTAS-CONTEMPLADAS»';
 export const NUM_ADMINISTRADORAS = '«Nº-ADMINISTRADORAS»';
 export const CASOS_SINISTRO = '«CASOS-SINISTRO»';
 
-/** Um dos três testados no protótipo v3. A escolha final é do marketing. */
-export const LEMA = 'MX. Junto no seu negócio.';
-
 export const WHATSAPP = { numero: '(19) 3863-8150', link: 'https://wa.me/551938638150' };
 export const WHATSAPP_SINISTRO = { numero: '(19) 98203-6147', link: 'https://wa.me/5519982036147' };
 export const EMAIL = 'mxseguros@mxseguros.com.br';

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SLUGS } from '@/content/produtos';
-import { LEMA, WHATSAPP } from '@/content/empresa';
+import { WHATSAPP } from '@/content/empresa';
 import Especialistas from '@/components/Especialistas';
 import Unidades from '@/components/Unidades';
 
@@ -22,7 +22,6 @@ export default function Pagina() {
                       <li aria-current="page">A MX</li></ol>
                 </nav>
                 <div className="hero__caixa">
-                  <span className="hero__olho">{LEMA}</span>
                   <h1>Uma corretora com endereço e nome de quem atende</h1>
                   <p>Desde 2002, em Itapira e Águas de Lindóia. A MX cuida das pessoas, do patrimônio e do crescimento de empresas e famílias da região.</p>
                 </div>

@@ -1,5 +1,5 @@
 <title>MX Site v3 Pilares</title>
-<meta name="description" content="Protótipo v3 do site da MX Corretora de Seguros: arquitetura por pilares, herói único e formulário qualificado.">
+<meta name="description" content="Protótipo v3 do site da MX Corretora de Seguros: arquitetura por pilares, slider de destaques e formulário qualificado.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap">
@@ -21,8 +21,6 @@ html, body{ background: var(--branco); }
   .topo__nav{ margin-left: .75rem; }
   .topo__link{ padding-inline: .5rem; font-size: .9rem; }
 }
-.util__lema{ color: var(--texto-fraco); padding-right: .8rem; margin-right: .2rem;
-  border-right: 1px solid var(--linha); font-weight: 500; }
 
 /* Painel por pilar: quatro colunas */
 @container palco (min-width: 760px){ .painel__grade--4{ grid-template-columns: repeat(2,1fr); } }
@@ -34,10 +32,6 @@ html, body{ background: var(--branco); }
 .painel__extra a{ color: var(--preto); text-decoration: none; }
 .painel__extra a:hover{ color: var(--azul); }
 @container palco (min-width: 940px){ .painel__extra{ display: none; } }
-
-/* Herói único — sem trilho, sem pontos, sem setas */
-.hero--unico .hero__slide{ min-height: clamp(380px, 46cqi, 480px); }
-.hero__olho{ font-size: .8125rem; font-weight: 500; color: var(--sage); letter-spacing: .01em; }
 
 /* Entradas fixas logo abaixo da faixa de números */
 .entradas{ padding-block: clamp(1.5rem, 3cqi, 2.25rem) 0; }
@@ -91,8 +85,6 @@ html, body{ background: var(--branco); }
 /* Mapa estático da unidade (o iframe do Google não roda no protótipo) */
 img.unidade__mapa{ object-fit: cover; height: 200px; }
 
-/* Rodapé: lema embaixo da marca */
-.rodape__lema{ color: var(--sage); font-size: .9375rem; }
 
 /* Notas de revisão — só existem no protótipo */
 .nota-rev{ border-bottom: 1px solid #F0DCAE; }
@@ -155,7 +147,6 @@ img.unidade__mapa{ object-fit: cover; height: 200px; }
 <!-- ===================== TOPO ===================== -->
 <div class="util">
   <div class="env">
-    <span class="util__lema" data-lema>MX. Junto no seu negócio.</span>
     <a href="#a-mx">A MX</a>
     <a href="#unidades">Unidades</a>
     <a href="#seguros">Todos os seguros</a>
@@ -204,31 +195,67 @@ img.unidade__mapa{ object-fit: cover; height: 200px; }
   <div class="faixa-tpl nota-rev"><div class="env">
     <b>Home v3: o que mudou.</b>
     <ul>
-      <li>Herói único de saúde empresarial para PME, no lugar do carrossel de três mensagens. Sai "a vida inteira". <i>(Diagnóstico: estratégicos · Posicionamento §2)</i></li>
+      <li>O slider de três destaques voltou a pedido do cliente: vida, plano de saúde da empresa (com foto nova) e seguro empresarial. "A vida inteira" não volta, e o slogan saiu de todo o site.</li>
       <li>Consórcio e seguro empresarial entram como entradas fixas logo abaixo dos números. Antes, o consórcio não aparecia. <i>(Posicionamento §2)</i></li>
       <li>A vitrine em abas vira três pilares mais a porta de entrada "Para você", e sai o texto "os outros 21". <i>(Diagnóstico: contagem · Posicionamento §1)</i></li>
       <li>Entram os especialistas por pilar, o formulário qualificado, os guias de decisão e a nota no Google no lugar de "milhares de clientes". A seção A MX foi reescrita.</li>
     </ul>
   </div></div>
 
-  <section class="hero hero--unico" aria-label="Destaque da MX">
-    <article class="hero__slide hero__slide--faixa">
-      <div class="hero__arte" style="background-image:var(--f-ph-vida-em-grupo);background-position:62% center" aria-hidden="true"></div>
-      <div class="hero__moldura" aria-hidden="true"></div>
-      <div class="hero__conteudo">
-        <div class="env">
-          <div class="hero__caixa">
-            <span class="hero__olho" data-lema>MX. Junto no seu negócio.</span>
-            <h1>O plano de saúde da sua empresa, comparado antes de assinar e revisto todo ano</h1>
-            <p>Para pequenas e médias empresas de Itapira, Águas de Lindóia e região. A MX compara operadoras, rede credenciada e reajuste, e volta a conversar com você antes de cada renovação.</p>
-            <div class="hero__acoes">
-              <a class="btn btn--branco" href="#cotar" data-pilar-ir="saude">Cotar plano para o meu time</a>
-              <a class="btn btn--zap" href="https://wa.me/551938638150" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap"/></svg> Falar no WhatsApp</a>
+  <section class="hero" id="heroi" aria-roledescription="carrossel" aria-label="Destaques da MX">
+    <div class="hero__trilho">
+      <article class="hero__slide" style="background-image:var(--f-ph-vida-individual);background-position:62% center">
+        <div class="hero__conteudo">
+          <div class="env">
+            <div class="hero__caixa">
+              <h1>Seguro de vida também paga em vida</h1>
+              <p>Invalidez e doenças graves são cobertas enquanto você está aqui. E, na maioria dos planos, contratar não exige exame médico.</p>
+              <div class="hero__acoes">
+                <a class="btn btn--branco" href="#cotar" data-pilar-ir="voce">Cotar seguro de vida</a>
+                <a class="btn btn--zap" href="https://wa.me/551938638150" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap"/></svg> Falar no WhatsApp</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+      <article class="hero__slide hero__slide--faixa">
+        <div class="hero__arte" style="background-image:var(--f-hero-medicos);background-position:62% center" aria-hidden="true"></div>
+        <div class="hero__moldura" aria-hidden="true"></div>
+        <div class="hero__conteudo">
+          <div class="env">
+            <div class="hero__caixa">
+              <h1>O plano de saúde da sua empresa, comparado antes de assinar e revisto todo ano</h1>
+              <p>Para pequenas e médias empresas de Itapira, Águas de Lindóia e região. A MX compara operadoras, rede credenciada e reajuste, e volta a conversar com você antes de cada renovação.</p>
+              <div class="hero__acoes">
+                <a class="btn btn--branco" href="#cotar" data-pilar-ir="saude">Cotar plano para o meu time</a>
+                <a class="btn btn--linha-neg" href="#saude-empresarial">Ver como funciona</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="hero__slide" style="background-image:var(--f-hero-empresas);background-position:center">
+        <div class="hero__conteudo">
+          <div class="env">
+            <div class="hero__caixa">
+              <h1>Seguro de empresa não é pacote de prateleira</h1>
+              <p>Patrimônio, responsabilidade civil e lucros cessantes dimensionados pelo que a sua empresa realmente tem. A gente lê a apólice antes de você assinar.</p>
+              <div class="hero__acoes">
+                <a class="btn btn--branco" href="#cotar" data-pilar-ir="empresarial">Cotar seguro empresarial</a>
+                <a class="btn btn--linha-neg" href="#seguro-empresarial">Ver coberturas</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <button class="hero__seta hero__seta--esq" type="button" aria-label="Destaque anterior"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M12 4L6 10l6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="hero__seta hero__seta--dir" type="button" aria-label="Próximo destaque"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M8 4l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="hero__nav">
+      <button class="hero__ponto" type="button" aria-label="Destaque 1 de 3"></button>
+      <button class="hero__ponto" type="button" aria-label="Destaque 2 de 3"></button>
+      <button class="hero__ponto" type="button" aria-label="Destaque 3 de 3"></button>
+    </div>
   </section>
 
   <section class="numeros">
@@ -818,7 +845,6 @@ img.unidade__mapa{ object-fit: cover; height: 200px; }
       <div class="hero__conteudo"><div class="env">
         <nav class="migalhas" aria-label="Trilha de navegação" style="color:rgba(255,255,255,.72)"><ol><li><a href="#inicio" style="color:rgba(255,255,255,.72)">Início</a></li><li aria-current="page" style="color:#fff">A MX</li></ol></nav>
         <div class="hero__caixa">
-          <span class="hero__olho" data-lema>MX. Junto no seu negócio.</span>
           <h1>Uma corretora com endereço e nome de quem atende</h1>
           <p>Desde 2002 em Itapira e, depois, em Águas de Lindóia. A MX cuida das pessoas, do patrimônio e do crescimento de empresas e famílias da região.</p>
         </div>
@@ -928,7 +954,6 @@ img.unidade__mapa{ object-fit: cover; height: 200px; }
       <div class="pilha g12">
         <h2>Decisões que o protótipo deixa abertas</h2>
         <ul class="checklist">
-          <li>Qual dos três lemas fica. Use o seletor em "Controles do protótipo".</li>
           <li>Se previdência entra em "Linhas financeiras" junto do consórcio.</li>
           <li>Se o recorte de PME de 2 a 99 vidas, mais agro e hotelaria, se confirma na carteira.</li>
         </ul>
@@ -954,7 +979,6 @@ img.unidade__mapa{ object-fit: cover; height: 200px; }
     <div class="rodape__topo">
       <div class="pilha g16">
         <span class="logo logo--neg" role="img" aria-label="MX Corretora de Seguros"></span>
-        <p class="rodape__lema" data-lema>MX. Junto no seu negócio.</p>
         <div class="pilha g12">
           <p class="rodape__linha"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap"/></svg><span><span class="rodape__rot">Cotação, apólice e dúvidas</span><a href="https://wa.me/551938638150" target="_blank" rel="noopener"><b class="num">(19) 3863-8150</b></a></span></p>
           <p class="rodape__linha"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-alerta"/></svg><span><span class="rodape__rot">Só para sinistro</span><a href="https://wa.me/5519982036147" target="_blank" rel="noopener"><b class="num">(19) 98203-6147</b></a></span></p>
@@ -1009,12 +1033,6 @@ img.unidade__mapa{ object-fit: cover; height: 200px; }
 
 <div class="ctrl" id="ctrl">
   <div class="ctrl__painel" id="ctrl-painel" hidden>
-    <fieldset>
-      <legend>Lema ao lado da marca</legend>
-      <label><input type="radio" name="lema" id="lema-0" value="0" checked> MX. Junto no seu negócio.</label>
-      <label><input type="radio" name="lema" id="lema-1" value="1"> MX. Proteção e crescimento para quem empreende aqui.</label>
-      <label><input type="radio" name="lema" id="lema-2" value="2"> MX. A corretora de quem constrói na região.</label>
-    </fieldset>
     <fieldset>
       <legend>Revisão</legend>
       <label><input type="checkbox" id="ctrl-notas" checked> Mostrar notas do que mudou</label>
@@ -1103,8 +1121,6 @@ img.unidade__mapa{ object-fit: cover; height: 200px; }
     { selo: 'Filial', cidade: 'Águas de Lindóia / SP', mapa: '/fotos/mapa-lindoia.webp', endereco: 'Rua Argentina, 15, Salas 2 e 3, Centro<br>Águas de Lindóia/SP · CEP <span class="token">«CEP-FILIAL»</span>',
       rota: 'https://www.google.com/maps/dir/?api=1&destination=Rua%20Argentina%2C%2015%20-%20%C3%81guas%20de%20Lind%C3%B3ia%20-%20SP', ir: 'Como chegar a Águas de Lindóia' },
   ];
-
-  const LEMAS = ['MX. Junto no seu negócio.', 'MX. Proteção e crescimento para quem empreende aqui.', 'MX. A corretora de quem constrói na região.'];
 
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -1317,23 +1333,39 @@ img.unidade__mapa{ object-fit: cover; height: 200px; }
   $('#painel-fechar').addEventListener('click', fechaPainel);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') fechaPainel(); });
 
+  /* ---------- slider do herói ---------- */
+  const heroi = $('#heroi');
+  const slides = $$('.hero__slide', heroi), pontos = $$('.hero__ponto', heroi);
+  const trilhoHeroi = $('.hero__trilho', heroi);
+  trilhoHeroi.style.transition = 'transform .38s cubic-bezier(.4,0,.2,1)';
+  let slideAtual = 0, heroiParado = false;
+  function mostraSlide(i) {
+    slideAtual = (i + slides.length) % slides.length;
+    trilhoHeroi.style.transform = 'translate3d(' + (-slideAtual * 100) + '%,0,0)';
+    slides.forEach((s, n) => { s.inert = n !== slideAtual; });
+    pontos.forEach((p, n) => p.setAttribute('aria-current', String(n === slideAtual)));
+  }
+  pontos.forEach((p, n) => p.addEventListener('click', () => mostraSlide(n)));
+  $('.hero__seta--esq', heroi).addEventListener('click', () => mostraSlide(slideAtual - 1));
+  $('.hero__seta--dir', heroi).addEventListener('click', () => mostraSlide(slideAtual + 1));
+  ['mouseenter', 'focusin'].forEach(ev => heroi.addEventListener(ev, () => { heroiParado = true; }));
+  ['mouseleave', 'focusout'].forEach(ev => heroi.addEventListener(ev, () => { heroiParado = false; }));
+  mostraSlide(0);
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setInterval(() => { if (!heroiParado) mostraSlide(slideAtual + 1); }, 7000);
+  }
+
   /* ---------- controles do protótipo ---------- */
   const palco = $('#palco');
   const guarda = (k, v) => { try { localStorage.setItem('mx-v3-' + k, v); } catch (e) {} };
   const le = k => { try { return localStorage.getItem('mx-v3-' + k); } catch (e) { return null; } };
 
-  function aplicaLema(i) {
-    $$('[data-lema]').forEach(el => el.textContent = LEMAS[i]);
-    const r = document.getElementById('lema-' + i); if (r) r.checked = true;
-  }
-  $$('input[name="lema"]').forEach(r => r.addEventListener('change', () => { aplicaLema(+r.value); guarda('lema', r.value); }));
   const notas = $('#ctrl-notas'), realce = $('#ctrl-realce');
   notas.addEventListener('change', () => { palco.dataset.notas = notas.checked ? '1' : '0'; guarda('notas', palco.dataset.notas); });
   realce.addEventListener('change', () => { palco.dataset.realce = realce.checked ? '1' : '0'; });
   const botao = $('#ctrl-botao'), cp = $('#ctrl-painel');
   botao.addEventListener('click', () => { cp.hidden = !cp.hidden; botao.setAttribute('aria-expanded', String(!cp.hidden)); });
 
-  const lemaSalvo = le('lema'); aplicaLema(lemaSalvo && LEMAS[+lemaSalvo] ? +lemaSalvo : 0);
   if (le('notas') === '0') { notas.checked = false; palco.dataset.notas = '0'; }
 
   window.addEventListener('hashchange', rota);

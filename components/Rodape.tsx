@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { SLUGS } from '@/content/produtos';
 import { PILARES } from '@/content/pilares';
-import { CNPJ, EMAIL, HORARIO, LEMA, SUSEP, UNIDADES, WHATSAPP, WHATSAPP_SINISTRO } from '@/content/empresa';
+import { CNPJ, EMAIL, HORARIO, SUSEP, UNIDADES, WHATSAPP, WHATSAPP_SINISTRO } from '@/content/empresa';
 import Dado from '@/components/Dado';
 
 /**
@@ -16,7 +16,6 @@ export default function Rodape() {
         <div className="rodape__topo">
           <div className="pilha g16">
             <span className="logo logo--neg" role="img" aria-label="MX Corretora de Seguros"></span>
-            <p className="rodape__lema">{LEMA}</p>
             <div className="pilha g12">
               <p className="rodape__linha"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg>
                 <span><span className="rodape__rot">Cotação, apólice e dúvidas</span><a href={WHATSAPP.link}><b className="num">{WHATSAPP.numero}</b></a></span></p>

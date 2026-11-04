@@ -57,6 +57,7 @@
   --f-hero-empresas: url("/fotos/hero-empresas.webp");
   --f-hero-condominio: url("/fotos/hero-condominio.webp");
   --f-hero-saude: url("/fotos/hero-saude.webp");
+  --f-hero-medicos: url("/fotos/hero-medicos.webp");
   --f-h-documento: url("/fotos/h-documento.webp");
   --f-h-loja: url("/fotos/h-loja.webp");
   --f-h-maquina: url("/fotos/h-maquina.webp");
@@ -332,7 +333,12 @@ ul,ol{ margin: 0; padding: 0; list-style: none; }
    6. HERO — foto com veu a esquerda
    ========================================================================== */
 .hero{ position: relative; overflow: hidden; background: var(--navy); }
-.hero__trilho{ display: flex; }
+.hero__trilho{
+  display: flex;
+  /* deixa a rolagem vertical com o navegador e o gesto horizontal conosco */
+  touch-action: pan-y;
+  will-change: transform;
+}
 .hero__slide{
   position: relative; flex: 0 0 100%;
   min-height: clamp(340px, 44cqi, 440px);
@@ -380,6 +386,26 @@ ul,ol{ margin: 0; padding: 0; list-style: none; }
 .hero h1{ color: #fff; }
 .hero p{ color: var(--neg-fraco); font-size: 1.0625rem; }
 .hero__acoes{ display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .3rem; }
+
+.hero__nav{
+  position: absolute; left: 0; right: 0; bottom: 1.1rem; z-index: 2;
+  display: flex; align-items: center; justify-content: center; gap: .4rem;
+}
+.hero__ponto{
+  appearance: none; border: 0; cursor: pointer; padding: 0;
+  width: 26px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.42);
+  transition: background-color .16s ease, width .16s ease;
+}
+.hero__ponto[aria-current="true"]{ background: #fff; width: 44px; }
+.hero__seta{
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+  width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+  display: none; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,.4); background: rgba(11,11,13,.28); color: #fff;
+}
+.hero__seta:hover{ background: rgba(11,11,13,.55); border-color: #fff; }
+.hero__seta--esq{ left: .75rem; } .hero__seta--dir{ right: .75rem; }
+@container palco (min-width: 820px){ .hero__seta{ display: flex; } }
 
 /* ==========================================================================
    7. TABS + CARDS COM FOTO
@@ -805,8 +831,6 @@ code{ font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size
   .topo__nav{ margin-left: .75rem; }
   .topo__link{ padding-inline: .5rem; font-size: .9rem; }
 }
-.util__lema{ color: var(--texto-fraco); padding-right: .8rem; margin-right: .2rem;
-  border-right: 1px solid var(--linha); font-weight: 500; }
 .painel__col h4 a{ color: var(--preto); text-decoration: none; }
 .painel__col h4 a:hover{ color: var(--azul); }
 .painel__extra{ display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; padding-block: 0 1.4rem; font-size: .9375rem; }
@@ -814,12 +838,10 @@ code{ font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size
 .painel__extra a:hover{ color: var(--azul); }
 @container palco (min-width: 940px){ .painel__extra{ display: none; } }
 
-.hero--unico .hero__slide{ min-height: clamp(380px, 46cqi, 480px); }
 /* No celular a foto da faixa fica atrás do texto: sem isto, foto clara o apaga. */
 @container palco (max-width: 760px){
   .hero__slide--faixa .hero__arte{ opacity: .28; }
 }
-.hero__olho{ font-size: .8125rem; font-weight: 500; color: var(--sage); letter-spacing: .01em; }
 .migalhas--neg, .migalhas--neg a{ color: rgba(255,255,255,.72); }
 .migalhas--neg li[aria-current]{ color: #fff; }
 
@@ -882,4 +904,3 @@ code{ font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size
 .guia{ padding-top: 1.25rem; border-top: 1px solid var(--linha); }
 .titulo-link{ text-decoration: none; }
 .titulo-link:hover{ color: var(--azul); }
-.rodape__lema{ color: var(--sage); }

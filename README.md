@@ -83,8 +83,8 @@ nenhuma administradora, e voltaram depois. Com o consórcio virando pilar, o tex
 ### 4. A marca se organiza em pilares
 
 Saúde para empresas, Linhas financeiras e Seguro empresarial, com "Para você" como porta de entrada.
-`content/pilares.ts` define o menu, a chamada de cada pilar e as páginas. O herói da home tem uma
-promessa só, e o formulário (`components/FormPilar.tsx`) pede dados diferentes por pilar.
+`content/pilares.ts` define o menu, a chamada de cada pilar e as páginas. O herói da home é um slider de
+três destaques, e o formulário (`components/FormPilar.tsx`) pede dados diferentes por pilar.
 
 ### 5. Valor entre « » é dado pendente
 

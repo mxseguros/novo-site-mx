@@ -12,7 +12,7 @@ import { NOTA_GOOGLE, TOTAL_AVALIACOES, WHATSAPP, WHATSAPP_SINISTRO } from '@/co
 /**
  * Home — aprovada no protótipo v3 (Docs/prototipo-v3-pilares.html).
  *
- * Abre com uma promessa só e apresenta a MX pelos três pilares: saúde,
+ * Abre com o slider de destaques e apresenta a MX pelos três pilares: saúde,
  * consórcio e seguro empresarial. Os links de produto saem do produtos.ts e os
  * de pilar do pilares.ts — nenhum destino é digitado à mão.
  */

@@ -8,7 +8,7 @@ como documento de design. O v2 (`Docs/prototipo.html`) fica como histórico.
 
 ## Antes de mexer no CSS
 
-**`.palco` não é um wrapper decorativo.** São 22 `@container palco` contra uma única
+**`.palco` não é um wrapper decorativo.** São 24 `@container palco` contra uma única
 `@media`: sem um elemento com `container-type: inline-size; container-name: palco`
 envolvendo o conteúdo, o site inteiro para de responder, em silêncio. Nenhum teste pega.
 
@@ -31,8 +31,11 @@ Vieram de rodadas de revisão e não devem ser reintroduzidas por conta própria
 - **Sem barra fixa de conversão.** O par WhatsApp + "Fazer cotação" no header é o padrão.
 - `.foto-card--grade` precisa de `background-position: 74% center`: as fotos foram recortadas
   com o sujeito à direita, e `center` cai no vazio.
-- **Herói único, sem carrossel.** Uma promessa só, de saúde empresarial. Consórcio e seguro
-  empresarial são entradas fixas logo abaixo da faixa de números.
+- **Herói em slider de três destaques:** vida, plano de saúde da empresa e seguro empresarial. O
+  cliente pediu a volta em 04/11/2026, no lugar do herói único. O slide de saúde não volta a dizer
+  "a vida inteira". Consórcio e seguro empresarial seguem como entradas fixas abaixo da faixa de
+  números.
+- **Sem slogan.** "MX. Junto no seu negócio." saiu do topo, do rodapé e da /a-mx a pedido do cliente.
 - **O menu principal são os pilares**, não a lista de produtos. Auto, residencial, moto e pets
   ficam em "Para você", como porta de entrada.
 
