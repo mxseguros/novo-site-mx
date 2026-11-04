@@ -64,8 +64,9 @@ export default function TabelaAssistencia() {
                 <td className="num">
                   {s.linhas.length === 0 && (
                     <>
-                      Telefone na sua apólice, ou chame a MX:{' '}
+                      Chame o WhatsApp de sinistro da MX:{' '}
                       <a href={WHATSAPP_SINISTRO.link}>{WHATSAPP_SINISTRO.numero}</a>
+                      . Fora do horário, use o telefone da sua apólice.
                     </>
                   )}
                   {s.linhas.map((l, i) => (
