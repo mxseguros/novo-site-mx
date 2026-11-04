@@ -1,0 +1,503 @@
+Plano de Execução — Redesign do Site MX Corretora de Seguros
+
+Versão: 1.0 (proposta para aprovação) Data: 17/08/2026 Site atual:
+https://mxseguros.com.br Status: aguardando aprovação — Portão G1 Regra do projeto:
+protótipo aprovado antes de qualquer implementação
+
+----------------------------------------------------------------------------------------
+
+1. Resumo executivo
+
+O site atual da MX cumpre a função de existir: tem todos os produtos, os endereços, os
+telefones e as páginas legais. O problema não é falta de conteúdo — é que o conteúdo
+certo está difícil de achar e o conteúdo errado está em destaque.
+
+Três exemplos que resumem o diagnóstico:
+
+1.  Um cliente com o carro quebrado às 22h precisa de três cliques e um acordeão que não
+    abre sozinho para chegar no telefone da assistência da seguradora dele.
+2.  O link de telefone do rodapé é tel:44133438 — um número que não existe. Está
+    quebrado em todas as páginas do site.
+3.  A página “Seguros Online” promete contratação online para 20 produtos, mas só 4 têm
+    cotador de verdade. Os outros 16 abrem a mesma conversa de WhatsApp.
+
+A proposta é um redesign completo — arquitetura, layout, conversão e performance —
+preservando 100% do conteúdo existente, reorganizado e reescrito para leitura, não
+descartado.
+
+Premissa central: a MX não compete com corretora digital em preço nem em tecnologia.
+Compete em 24 anos de mercado, escritório físico em duas cidades e dez seguradoras
+parceiras. O site precisa provar isso na primeira tela — hoje não prova.
+
+----------------------------------------------------------------------------------------
+
+2. Inventário do site atual
+
+Levantamento completo realizado em 17/08/2026. Nada aqui será descartado.
+
+2.1 Estrutura de páginas
+
+  ---------------------------------------------------------------------------------------
+  Grupo                                       Páginas
+  ------------------------------------------- -------------------------------------------
+  Institucional                               Home · Sobre nós · Política de Privacidade
+                                              · Resolução CNSP 382/2020 · Contato
+
+  Serviço                                     Sinistro · Assistência · Seguros Online
+
+  Produtos — Individual (13)                  Automóvel · Acidentes Pessoais · Bike ·
+                                              Caminhão · Equipamentos Portáteis · Festas
+                                              e Eventos · Fiança Locatícia · Moto ·
+                                              Residencial · RC Profissional · RC Médico e
+                                              Dentista · Vida Individual · Viagem
+
+  Produtos — Empresarial (12)                 Agronegócios · Condomínio · Empresarial ·
+                                              Estagiário · Frota · Garantia · Grandes
+                                              Riscos · Máquinas Agrícolas · Riscos
+                                              Cibernéticos · Riscos de Engenharia ·
+                                              Transportes · Vida em Grupo
+
+  Consórcios (4)                              Consórcios · Automóveis · Imóveis ·
+                                              Serviços
+
+  Outros produtos (4)                         Odontológico · Previdência · Saúde · Saúde
+                                              para Pets
+  ---------------------------------------------------------------------------------------
+
+Total: 41 páginas.
+
+2.2 Conteúdo institucional (preservar integralmente)
+
+-   História: “Formada por consultores experientes e preparados, atuando no mercado de
+    seguros desde 2002 com eficiência, inovação e preços competitivos, a MX Seguros é
+    uma das principais empresas do ramo de seguro na região.”
+-   Missão: Através da Excelência no Atendimento, levar Segurança e Tranquilidade aos
+    nossos clientes.
+-   Visão: Ser Referência no Mercado de Seguros, em constante Evolução em Tecnologia e
+    Inovação.
+-   Valores: Ética · Pontualidade · Transparência · Integridade · Comprometimento
+-   Fotos: equipe 2022, fachada da matriz (Itapira), fachada da filial (Águas de
+    Lindoia)
+
+2.3 Conteúdo de serviço (o mais valioso do site)
+
+Página Sinistro — checklists de documentação por ramo. É o conteúdo mais útil do site
+inteiro e hoje está em texto corrido com travessões: - Automóvel (documentos gerais +
+perda total) - Residencial · Vida · Condomínio · Empresarial
+
+Página Assistência — contatos de emergência das seguradoras, hoje ocultos em acordeão.
+
+2.4 Dados de contato
+
+  Canal                Número                                                        Uso atual
+  -------------------- ------------------------------------------------------------- --------------------------------------
+  Telefone matriz      (19) 3863-8150                                                Geral
+  Telefone 2           (19) 98112-7038                                               Geral
+  WhatsApp geral       (19) 3863-8150                                                Header e rodapé
+  WhatsApp comercial   (19) 97138-6794                                               Cotações de 16 produtos, transportes
+  WhatsApp sinistro    (19) 98203-6147                                               Atendimento de sinistro
+  E-mail               mxseguros@mxseguros.com.br                                    —
+  Matriz               Av. Rio Branco, 221 — Centro — Itapira/SP — CEP 13970-070     —
+  Filial               Rua Argentina, 15, Salas 2-3 — Centro — Águas de Lindoia/SP   —
+  Horário              Segunda a sexta, 08:00 às 18:00                               —
+
+Confirmado pelo cliente em 17/08/2026. Os endereços e os três telefones do rodapé estão
+corretos como texto exibido e devem ser preservados integralmente. O que precisa de
+correção é o href do primeiro telefone (ver P2) e a ausência de rótulo distinguindo
+telefone de WhatsApp.
+
+No redesign, as duas unidades saem da lista de texto do rodapé e ganham cards próprios
+com endereço, mapa, horário e telefone da unidade. | Redes | @mxsegurositapira (Facebook
+e Instagram) | — |
+
+2.5 Ativos e integrações
+
+-   Seguradoras parceiras (10): Azul · Itaú · MSIG · Tokio Marine · HDI · Yelum ·
+    Allianz · Zurich · Sompo · Bradesco
+-   Parceiros locais (~24 logos): Lojacor, Big Soccer, Shopping Fer, Lotus, ACL, GPO,
+    Óticas Vivi, Organza, Nilson Despachante, Método, Fazfarma, Edubikes, Colibri, Chopp
+    Germânia, Avanti, Atifer, Arte Própria, Wine Experts e outros
+-   Cotador externo: formigari.aggilizador.com.br — deep links funcionais em /auto,
+    /residence, /life, /business
+-   Link direto Porto Seguro na página de Automóvel
+-   Meta Pixel: 1397202118054084
+-   Stack atual: WordPress + Elementor 3.35.5 + ElementsKit
+-   Marca: logos em positivo e negativo, favicon
+
+----------------------------------------------------------------------------------------
+
+3. Diagnóstico — 12 problemas encontrados
+
+Ordenados por impacto no negócio.
+
+Críticos
+
+P1 — Contatos de emergência escondidos. A página Assistência exige clicar em um acordeão
+para revelar o telefone da seguradora. O usuário nessa página está com o carro quebrado
+ou a casa alagada. Contato de emergência precisa estar visível, clicável e funcionando
+offline se possível.
+
+P2 — Link de telefone quebrado no rodapé de todo o site.
+
+Atenção à natureza exata do erro: o texto exibido está correto, o link é que está
+errado.
+
+  Rodapé       Texto exibido     href real                 Situação
+  ------------ ----------------- ------------------------- ------------------------
+  Telefone 1   (19) 3863-8150    tel:44133438              ❌ número inexistente
+  Telefone 2   (19) 98112-7038   tel:19981127038           ✅ correto
+  Telefone 3   (19) 3863-8150    WhatsApp 5519 3863-8150   ✅ funciona, sem rótulo
+
+No desktop ninguém percebe — o visitante lê o número e disca no aparelho. No celular,
+tocar no primeiro item disca 44133438 e a ligação não completa. Como a maior parte do
+tráfego é mobile, é ligação perdida silenciosa, em 41 páginas.
+
+Problema secundário: o item 1 e o item 3 exibem o mesmo número sem rótulo. Um é
+telefone, o outro é WhatsApp — para o visitante parece duplicata.
+
+P3 — Header com telefone sem DDD. Exibe (19) 3863-8150, mas o link é tel:38638150 — sem
+o DDD. Fora da região de Itapira, essa ligação não completa.
+
+P4 — Links de produto apontando para a página errada na Home. O card “VIDA” leva para
+/automovel/. O card “RESIDENCIAL” da seção de soluções leva para /saude/. São dois
+produtos de alto valor mandando o visitante para o lugar errado.
+
+Altos
+
+P5 — “Seguros Online” não é online. 20 produtos anunciados, 4 com cotador real. Os
+outros 16 abrem WhatsApp. A promessa do nome da página não se cumpre, e isso gera
+frustração exatamente no momento de maior intenção de compra.
+
+P6 — Quatro números de telefone sem lógica aparente. O cliente não sabe qual usar.
+Comercial, sinistro, geral e um segundo celular aparecem misturados, e o número de
+sinistro só existe dentro de uma página específica.
+
+P7 — O CTA principal manda o visitante para fora do domínio. Todo “FAÇA UMA COTAÇÃO”
+leva a formigari.aggilizador.com.br. Perde-se controle de mensuração, de experiência e
+de marca no momento decisivo.
+
+P8 — Nenhuma prova social. Zero depoimentos, zero avaliações, zero números de carteira.
+Os 24 anos de mercado e os dois escritórios físicos — que são a vantagem real contra
+corretora digital — não são usados como argumento.
+
+Médios
+
+P9 — Caixa alta em blocos de texto. Reduz velocidade de leitura e prejudica leitores de
+tela. Usada em títulos e em parágrafos inteiros.
+
+P10 — Quatro formulários idênticos na Home. As abas CARRO / RESIDENCIAL / VIDA / SAÚDE
+repetem o mesmo formulário “Deixe seus dados e receba nosso contato”, sem diferenciação.
+
+P11 — Rodapé desatualizado. “© 2025” em agosto de 2026. Sinal de site abandonado.
+
+P12 — Peso e performance. Elementor com ElementsKit, dezenas de imagens JPG não
+otimizadas, carrossel de 24 logos de parceiros carregando na Home. Provável LCP acima de
+4s no mobile.
+
+----------------------------------------------------------------------------------------
+
+4. Benchmarks e direção de design
+
+4.1 O que o mercado faz bem
+
+  -----------------------------------------------------------------------------------------
+  Padrão                        Onde se vê                    Aplicação na MX
+  ----------------------------- ----------------------------- -----------------------------
+  Hero com um único caminho de  Seguradoras diretas (Porto,   Um CTA primário: cotação. Um
+  ação                          Azul, Youse)                  secundário: WhatsApp
+
+  Seletor de produto como       Corretoras digitais           Grid visual de produtos com
+  entrada                                                     busca, no lugar do menu de 33
+                                                              itens
+
+  Área de sinistro em destaque  Grandes corretoras (Marsh,    Botão fixo “Sinistro /
+  no header                     Alper)                        Assistência 24h”
+
+  Prova social nomeada          Corretoras especializadas     Depoimentos de clientes reais
+                                                              das duas cidades
+
+  Conteúdo de apoio indexável   Todas as líderes              Aproveitar a página Sinistro
+                                                              como conteúdo de SEO
+
+  Transparência regulatória     Exigência CNSP                Já existe — só precisa sair
+  visível                                                     do submenu
+  -----------------------------------------------------------------------------------------
+
+4.2 Direção visual proposta
+
+Conceito: “corretor de verdade, ferramenta moderna”. Clean e contemporâneo, mas sem
+parecer fintech genérica. O público de Itapira e Águas de Lindoia precisa reconhecer a
+MX como a empresa da Avenida Rio Branco — não como um app sem rosto.
+
+-   Paleta: derivada da marca atual, com uma cor de ação de alto contraste reservada
+    exclusivamente a botões de conversão. Neutros claros dominando o fundo.
+-   Tipografia: uma família, dois a três pesos. Escala tipográfica ampla — títulos
+    grandes, corpo de 17-18px. Fim da caixa alta em parágrafos.
+-   Espaçamento: respiro generoso. O site atual é denso; a percepção de “moderno” vem
+    mais de espaço em branco do que de efeito visual.
+-   Componentes: cards com sombra sutil, bordas arredondadas discretas, ícones de linha
+    consistentes. Sem gradientes chamativos, sem animação de entrada em cada seção.
+-   Fotografia: priorizar as fotos reais que a MX já tem — equipe, fachada da matriz,
+    fachada da filial. Foto real de escritório de cidade do interior vale mais que banco
+    de imagem com executivo sorrindo.
+-   Mobile-first. A maior parte do tráfego é celular, e o site atual foi claramente
+    pensado no desktop.
+
+----------------------------------------------------------------------------------------
+
+5. Arquitetura de informação proposta
+
+5.1 Navegação principal
+
+O menu atual tem 33 itens em três níveis. Proposta de cinco entradas:
+
+    [LOGO]   Seguros ▾   Consórcios   Sinistro e Assistência   A MX   Contato
+                                                        [Fazer cotação]  [WhatsApp]
+
+“Seguros ▾” abre um mega-menu em três colunas — Para você · Para sua empresa · Outros
+produtos — com busca por nome de produto no topo. Todos os 33 produtos continuam
+acessíveis; o que muda é que o visitante escaneia em vez de navegar submenus aninhados.
+
+“Sinistro e Assistência” sobe para o primeiro nível. É o motivo número um de visita de
+cliente já segurado, e hoje está diluído.
+
+5.2 Estrutura da Home
+
+  #    Seção                    Conteúdo
+  ---- ------------------------ ---------------------------------------------------------------------
+  1    Header fixo              Logo, menu, CTA de cotação, WhatsApp
+  2    Hero                     Proposta de valor + busca/seletor de produto + CTA duplo
+  3    Barra de confiança       Desde 2002 · 10 seguradoras parceiras · Itapira e Águas de Lindoia
+  4    Seletor de seguros       Grid visual: 6 produtos principais + “ver todos”
+  5    Por que uma corretora    Comparação: cotar direto na seguradora × cotar com a MX
+  6    Cotação rápida           Formulário único com seletor de produto — substitui os 4 duplicados
+  7    Sinistro e assistência   Bloco de acesso rápido, com telefone visível
+  8    Seguradoras parceiras    Os 10 logos
+  9    Depoimentos              Novo — a construir (ver pendência 4)
+  10   Sobre a MX               Resumo + foto da equipe + link para a página completa
+  11   Parceiros locais         Os ~24 logos, em carrossel com carregamento tardio
+  12   Unidades                 Dois cards com endereço, mapa, horário e telefone
+  13   Rodapé                   Navegação completa, contatos, legais, CNSP 382/2020, LGPD
+
+5.3 Template de página de produto
+
+Um único template para os 33 produtos, com blocos opcionais:
+
+1.  Breadcrumb + título + resumo em uma frase
+2.  “Para quem é” — 3 perfis
+3.  Coberturas em cards (o conteúdo textual atual, reformatado)
+4.  “O que não está coberto” — novo, e é diferencial de confiança
+5.  Como contratar — 3 ou 4 passos
+6.  FAQ do produto — 4 a 6 perguntas
+7.  Formulário de cotação inline
+8.  Produtos relacionados
+
+5.4 Sinistro e Assistência — reconstrução
+
+Esta é a maior oportunidade de melhoria de experiência do projeto.
+
+Página Sinistro: - Botão de emergência no topo, com o número (19) 98203-6147 visível e
+clicável - Checklists de documentação em acordeões por ramo, com opção de imprimir e de
+enviar por WhatsApp - Passo a passo do que fazer nas primeiras 24 horas
+
+Página Assistência: - Tabela aberta com todas as seguradoras e seus telefones 24h, sem
+cliques - Busca por nome de seguradora - Botão de ligar direto no celular - Página leve
+o suficiente para abrir em conexão ruim
+
+----------------------------------------------------------------------------------------
+
+6. Fases de execução
+
+Cinco fases, três portões de aprovação. Nada é implementado antes do protótipo aprovado.
+
+  Portão   O que é aprovado                        Libera
+  -------- --------------------------------------- ------------------------
+  G1       Este plano, diagnóstico e arquitetura   Fase 2 — protótipo
+  G2       Protótipo navegável                     Fase 3 — conteúdo
+  G3       Conteúdo migrado e revisado             Fase 4 — implementação
+
+Fase 0 — Levantamento e diagnóstico · CONCLUÍDA
+
+Inventário das 41 páginas, mapa de conteúdo, dados de contato, ativos, integrações e os
+12 problemas da seção 3. Entregável: este documento.
+
+Fase 1 — Discovery e alinhamento · EM APROVAÇÃO
+
+Entregável: plano-redesign-site.md (este arquivo)
+
+O que precisa da MX:
+
+1.  Aprovação do diagnóstico e da priorização
+2.  Aprovação da arquitetura de navegação de 5 entradas
+3.  Aprovação da estrutura da Home
+4.  Resposta às pendências 1 a 4 da seção 8
+
+  Portão G1 — sem aprovação, a Fase 2 não inicia.
+
+Fase 2 — Protótipo
+
+Objetivo: ver e navegar antes de construir.
+
+Atividades: - Definição do design system: paleta, tipografia, espaçamento, componentes -
+Protótipo em HTML navegável de 4 telas-chave: - Home completa - Página de produto
+(usando Automóvel como referência) - Sinistro e Assistência - Contato e unidades -
+Validação em mobile antes de desktop - Duas rodadas de ajuste incluídas
+
+Entregável: protótipo navegável + guia do design system
+
+  Portão G2 — protótipo aprovado libera a migração de conteúdo.
+
+Fase 3 — Conteúdo
+
+Objetivo: migrar tudo, sem perder nada, melhorando a leitura.
+
+Atividades: - Migração das 41 páginas para a nova estrutura - Reescrita dos textos de
+produto: sair da caixa alta, quebrar parágrafos longos, padronizar o tom - Estruturação
+dos checklists de sinistro em formato consultável - Levantamento e tabulação dos
+telefones 24h de todas as seguradoras parceiras - Redação das FAQs por produto -
+Definição da política de uso dos números de telefone (ver pendência 2) - Revisão de
+conformidade: SUSEP, CNSP 382/2020, LGPD
+
+Entregável: conteudo.md com todo o texto final por página
+
+  Portão G3 — conteúdo aprovado libera a implementação.
+
+Fase 4 — Implementação
+
+Atividades: - Construção do tema/páginas conforme o protótipo - Formulário de cotação
+com seletor de produto e validação - Integração com o destino de lead definido (ver
+pendência 1) - Correção dos links quebrados (P2, P3, P4) - Otimização de imagens para
+WebP com carregamento tardio - Meta tags, Open Graph e JSON-LD: InsuranceAgency +
+LocalBusiness (duas unidades) + FAQPage - Instalação de GA4 e reaproveitamento do Meta
+Pixel existente - Mapa de redirecionamentos 301 de todas as URLs antigas
+
+Fase 5 — QA, publicação e medição
+
+Checklist:
+
+-   ☐ Responsividade em 360px, 768px, 1024px e 1440px
+-   ☐ Chrome, Safari, Firefox e Edge; Safari iOS 15+ e Chrome Android
+-   ☐ LCP < 2,5s no mobile; PageSpeed > 90
+-   ☐ Todos os links de telefone testados em celular real
+-   ☐ Todos os links de produto apontando para a página correta
+-   ☐ Formulário entregando o lead ao destino definido
+-   ☐ Navegação por teclado com foco visível
+-   ☐ Contraste AA em todos os blocos
+-   ☐ Redirecionamentos 301 validados um a um
+-   ☐ Search Console: sitemap enviado, cobertura verificada
+-   ☐ Eventos de GA4 e Pixel disparando
+-   ☐ Revisão ortográfica e conferência de todos os dados de contato
+
+Pós-publicação: monitorar posições e erros 404 por 30 dias. Reavaliar conversão em 60
+dias.
+
+----------------------------------------------------------------------------------------
+
+7. Riscos
+
+  ---------------------------------------------------------------------------------------
+  Risco                 Prob.                 Impacto               Mitigação
+  --------------------- --------------------- --------------------- ---------------------
+  Perda de              Média                 Alto                  Mapa de 301 completo,
+  posicionamento em                                                 manter URLs quando
+  busca                                                             possível, sitemap no
+                                                                    Search Console
+
+  Conteúdo perdido na   Média                 Alto                  Inventário da seção 2
+  migração                                                          como checklist de
+                                                                    conferência item a
+                                                                    item
+
+  Telefones 24h das     Alta                  Alto                  Validar um a um na
+  seguradoras                                                       Fase 3; definir
+  desatualizados                                                    responsável por
+                                                                    revisão semestral
+
+  Escopo crescendo para Alta                  Médio                 Fora de escopo nesta
+  blog, área do                                                     entrega; entram como
+  cliente, app                                                      ciclo seguinte
+
+  Dependência do        Média                 Médio                 Decidir na pendência
+  cotador externo                                                   1 se o Aggilizador
+                                                                    continua ou vira
+                                                                    etapa posterior
+
+  Site fora do ar na    Baixa                 Alto                  Publicar em staging,
+  virada                                                            validar, virar em
+                                                                    janela de baixo
+                                                                    tráfego
+
+  Aprovações travando o Alta                  Médio                 Portões com escopo
+  cronograma                                                        objetivo; duas
+                                                                    rodadas de ajuste por
+                                                                    fase
+  ---------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------
+
+8. Pendências que precisam da MX
+
+  -----------------------------------------------------------------------------------------
+  #                             Decisão                       Por que importa
+  ----------------------------- ----------------------------- -----------------------------
+  1                             O cotador Aggilizador         Define se o formulário do
+                                continua como CTA principal?  site é o destino ou apenas
+                                                              uma etapa. Muda a arquitetura
+                                                              de conversão inteira
+
+  2                             Qual a política dos quatro    Proposta: 3863-8150
+                                telefones?                    institucional · 97138-6794
+                                                              comercial · 98203-6147
+                                                              sinistro · 98112-7038
+                                                              aposentar ou definir uso
+
+  3                             Registro SUSEP da corretora   Exigido no rodapé para
+                                                              conformidade
+
+  4                             Existem depoimentos ou        Prova social é a maior lacuna
+                                avaliações no Google          do site. Sem ela, o argumento
+                                Business?                     dos 24 anos fica sem lastro
+
+  5                             Manter WordPress ou migrar de Afeta prazo, custo e
+                                stack?                        autonomia de edição da equipe
+
+  6                             Quem edita o site depois de   Define o nível de
+                                pronto?                       flexibilidade necessário no
+                                                              CMS
+
+  7                             Há material fotográfico novo? As fotos atuais são de 2022
+
+  8                             Existe verba de mídia         Muda a prioridade entre SEO e
+                                planejada?                    conversão
+  -----------------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------------
+
+9. Critérios de aceite
+
+-   ☐ As 41 páginas migradas, com conteúdo integral preservado
+-   ☐ Nenhum link quebrado — telefone, produto ou interno
+-   ☐ LCP < 2,5s no mobile
+-   ☐ Contatos de emergência acessíveis em um toque a partir da Home
+-   ☐ Formulário funcionando e entregando lead ao destino definido
+-   ☐ Redirecionamentos 301 cobrindo 100% das URLs antigas
+-   ☐ Contraste AA e navegação por teclado
+-   ☐ Conformidade SUSEP, CNSP 382/2020 e LGPD visível
+-   ☐ Rodapé com ano correto e dados conferidos
+-   ☐ Aprovação formal da MX em cada portão
+
+----------------------------------------------------------------------------------------
+
+10. Fluxo resumido
+
+    Fase 0 — Diagnóstico          ✅ concluída
+       ↓
+    Fase 1 — Plano                ⏳ aguardando aprovação   ← VOCÊ ESTÁ AQUI
+       ↓ G1
+    Fase 2 — Protótipo            4 telas navegáveis
+       ↓ G2
+    Fase 3 — Conteúdo             conteudo.md
+       ↓ G3
+    Fase 4 — Implementação        site completo
+       ↓
+    Fase 5 — QA e publicação      + 301, Search Console, medição

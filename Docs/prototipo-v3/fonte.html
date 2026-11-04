@@ -1,0 +1,1342 @@
+<title>MX Site v3 Pilares</title>
+<meta name="description" content="Protótipo v3 do site da MX Corretora de Seguros: arquitetura por pilares, herói único e formulário qualificado.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap">
+<style>
+/*@@GLOBALS@@*/
+
+/* ==========================================================================
+   ── novo na v3 ──
+   Tudo daqui para baixo é o que a v3 acrescenta ao globals.css do site.
+   Os nomes já seguem o design system para portar sem reescrever.
+   ========================================================================== */
+:root{ --font-dm-sans: "DM Sans"; }
+html, body{ background: var(--branco); }
+.tela[hidden]{ display: none !important; }
+
+/* Topo por pilar: quatro entradas e o par WhatsApp + cotação.
+   Entre 940 e 1120px aperta o respiro dos links para tudo caber na linha. */
+@container palco (min-width: 940px) and (max-width: 1119px){
+  .topo__nav{ margin-left: .75rem; }
+  .topo__link{ padding-inline: .5rem; font-size: .9rem; }
+}
+.util__lema{ color: var(--texto-fraco); padding-right: .8rem; margin-right: .2rem;
+  border-right: 1px solid var(--linha); font-weight: 500; }
+
+/* Painel por pilar: quatro colunas */
+@container palco (min-width: 760px){ .painel__grade--4{ grid-template-columns: repeat(2,1fr); } }
+@container palco (min-width: 1000px){ .painel__grade--4{ grid-template-columns: repeat(4,1fr); } }
+.painel__col h4 a{ color: var(--preto); text-decoration: none; display: inline-flex; align-items: center; gap: .35rem; }
+.painel__col h4 a:hover{ color: var(--azul); }
+.painel__col h4 a svg{ width: 12px; height: 12px; }
+.painel__extra{ display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; padding-block: 0 1.4rem; font-size: .9375rem; }
+.painel__extra a{ color: var(--preto); text-decoration: none; }
+.painel__extra a:hover{ color: var(--azul); }
+@container palco (min-width: 940px){ .painel__extra{ display: none; } }
+
+/* Herói único — sem trilho, sem pontos, sem setas */
+.hero--unico .hero__slide{ min-height: clamp(380px, 46cqi, 480px); }
+.hero__olho{ font-size: .8125rem; font-weight: 500; color: var(--sage); letter-spacing: .01em; }
+
+/* Entradas fixas logo abaixo da faixa de números */
+.entradas{ padding-block: clamp(1.5rem, 3cqi, 2.25rem) 0; }
+.oferta--entrada{ min-height: auto; padding: 1.3rem 1.4rem; }
+.oferta--entrada h3{ max-width: 24ch; font-size: 1.2rem; }
+.oferta--entrada p{ max-width: 46ch; }
+
+/* Porta de entrada "Para você" — linha de atalhos */
+.porta{ display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem;
+  padding: 1rem 1.2rem; border: 1px solid var(--linha); border-radius: var(--raio-card); background: #fff; }
+.porta__rot{ display: flex; flex-direction: column; gap: .1rem; margin-right: .4rem; }
+.porta__rot b{ font-size: 1rem; }
+.porta__rot span{ font-size: .8125rem; color: var(--texto-fraco); }
+.chip--link{ text-decoration: none; transition: background-color .16s ease, color .16s ease; }
+.chip--link:hover{ background: var(--azul-tenue-leve); color: var(--azul); }
+
+/* Especialista por pilar. É caixa: sem hover. */
+.esp{ gap: .6rem; }
+.esp__foto{ min-height: 0; aspect-ratio: 4 / 3; max-width: 100%; }
+.esp__area{ font-size: .8125rem; font-weight: 500; color: var(--azul); }
+.esp__onde{ font-size: .8125rem; color: var(--texto-fraco); margin-top: auto; }
+.esp--largo{ display: grid; gap: 1rem; align-items: start; }
+@container palco (min-width: 640px){ .esp--largo{ grid-template-columns: 11rem 1fr; } }
+
+/* Formulário por pilar */
+.form-pilar .tabs{ margin-bottom: 1rem; }
+.form-pilar fieldset{ border: 0; margin: 0; padding: 0; min-width: 0; }
+.form-pilar legend{ padding: 0; font-size: .8125rem; color: var(--texto); margin-bottom: .35rem; }
+.checks{ display: grid; gap: .45rem .9rem; }
+@container palco (min-width: 520px){ .checks{ grid-template-columns: 1fr 1fr; } }
+.check{ display: flex; gap: .5rem; align-items: center; font-size: .9375rem; color: var(--preto); }
+.check input{ width: 18px; height: 18px; accent-color: var(--azul); flex: 0 0 auto; }
+
+/* Sinistro: o que é 24h e o que é horário comercial */
+.horarios{ display: grid; gap: .75rem; }
+.horario{ display: flex; flex-direction: column; gap: .3rem; padding: 1.1rem 1.2rem;
+  border-radius: var(--raio-card); border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06); }
+.horario__quando{ font: 700 .72rem/1.4 var(--fonte); letter-spacing: .09em; text-transform: uppercase; color: var(--sage); }
+.horario h4{ color: #fff; }
+.horario p{ font-size: .9375rem; color: var(--neg-fraco); }
+
+/* Prova social com número verificável */
+.prova{ display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem .9rem; }
+.prova__n{ font-size: clamp(2.2rem, 4.5cqi, 3rem); font-weight: 300; color: var(--preto); letter-spacing: -.03em; line-height: 1; }
+
+/* Caixa de conformidade — neutra. Vermelho é só de sinistro. */
+.conf{ background: var(--azul-tenue-leve); }
+.conf h3{ max-width: none; }
+.conf .lista-v{ max-width: 70ch; }
+
+/* Mapa estático da unidade (o iframe do Google não roda no protótipo) */
+img.unidade__mapa{ object-fit: cover; height: 200px; }
+
+/* Rodapé: lema embaixo da marca */
+.rodape__lema{ color: var(--sage); font-size: .9375rem; }
+
+/* Notas de revisão — só existem no protótipo */
+.nota-rev{ border-bottom: 1px solid #F0DCAE; }
+.nota-rev ul{ display: flex; flex-direction: column; gap: .15rem; margin-top: .25rem; }
+.nota-rev li{ padding-left: 1rem; position: relative; }
+.nota-rev li::before{ content: "·"; position: absolute; left: .2rem; font-weight: 700; }
+.palco[data-notas="0"] .nota-rev{ display: none; }
+.palco[data-realce="1"] .token{ outline: 2px solid #D9A63C; outline-offset: 2px; background: #FFE7A8; }
+
+/* Controles do protótipo */
+.ctrl{
+  position: fixed; z-index: 400;
+  right: calc(12px + env(safe-area-inset-right, 0px));
+  bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  display: flex; flex-direction: column; align-items: flex-end; gap: .5rem;
+  font-size: .8125rem;
+}
+@container palco (min-width: 940px){ .ctrl{ bottom: calc(16px + env(safe-area-inset-bottom, 0px)); } }
+.ctrl__botao{
+  appearance: none; cursor: pointer; border: 1px solid #D9A63C; border-radius: 999px;
+  background: #FFF3D6; color: #5C3F04; font: 700 .75rem/1 var(--fonte); letter-spacing: .06em;
+  text-transform: uppercase; padding: .65rem .95rem; box-shadow: var(--sombra);
+}
+.ctrl__painel{
+  width: min(19rem, calc(100vw - 24px)); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: .8rem;
+  background: #fff; border: 1px solid var(--linha-forte); border-radius: var(--raio-card); box-shadow: var(--sombra-alta);
+  color: var(--texto);
+}
+.ctrl__painel fieldset{ border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .35rem; }
+.ctrl__painel legend{ font-weight: 500; color: var(--preto); margin-bottom: .2rem; padding: 0; }
+.ctrl__painel label{ display: flex; gap: .45rem; align-items: flex-start; line-height: 1.35; cursor: pointer; }
+.ctrl__painel input{ accent-color: var(--azul); margin-top: .1rem; }
+.ctrl__painel a{ color: var(--azul); font-weight: 500; }
+
+/* Pendências */
+.pend td:first-child{ white-space: nowrap; }
+.pend td{ font-size: .9375rem; }
+.guia{ padding-top: 1.25rem; border-top: 1px solid var(--linha); }
+</style>
+
+<div class="palco" id="palco" data-notas="1">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <g id="i-baixo"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="i-zap"><path d="M3 17l1-3.6A7 7 0 1 1 6.6 16L3 17Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.4 7.2c.2 1.6 1.6 3.4 3.4 4.1.5.2 1 .1 1.3-.3l.4-.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></g>
+  <g id="i-pin"><path d="M10 17.5s5.5-5 5.5-9.2A5.5 5.5 0 0 0 4.5 8.3C4.5 12.5 10 17.5 10 17.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10" cy="8.2" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/></g>
+  <g id="i-relogio"><circle cx="10" cy="10" r="7.3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 5.8V10l3 1.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g>
+  <g id="i-mail"><rect x="2.5" y="4.5" width="15" height="11" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 5.5 10 11l7-5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></g>
+  <g id="i-alerta"><path d="M10 2.6 18.4 17H1.6L10 2.6Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 7.6v4.1M10 14.4h.01" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></g>
+  <g id="i-casa"><path d="M3 9.2 10 3.5l7 5.7M4.8 10.6v6h10.4v-6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></g>
+  <g id="i-vida"><path d="M10 16.5S3 12.4 3 8.1a3.6 3.6 0 0 1 7-1.3 3.6 3.6 0 0 1 7 1.3c0 4.3-7 8.4-7 8.4Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></g>
+  <g id="i-predio"><path d="M3.5 17V4.2c0-.4.3-.7.7-.7h7.1c.4 0 .7.3.7.7V17M12 8.5h4.1c.3 0 .6.3.6.6V17M2.5 17h15M6 6.5h1.5M6 9.5h1.5M6 12.5h1.5M9.5 6.5H11M9.5 9.5H11M9.5 12.5H11M14 11.5h1.2M14 14h1.2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></g>
+  <g id="i-escudo"><path d="M10 2.8 16.2 5v5c0 3.7-2.6 6.4-6.2 7.4C6.4 16.4 3.8 13.7 3.8 10V5L10 2.8Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M7.4 10 9.3 12l3.4-3.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="i-caminhao"><path d="M1.8 13.5V5.6h9.4v7.9M11.2 8h3l2.4 2.9v2.6M2 13.5h1.4M7.6 13.5h3.4M14.6 13.5h1.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="5.5" cy="14.4" r="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="13" cy="14.4" r="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/></g>
+  <g id="i-planta"><path d="M10 17V8M10 8C10 5 7.8 2.8 4.6 2.8 4.6 6 6.8 8 10 8ZM10 10.5c0-2.6 2-4.6 4.9-4.6 0 2.9-2 4.6-4.9 4.6Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></g>
+  <g id="i-seta"><path d="M3.5 10h12M11 5.5l4.5 4.5L11 14.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g id="i-etiqueta"><path d="M9.6 2.6H16a1.4 1.4 0 0 1 1.4 1.4v6.4l-7.2 7.2a1.4 1.4 0 0 1-2 0l-5.2-5.2a1.4 1.4 0 0 1 0-2l6.6-7.8Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="13.4" cy="6.6" r="1.2" fill="currentColor"/></g>
+  <g id="i-lupa"><circle cx="7.5" cy="7.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M11.6 11.6 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></g>
+</defs></svg>
+
+<!-- ===================== TOPO ===================== -->
+<div class="util">
+  <div class="env">
+    <span class="util__lema" data-lema>MX. Junto no seu negócio.</span>
+    <a href="#a-mx">A MX</a>
+    <a href="#unidades">Unidades</a>
+    <a href="#seguros">Todos os seguros</a>
+    <a href="https://novo-site-mx.vercel.app/trabalhe-conosco" target="_blank" rel="noopener">Trabalhe conosco</a>
+    <a class="util__socorro" href="https://novo-site-mx.vercel.app/sinistro" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true"><use href="#i-alerta"/></svg>Sinistro e assistência 24h</a>
+  </div>
+</div>
+
+<header class="topo" id="topo">
+  <div class="env">
+    <div class="topo__linha">
+      <a href="#inicio" class="logo"><span class="oculto">MX Corretora de Seguros, página inicial</span></a>
+      <nav class="topo__nav" aria-label="Principal">
+        <a class="topo__link" href="#saude-empresarial" data-nav="saude-empresarial">Saúde empresarial</a>
+        <a class="topo__link" href="#consorcio" data-nav="consorcio">Consórcio</a>
+        <a class="topo__link" href="#seguro-empresarial" data-nav="seguro-empresarial">Seguro empresarial</a>
+        <a class="topo__link" href="#para-voce" data-nav="para-voce">Para você</a>
+      </nav>
+      <div class="topo__dir">
+        <a class="btn btn--zap btn--peq topo__cta topo__zap" href="https://wa.me/551938638150" target="_blank" rel="noopener" aria-label="Falar no WhatsApp da MX"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap"/></svg><span>WhatsApp</span></a>
+        <a class="btn btn--azul btn--peq topo__cta" href="#cotar">Fazer cotação</a>
+        <button class="topo__hamb" id="hamb" aria-expanded="false" aria-controls="painel" aria-label="Abrir menu">
+          <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="painel" id="painel" data-aberto="0">
+    <div class="env">
+      <button class="painel__fechar" id="painel-fechar" type="button" aria-label="Fechar menu">
+        <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <div class="painel__grade painel__grade--4" data-lista-pilares="painel"></div>
+      <div class="painel__extra">
+        <a href="#a-mx">A MX</a><a href="#unidades">Unidades</a><a href="#seguros">Todos os seguros</a>
+        <a href="https://novo-site-mx.vercel.app/trabalhe-conosco" target="_blank" rel="noopener">Trabalhe conosco</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- ===================== HOME ===================== -->
+<div class="tela" id="tela-inicio">
+  <div class="faixa-tpl nota-rev"><div class="env">
+    <b>Home v3: o que mudou.</b>
+    <ul>
+      <li>Herói único de saúde empresarial para PME, no lugar do carrossel de três mensagens. Sai "a vida inteira". <i>(Diagnóstico: estratégicos · Posicionamento §2)</i></li>
+      <li>Consórcio e seguro empresarial entram como entradas fixas logo abaixo dos números. Antes, o consórcio não aparecia. <i>(Posicionamento §2)</i></li>
+      <li>A vitrine em abas vira três pilares mais a porta de entrada "Para você", e sai o texto "os outros 21". <i>(Diagnóstico: contagem · Posicionamento §1)</i></li>
+      <li>Entram os especialistas por pilar, o formulário qualificado, os guias de decisão e a nota no Google no lugar de "milhares de clientes". A seção A MX foi reescrita.</li>
+    </ul>
+  </div></div>
+
+  <section class="hero hero--unico" aria-label="Destaque da MX">
+    <article class="hero__slide hero__slide--faixa">
+      <div class="hero__arte" style="background-image:var(--f-ph-vida-em-grupo);background-position:62% center" aria-hidden="true"></div>
+      <div class="hero__moldura" aria-hidden="true"></div>
+      <div class="hero__conteudo">
+        <div class="env">
+          <div class="hero__caixa">
+            <span class="hero__olho" data-lema>MX. Junto no seu negócio.</span>
+            <h1>O plano de saúde da sua empresa, comparado antes de assinar e revisto todo ano</h1>
+            <p>Para pequenas e médias empresas de Itapira, Águas de Lindóia e região. A MX compara operadoras, rede credenciada e reajuste, e volta a conversar com você antes de cada renovação.</p>
+            <div class="hero__acoes">
+              <a class="btn btn--branco" href="#cotar" data-pilar-ir="saude">Cotar plano para o meu time</a>
+              <a class="btn btn--zap" href="https://wa.me/551938638150" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap"/></svg> Falar no WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="numeros">
+    <div class="env">
+      <div class="numeros__grade">
+        <div class="numeros__item"><span class="numeros__n num">24</span><span class="numeros__t">anos de mercado</span><span class="numeros__d">Atuando em seguros desde 2002</span></div>
+        <div class="numeros__item"><span class="numeros__n num">+40</span><span class="numeros__t">seguradoras parceiras</span><span class="numeros__d">A seguradora certa para cada risco</span></div>
+        <div class="numeros__item"><span class="numeros__n num">2</span><span class="numeros__t">escritórios de porta aberta</span><span class="numeros__d">Consultores que moram em Itapira e em Águas de Lindóia</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="entradas">
+    <div class="env">
+      <div class="grade grade--2">
+        <a class="oferta oferta--entrada" href="#consorcio">
+          <span class="olho">Consórcio</span>
+          <h3>Imóvel, veículo ou serviço sem juros de financiamento</h3>
+          <p>Compra planejada com acompanhamento até a contemplação. Consórcio não é seguro nem investimento, e a MX explica isso antes de você aderir.</p>
+          <span class="seta">Simular meu consórcio <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta"/></svg></span>
+        </a>
+        <a class="oferta oferta--entrada" href="#seguro-empresarial">
+          <span class="olho">Seguro empresarial</span>
+          <h3>Seguro dimensionado pelo que a sua empresa realmente tem</h3>
+          <p>Patrimônio, responsabilidade civil, frota e carga. A gente lê a apólice atual com você e mostra o que sobra e o que falta.</p>
+          <span class="seta">Revisar meu seguro <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao">
+    <div class="env pilha g24">
+      <div class="pilha g8">
+        <span class="olho">Para quem empreende na região</span>
+        <h2>Pessoas, patrimônio e crescimento num só relacionamento</h2>
+        <p class="lide medida">A saúde protege quem trabalha na empresa. O seguro protege o que a empresa tem. O consórcio financia o que ela vai ter. O mesmo consultor acompanha os três.</p>
+      </div>
+      <div class="grade grade--3">
+        <a class="foto-card foto-card--grade" href="#saude-empresarial" style="background-image:var(--f-cd-saude)">
+          <span class="foto-card__chip"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-vida"/></svg> Pessoas</span>
+          <h3>Saúde empresarial</h3>
+          <p>Plano de saúde, odontológico e vida em grupo para o seu time.</p>
+          <span class="foto-card__btn">Cotar plano para o meu time</span>
+        </a>
+        <a class="foto-card foto-card--grade" href="#consorcio" style="background-image:var(--f-hero-condominio)">
+          <span class="foto-card__chip"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-predio"/></svg> Crescimento</span>
+          <h3>Consórcio</h3>
+          <p>Imóvel, veículo e serviços, com planejamento e sem juros de financiamento.</p>
+          <span class="foto-card__btn">Simular meu consórcio</span>
+        </a>
+        <a class="foto-card foto-card--grade" href="#seguro-empresarial" style="background-image:var(--f-card-empresa)">
+          <span class="foto-card__chip"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-escudo"/></svg> Patrimônio</span>
+          <h3>Seguro empresarial</h3>
+          <p>Empresa, condomínio, frota, carga, agro e responsabilidade civil.</p>
+          <span class="foto-card__btn">Revisar meu seguro</span>
+        </a>
+      </div>
+      <div class="porta">
+        <div class="porta__rot"><b>Para você</b><span>Carro, casa, vida e viagem, com o mesmo atendimento</span></div>
+        <div class="chip-lista">
+          <a class="chip chip--link" href="https://novo-site-mx.vercel.app/seguros/automovel" target="_blank" rel="noopener">Automóvel</a>
+          <a class="chip chip--link" href="https://novo-site-mx.vercel.app/seguros/residencial" target="_blank" rel="noopener">Residencial</a>
+          <a class="chip chip--link" href="https://novo-site-mx.vercel.app/seguros/vida-individual" target="_blank" rel="noopener">Vida</a>
+          <a class="chip chip--link" href="https://novo-site-mx.vercel.app/seguros/moto" target="_blank" rel="noopener">Moto</a>
+          <a class="chip chip--link" href="https://novo-site-mx.vercel.app/seguros/pets" target="_blank" rel="noopener">Pets</a>
+        </div>
+        <a class="seta" href="#para-voce" style="margin-left:auto;align-self:center">Ver os seguros para você <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta"/></svg></a>
+      </div>
+      <a class="seta" href="#seguros">Ver todos os <span data-total></span> seguros e soluções <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta"/></svg></a>
+    </div>
+  </section>
+
+  <section class="secao cinza">
+    <div class="env pilha g24">
+      <div class="pilha g8">
+        <span class="olho">Quem cuida de cada área</span>
+        <h2>Você sabe o nome de quem atende a sua empresa</h2>
+        <p class="lide medida">Cada pilar tem um consultor responsável, que mora na região e acompanha a sua conta da cotação à renovação.</p>
+      </div>
+      <div class="grade grade--3" data-especialistas="todos"></div>
+    </div>
+  </section>
+
+  <section class="secao" id="cotar">
+    <div class="env">
+      <div class="grade grade--2" style="gap:clamp(1.5rem,4cqi,3rem);align-items:start">
+        <div class="pilha g16">
+          <span class="olho">Cotação</span>
+          <h2>Conte o que a sua empresa precisa</h2>
+          <p class="lide">Cada assunto pede dados diferentes. Com eles, o consultor já chega na primeira conversa sabendo o que comparar.</p>
+          <ul class="lista-v">
+            <li>Sem custo e sem compromisso. A corretagem já está no preço da apólice.</li>
+            <li>Retorno em <span class="token">«SLA»</span>, em dia útil, por WhatsApp ou telefone.</li>
+            <li>Quem atende é corretor, não robô de triagem.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="form-pilar" data-pilar="saude"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao cinza">
+    <div class="env pilha g24">
+      <div class="pilha g8">
+        <span class="olho">Antes de decidir</span>
+        <h2>Antes de trocar o plano de saúde da empresa</h2>
+        <p class="lide medida">Escolher um plano leva meses. Estes guias explicam os pontos em que as propostas mais diferem.</p>
+      </div>
+      <div class="grade grade--4" data-guias></div>
+    </div>
+  </section>
+
+  <section class="secao escuro">
+    <div class="env">
+      <div class="grade grade--2" style="gap:clamp(1.5rem,4cqi,3rem);align-items:center">
+        <div class="pilha g16">
+          <span class="olho" style="color:var(--sage)">Já é cliente e precisa agora</span>
+          <h2>Sinistro e assistência</h2>
+          <p class="lide">O telefone da assistência da sua seguradora fica aberto na tela, sem clique e sem acordeão. A página abre em conexão ruim e pode ser salva no celular.</p>
+          <div class="acoes">
+            <a class="btn btn--socorro" href="https://novo-site-mx.vercel.app/sinistro" target="_blank" rel="noopener">Abrir sinistro e assistência</a>
+            <a class="btn btn--zap num" href="https://wa.me/5519982036147" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap"/></svg> (19) 98203-6147</a>
+          </div>
+        </div>
+        <div class="horarios">
+          <div class="horario">
+            <span class="horario__quando">24 horas, todos os dias</span>
+            <h4>Assistência da sua seguradora</h4>
+            <p>Guincho, chaveiro, socorro mecânico e aviso de sinistro. Os telefones de cada seguradora estão na página de sinistro.</p>
+          </div>
+          <div class="horario">
+            <span class="horario__quando">Segunda a sexta, 08:00 às 18:00</span>
+            <h4>WhatsApp de sinistro da MX</h4>
+            <p>Documentação e acompanhamento do processo com a seguradora. Fora desse horário, comece pela assistência 24 horas e mande a mensagem: a MX responde no próximo dia útil.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao--curta">
+    <div class="env">
+      <div class="oferta oferta--larga" style="min-height:auto">
+        <span class="olho">Canais</span>
+        <h3 style="max-width:none">São dois números, e cada um tem um dono</h3>
+        <p style="max-width:62ch">Um resolve tudo: cotação, apólice, boleto e dúvida. O outro é só para sinistro, e por isso não fica preso em conversa de venda.</p>
+        <div class="acoes" style="padding-top:.7rem">
+          <a class="btn btn--zap btn--peq num" href="https://wa.me/551938638150" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><use href="#i-zap"/></svg> (19) 3863-8150</a>
+          <a class="btn btn--socorro btn--peq num" href="https://wa.me/5519982036147" target="_blank" rel="noopener">(19) 98203-6147 · sinistro</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao">
+    <div class="env pilha g20">
+      <div class="pilha g8">
+        <span class="olho">Seguradoras parceiras</span>
+        <h2>A seguradora certa para o risco da sua empresa</h2>
+      </div>
+      <div class="logos">
+        <div class="logos__item"><img src="/seguradoras/seg_azul.webp" alt="Azul Seguros"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_sulamerica.webp" alt="SulAmérica"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_mitsui.webp" alt="Mitsui Sumitomo Seguros"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_tokio.webp" alt="Tokio Marine Seguradora"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_hdi.webp" alt="HDI Seguros"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_yelum.svg" alt="Yelum Seguradora"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_allianz.webp" alt="Allianz Seguros"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_zurich.webp" alt="Zurich Seguros"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_sompo.webp" alt="Sompo Seguros"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_porto.webp" alt="Porto Seguro"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_chubb.webp" alt="Chubb Seguros"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_bradesco.webp" alt="Bradesco Seguros"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_itau.webp" alt="Itaú Seguros"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_mapfre.webp" alt="MAPFRE Seguros"></div>
+        <div class="logos__item"><img src="/seguradoras/seg_norden.svg" alt="Norden"></div>
+      </div>
+      <p class="nota">Nem toda seguradora opera todos os ramos. Na sua cotação entram as que trabalham com o produto que você procura.</p>
+    </div>
+  </section>
+
+  <section class="secao cinza">
+    <div class="env pilha g20">
+      <div class="pilha g8">
+        <span class="olho">Quem já é cliente</span>
+        <div class="prova">
+          <span class="prova__n num"><span class="token">«NOTA-GOOGLE»</span></span>
+          <h2 style="font-size:clamp(1.3rem,2.4cqi,1.8rem)">de 5 no Google, em <span class="token">«TOTAL-AVALIAÇÕES»</span> avaliações</h2>
+        </div>
+      </div>
+      <div class="grade grade--3">
+        <figure class="depo">
+          <span class="depo__ramo">Avaliação no Google</span>
+          <blockquote>Trabalho de excelência, sempre superando as expectativas. Agradeço ao Natã pelo excelente atendimento.</blockquote>
+          <figcaption class="depo__pe"><span class="depo__av" aria-hidden="true">T</span><span class="depo__quem"><b>Tammy</b><span class="depo__meta">2 avaliações · há 2 anos</span></span></figcaption>
+        </figure>
+        <figure class="depo">
+          <span class="depo__ramo">Avaliação no Google</span>
+          <blockquote>Ótimos profissionais com muita atenção para com a gente.</blockquote>
+          <figcaption class="depo__pe"><span class="depo__av" aria-hidden="true">MV</span><span class="depo__quem"><b>Marcos Vieira</b><span class="depo__meta">Local Guide · 32 avaliações · há 2 anos</span></span></figcaption>
+        </figure>
+        <figure class="depo">
+          <span class="depo__ramo">Avaliação no Google</span>
+          <blockquote>Melhor atendimento, profissionais competentes e muito educados.</blockquote>
+          <figcaption class="depo__pe"><span class="depo__av" aria-hidden="true">RB</span><span class="depo__quem"><b>Rubens Bozio</b><span class="depo__meta">Local Guide · 17 avaliações · há 7 anos</span></span></figcaption>
+        </figure>
+      </div>
+      <p class="nota">Avaliações publicadas no perfil da MX Corretora de Seguros no Google, por clientes identificados. <a href="https://share.google/ftBOp0uBpji8cZr16" target="_blank" rel="noopener">Ver todas no Google</a>.</p>
+    </div>
+  </section>
+
+  <section class="secao" id="sobre">
+    <div class="env">
+      <div class="grade grade--2" style="gap:clamp(1.5rem,4cqi,3rem);align-items:center">
+        <div class="pilha g16">
+          <span class="olho">A MX</span>
+          <h2>Consultores que moram onde os clientes moram</h2>
+          <p>A MX atende Itapira, Águas de Lindóia e as cidades em volta desde 2002. Quem cota o seu seguro é a mesma pessoa que você encontra no escritório da Avenida Rio Branco ou da Rua Argentina. É ela que acompanha a renovação e o sinistro.</p>
+          <ul class="lista-v">
+            <li>Somos corretora: não assumimos o risco nem administramos planos. Nosso trabalho é escolher a seguradora certa, ler a apólice com você e ficar do seu lado quando algo acontece.</li>
+            <li>Cada área tem um consultor responsável: saúde, consórcio e seguro empresarial.</li>
+            <li>No sinistro, a MX acompanha o processo com a seguradora do primeiro contato até o encerramento.</li>
+          </ul>
+          <a class="seta" href="#a-mx">Conhecer a MX <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta"/></svg></a>
+        </div>
+        <div class="foto-larga" style="background-image:var(--f-predio-mx)" role="img" aria-label="Fachada do escritório da MX em Itapira"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao cinza" id="unidades">
+    <div class="env pilha g20">
+      <div class="pilha g8">
+        <span class="olho">Unidades</span>
+        <h2>Duas portas abertas, de segunda a sexta</h2>
+      </div>
+      <div class="grade grade--2" data-unidades></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===================== PILAR: SAÚDE ===================== -->
+<div class="tela" id="tela-saude-empresarial" hidden>
+  <div class="faixa-tpl nota-rev"><div class="env">
+    <b>Página de pilar: saúde empresarial.</b>
+    <ul>
+      <li>Segue a arquitetura de mensagem: comprador (dono ou RH de PME) → promessa → prova → chamada "Cotar plano para o meu time".</li>
+      <li>O formulário pede empresa, vidas, operadora atual e mês de vencimento. A data de vencimento orienta o contato 90 a 120 dias antes.</li>
+      <li>O recorte "2 a 99 vidas" é uma hipótese do posicionamento e por isso não aparece como promessa no texto.</li>
+    </ul>
+  </div></div>
+  <section class="hero">
+    <article class="hero__slide hero__slide--faixa">
+      <div class="hero__arte" style="background-image:var(--f-hero-saude);background-position:58% center" aria-hidden="true"></div>
+      <div class="hero__moldura" aria-hidden="true"></div>
+      <div class="hero__conteudo"><div class="env">
+        <nav class="migalhas" aria-label="Trilha de navegação" style="color:rgba(255,255,255,.72)"><ol><li><a href="#inicio" style="color:rgba(255,255,255,.72)">Início</a></li><li aria-current="page" style="color:#fff">Saúde empresarial</li></ol></nav>
+        <div class="hero__caixa">
+          <h1>Plano de saúde para o seu time, escolhido com quem conhece a sua empresa</h1>
+          <p>Comparamos operadoras, rede e reajuste antes de você assinar, e reavaliamos o contrato todo ano.</p>
+          <div class="chip-lista"><span class="chip chip--neg">Operadoras lado a lado</span><span class="chip chip--neg">Recotação antes da renovação</span><span class="chip chip--neg">Portabilidade de carências, quando cabe</span></div>
+          <div class="hero__acoes">
+            <a class="btn btn--branco" href="#cotar-saude">Cotar plano para o meu time</a>
+            <a class="btn btn--zap" href="https://wa.me/551938638150" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap"/></svg> WhatsApp</a>
+          </div>
+        </div>
+      </div></div>
+    </article>
+  </section>
+
+  <section class="secao">
+    <div class="env pilha g24">
+      <div class="pilha g8"><span class="olho">Para quem é</span><h2>Para o dono ou o RH de pequena e média empresa</h2></div>
+      <div class="grade grade--3">
+        <div class="card"><span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-vida"/></svg></span><h4>A empresa ainda não tem plano</h4><p>Quer oferecer o benefício e precisa saber quanto custa por vida, com que rede e com que coparticipação.</p></div>
+        <div class="card"><span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-predio"/></svg></span><h4>Quer trocar de operadora</h4><p>A rede não atende onde o time mora, ou o atendimento piorou. A troca pede comparar carência e portabilidade.</p></div>
+        <div class="card"><span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-escudo"/></svg></span><h4>O reajuste chegou alto</h4><p>A renovação está perto e o índice proposto pesa no caixa. Dá para recotar o mercado antes de aceitar.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao cinza">
+    <div class="env pilha g24">
+      <div class="pilha g8"><span class="olho">Como a MX trabalha</span><h2>Da primeira conversa à renovação</h2></div>
+      <div class="passos">
+        <div class="passo"><h4>Levantamento</h4><p>Quantas vidas, idades, cidades e a rede que o time já usa.</p></div>
+        <div class="passo"><h4>Comparação</h4><p>Operadoras, rede credenciada, acomodação, coparticipação e carências, lado a lado.</p></div>
+        <div class="passo"><h4>Contratação</h4><p>A MX organiza a documentação. O contrato é entre a empresa e a operadora.</p></div>
+        <div class="passo"><h4>Revisão anual</h4><p>Antes do aniversário do contrato, a MX recota o mercado e leva as opções a você.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao--curta">
+    <div class="env">
+      <div class="numeros">
+        <div class="numeros__grade">
+          <div class="numeros__item"><span class="numeros__n num"><span class="token">«VIDAS-ADMINISTRADAS»</span></span><span class="numeros__t">vidas em planos intermediados pela MX</span><span class="numeros__d">Número da carteira atual</span></div>
+          <div class="numeros__item"><span class="numeros__n num"><span class="token">«NOTA-GOOGLE»</span></span><span class="numeros__t">de nota no Google</span><span class="numeros__d"><span class="token">«TOTAL-AVALIAÇÕES»</span> avaliações de clientes</span></div>
+          <div class="numeros__item"><span class="numeros__n num"><span class="token">«CASE-SAÚDE»</span></span><span class="numeros__t">case real, com autorização do cliente</span><span class="numeros__d">Empresa, problema e resultado</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao">
+    <div class="env pilha g24">
+      <div class="pilha g8"><span class="olho">Antes de decidir</span><h2>O que comparar entre as propostas</h2></div>
+      <div class="grade grade--4" data-guias></div>
+    </div>
+  </section>
+
+  <section class="secao cinza" id="cotar-saude">
+    <div class="env">
+      <div class="grade grade--2" style="gap:clamp(1.5rem,4cqi,3rem);align-items:start">
+        <div class="pilha g16">
+          <span class="olho">Quem atende</span>
+          <h2>Fale direto com quem cuida de saúde na MX</h2>
+          <div data-especialistas="saude" data-largo></div>
+        </div>
+        <div class="card"><div class="form-pilar" data-pilar="saude" data-fixo></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao">
+    <div class="env pilha g20">
+      <div class="pilha g8"><span class="olho">Neste pilar</span><h2>Benefícios para o seu time</h2></div>
+      <div class="grade grade--3" data-produtos-pilar="saude"></div>
+      <p class="nota">A MX é corretora de seguros, não administradora de benefícios: inclusão e exclusão de vidas são feitas pela empresa junto à operadora. Rede, carências e reajuste seguem o contrato e as regras da ANS.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ===================== PILAR: CONSÓRCIO ===================== -->
+<div class="tela" id="tela-consorcio" hidden>
+  <div class="faixa-tpl nota-rev"><div class="env">
+    <b>Página de pilar: linhas financeiras (consórcio).</b>
+    <ul>
+      <li>A conformidade vem antes de tudo: consórcio é regulado pelo Banco Central, não é seguro nem investimento e não tem contemplação garantida. <b>O texto precisa passar pelo jurídico.</b></li>
+      <li>O README registra que as páginas de consórcio saíram em 21/08/2026 porque a MX não representava administradora. Elas só vão ao ar com «ADMINISTRADORAS» preenchido.</li>
+      <li>O CTA "Simular" leva ao formulário: quem monta a simulação é o consultor, e não existe simulador automático.</li>
+      <li>Proposta a validar: previdência entra neste pilar, sempre sem projeção de rentabilidade.</li>
+    </ul>
+  </div></div>
+  <section class="hero">
+    <article class="hero__slide" style="background-image:var(--f-hero-condominio);background-position:center">
+      <div class="hero__conteudo"><div class="env">
+        <nav class="migalhas" aria-label="Trilha de navegação" style="color:rgba(255,255,255,.72)"><ol><li><a href="#inicio" style="color:rgba(255,255,255,.72)">Início</a></li><li aria-current="page" style="color:#fff">Consórcio</li></ol></nav>
+        <div class="hero__caixa">
+          <h1>Consórcio para crescer sem juros de financiamento</h1>
+          <p>Imóvel, veículo ou serviço com planejamento. A MX ajuda a escolher o grupo, explica a taxa de administração e acompanha você até a contemplação.</p>
+          <div class="chip-lista"><span class="chip chip--neg">Imóvel</span><span class="chip chip--neg">Automóvel</span><span class="chip chip--neg">Serviços</span></div>
+          <div class="hero__acoes">
+            <a class="btn btn--branco" href="#cotar-consorcio">Simular meu consórcio</a>
+            <a class="btn btn--zap" href="https://wa.me/551938638150" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap"/></svg> WhatsApp</a>
+          </div>
+        </div>
+      </div></div>
+    </article>
+  </section>
+
+  <section class="secao--curta">
+    <div class="env">
+      <div class="oferta oferta--faixa conf" style="min-height:auto">
+        <span class="olho">Antes de tudo</span>
+        <h3>Consórcio não é seguro, e a MX explica a diferença</h3>
+        <ul class="lista-v">
+          <li>É regulado pelo Banco Central (Lei 11.795/2008), não pela SUSEP.</li>
+          <li>Não é investimento e não rende: é uma compra programada.</li>
+          <li>A contemplação é por sorteio ou lance, sem data garantida.</li>
+          <li>Não tem juros de financiamento, mas tem taxa de administração e fundo de reserva, informados antes da adesão.</li>
+          <li>O contrato, a carta de crédito e as assembleias são da administradora. A MX atua junto a <span class="token">«ADMINISTRADORAS»</span>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao">
+    <div class="env pilha g24">
+      <div class="pilha g8"><span class="olho">Para quem é</span><h2>Para o empresário e para a família</h2></div>
+      <div class="grade grade--3">
+        <div class="card"><span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-predio"/></svg></span><h4>Imóvel da empresa ou da família</h4><p>Sala comercial, galpão, casa ou terreno, com a carta de crédito usada na compra.</p></div>
+        <div class="card"><span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-caminhao"/></svg></span><h4>Veículos</h4><p>O carro da família ou os veículos da empresa, planejados sem comprometer o caixa com juros.</p></div>
+        <div class="card"><span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-etiqueta"/></svg></span><h4>Serviços</h4><p>Reforma, formatura, viagem e outros serviços previstos no objeto do grupo.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao cinza">
+    <div class="env pilha g24">
+      <div class="pilha g8"><span class="olho">Como a MX trabalha</span><h2>Do objetivo à carta de crédito</h2></div>
+      <div class="passos">
+        <div class="passo"><h4>Objetivo</h4><p>O que você quer comprar, o valor da carta e a parcela que cabe no mês.</p></div>
+        <div class="passo"><h4>Simulação</h4><p>O consultor compara grupos das administradoras parceiras: prazo, taxa e regras de lance.</p></div>
+        <div class="passo"><h4>Adesão</h4><p>Você entra no grupo com contrato da administradora, sabendo o custo total.</p></div>
+        <div class="passo"><h4>Acompanhamento</h4><p>A MX acompanha as assembleias com você até a contemplação e o uso da carta.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao--curta">
+    <div class="env">
+      <div class="numeros">
+        <div class="numeros__grade">
+          <div class="numeros__item"><span class="numeros__n num"><span class="token">«CARTAS-CONTEMPLADAS»</span></span><span class="numeros__t">cartas contempladas de clientes MX</span><span class="numeros__d">Número real da carteira</span></div>
+          <div class="numeros__item"><span class="numeros__n num"><span class="token">«Nº-ADMINISTRADORAS»</span></span><span class="numeros__t">administradoras parceiras</span><span class="numeros__d">Autorizadas pelo Banco Central</span></div>
+          <div class="numeros__item"><span class="numeros__n num">24</span><span class="numeros__t">anos de mercado</span><span class="numeros__d">Atuando desde 2002</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao cinza" id="cotar-consorcio">
+    <div class="env">
+      <div class="grade grade--2" style="gap:clamp(1.5rem,4cqi,3rem);align-items:start">
+        <div class="pilha g16">
+          <span class="olho">Quem atende</span>
+          <h2>Fale com quem cuida de consórcio na MX</h2>
+          <div data-especialistas="financeiras" data-largo></div>
+        </div>
+        <div class="card"><div class="form-pilar" data-pilar="financeiras" data-fixo></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao">
+    <div class="env pilha g20">
+      <div class="pilha g8"><span class="olho">Neste pilar</span><h2>Linhas financeiras</h2></div>
+      <div class="grade grade--4" data-produtos-pilar="financeiras"></div>
+      <p class="nota">Consórcio é intermediado junto a administradoras autorizadas pelo Banco Central e não é seguro nem investimento. Previdência é produto de seguro de pessoas, regulado pela SUSEP, e não tem rentabilidade garantida.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ===================== PILAR: EMPRESARIAL ===================== -->
+<div class="tela" id="tela-seguro-empresarial" hidden>
+  <div class="faixa-tpl nota-rev"><div class="env">
+    <b>Página de pilar: linhas empresariais.</b>
+    <ul>
+      <li>Promessa: "seguro dimensionado pelo que a empresa realmente tem". Chamada: "Revisar meu seguro".</li>
+      <li>Os perfis usam a hipótese regional do diagnóstico (agro em Itapira, hotelaria e turismo em Águas de Lindóia), que ainda precisa ser validada com a carteira.</li>
+      <li>O formulário pede ramo, porte e o que a empresa já tem segurado.</li>
+    </ul>
+  </div></div>
+  <section class="hero">
+    <article class="hero__slide" style="background-image:var(--f-hero-empresas);background-position:center">
+      <div class="hero__conteudo"><div class="env">
+        <nav class="migalhas" aria-label="Trilha de navegação" style="color:rgba(255,255,255,.72)"><ol><li><a href="#inicio" style="color:rgba(255,255,255,.72)">Início</a></li><li aria-current="page" style="color:#fff">Seguro empresarial</li></ol></nav>
+        <div class="hero__caixa">
+          <h1>Seguro de empresa dimensionado pelo que ela realmente tem</h1>
+          <p>Patrimônio, responsabilidade civil, frota, carga e lucros cessantes. A MX levanta os riscos com você e lê a apólice item por item antes de você assinar.</p>
+          <div class="chip-lista"><span class="chip chip--neg">Comércio e serviços</span><span class="chip chip--neg">Indústria</span><span class="chip chip--neg">Agro</span><span class="chip chip--neg">Hotelaria</span></div>
+          <div class="hero__acoes">
+            <a class="btn btn--branco" href="#cotar-empresarial">Revisar meu seguro</a>
+            <a class="btn btn--zap" href="https://wa.me/551938638150" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap"/></svg> WhatsApp</a>
+          </div>
+        </div>
+      </div></div>
+    </article>
+  </section>
+
+  <section class="secao">
+    <div class="env pilha g24">
+      <div class="pilha g8"><span class="olho">Para quem é</span><h2>Para o dono de empresa da região</h2></div>
+      <div class="grade grade--4">
+        <div class="card"><span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-etiqueta"/></svg></span><h4>Comércio e serviços</h4><p>Loja, escritório e clínica: incêndio, roubo, equipamentos e responsabilidade civil.</p></div>
+        <div class="card"><span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-predio"/></svg></span><h4>Indústria e obra</h4><p>Máquinas, estoque, riscos de engenharia e garantia de contrato.</p></div>
+        <div class="card"><span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-planta"/></svg></span><h4>Agro</h4><p>Lavoura, penhor rural e máquinas agrícolas, no campo e no transporte.</p></div>
+        <div class="card"><span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-casa"/></svg></span><h4>Hotelaria e turismo</h4><p>Hotel, pousada e eventos: patrimônio, responsabilidade civil com hóspedes e lucros cessantes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao cinza">
+    <div class="env pilha g24">
+      <div class="pilha g8"><span class="olho">Como a MX trabalha</span><h2>Da apólice atual à proposta certa</h2></div>
+      <div class="passos">
+        <div class="passo"><h4>Levantamento</h4><p>O que a empresa tem, o que ela faz e o que já está segurado hoje.</p></div>
+        <div class="passo"><h4>Cotação</h4><p>O risco vai para as seguradoras que operam o ramo, e não para todas.</p></div>
+        <div class="passo"><h4>Leitura da apólice</h4><p>Coberturas, limites e franquias comparados item por item antes de assinar.</p></div>
+        <div class="passo"><h4>Sinistro</h4><p>A MX acompanha o processo com a seguradora, do aviso ao encerramento.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao--curta">
+    <div class="env">
+      <div class="numeros">
+        <div class="numeros__grade">
+          <div class="numeros__item"><span class="numeros__n num"><span class="token">«CASOS-SINISTRO»</span></span><span class="numeros__t">casos de sinistro acompanhados</span><span class="numeros__d">Com autorização do cliente</span></div>
+          <div class="numeros__item"><span class="numeros__n num">+40</span><span class="numeros__t">seguradoras parceiras</span><span class="numeros__d">Nem toda opera todos os ramos</span></div>
+          <div class="numeros__item"><span class="numeros__n num" data-total-pilar="empresarial"></span><span class="numeros__t">ramos empresariais cotados</span><span class="numeros__d">Do comércio aos grandes riscos</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao cinza" id="cotar-empresarial">
+    <div class="env">
+      <div class="grade grade--2" style="gap:clamp(1.5rem,4cqi,3rem);align-items:start">
+        <div class="pilha g16">
+          <span class="olho">Quem atende</span>
+          <h2>Fale com quem cuida de seguro empresarial na MX</h2>
+          <div data-especialistas="empresarial" data-largo></div>
+        </div>
+        <div class="card"><div class="form-pilar" data-pilar="empresarial" data-fixo></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao">
+    <div class="env pilha g20">
+      <div class="pilha g8"><span class="olho">Neste pilar</span><h2>Os ramos que a MX cota para empresas</h2></div>
+      <div class="grade grade--3" data-produtos-pilar="empresarial" data-compacto></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===================== PARA VOCÊ ===================== -->
+<div class="tela" id="tela-para-voce" hidden>
+  <div class="faixa-tpl nota-rev"><div class="env">
+    <b>Para você: porta de entrada.</b>
+    <ul>
+      <li>Auto, residencial, moto, pets e os outros seguros pessoais deixam de ser vitrine e passam a ser porta de entrada e relacionamento. <i>(Posicionamento §1)</i></li>
+      <li>"Não sei, me ajuda a escolher" passa a ter valor próprio no formulário. No site atual ele tem valor vazio e trava o envio.</li>
+    </ul>
+  </div></div>
+  <section class="secao cinza">
+    <div class="env pilha g16">
+      <nav class="migalhas" aria-label="Trilha de navegação"><ol><li><a href="#inicio">Início</a></li><li aria-current="page">Para você</li></ol></nav>
+      <h1>Para você e para a sua família</h1>
+      <p class="lide medida">Carro, casa, vida e viagem. Muitos clientes chegam à MX por um seguro pessoal e ficam pelo atendimento, na região e no dia do sinistro.</p>
+    </div>
+  </section>
+  <section class="secao">
+    <div class="env">
+      <div class="grade grade--3" data-produtos-pilar="voce"></div>
+    </div>
+  </section>
+  <section class="secao cinza" id="cotar-voce">
+    <div class="env">
+      <div class="grade grade--2" style="gap:clamp(1.5rem,4cqi,3rem);align-items:start">
+        <div class="pilha g16">
+          <span class="olho">Cotação</span>
+          <h2>Cotar um seguro pessoal</h2>
+          <p class="lide">Você preenche uma vez. A MX manda o risco às seguradoras que operam o produto e explica a diferença entre as propostas.</p>
+          <ul class="lista-v"><li>Retorno em <span class="token">«SLA»</span>, em dia útil.</li><li>Quem atende é corretor, não robô de triagem.</li></ul>
+        </div>
+        <div class="card"><div class="form-pilar" data-pilar="voce" data-fixo></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===================== TODOS OS SEGUROS ===================== -->
+<div class="tela" id="tela-seguros" hidden>
+  <div class="faixa-tpl nota-rev"><div class="env">
+    <b>Índice por pilar.</b> A contagem é calculada a partir da lista e nunca digitada. O site diz "27" em cinco lugares, mas a lista tem 32.
+  </div></div>
+  <section class="secao cinza">
+    <div class="env pilha g16">
+      <nav class="migalhas" aria-label="Trilha de navegação"><ol><li><a href="#inicio">Início</a></li><li aria-current="page">Todos os seguros</li></ol></nav>
+      <h1>Os <span data-total></span> seguros e soluções da MX</h1>
+      <p class="lide medida">Organizados pelo que protegem: as pessoas da empresa, o que ela vai conquistar, o patrimônio dela e a sua família.</p>
+    </div>
+  </section>
+  <section class="secao">
+    <div class="env"><div class="painel__grade painel__grade--4" data-lista-pilares="indice"></div></div>
+  </section>
+</div>
+
+<!-- ===================== A MX ===================== -->
+<div class="tela" id="tela-a-mx" hidden>
+  <div class="faixa-tpl nota-rev"><div class="env">
+    <b>A MX reescrita.</b>
+    <ul>
+      <li>Saem "eficiência, inovação e preços competitivos", a missão, a visão e os chips de valores, que o diagnóstico considerou genéricos.</li>
+      <li>Entram fatos verificáveis, o papel de corretora, o jeito de trabalhar e as pessoas por trás de cada área.</li>
+    </ul>
+  </div></div>
+  <section class="hero">
+    <article class="hero__slide" style="background-image:var(--f-predio-mx);background-position:center">
+      <div class="hero__conteudo"><div class="env">
+        <nav class="migalhas" aria-label="Trilha de navegação" style="color:rgba(255,255,255,.72)"><ol><li><a href="#inicio" style="color:rgba(255,255,255,.72)">Início</a></li><li aria-current="page" style="color:#fff">A MX</li></ol></nav>
+        <div class="hero__caixa">
+          <span class="hero__olho" data-lema>MX. Junto no seu negócio.</span>
+          <h1>Uma corretora com endereço e nome de quem atende</h1>
+          <p>Desde 2002 em Itapira e, depois, em Águas de Lindóia. A MX cuida das pessoas, do patrimônio e do crescimento de empresas e famílias da região.</p>
+        </div>
+      </div></div>
+    </article>
+  </section>
+  <section class="secao">
+    <div class="env">
+      <div class="grade grade--2" style="gap:clamp(1.5rem,4cqi,3rem);align-items:start">
+        <div class="pilha g16">
+          <span class="olho">O que a MX faz</span>
+          <h2>Corretora: do seu lado, não do lado da seguradora</h2>
+          <p>A MX não assume riscos nem administra planos. O trabalho é entender o que precisa ser protegido, levar o risco às seguradoras que operam aquele ramo e explicar a diferença entre as propostas antes de você assinar.</p>
+          <p>Depois da assinatura, a MX continua no contrato: endossos, renovação e, principalmente, o sinistro. É nessa hora que fica claro por que vale ter uma corretora com endereço.</p>
+        </div>
+        <div class="pilha g16">
+          <span class="olho">Como trabalhamos</span>
+          <div class="passos" style="grid-template-columns:1fr">
+            <div class="passo"><h4>Entender antes de oferecer</h4><p>Primeiro o que você precisa proteger, depois o produto.</p></div>
+            <div class="passo"><h4>Cotar onde faz sentido</h4><p>Nas seguradoras que operam o ramo, com a mesma informação para todas.</p></div>
+            <div class="passo"><h4>Explicar a diferença</h4><p>Coberturas, limites e franquias, item por item.</p></div>
+            <div class="passo"><h4>Ficar junto</h4><p>Na renovação e no dia do sinistro.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="secao cinza">
+    <div class="env pilha g24">
+      <div class="pilha g8"><span class="olho">As pessoas</span><h2>Quem lidera cada área</h2></div>
+      <div class="grade grade--3" data-especialistas="todos"></div>
+    </div>
+  </section>
+  <section class="secao--curta">
+    <div class="env">
+      <div class="numeros">
+        <div class="numeros__grade">
+          <div class="numeros__item"><span class="numeros__n num">24</span><span class="numeros__t">anos de mercado</span><span class="numeros__d">Atuando em seguros desde 2002</span></div>
+          <div class="numeros__item"><span class="numeros__n num">+40</span><span class="numeros__t">seguradoras parceiras</span><span class="numeros__d">A seguradora certa para cada risco</span></div>
+          <div class="numeros__item"><span class="numeros__n num">2</span><span class="numeros__t">escritórios de porta aberta</span><span class="numeros__d">Itapira e Águas de Lindóia</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="secao cinza">
+    <div class="env pilha g20">
+      <div class="pilha g8"><span class="olho">Unidades</span><h2>Duas portas abertas, de segunda a sexta</h2></div>
+      <div class="grade grade--2" data-unidades></div>
+    </div>
+  </section>
+</div>
+
+<!-- ===================== GUIAS (esqueleto) ===================== -->
+<div class="tela" id="tela-guias" hidden>
+  <div class="faixa-tpl nota-rev"><div class="env">
+    <b>Guias: esqueleto.</b> Conteúdo para quem está no meio de uma decisão de 3 a 5 meses <i>(Posicionamento §4)</i>. Cada bloco mostra o que o guia vai cobrir. O texto completo é da Fase C.
+  </div></div>
+  <section class="secao cinza">
+    <div class="env pilha g16">
+      <nav class="migalhas" aria-label="Trilha de navegação"><ol><li><a href="#inicio">Início</a></li><li><a href="#saude-empresarial">Saúde empresarial</a></li><li aria-current="page">Guias</li></ol></nav>
+      <h1>Guias para escolher o plano de saúde da empresa</h1>
+    </div>
+  </section>
+  <section class="secao">
+    <div class="env pilha g32 medida" data-guias-corpo></div>
+  </section>
+</div>
+
+<!-- ===================== PENDÊNCIAS ===================== -->
+<div class="tela" id="tela-pendencias" hidden>
+  <section class="secao cinza">
+    <div class="env pilha g16">
+      <span class="olho">Protótipo v3</span>
+      <h1>Pendências antes de publicar</h1>
+      <p class="lide medida">Nenhum dado foi inventado. Tudo o que falta aparece como token «…» na tela e está listado aqui. Antes de qualquer publicação, a busca por « no código precisa voltar vazia.</p>
+    </div>
+  </section>
+  <section class="secao">
+    <div class="env pilha g32">
+      <div class="pilha g12">
+        <h2>Travam a publicação</h2>
+        <div class="rolagem"><table class="tab-comp pend">
+          <thead><tr><th scope="col">Token</th><th scope="col">O que é</th><th scope="col">Onde aparece</th></tr></thead>
+          <tbody>
+            <tr><td><span class="token">«SUSEP»</span></td><td>Registro da corretora na SUSEP. É exigência regulatória e sinal de legitimidade.</td><td>Rodapé</td></tr>
+            <tr><td><span class="token">«CNPJ»</span></td><td>O site mostra 07.499.352/0001-82, mas o protótipo v2 registrou 45.154.654/0001-08 (MX Seguros e Créditos Ltda). Confirmar qual vale.</td><td>Rodapé</td></tr>
+            <tr><td><span class="token">«CEP-FILIAL»</span></td><td>CEP de Águas de Lindóia. Os Correios dão 13940-172 para a Rua Argentina, mas no Jardim São Francisco, não no Centro.</td><td>Unidades, rodapé</td></tr>
+            <tr><td><span class="token">«SLA»</span></td><td>Prazo de retorno que o time cumpre, por exemplo "até 1 hora útil". Só publicar o que for cumprido.</td><td>Formulários</td></tr>
+            <tr><td><span class="token">«ADMINISTRADORAS»</span></td><td>Administradoras de consórcio com que a MX trabalha, mais a revisão jurídica de todo o texto de consórcio.</td><td>Consórcio, rodapé</td></tr>
+            <tr><td>WhatsApp</td><td>Confirmar que (19) 3863-8150 está ativo no WhatsApp Business. É o botão principal do site.</td><td>Todo o site</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="pilha g12">
+        <h2>Não travam, mas são o próximo passo (30 dias)</h2>
+        <div class="rolagem"><table class="tab-comp pend">
+          <thead><tr><th scope="col">Token</th><th scope="col">O que é</th><th scope="col">Onde aparece</th></tr></thead>
+          <tbody>
+            <tr><td><span class="token">«NOME-…»</span> <span class="token">«FOTO-…»</span></td><td>Nome e foto real dos três consultores que lideram saúde, consórcio e empresarial.</td><td>Home, A MX, páginas de pilar</td></tr>
+            <tr><td><span class="token">«NOTA-GOOGLE»</span> <span class="token">«TOTAL-AVALIAÇÕES»</span></td><td>Nota média e total de avaliações do Perfil da Empresa no Google, no lugar de "milhares de clientes". Vale uma campanha para pedir avaliações novas, já que as atuais têm 2 e 7 anos.</td><td>Home, saúde</td></tr>
+            <tr><td><span class="token">«VIDAS-ADMINISTRADAS»</span> <span class="token">«CASE-SAÚDE»</span></td><td>Prova do pilar saúde.</td><td>Saúde empresarial</td></tr>
+            <tr><td><span class="token">«CARTAS-CONTEMPLADAS»</span> <span class="token">«Nº-ADMINISTRADORAS»</span></td><td>Prova do pilar consórcio.</td><td>Consórcio</td></tr>
+            <tr><td><span class="token">«CASOS-SINISTRO»</span></td><td>Prova do pilar empresarial, com autorização dos clientes.</td><td>Seguro empresarial</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="pilha g12">
+        <h2>Decisões que o protótipo deixa abertas</h2>
+        <ul class="checklist">
+          <li>Qual dos três lemas fica. Use o seletor em "Controles do protótipo".</li>
+          <li>Se previdência entra em "Linhas financeiras" junto do consórcio.</li>
+          <li>Se o recorte de PME de 2 a 99 vidas, mais agro e hotelaria, se confirma na carteira.</li>
+        </ul>
+      </div>
+      <div class="pilha g12">
+        <h2>Entram na implementação sem tela própria</h2>
+        <ul class="lista-v">
+          <li>Imagem de compartilhamento (og:image) e cartão grande, para o link aparecer bem no WhatsApp.</li>
+          <li>Texto alternativo no logo, já aplicado neste protótipo.</li>
+          <li>Meta description com até 155 caracteres e dados estruturados de corretora (InsuranceAgency) com as duas unidades.</li>
+          <li>GA4 com eventos de clique no WhatsApp e de envio de formulário, com o pilar no evento.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<!-- ===================== RODAPÉ ===================== -->
+<footer class="rodape">
+  <div class="env">
+    <div class="rodape__topo">
+      <div class="pilha g16">
+        <span class="logo logo--neg" role="img" aria-label="MX Corretora de Seguros"></span>
+        <p class="rodape__lema" data-lema>MX. Junto no seu negócio.</p>
+        <div class="pilha g12">
+          <p class="rodape__linha"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap"/></svg><span><span class="rodape__rot">Cotação, apólice e dúvidas</span><a href="https://wa.me/551938638150" target="_blank" rel="noopener"><b class="num">(19) 3863-8150</b></a></span></p>
+          <p class="rodape__linha"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-alerta"/></svg><span><span class="rodape__rot">Só para sinistro</span><a href="https://wa.me/5519982036147" target="_blank" rel="noopener"><b class="num">(19) 98203-6147</b></a></span></p>
+          <p class="rodape__linha"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-mail"/></svg><span><span class="rodape__rot">E-mail</span>mxseguros@mxseguros.com.br</span></p>
+        </div>
+      </div>
+      <div>
+        <h4>Soluções</h4>
+        <ul>
+          <li><a href="#saude-empresarial">Saúde empresarial</a></li>
+          <li><a href="#consorcio">Consórcio</a></li>
+          <li><a href="#seguro-empresarial">Seguro empresarial</a></li>
+          <li><a href="#para-voce">Para você</a></li>
+          <li><a href="#seguros"><b>Ver os <span data-total></span> seguros</b></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>A MX</h4>
+        <ul>
+          <li><a href="#a-mx">Sobre nós</a></li>
+          <li><a href="https://novo-site-mx.vercel.app/sinistro" target="_blank" rel="noopener">Sinistro e assistência 24h</a></li>
+          <li><a href="https://novo-site-mx.vercel.app/contato" target="_blank" rel="noopener">Contato</a></li>
+          <li><a href="https://novo-site-mx.vercel.app/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a></li>
+          <li><a href="https://novo-site-mx.vercel.app/cnsp-382-2020" target="_blank" rel="noopener">Resolução CNSP 382/2020</a></li>
+        </ul>
+      </div>
+      <div class="pilha g20">
+        <div>
+          <h4>Unidades</h4>
+          <ul>
+            <li><span class="rodape__rot">Matriz</span>Av. Rio Branco, 221, Centro<br>Itapira/SP · CEP 13970-070</li>
+            <li style="margin-top:.5rem"><span class="rodape__rot">Filial</span>Rua Argentina, 15, Salas 2 e 3, Centro<br>Águas de Lindóia/SP · CEP <span class="token">«CEP-FILIAL»</span></li>
+          </ul>
+        </div>
+        <div><h4>Horário</h4><p>Segunda a sexta, 08:00 às 18:00</p></div>
+      </div>
+    </div>
+    <p class="rodape__legal">MX Corretora de Seguros · CNPJ <span class="token">«CNPJ»</span> · Registro SUSEP <span class="token">«SUSEP»</span>. A MX é corretora: não assume riscos nem administra planos, e a contratação é feita com a seguradora ou a operadora. Consórcio é intermediado junto a administradoras autorizadas pelo Banco Central e não é seguro nem investimento.</p>
+    <div class="rodape__base">
+      <span>© <span data-ano></span> MX Corretora de Seguros. Todos os direitos reservados.</span>
+      <a href="https://novo-site-mx.vercel.app/politica-de-privacidade" target="_blank" rel="noopener">Privacidade</a>
+      <a href="https://novo-site-mx.vercel.app/cnsp-382-2020" target="_blank" rel="noopener">CNSP 382/2020</a>
+    </div>
+  </div>
+</footer>
+
+<div class="barra-mobile">
+  <a class="btn btn--azul" href="#cotar">Fazer cotação</a>
+  <a class="btn btn--zap" href="https://wa.me/551938638150" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><use href="#i-zap"/></svg> WhatsApp</a>
+  <a class="btn btn--socorro" href="https://novo-site-mx.vercel.app/sinistro" target="_blank" rel="noopener">Sinistro</a>
+</div>
+
+<div class="ctrl" id="ctrl">
+  <div class="ctrl__painel" id="ctrl-painel" hidden>
+    <fieldset>
+      <legend>Lema ao lado da marca</legend>
+      <label><input type="radio" name="lema" id="lema-0" value="0" checked> MX. Junto no seu negócio.</label>
+      <label><input type="radio" name="lema" id="lema-1" value="1"> MX. Proteção e crescimento para quem empreende aqui.</label>
+      <label><input type="radio" name="lema" id="lema-2" value="2"> MX. A corretora de quem constrói na região.</label>
+    </fieldset>
+    <fieldset>
+      <legend>Revisão</legend>
+      <label><input type="checkbox" id="ctrl-notas" checked> Mostrar notas do que mudou</label>
+      <label><input type="checkbox" id="ctrl-realce"> Realçar dados pendentes «…»</label>
+    </fieldset>
+    <a href="#pendencias">Ver pendências antes de publicar</a>
+  </div>
+  <button class="ctrl__botao" id="ctrl-botao" type="button" aria-expanded="false" aria-controls="ctrl-painel">Controles do protótipo</button>
+</div>
+</div>
+
+<script>
+(function(){
+  const SITE = 'https://novo-site-mx.vercel.app';
+  const ZAP = 'https://wa.me/551938638150';
+  const seta = '<svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta"/></svg>';
+
+  const PILARES = [
+    { id: 'saude',       rota: 'saude-empresarial',  coluna: 'Saúde para empresas', menu: 'Saúde empresarial',  botao: 'Pedir cotação do plano' },
+    { id: 'financeiras', rota: 'consorcio',          coluna: 'Linhas financeiras',  menu: 'Consórcio',          botao: 'Pedir minha simulação' },
+    { id: 'empresarial', rota: 'seguro-empresarial', coluna: 'Seguro empresarial',  menu: 'Seguro empresarial', botao: 'Pedir revisão do seguro' },
+    { id: 'voce',        rota: 'para-voce',          coluna: 'Para você',           menu: 'Para você',          botao: 'Quero minha cotação' },
+  ];
+  const PILAR = Object.fromEntries(PILARES.map(p => [p.id, p]));
+
+  /* Os 32 de content/produtos.ts, com o grupo novo. */
+  const PRODUTOS = [
+    ['saude','Saúde','saude','cd-saude','Plano de saúde por empresa, com comparação de operadora e rede.'],
+    ['odontologico','Odontológico','saude','ph-odontologico','Plano dental com rede credenciada, pela empresa.'],
+    ['vida-em-grupo','Vida em Grupo','saude','ph-vida-em-grupo','Benefício para o time, com adesão simples e custo por vida.'],
+    ['consorcio-de-imoveis','Consórcio de Imóveis','financeiras','hero-condominio','Compra programada de imóvel, sem juros de financiamento.'],
+    ['consorcio-de-automoveis','Consórcio de Automóveis','financeiras','hero-auto','Compra programada de carro ou moto, sem juros de financiamento.'],
+    ['consorcio-de-servicos','Consórcio de Serviços','financeiras','h-documento','Reforma, formatura, viagem e outros serviços.'],
+    ['previdencia','Previdência','financeiras','cd-previdencia','PGBL e VGBL para planejar o longo prazo com orientação de corretor.'],
+    ['empresarial','Empresarial','empresarial','h-loja','Patrimônio, lucros cessantes e responsabilidade civil do seu CNPJ.'],
+    ['condominio','Condomínio','empresarial','card-condominio','A cobertura que a lei exige, mais responsabilidade civil do síndico.'],
+    ['frota','Frota','empresarial','h-veiculo','Todos os veículos da empresa em uma apólice só.'],
+    ['transportes','Transportes','empresarial','ph-transportes','RCTR-C, RC-DC e RC-V para transportadora e para quem embarca carga.'],
+    ['agronegocios','Agronegócios','empresarial','h-maquina','Lavoura, penhor rural e o que o banco exige no financiamento.'],
+    ['maquinas-agricolas','Máquinas Agrícolas','empresarial','ph-maquinas-agricolas','Colheitadeira, trator e implementos, no campo e no transporte.'],
+    ['garantia','Garantia','empresarial','ph-garantia','A garantia que o edital ou o contrato pede, sem imobilizar caixa.'],
+    ['riscos-de-engenharia','Riscos de Engenharia','empresarial','ph-riscos-de-engenharia','Obra e montagem cobertas do canteiro até a entrega.'],
+    ['riscos-ciberneticos','Riscos Cibernéticos','empresarial','ph-riscos-ciberneticos','Ataque, vazamento de dados e parada de sistema.'],
+    ['grandes-riscos','Grandes Riscos','empresarial','ph-grandes-riscos','Apólice negociada cláusula a cláusula para operação industrial.'],
+    ['responsabilidade-civil-profissional','RC Profissional','empresarial','h-documento','Cobre o prejuízo que um erro no trabalho causa a um cliente.'],
+    ['responsabilidade-civil-medico-e-dentista','RC Médico e Dentista','empresarial','h-pessoas','Defesa e indenização quando o paciente processa.'],
+    ['estagiario','Estagiário','empresarial','ph-estagiario','O seguro de acidentes pessoais que a Lei do Estágio exige.'],
+    ['automovel','Automóvel','voce','ph-automovel','Colisão, roubo, danos a terceiros e assistência 24 horas.'],
+    ['moto','Moto','voce','ph-moto','Cobertura para a moto e para quem depende dela no trabalho.'],
+    ['caminhao','Caminhão','voce','ph-caminhao','Para o caminhoneiro autônomo, com assistência na estrada.'],
+    ['residencial','Residencial','voce','ph-residencial','Incêndio, roubo, danos elétricos e vendaval, com chaveiro e encanador.'],
+    ['vida-individual','Vida Individual','voce','ph-vida-individual','Proteção financeira para quem depende de você.'],
+    ['acidentes-pessoais','Acidentes Pessoais','voce','ph-acidentes-pessoais','Indenização por morte ou invalidez decorrente de acidente.'],
+    ['viagem','Viagem','voce','ph-viagem','Assistência médica, bagagem e cancelamento, dentro e fora do país.'],
+    ['bike','Bike','voce','ph-bike','Roubo, furto qualificado e danos à bicicleta.'],
+    ['equipamentos-portateis','Equipamentos Portáteis','voce','ph-equipamentos-portateis','Celular, notebook e câmera contra roubo e quebra acidental.'],
+    ['festas-e-eventos','Festas e Eventos','voce','ph-festas-e-eventos','Responsabilidade civil e danos ao espaço contratado.'],
+    ['fianca-locaticia','Fiança Locatícia','voce','ph-fianca-locaticia','Alternativa ao fiador e à caução na hora de alugar.'],
+    ['pets','Seguro para Pets','voce','ph-pets','Consultas, exames e cirurgias do seu animal.'],
+  ].map(([slug, rotulo, pilar, foto, resumo]) => ({ slug, rotulo, pilar, foto, resumo }));
+
+  const porPilar = id => PRODUTOS.filter(p => p.pilar === id)
+    .sort((a, b) => a.rotulo.localeCompare(b.rotulo, 'pt-BR'));
+  const linkProduto = slug => `${SITE}/seguros/${slug}`;
+
+  const ESPECIALISTAS = {
+    saude:       { area: 'Saúde empresarial',  nome: '«NOME-SAÚDE»',       foto: '«FOTO-SAÚDE»',       faz: 'Planos de saúde e odontológicos por empresa, vida em grupo e renovação de contrato.' },
+    financeiras: { area: 'Consórcio',          nome: '«NOME-CONSÓRCIO»',   foto: '«FOTO-CONSÓRCIO»',   faz: 'Consórcio de imóvel, veículo e serviços, da simulação à contemplação.' },
+    empresarial: { area: 'Seguro empresarial', nome: '«NOME-EMPRESARIAL»', foto: '«FOTO-EMPRESARIAL»', faz: 'Empresa, condomínio, frota, transportes, agro e responsabilidade civil.' },
+  };
+
+  const GUIAS = [
+    { id: 'g-operadoras',     titulo: 'Como comparar operadoras',  texto: 'Rede, abrangência e acomodação dizem mais do que o preço.',
+      cobre: ['Rede credenciada nas cidades onde o time mora', 'Abrangência municipal, regional ou nacional', 'Enfermaria e apartamento', 'Reembolso e livre escolha'] },
+    { id: 'g-carencia',       titulo: 'Carência e portabilidade',  texto: 'Quem já tem plano pode levar o tempo cumprido, se os requisitos baterem.',
+      cobre: ['O que é carência e os prazos máximos da ANS', 'Quando a portabilidade se aplica', 'Doença ou lesão preexistente e cobertura parcial temporária'] },
+    { id: 'g-coparticipacao', titulo: 'Coparticipação vale a pena?', texto: 'Ela baixa a mensalidade, mas muda quanto cada pessoa paga ao usar.',
+      cobre: ['Como funciona a coparticipação', 'Tetos por procedimento e por mês', 'Quando faz sentido para empresas pequenas'] },
+    { id: 'g-reajuste',       titulo: 'Como funciona o reajuste',  texto: 'No plano empresarial, o índice é negociado entre empresa e operadora.',
+      cobre: ['Reajuste anual e reajuste por sinistralidade', 'Reajuste por faixa etária', 'O que a MX faz 90 a 120 dias antes da renovação'] },
+  ];
+
+  const UNIDADES = [
+    { selo: 'Matriz', cidade: 'Itapira / SP', mapa: '/fotos/mapa-itapira.webp', endereco: 'Av. Rio Branco, 221, Centro<br>Itapira/SP · CEP 13970-070',
+      rota: 'https://www.google.com/maps/dir/?api=1&destination=Av.%20Rio%20Branco%2C%20221%20-%20Centro%2C%20Itapira%20-%20SP%2C%2013970-070', ir: 'Como chegar a Itapira' },
+    { selo: 'Filial', cidade: 'Águas de Lindóia / SP', mapa: '/fotos/mapa-lindoia.webp', endereco: 'Rua Argentina, 15, Salas 2 e 3, Centro<br>Águas de Lindóia/SP · CEP <span class="token">«CEP-FILIAL»</span>',
+      rota: 'https://www.google.com/maps/dir/?api=1&destination=Rua%20Argentina%2C%2015%20-%20%C3%81guas%20de%20Lind%C3%B3ia%20-%20SP', ir: 'Como chegar a Águas de Lindóia' },
+  ];
+
+  const LEMAS = ['MX. Junto no seu negócio.', 'MX. Proteção e crescimento para quem empreende aqui.', 'MX. A corretora de quem constrói na região.'];
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const tok = s => s.replace(/(«[^»]+»)/g, '<span class="token">$1</span>');
+
+  /* ---------- listas que saem dos dados ---------- */
+  $$('[data-total]').forEach(el => el.textContent = PRODUTOS.length);
+  $$('[data-total-pilar]').forEach(el => el.textContent = porPilar(el.dataset.totalPilar).length);
+  $$('[data-ano]').forEach(el => el.textContent = new Date().getFullYear());
+
+  $$('[data-lista-pilares]').forEach(el => {
+    el.innerHTML = PILARES.map(p => `
+      <div class="painel__col">
+        <h4><a href="#${p.rota}">${p.coluna} ${seta}</a></h4>
+        <ul>${porPilar(p.id).map(x => `<li><a href="${linkProduto(x.slug)}" target="_blank" rel="noopener">${x.rotulo}</a></li>`).join('')}</ul>
+      </div>`).join('');
+  });
+
+  $$('[data-produtos-pilar]').forEach(el => {
+    const lista = porPilar(el.dataset.produtosPilar);
+    if (el.hasAttribute('data-compacto')) {
+      el.innerHTML = lista.map(x => `
+        <a class="card ix" href="${linkProduto(x.slug)}" target="_blank" rel="noopener">
+          <h4>${x.rotulo}</h4><p>${x.resumo}</p>
+          <span class="seta" style="margin-top:auto">Ver coberturas ${seta}</span>
+        </a>`).join('');
+    } else {
+      el.innerHTML = lista.map(x => `
+        <a class="foto-card foto-card--grade" href="${linkProduto(x.slug)}" target="_blank" rel="noopener" style="background-image:var(--f-${x.foto})">
+          <h3>${x.rotulo}</h3><p>${x.resumo}</p>
+          <span class="foto-card__btn">Ver coberturas</span>
+        </a>`).join('');
+    }
+  });
+
+  $$('[data-especialistas]').forEach(el => {
+    const qual = el.dataset.especialistas;
+    const ids = qual === 'todos' ? ['saude', 'financeiras', 'empresarial'] : [qual];
+    const largo = el.hasAttribute('data-largo');
+    el.innerHTML = ids.map(id => {
+      const e = ESPECIALISTAS[id];
+      return `
+      <div class="card esp${largo ? ' esp--largo' : ''}">
+        <div class="foto-vazia esp__foto"><b>${tok(e.foto)}</b><small>Foto real, no escritório</small></div>
+        <div class="pilha g8">
+          <span class="esp__area">${e.area}</span>
+          <h4>${tok(e.nome)}</h4>
+          <p>${e.faz}</p>
+          <p class="esp__onde">Atende Itapira, Águas de Lindóia e região</p>
+          ${largo ? `<a class="btn btn--zap btn--peq" style="align-self:flex-start" href="${ZAP}" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><use href="#i-zap"/></svg> Falar no WhatsApp</a>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+  });
+
+  $$('[data-guias]').forEach(el => {
+    el.innerHTML = GUIAS.map(g => `
+      <a class="card" href="#${g.id}">
+        <span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-lupa"/></svg></span>
+        <h4>${g.titulo}</h4><p>${g.texto}</p>
+        <span class="seta" style="margin-top:auto">Ler o guia ${seta}</span>
+      </a>`).join('');
+  });
+  $$('[data-guias-corpo]').forEach(el => {
+    el.innerHTML = GUIAS.map(g => `
+      <article class="guia pilha g12" id="${g.id}">
+        <h2>${g.titulo}</h2>
+        <p class="lide">${g.texto}</p>
+        <span class="olho">O que o guia vai cobrir</span>
+        <ul class="lista-v">${g.cobre.map(c => `<li>${c}</li>`).join('')}</ul>
+        <a class="btn btn--azul" style="align-self:flex-start" href="#cotar-saude">Cotar plano para o meu time</a>
+      </article>`).join('');
+  });
+
+  $$('[data-unidades]').forEach(el => {
+    el.innerHTML = UNIDADES.map(u => `
+      <div class="unidade">
+        <img class="unidade__mapa" src="${u.mapa}" alt="Mapa da unidade da MX em ${u.cidade}">
+        <div class="unidade__corpo">
+          <span class="selo">${u.selo}</span>
+          <h3>${u.cidade}</h3>
+          <div class="dados">
+            <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin"/></svg><span>${u.endereco}</span></p>
+            <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio"/></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
+            <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap"/></svg><span><span class="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="${ZAP}" class="num" target="_blank" rel="noopener">(19) 3863-8150</a></span></p>
+            <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-alerta"/></svg><span><span class="dados__rot">WhatsApp · só sinistro</span><a href="https://wa.me/5519982036147" class="num" target="_blank" rel="noopener">(19) 98203-6147</a></span></p>
+          </div>
+          <a class="seta" href="${u.rota}" target="_blank" rel="noopener">${u.ir} ${seta}</a>
+        </div>
+      </div>`).join('');
+  });
+
+  /* ---------- formulário por pilar ---------- */
+  const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  const opcoes = (lista, vazio) => `<option value="">${vazio}</option>` + lista.map(o => Array.isArray(o)
+    ? `<option value="${o[0]}">${o[1]}</option>` : `<option>${o}</option>`).join('');
+
+  let nForm = 0;
+  $$('.form-pilar').forEach(el => {
+    const n = ++nForm;
+    const id = s => `f${n}-${s}`;
+    const fixo = el.hasAttribute('data-fixo');
+    const campo = (rot, nome, extra = '') =>
+      `<label class="campo" for="${id(nome)}"><span>${rot}</span><input id="${id(nome)}" name="${nome}" ${extra}></label>`;
+    const sel = (rot, nome, html, extra = '') =>
+      `<label class="campo" for="${id(nome)}"><span>${rot}</span><select id="${id(nome)}" name="${nome}" ${extra}>${html}</select></label>`;
+
+    el.innerHTML = `
+      ${fixo ? '' : `<div class="tabs" role="tablist" aria-label="Assunto da cotação">${PILARES.map(p =>
+        `<button type="button" class="tab" role="tab" data-p="${p.id}" aria-selected="false">${p.menu}</button>`).join('')}</div>`}
+      <form class="pilha g12" novalidate>
+        <fieldset data-p="saude" class="pilha g12">
+          ${campo('Empresa', 'empresa', 'required autocomplete="organization"')}
+          <div class="campos-2">
+            ${sel('Quantas vidas', 'vidas', opcoes(['2 a 9', '10 a 29', '30 a 99', '100 ou mais'], 'Selecione'), 'required')}
+            ${campo('Operadora atual', 'operadora', 'placeholder="Ou: não temos plano"')}
+          </div>
+          ${sel('Mês de vencimento do contrato atual', 'vencimento', opcoes([...MESES, 'Não sei', 'Ainda não temos plano'], 'Selecione'), 'required')}
+          <span class="campo__dica">Com essa data, a MX programa a conversa para antes da renovação.</span>
+        </fieldset>
+        <fieldset data-p="financeiras" class="pilha g12">
+          ${sel('O que você quer comprar', 'objetivo', opcoes(['Imóvel', 'Automóvel ou moto', 'Serviços', 'Ainda não sei'], 'Selecione'), 'required')}
+          <div class="campos-2">
+            ${sel('Valor da carta de crédito', 'valor', opcoes(['Até R$ 100 mil', 'R$ 100 mil a R$ 300 mil', 'R$ 300 mil a R$ 1 milhão', 'Acima de R$ 1 milhão'], 'Selecione'), 'required')}
+            ${sel('Prazo desejado', 'prazo', opcoes(['Até 60 meses', '61 a 120 meses', 'Mais de 120 meses', 'Sem preferência'], 'Selecione'))}
+          </div>
+          <span class="campo__dica">O consultor monta a simulação com as administradoras parceiras. Consórcio não tem data garantida de contemplação.</span>
+        </fieldset>
+        <fieldset data-p="empresarial" class="pilha g12">
+          <div class="campos-2">
+            ${campo('Ramo de atividade', 'ramo', 'required placeholder="Ex.: pousada, loja, indústria"')}
+            ${sel('Porte', 'porte', opcoes(['Até 9 funcionários', '10 a 49', '50 a 99', '100 ou mais'], 'Selecione'), 'required')}
+          </div>
+          <fieldset>
+            <legend>O que a empresa já tem segurado</legend>
+            <div class="checks">
+              ${['Prédio e conteúdo', 'Frota', 'Responsabilidade civil', 'Carga', 'Riscos cibernéticos', 'Nada ainda'].map((c, i) =>
+                `<label class="check" for="${id('tem' + i)}"><input type="checkbox" id="${id('tem' + i)}" name="tem" value="${c}"> ${c}</label>`).join('')}
+            </div>
+          </fieldset>
+        </fieldset>
+        <fieldset data-p="voce" class="pilha g12">
+          ${sel('O que você quer proteger?', 'produto', opcoes([...porPilar('voce').map(x => [x.slug, x.rotulo]), ['nao-sei', 'Não sei, me ajuda a escolher']], 'Selecione o seguro'), 'required')}
+        </fieldset>
+        <div class="campos-2">
+          ${campo('Nome', 'nome', 'required autocomplete="name"')}
+          ${campo('WhatsApp', 'fone', 'required type="tel" inputmode="numeric" autocomplete="tel" placeholder="(19) 98765-4321" pattern="[\\d\\s()+-]{10,}"')}
+        </div>
+        ${campo('Cidade', 'cidade', 'placeholder="Itapira, Águas de Lindóia, Mogi Guaçu…"')}
+        <label class="consent" for="${id('lgpd')}"><input type="checkbox" id="${id('lgpd')}" required>
+          <span>Autorizo a MX a entrar em contato sobre este pedido. <a href="${SITE}/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label>
+        <button class="btn btn--azul btn--largo" type="submit" data-enviar></button>
+        <div class="saida" role="status" data-visivel="1">
+          <svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true" style="flex:0 0 auto;margin-top:3px"><use href="#i-escudo"/></svg>
+          <span data-saida>Seus dados vão para a corretora, não para uma lista de disparo.</span>
+        </div>
+      </form>`;
+
+    const form = $('form', el);
+    const grupos = $$(':scope > form > fieldset[data-p]', el);
+    function mostra(p) {
+      el.dataset.pilar = p;
+      grupos.forEach(g => { const ativo = g.dataset.p === p; g.hidden = !ativo; g.disabled = !ativo; });
+      $$('.tab', el).forEach(t => t.setAttribute('aria-selected', String(t.dataset.p === p)));
+      $('[data-enviar]', el).textContent = PILAR[p].botao;
+    }
+    $$('.tab', el).forEach(t => t.addEventListener('click', () => mostra(t.dataset.p)));
+    el.mostra = mostra;
+    mostra(el.dataset.pilar);
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      $('[data-saida]', el).innerHTML = `Pedido montado no protótipo, sem envio. No site, ele chega à MX marcado como <b>${PILAR[el.dataset.pilar].menu}</b>, com os campos acima, e o consultor responde em <span class="token">«SLA»</span>.`;
+    });
+  });
+
+  /* Botões da home que já escolhem o assunto do formulário */
+  $$('[data-pilar-ir]').forEach(a => a.addEventListener('click', () => {
+    const f = $('#cotar .form-pilar'); if (f && f.mostra) f.mostra(a.dataset.pilarIr);
+  }));
+
+  /* ---------- telas, por hash ---------- */
+  const telas = $$('.tela');
+  function rota() {
+    const h = decodeURIComponent(location.hash.slice(1)) || 'inicio';
+    let tela = document.getElementById('tela-' + h);
+    let alvo = null;
+    if (!tela) {
+      alvo = document.getElementById(h);
+      tela = alvo ? alvo.closest('.tela') : null;
+    }
+    if (!tela) tela = document.getElementById('tela-inicio');
+    telas.forEach(t => t.hidden = t !== tela);
+    const nome = tela.id.replace('tela-', '');
+    $$('[data-nav]').forEach(a => { if (a.dataset.nav === nome) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    fechaPainel();
+    if (alvo && alvo !== tela) alvo.scrollIntoView();
+    else window.scrollTo(0, 0);
+  }
+
+  /* ---------- painel do menu ---------- */
+  const painel = $('#painel'), hamb = $('#hamb');
+  function fechaPainel() { painel.dataset.aberto = '0'; hamb.setAttribute('aria-expanded', 'false'); }
+  hamb.addEventListener('click', () => {
+    const abrir = painel.dataset.aberto !== '1';
+    painel.dataset.aberto = abrir ? '1' : '0';
+    hamb.setAttribute('aria-expanded', String(abrir));
+  });
+  $('#painel-fechar').addEventListener('click', fechaPainel);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') fechaPainel(); });
+
+  /* ---------- controles do protótipo ---------- */
+  const palco = $('#palco');
+  const guarda = (k, v) => { try { localStorage.setItem('mx-v3-' + k, v); } catch (e) {} };
+  const le = k => { try { return localStorage.getItem('mx-v3-' + k); } catch (e) { return null; } };
+
+  function aplicaLema(i) {
+    $$('[data-lema]').forEach(el => el.textContent = LEMAS[i]);
+    const r = document.getElementById('lema-' + i); if (r) r.checked = true;
+  }
+  $$('input[name="lema"]').forEach(r => r.addEventListener('change', () => { aplicaLema(+r.value); guarda('lema', r.value); }));
+  const notas = $('#ctrl-notas'), realce = $('#ctrl-realce');
+  notas.addEventListener('change', () => { palco.dataset.notas = notas.checked ? '1' : '0'; guarda('notas', palco.dataset.notas); });
+  realce.addEventListener('change', () => { palco.dataset.realce = realce.checked ? '1' : '0'; });
+  const botao = $('#ctrl-botao'), cp = $('#ctrl-painel');
+  botao.addEventListener('click', () => { cp.hidden = !cp.hidden; botao.setAttribute('aria-expanded', String(!cp.hidden)); });
+
+  const lemaSalvo = le('lema'); aplicaLema(lemaSalvo && LEMAS[+lemaSalvo] ? +lemaSalvo : 0);
+  if (le('notas') === '0') { notas.checked = false; palco.dataset.notas = '0'; }
+
+  window.addEventListener('hashchange', rota);
+  rota();
+})();
+</script>

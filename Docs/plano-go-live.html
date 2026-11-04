@@ -1,0 +1,881 @@
+<title>Go-Live MX Corretora</title>
+<meta name="description" content="Plano para publicar o site novo da MX Corretora já conectado ao sistema de captura de leads.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+
+<style>
+/* ==========================================================================
+   TOKENS — neutros com viés no navy da MX, acentos herdados da marca
+   ========================================================================== */
+:root{
+  color-scheme: light;
+
+  --papel:      #F7F7F4;
+  --superficie: #FFFFFF;
+  --superficie-2:#EFEFEB;
+  --tinta:      #0B1A2B;
+  --tinta-2:    #33414F;
+  --tinta-3:    #63707E;
+  --linha:      #DCDCD5;
+  --linha-forte:#BFBFB6;
+
+  --azul:       #0B4FD6;   /* cor de ação da MX */
+  --azul-fundo: #E7EEFC;
+  --sage:       #6F6E55;   /* sage da marca, escurecido para texto */
+  --sage-fundo: #EDEDE3;
+  --trava:      #A82A17;   /* socorro da MX, escurecido para AA */
+  --trava-fundo:#FBEBE8;
+  --feito:      #0F6A38;
+  --feito-fundo:#E6F2EA;
+
+  --largura: 74rem;
+  --prosa: 40rem;
+
+  --fonte-ui:   'Archivo', 'Segoe UI', system-ui, sans-serif;
+  --fonte-prosa:'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --fonte-mono: 'JetBrains Mono', 'Cascadia Mono', Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --papel:      #0C1119;
+    --superficie: #131B26;
+    --superficie-2:#1B2530;
+    --tinta:      #E9EEF4;
+    --tinta-2:    #B4C0CD;
+    --tinta-3:    #808F9E;
+    --linha:      #26313E;
+    --linha-forte:#3A4756;
+    --azul:       #6EA4FF;
+    --azul-fundo: #142542;
+    --sage:       #B6B492;
+    --sage-fundo: #22261D;
+    --trava:      #F08A75;
+    --trava-fundo:#331912;
+    --feito:      #63C48D;
+    --feito-fundo:#10281B;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --papel:      #0C1119;
+  --superficie: #131B26;
+  --superficie-2:#1B2530;
+  --tinta:      #E9EEF4;
+  --tinta-2:    #B4C0CD;
+  --tinta-3:    #808F9E;
+  --linha:      #26313E;
+  --linha-forte:#3A4756;
+  --azul:       #6EA4FF;
+  --azul-fundo: #142542;
+  --sage:       #B6B492;
+  --sage-fundo: #22261D;
+  --trava:      #F08A75;
+  --trava-fundo:#331912;
+  --feito:      #63C48D;
+  --feito-fundo:#10281B;
+}
+
+*{ box-sizing: border-box; }
+body{
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta-2);
+  font: 400 1.0625rem/1.65 var(--fonte-prosa);
+  -webkit-font-smoothing: antialiased;
+}
+.env{ width: min(100% - 2.5rem, var(--largura)); margin-inline: auto; }
+.prosa{ max-width: var(--prosa); }
+
+h1,h2,h3,h4{ font-family: var(--fonte-ui); color: var(--tinta); margin: 0; text-wrap: balance; }
+h1{ font-size: clamp(2rem, 5vw, 3.05rem); font-weight: 600; letter-spacing: -.033em; line-height: 1.04; }
+h2{ font-size: clamp(1.35rem, 2.6vw, 1.75rem); font-weight: 600; letter-spacing: -.022em; line-height: 1.15; }
+h3{ font-size: 1.0625rem; font-weight: 600; letter-spacing: -.012em; }
+h4{ font-size: .9375rem; font-weight: 600; letter-spacing: -.008em; }
+p{ margin: 0; }
+b, strong{ color: var(--tinta); font-weight: 600; }
+a{ color: var(--azul); }
+a:focus-visible, summary:focus-visible{ outline: 2px solid var(--azul); outline-offset: 3px; border-radius: 3px; }
+
+code, .mono{ font-family: var(--fonte-mono); font-size: .8125em; }
+code{
+  background: var(--superficie-2); color: var(--tinta);
+  padding: .1em .38em; border-radius: 3px; border: 1px solid var(--linha);
+}
+.tok{
+  font-family: var(--fonte-mono); font-size: .78em; white-space: nowrap;
+  background: var(--trava-fundo); color: var(--trava);
+  border: 1px dashed currentColor; border-radius: 3px; padding: .08em .34em;
+}
+
+/* rótulo de seção */
+.olho{
+  font-family: var(--fonte-ui); font-size: .6875rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--tinta-3);
+}
+
+/* ==========================================================================
+   CABEÇALHO
+   ========================================================================== */
+.capa{
+  border-bottom: 1px solid var(--linha);
+  background: var(--superficie);
+  padding-block: clamp(2.5rem, 6vw, 4.25rem) clamp(2rem, 4vw, 3rem);
+}
+.capa__grade{ display: grid; gap: 2rem; }
+@media (min-width: 62rem){ .capa__grade{ grid-template-columns: 1.35fr .95fr; gap: 3.5rem; align-items: end; } }
+.capa__meta{ display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; font-family: var(--fonte-ui); font-size: .8125rem; color: var(--tinta-3); }
+.capa h1{ margin-block: .75rem .9rem; }
+.capa__lide{ font-size: 1.1875rem; line-height: 1.55; }
+
+.decisao{
+  display: grid; gap: .9rem;
+  padding: 1.15rem 1.25rem;
+  background: var(--azul-fundo); border: 1px solid var(--linha); border-radius: 4px;
+}
+.decisao__item{ display: grid; grid-template-columns: auto 1fr; gap: .1rem .7rem; align-items: baseline; }
+.decisao__n{
+  font-family: var(--fonte-mono); font-size: .75rem; font-weight: 500;
+  color: var(--azul); grid-row: span 2;
+}
+.decisao__v{ font-family: var(--fonte-ui); font-weight: 600; color: var(--tinta); font-size: .9375rem; }
+.decisao__p{ font-size: .875rem; line-height: 1.5; color: var(--tinta-2); }
+
+/* ==========================================================================
+   SEÇÕES
+   ========================================================================== */
+.secao{ padding-block: clamp(2.5rem, 5vw, 3.75rem); border-bottom: 1px solid var(--linha); }
+.secao__cabeca{ display: grid; gap: .55rem; margin-bottom: 1.75rem; }
+.secao__cabeca p{ max-width: var(--prosa); }
+.pilha{ display: grid; gap: 1.05rem; }
+
+/* ==========================================================================
+   DIAGRAMA DO FLUXO DE LEAD
+   ========================================================================== */
+.fluxo{ overflow-x: auto; padding-bottom: .4rem; }
+.fluxo__trilho{
+  display: grid; gap: 1.5rem; min-width: 46rem;
+  grid-template-columns: 1.05fr auto .95fr auto 1fr;
+  align-items: center;
+}
+.fluxo__col{ display: grid; gap: .5rem; }
+.fluxo__rot{
+  font-family: var(--fonte-ui); font-size: .625rem; font-weight: 600;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--tinta-3);
+  margin-bottom: .15rem;
+}
+.no{
+  background: var(--superficie); border: 1px solid var(--linha); border-radius: 4px;
+  padding: .6rem .75rem; font-family: var(--fonte-ui); font-size: .8125rem; color: var(--tinta);
+  line-height: 1.35;
+}
+.no small{ display: block; font-size: .6875rem; color: var(--tinta-3); font-weight: 400; margin-top: .1rem; }
+.no--nucleo{ border-color: var(--azul); background: var(--azul-fundo); border-width: 1.5px; }
+.no--nucleo b{ color: var(--azul); }
+.no--futuro{ border-style: dashed; color: var(--tinta-3); background: transparent; }
+.no--futuro small{ color: var(--tinta-3); }
+.seta{ font-family: var(--fonte-mono); color: var(--linha-forte); font-size: 1.1rem; text-align: center; }
+.fluxo__nota{
+  margin-top: 1.1rem; font-size: .875rem; color: var(--tinta-3);
+  max-width: var(--prosa); font-style: italic;
+}
+
+/* ==========================================================================
+   ESTADO DOS DOIS PROJETOS
+   ========================================================================== */
+.trilhas{ display: grid; gap: 1.25rem; }
+@media (min-width: 52rem){ .trilhas{ grid-template-columns: 1fr 1fr; } }
+.trilha{
+  background: var(--superficie); border: 1px solid var(--linha); border-radius: 4px;
+  padding: 1.35rem 1.4rem; display: grid; gap: .85rem; align-content: start;
+}
+.trilha__topo{ display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.selo{
+  font-family: var(--fonte-ui); font-size: .6875rem; font-weight: 600; letter-spacing: .06em;
+  padding: .18rem .5rem; border-radius: 3px; white-space: nowrap;
+}
+.selo--ok{ background: var(--feito-fundo); color: var(--feito); }
+.selo--trava{ background: var(--trava-fundo); color: var(--trava); }
+.passos{ display: flex; gap: .3rem; }
+.passo{ flex: 1; height: 5px; border-radius: 2px; background: var(--linha); }
+.passo--feito{ background: var(--feito); }
+.passo--agora{ background: var(--azul); }
+.trilha__leg{ font-family: var(--fonte-ui); font-size: .75rem; color: var(--tinta-3); display: flex; justify-content: space-between; }
+.trilha p{ font-size: .9375rem; line-height: 1.55; }
+
+/* ==========================================================================
+   MARCOS
+   ========================================================================== */
+.marco{
+  display: grid; gap: .35rem 1.5rem; padding-block: 1.5rem;
+  border-top: 1px solid var(--linha);
+}
+.marco:first-of-type{ border-top: 0; padding-top: .25rem; }
+@media (min-width: 56rem){
+  .marco{ grid-template-columns: 8.5rem 1fr; }
+  .marco__lado{ grid-row: span 3; }
+}
+.marco__lado{ display: grid; gap: .3rem; align-content: start; }
+.marco__id{ font-family: var(--fonte-mono); font-size: 1.5rem; font-weight: 500; color: var(--azul); line-height: 1; }
+.marco__prazo{ font-family: var(--fonte-ui); font-size: .75rem; color: var(--tinta-3); }
+.marco__corpo{ display: grid; gap: .7rem; }
+.marco__corpo p{ max-width: var(--prosa); font-size: .9375rem; }
+.tarefas{ margin: 0; padding: 0; list-style: none; display: grid; gap: .4rem; }
+.tarefas li{
+  position: relative; padding-left: 1.15rem; font-size: .9375rem; line-height: 1.5;
+}
+.tarefas li::before{
+  content: ""; position: absolute; left: 0; top: .62em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--linha-forte);
+}
+.saida{
+  font-family: var(--fonte-ui); font-size: .8125rem; line-height: 1.5;
+  background: var(--sage-fundo); border-left: 2px solid var(--sage);
+  padding: .55rem .8rem; color: var(--tinta-2); border-radius: 0 3px 3px 0;
+  max-width: var(--prosa);
+}
+.saida b{ color: var(--sage); font-weight: 600; }
+.portao{
+  font-family: var(--fonte-ui); font-size: .8125rem; font-weight: 600; color: var(--tinta);
+  background: var(--superficie-2); border: 1px solid var(--linha-forte);
+  padding: .5rem .8rem; border-radius: 3px; max-width: var(--prosa);
+}
+
+/* ==========================================================================
+   TRAVAS
+   ========================================================================== */
+.travas{ display: grid; gap: .6rem; }
+.trava{
+  display: grid; gap: .15rem .9rem; align-items: baseline;
+  grid-template-columns: auto 1fr auto;
+  background: var(--superficie); border: 1px solid var(--linha);
+  border-left: 3px solid var(--linha-forte); border-radius: 0 4px 4px 0;
+  padding: .8rem 1rem;
+}
+.trava--dura{ border-left-color: var(--trava); }
+.trava--decisao{ border-left-color: var(--azul); }
+.trava__n{ font-family: var(--fonte-mono); font-size: .75rem; color: var(--tinta-3); }
+.trava__t{ font-family: var(--fonte-ui); font-weight: 600; font-size: .9375rem; color: var(--tinta); }
+.trava__p{ grid-column: 2; font-size: .875rem; line-height: 1.5; }
+.trava__tipo{
+  font-family: var(--fonte-ui); font-size: .625rem; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase; white-space: nowrap;
+  padding: .16rem .45rem; border-radius: 3px;
+}
+.trava__tipo--dura{ background: var(--trava-fundo); color: var(--trava); }
+.trava__tipo--decisao{ background: var(--azul-fundo); color: var(--azul); }
+.trava__tipo--leve{ background: var(--superficie-2); color: var(--tinta-3); }
+
+/* ==========================================================================
+   TABELAS
+   ========================================================================== */
+.rolagem{ overflow-x: auto; }
+table{
+  width: 100%; border-collapse: collapse; min-width: 34rem;
+  font-family: var(--fonte-ui); font-size: .875rem;
+}
+th, td{ text-align: left; padding: .7rem .85rem; border-bottom: 1px solid var(--linha); vertical-align: top; }
+thead th{
+  font-size: .6875rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--tinta-3); border-bottom: 1px solid var(--linha-forte);
+}
+th:first-child, td:first-child{ padding-left: 0; }
+tbody th{ font-weight: 500; color: var(--tinta); }
+td{ color: var(--tinta-2); line-height: 1.5; }
+.n{ font-variant-numeric: tabular-nums; font-family: var(--fonte-mono); font-size: .8125rem; }
+.prob{ font-family: var(--fonte-ui); font-size: .75rem; font-weight: 600; }
+.prob--alta{ color: var(--trava); }
+.prob--media{ color: var(--sage); }
+.prob--baixa{ color: var(--tinta-3); }
+
+/* ==========================================================================
+   RODAPÉ
+   ========================================================================== */
+.rodape{ padding-block: 2.25rem 3rem; font-family: var(--fonte-ui); font-size: .8125rem; color: var(--tinta-3); }
+.rodape p{ max-width: var(--prosa); line-height: 1.6; }
+.rodape b{ color: var(--tinta-2); }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; }
+}
+</style>
+
+<header class="capa">
+  <div class="env capa__grade">
+    <div>
+      <div class="capa__meta">
+        <span>MX Corretora de Seguros</span>
+        <span>24 de agosto de 2026</span>
+        <span>Rascunho para aprovação</span>
+      </div>
+      <h1>Terminar o site e subir</h1>
+      <p class="capa__lide">
+        Um projeto de cada vez. O <b>redesign do site</b> está no Portão G2 com o protótipo
+        pronto e vai até a publicação. A <b>plataforma de captura de leads</b> fica para depois,
+        no plano próprio dela. O que o site leva agora é só o suficiente para o formulário não
+        nascer quebrado — e uma porta pronta para a plataforma encaixar quando chegar.
+      </p>
+    </div>
+
+    <div class="decisao">
+      <div class="olho">Decidido hoje</div>
+      <div class="decisao__item">
+        <span class="decisao__n">01</span>
+        <span class="decisao__v">Next.js na Vercel</span>
+        <p class="decisao__p">Encerra a pendência 5 do plano do site. O WordPress sai.</p>
+      </div>
+      <div class="decisao__item">
+        <span class="decisao__n">02</span>
+        <span class="decisao__v">Destino mínimo do lead</span>
+        <p class="decisao__p">Grava e notifica. Nada de Kanban, scoring ou importação da base agora.</p>
+      </div>
+      <div class="decisao__item">
+        <span class="decisao__n">03</span>
+        <span class="decisao__v">Site primeiro, captura depois</span>
+        <p class="decisao__p">Os 965 CNPJs e o CRM voltam ao trabalho depois do go-live.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ====================================================================== -->
+<section class="secao">
+  <div class="env">
+    <div class="secao__cabeca">
+      <span class="olho">Por que dá para separar</span>
+      <h2>O site não depende de nenhuma das travas do CRM</h2>
+      <p class="prosa">
+        Esta é a razão de o site poder ir sozinho, e vale explicar porque é contraintuitiva.
+        As três pendências que seguram o Portão G1 do projeto de leads são <b>parecer de LGPD para
+        contatar ex-clientes</b>, <b>confirmar o significado de “ATIVO”</b> e <b>construir ou contratar
+        a plataforma</b>. Nenhuma delas toca o site.
+      </p>
+    </div>
+
+    <div class="pilha prosa">
+      <p>
+        O parecer de legítimo interesse que trava o G1 é sobre o <b>segmento S1</b> — os 422
+        ex-clientes que a MX quer abordar ativamente. É disparo de mensagem para quem não pediu
+        contato. O formulário do site é o oposto: a pessoa procurou a MX, preencheu e marcou o
+        consentimento. Isso é <b>base legal por consentimento</b>, o segmento S4 do próprio SDD,
+        que o documento já classifica como resolvido — “coletar explicitamente”.
+      </p>
+      <p>
+        A confirmação do campo <code>ATIVO</code> e a decisão de construir ou contratar governam a
+        importação dos 965 CNPJs e a ferramenta que a analista vai operar. São questões de
+        <b>quem já está na base</b>. O site trata de <b>quem ainda não está</b>.
+      </p>
+      <p>
+        O que o site leva agora é o mínimo para não repetir o erro do site atual, que tem
+        formulário sem destino: <b>gravar o lead e avisar alguém</b>. Kanban, scoring, segmentação
+        e importação dos 965 CNPJs não entram — são o projeto de captura, que tem plano e portões
+        próprios e volta ao trabalho depois da publicação.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<section class="secao">
+  <div class="env">
+    <div class="secao__cabeca">
+      <span class="olho">Arquitetura</span>
+      <h2>A junta já existe no código</h2>
+      <p class="prosa">
+        O projeto <code>MX CNPJ</code> tem um arquivo chamado <code>lib/leads/sink.ts</code> cujo
+        comentário diz, literalmente, que trocar de CRM depois “é trocar a implementação de uma
+        função, não refatorar o app”. Ele já é o ponto único de saída do lead, e já tem os dois
+        <code>TODO</code> que este plano executa: gravar em Postgres e notificar por e-mail.
+        O site novo não inventa uma camada de captura — ele passa a usar essa.
+      </p>
+    </div>
+
+    <div class="fluxo">
+      <div class="fluxo__trilho">
+
+        <div class="fluxo__col">
+          <div class="fluxo__rot">Fontes</div>
+          <div class="no"><b>Site novo</b><small>35 páginas · 27 formulários de produto</small></div>
+          <div class="no no--futuro"><b>LP transportador</b><small>Conecta depois</small></div>
+          <div class="no no--futuro"><b>LPs B2B</b><small>Conecta depois</small></div>
+          <div class="no no--futuro"><b>WhatsApp e Instagram</b><small>Projeto de captura</small></div>
+        </div>
+
+        <div class="seta">→</div>
+
+        <div class="fluxo__col">
+          <div class="fluxo__rot">Entrada</div>
+          <div class="no no--nucleo">
+            <b>POST /api/lead</b>
+            <small>Validação · honeypot · consentimento LGPD · protocolo</small>
+          </div>
+          <div class="no no--nucleo">
+            <b>sink.ts</b>
+            <small>Ponto único de saída — já escrito</small>
+          </div>
+        </div>
+
+        <div class="seta">→</div>
+
+        <div class="fluxo__col">
+          <div class="fluxo__rot">Destino</div>
+          <div class="no"><b>Neon Postgres</b><small>Fonte de verdade do lead</small></div>
+          <div class="no"><b>E-mail para a analista</b><small>Resend</small></div>
+          <div class="no"><b>WhatsApp da célula</b><small>Link wa.me com protocolo</small></div>
+          <div class="no no--futuro"><b>Plataforma de captura</b><small>Lê do banco quando existir</small></div>
+        </div>
+
+      </div>
+    </div>
+
+    <p class="fluxo__nota">
+      Tudo que está tracejado é o projeto de captura e não segura a publicação. O que importa é que
+      o lead nasce dentro de casa: quando a plataforma chegar — construída ou contratada — ela lê de
+      um banco que já tem histórico, em vez de começar do zero.
+    </p>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<section class="secao">
+  <div class="env">
+    <div class="secao__cabeca">
+      <span class="olho">Ponto de partida</span>
+      <h2>Onde cada projeto está hoje</h2>
+    </div>
+
+    <div class="trilhas">
+      <div class="trilha">
+        <div class="trilha__topo">
+          <h3>Redesign do site</h3>
+          <span class="selo selo--ok">Protótipo pronto</span>
+        </div>
+        <div class="passos" role="img" aria-label="Fase 0 e 1 concluídas, Fase 2 concluída, Fases 3 a 5 pendentes">
+          <span class="passo passo--feito"></span>
+          <span class="passo passo--feito"></span>
+          <span class="passo passo--agora"></span>
+          <span class="passo"></span>
+          <span class="passo"></span>
+          <span class="passo"></span>
+        </div>
+        <div class="trilha__leg"><span>Fase 0</span><span>Portão G2</span><span>Fase 5</span></div>
+        <p>
+          Protótipo navegável com 9 telas, sitemap fechado em 35 páginas, os 27 produtos escritos
+          e fotografados, mapa de 6 redirecionamentos 301 e o design system documentado. Falta
+          implementar.
+        </p>
+      </div>
+
+      <div class="trilha">
+        <div class="trilha__topo">
+          <h3>Captura de leads</h3>
+          <span class="selo selo--trava">3 pendências no G1</span>
+        </div>
+        <div class="passos" role="img" aria-label="Fase 0 concluída, Fase 1 em aprovação, Fases 2 a 5 pendentes">
+          <span class="passo passo--feito"></span>
+          <span class="passo passo--agora"></span>
+          <span class="passo"></span>
+          <span class="passo"></span>
+          <span class="passo"></span>
+          <span class="passo"></span>
+        </div>
+        <div class="trilha__leg"><span>Fase 0</span><span>Portão G1</span><span>Fase 5</span></div>
+        <p>
+          Base de 965 CNPJs perfilada e segmentada em S1–S4, fórmula de scoring definida, SDD
+          escrito. Travado em parecer de LGPD, confirmação do campo <code>ATIVO</code> e a decisão
+          de construir ou contratar.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<section class="secao">
+  <div class="env">
+    <div class="secao__cabeca">
+      <span class="olho">Execução</span>
+      <h2>Cinco marcos até o DNS virar</h2>
+      <p class="prosa">
+        Os prazos são de esforço, não de calendário — dependem de quantas horas por semana o
+        projeto recebe. O que é sequencial está marcado; o resto corre em paralelo.
+      </p>
+    </div>
+
+    <div>
+
+      <article class="marco">
+        <div class="marco__lado">
+          <span class="marco__id">M1</span>
+          <span class="marco__prazo">Semana 1</span>
+        </div>
+        <div class="marco__corpo">
+          <h3>Fundação e contrato do lead</h3>
+          <p>
+            Antes de qualquer página. O contrato do lead precisa estar fechado e testado, senão a
+            implementação do site vai empurrando o formulário para o fim — que é exatamente como o
+            site atual acabou sem destino de lead.
+          </p>
+          <ul class="tarefas">
+            <li>Repositório <code>mx-site</code> e projeto na Vercel, com domínio de staging</li>
+            <li>Neon Postgres provisionado por <code>vercel integration</code>, compartilhado com as LPs</li>
+            <li>Tabela <code>lead</code> com coluna <code>origem</code>, alinhada ao modelo do SDD §4</li>
+            <li>Os dois <code>TODO</code> do <code>sink.ts</code> implementados: persistir e notificar</li>
+            <li>Resend configurado com o e-mail da analista</li>
+          </ul>
+          <div class="saida">
+            <b>Critério de saída</b> — um POST de teste grava a linha no banco e chega no e-mail da
+            analista em menos de um minuto, com protocolo.
+          </div>
+        </div>
+      </article>
+
+      <article class="marco">
+        <div class="marco__lado">
+          <span class="marco__id">M2</span>
+          <span class="marco__prazo">Semanas 2 a 5</span>
+        </div>
+        <div class="marco__corpo">
+          <h3>Implementação do site</h3>
+          <p>
+            O protótipo vira aplicação. A parte mais barata do trabalho é a que parece mais cara:
+            as 27 páginas de produto já são geradas por um motor <code>renderProduto(slug)</code> a
+            partir de um objeto em JavaScript — viram uma rota dinâmica e um arquivo de conteúdo,
+            não 27 páginas montadas à mão.
+          </p>
+          <ul class="tarefas">
+            <li>Telas do protótipo em componentes: home, sinistro, contato, A MX, privacidade, CNSP, índice</li>
+            <li><code>PRODUTOS</code> vira <code>content/produtos.ts</code>; rota <code>/seguros/[slug]</code></li>
+            <li>As fotos saem do HTML embutido e viram arquivos servidos por <code>next/image</code></li>
+            <li>Formulários ligados ao <code>/api/lead</code>, com o produto já selecionado pela página</li>
+            <li>Os 6 redirecionamentos 301 no <code>vercel.json</code></li>
+            <li>JSON-LD <span class="mono">InsuranceAgency</span> + <span class="mono">LocalBusiness</span> (duas unidades) + <span class="mono">FAQPage</span></li>
+            <li>GA4 novo e reaproveitamento do Meta Pixel existente</li>
+          </ul>
+          <div class="saida">
+            <b>Critério de saída</b> — site inteiro navegável no domínio de staging, com formulário
+            entregando lead de verdade ao banco.
+          </div>
+        </div>
+      </article>
+
+      <article class="marco">
+        <div class="marco__lado">
+          <span class="marco__id">M3</span>
+          <span class="marco__prazo">Paralelo ao M2</span>
+        </div>
+        <div class="marco__corpo">
+          <h3>Conformidade e dados que faltam</h3>
+          <p>
+            Esta trilha não depende de código e é a que mais costuma atrasar publicação, porque
+            depende de terceiros: seguradora, jurídico e clientes. Começar junto com o M2, não depois.
+          </p>
+          <ul class="tarefas">
+            <li>Registro SUSEP de volta ao rodapé — <span class="tok">«SUSEP»</span></li>
+            <li>Confirmar os telefones da Sompo e da Zurich direto com as seguradoras</li>
+            <li>Substituir os três depoimentos fictícios por relatos reais e autorizados</li>
+            <li>Revisão jurídica da Política de Privacidade, hoje datada de 25/03/2021</li>
+            <li>CEP da filial de Águas de Lindóia, com o conflito de bairro resolvido</li>
+            <li>Fotos das duas fachadas, se houver material novo</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="marco">
+        <div class="marco__lado">
+          <span class="marco__id">M4</span>
+          <span class="marco__prazo">Semana 6</span>
+        </div>
+        <div class="marco__corpo">
+          <h3>QA e endurecimento do formulário</h3>
+          <p>
+            O checklist da Fase 5 do plano do site vale integralmente. O que se soma a ele é a
+            parte nova: um formulário público exposto na internet é um alvo, e lead falso na base
+            estraga o scoring antes mesmo de ele existir.
+          </p>
+          <ul class="tarefas">
+            <li>Responsividade em 360, 768, 1024 e 1440 · Safari iOS e Chrome Android reais</li>
+            <li>LCP abaixo de 2,5s no mobile e PageSpeed acima de 90</li>
+            <li>Todos os links de WhatsApp testados em celular de verdade</li>
+            <li>Os 6 redirecionamentos validados um a um</li>
+            <li>Contraste AA e navegação por teclado com foco visível</li>
+            <li>Honeypot, limite de requisições por IP e validação de servidor no <code>/api/lead</code></li>
+            <li>Teste de reenvio: o mesmo lead duas vezes não pode virar dois registros</li>
+          </ul>
+          <div class="portao">
+            Portão de go-live — a lista de travas da seção seguinte precisa estar inteira resolvida.
+          </div>
+        </div>
+      </article>
+
+      <article class="marco">
+        <div class="marco__lado">
+          <span class="marco__id">M5</span>
+          <span class="marco__prazo">Semana 6 e os 60 dias seguintes</span>
+        </div>
+        <div class="marco__corpo">
+          <h3>Virada e medição</h3>
+          <p>
+            A virada de DNS é o momento de maior risco do projeto inteiro, porque é onde 24 anos
+            de indexação podem ser perdidos por um redirecionamento errado. Fazer em dia útil de
+            manhã, com o site antigo intacto para voltar atrás.
+          </p>
+          <ul class="tarefas">
+            <li>Apontar <span class="mono">mxseguros.com.br</span> para a Vercel, mantendo o WordPress no ar em outro endereço</li>
+            <li>Sitemap novo no Search Console e cobertura verificada</li>
+            <li>Monitorar 404 e posições por 30 dias</li>
+            <li>Primeira leitura de conversão por página aos 60 dias</li>
+          </ul>
+          <div class="saida">
+            <b>Critério de saída</b> — a analista recebe leads do site sem ninguém precisar avisá-la,
+            e existe um número de conversão que antes não existia.
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<section class="secao">
+  <div class="env">
+    <div class="secao__cabeca">
+      <span class="olho">Portão de go-live</span>
+      <h2>O que trava a publicação</h2>
+      <p class="prosa">
+        Separado por natureza. As <b>travas duras</b> são de conformidade ou de dado errado — nenhuma
+        delas admite “sobe assim e ajusta depois”. As <b>decisões</b> dependem de resposta sua e
+        mudam trabalho já feito quanto mais tarde chegarem.
+      </p>
+    </div>
+
+    <div class="travas">
+
+      <div class="trava trava--dura">
+        <span class="trava__n">01</span>
+        <span class="trava__t">Registro SUSEP fora do rodapé</span>
+        <span class="trava__tipo trava__tipo--dura">Trava dura</span>
+        <p class="trava__p">
+          Retirado das páginas hoje, a seu pedido. A identificação do corretor habilitado é
+          exigência regulatória e é o que permite ao cliente conferir a habilitação da MX na
+          consulta pública. Precisa voltar com o número real.
+        </p>
+      </div>
+
+      <div class="trava trava--dura">
+        <span class="trava__n">02</span>
+        <span class="trava__t">Telefones da Sompo e da Zurich sem confirmação</span>
+        <span class="trava__tipo trava__tipo--dura">Trava dura</span>
+        <p class="trava__p">
+          Saíram com blocos sobrepostos na extração e estão marcados “a confirmar”. Número de
+          emergência errado numa página de sinistro é pior do que número ausente — o cliente liga
+          no pior momento possível e não é atendido.
+        </p>
+      </div>
+
+      <div class="trava trava--dura">
+        <span class="trava__n">03</span>
+        <span class="trava__t">Depoimentos fictícios na home</span>
+        <span class="trava__tipo trava__tipo--dura">Trava dura</span>
+        <p class="trava__p">
+          Os três textos foram escritos para o protótipo e estão marcados como exemplo no Design
+          system. Prova social fabricada em site de corretora é infração ao Código de Defesa do
+          Consumidor. Ou entram relatos reais com autorização, ou o bloco sai antes de publicar.
+        </p>
+      </div>
+
+      <div class="trava trava--dura">
+        <span class="trava__n">04</span>
+        <span class="trava__t">Política de Privacidade de 2021</span>
+        <span class="trava__tipo trava__tipo--dura">Trava dura</span>
+        <p class="trava__p">
+          Datada de 25/03/2021 e menciona tratamento de dados de saúde e histórico de crédito.
+          Com o site passando a coletar lead por formulário, ela deixa de ser página institucional
+          e vira a base legal do consentimento. Precisa de revisão jurídica antes de ir ao ar.
+        </p>
+      </div>
+
+      <div class="trava trava--decisao">
+        <span class="trava__n">05</span>
+        <span class="trava__t">O cotador Aggilizador continua sendo o CTA principal?</span>
+        <span class="trava__tipo trava__tipo--decisao">Decisão</span>
+        <p class="trava__p">
+          Pendência 1 do plano do site, aberta desde 17/08 e a mais cara de responder tarde. Se o
+          Aggilizador continua, o formulário do site é uma etapa e o lead nasce incompleto; se sai,
+          o formulário é o destino e precisa coletar tudo. Muda a arquitetura de conversão inteira.
+        </p>
+      </div>
+
+      <div class="trava trava--decisao">
+        <span class="trava__n">06</span>
+        <span class="trava__t">Quem edita o site depois de pronto</span>
+        <span class="trava__tipo trava__tipo--decisao">Decisão</span>
+        <p class="trava__p">
+          Pendência 6 do plano do site, e a decisão de hoje mudou o peso dela. Sem WordPress, o
+          conteúdo passa a viver no repositório. Se a MX precisar trocar um texto sem depender de
+          você, isso é um CMS a mais no escopo — e é melhor saber agora do que depois de publicado.
+        </p>
+      </div>
+
+      <div class="trava trava--decisao">
+        <span class="trava__n">07</span>
+        <span class="trava__t">Onde ficam as landing pages no domínio</span>
+        <span class="trava__tipo trava__tipo--decisao">Decisão</span>
+        <p class="trava__p">
+          A LP do transportador e as LPs B2B de empresas e condomínio hoje são projetos separados.
+          Com o site tomando o domínio, elas precisam de um caminho definido — subdomínio, rota
+          reservada ou incorporação ao site. Não decidir vira link quebrado no dia da virada.
+        </p>
+      </div>
+
+      <div class="trava">
+        <span class="trava__n">08</span>
+        <span class="trava__t">CEP da filial e fotos das fachadas</span>
+        <span class="trava__tipo trava__tipo--leve">Não trava</span>
+        <p class="trava__p">
+          O CEP da Rua Argentina aparece nos Correios como 13940-172, mas no bairro Jardim São
+          Francisco, e não no Centro. Publica-se sem, e corrige quando a MX confirmar.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<section class="secao">
+  <div class="env">
+    <div class="secao__cabeca">
+      <span class="olho">Riscos</span>
+      <h2>O que pode dar errado, e o que fazer antes</h2>
+    </div>
+    <div class="rolagem">
+      <table>
+        <thead>
+          <tr><th>Risco</th><th>Prob.</th><th>Impacto</th><th>Mitigação</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Perda de posição orgânica na virada de stack</th>
+            <td><span class="prob prob--media">Média</span></td>
+            <td>Crítico</td>
+            <td>Todo slug antigo preservado; os 6 redirecionamentos validados um a um antes do DNS; WordPress no ar por 30 dias para comparar.</td>
+          </tr>
+          <tr>
+            <th scope="row">Lead entra e ninguém vê</th>
+            <td><span class="prob prob--media">Média</span></td>
+            <td>Crítico</td>
+            <td>Notificação por e-mail no M1, antes das páginas. Alerta se nenhum lead entrar em 48h — silêncio pode ser formulário quebrado, não mercado parado.</td>
+          </tr>
+          <tr>
+            <th scope="row">Formulário virar alvo de robô</th>
+            <td><span class="prob prob--alta">Alta</span></td>
+            <td>Médio</td>
+            <td>Honeypot já existe no código da LP; somar limite por IP e validação de servidor. Lead falso contamina o scoring do CRM depois.</td>
+          </tr>
+          <tr>
+            <th scope="row">Aggilizador ser respondido depois do M2</th>
+            <td><span class="prob prob--alta">Alta</span></td>
+            <td>Alto</td>
+            <td>É pendência de 17/08 ainda aberta. Se não houver resposta até o fim do M1, assumir que o formulário é o destino e registrar a premissa.</td>
+          </tr>
+          <tr>
+            <th scope="row">Escopo escorregar para o projeto de captura</th>
+            <td><span class="prob prob--alta">Alta</span></td>
+            <td>Alto</td>
+            <td>O maior risco desta decisão. Com o banco de leads no ar, importar os 965 CNPJs e montar um Kanban parece o próximo passo natural — e o site fica pela metade. Nada de captura entra até o DNS virar.</td>
+          </tr>
+          <tr>
+            <th scope="row">Conteúdo travar por falta de resposta da MX</th>
+            <td><span class="prob prob--media">Média</span></td>
+            <td>Alto</td>
+            <td>As quatro travas duras dependem de terceiros. Por isso o M3 corre em paralelo ao M2, e não depois.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<section class="secao">
+  <div class="env">
+    <div class="secao__cabeca">
+      <span class="olho">Pendências</span>
+      <h2>Quem responde o quê</h2>
+      <p class="prosa">
+        Consolidado dos dois planos, ordenado por quando a resposta é necessária. As três primeiras
+        precisam sair até o fim do M1 para não custarem retrabalho.
+      </p>
+    </div>
+    <div class="rolagem">
+      <table>
+        <thead>
+          <tr><th>Pendência</th><th>Origem</th><th>Responsável</th><th>Precisa até</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Cotador Aggilizador continua como CTA principal?</th><td>Site · 1</td><td>MX</td><td class="n">Fim do M1</td></tr>
+          <tr><th scope="row">Registro SUSEP da corretora</th><td>Site · 3</td><td>MX</td><td class="n">Fim do M1</td></tr>
+          <tr><th scope="row">Quem edita o conteúdo depois de publicado</th><td>Site · 6</td><td>MX</td><td class="n">Fim do M1</td></tr>
+          <tr><th scope="row">Confirmação dos telefones Sompo e Zurich</th><td>Site · «TEL-24H»</td><td>MX</td><td class="n">M3</td></tr>
+          <tr><th scope="row">Depoimentos reais, com autorização</th><td>Site · 4</td><td>MX</td><td class="n">M3</td></tr>
+          <tr><th scope="row">Revisão jurídica da Política de Privacidade</th><td>Site · novo</td><td>Jurídico</td><td class="n">M3</td></tr>
+          <tr><th scope="row">Destino das landing pages no domínio</th><td>Novo</td><td>PO</td><td class="n">M4</td></tr>
+          <tr><th scope="row">Número dedicado para o WhatsApp Cloud API</th><td>Leads · 4</td><td>MX</td><td class="n">Depois do go-live</td></tr>
+          <tr><th scope="row">Parecer de legítimo interesse para o S1</th><td>Leads · 2</td><td>DPO</td><td class="n">Depois do go-live</td></tr>
+          <tr><th scope="row">Confirmar que <code>ATIVO</code> = apólice vigente</th><td>Leads · 3</td><td>MX</td><td class="n">Depois do go-live</td></tr>
+          <tr><th scope="row">Construir ou contratar o CRM</th><td>Leads · 5</td><td>Patrocinador</td><td class="n">Depois do go-live</td></tr>
+          <tr><th scope="row">Extração com vencimento, prêmio e seguradora</th><td>Leads · 1</td><td>MX / TI</td><td class="n">Depois do go-live</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<section class="secao">
+  <div class="env">
+    <div class="secao__cabeca">
+      <span class="olho">Medição</span>
+      <h2>Como saber se funcionou</h2>
+      <p class="prosa">
+        O plano do site prevê reavaliar conversão em 60 dias e o plano de leads admite não ter
+        linha de base. Publicar com captura resolve os dois: a partir do dia 1 existe numerador
+        e denominador.
+      </p>
+    </div>
+    <div class="rolagem">
+      <table>
+        <thead>
+          <tr><th>Indicador</th><th>Hoje</th><th>Alvo em 60 dias</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Leads capturados pelo site</th><td>Não medido — o formulário não tem destino</td><td>Linha de base estabelecida</td></tr>
+          <tr><th scope="row">Conversão por página de produto</th><td>Inexistente</td><td>Ranking dos 27 produtos por conversão</td></tr>
+          <tr><th scope="row">Tempo até a primeira resposta</th><td>Não rastreado</td><td>Abaixo de 2h úteis</td></tr>
+          <tr><th scope="row">Erros 404 após a virada</th><td>—</td><td>Zero nas URLs antigas indexadas</td></tr>
+          <tr><th scope="row">LCP no mobile</th><td>Não medido no site atual</td><td>Abaixo de 2,5s</td></tr>
+          <tr><th scope="row">Leads perdidos por falha técnica</th><td>Desconhecido</td><td>Zero — todo POST gravado ou registrado como erro</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="rodape">
+  <div class="env">
+    <p>
+      <b>Rascunho para aprovação · 24 de agosto de 2026.</b> Consolida o
+      <span class="mono">Plano-Redesign-Site-MX.txt</span> v1.0, o <span class="mono">ESCOPO_v2.md</span>,
+      o <span class="mono">PLANEJAMENTO.md</span> e o <span class="mono">SDD.md</span>. Não substitui
+      nenhum deles: os portões G2 do site e G1 dos leads continuam valendo dentro dos seus projetos.
+      O que este documento acrescenta é a ordem entre os dois e a lista do que trava a publicação.
+    </p>
+  </div>
+</footer>

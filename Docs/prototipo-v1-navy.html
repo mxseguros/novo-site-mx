@@ -1,0 +1,2078 @@
+<title>Protótipo MX Corretora</title>
+<meta name="description" content="Protótipo navegável do redesign do site da MX Corretora de Seguros — Fase 2, Portão G2.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+
+<!--
+  ==========================================================================
+  PROTOTIPO — Fase 2 · Portao G2.  Nao publicar, nao indexar.
+  Redesign do site da MX Corretora de Seguros (mxseguros.com.br).
+
+  Sistema visual herdado do projeto "MX landing" (transportador), estendido
+  para site institucional. Tema unico e deliberado: a marca nao inverte com
+  o SO do visitante — todo fundo e toda cor sao pintados a partir de tokens.
+
+  PENDENCIAS DA MX — buscar por « antes de qualquer publicacao.
+  ==========================================================================
+-->
+
+<style>
+/* ==========================================================================
+   1. TOKENS
+   ========================================================================== */
+:root{
+  color-scheme: light;
+
+  /* Marca — extraida do logo e do CSS do site atual */
+  --navy:        #071B34;
+  --navy-alto:   #0D2949;
+  --navy-fundo:  #051426;
+  --sage:        #B0AF94;
+  --sage-claro:  #C9C8B4;
+  --sage-escuro: #7E7D63;
+
+  /* Acao — so em botao de conversao. Nunca decorativa. */
+  --acao:        #F6A31A;
+  --acao-hover:  #FFB534;
+
+  /* Socorro — exclusiva de sinistro e assistencia 24h. Nunca vende nada. */
+  --socorro:      #B32D19;
+  --socorro-alto: #8F2413;
+  --socorro-tenue:#FBEDE9;
+
+  /* Neutros puxados para o sage, nao cinza de sistema */
+  --papel:      #FFFDFB;
+  --papel-2:    #F4F2ED;
+  --papel-3:    #EAE7DE;
+  --linha:      #E4E1D9;
+  --linha-forte:#CBC8BC;
+
+  /* Tinta */
+  --tinta:       #071B34;
+  --corpo:       #484848;
+  --corpo-fraco: #6B6B6B;
+  --tinta-neg:   #FFFDFB;
+  --corpo-neg:   #C3CBD7;
+
+  /* Estrutura */
+  --largura: 1140px;
+  --gutter: clamp(1.15rem, 4cqi, 2.75rem);
+  --secao: clamp(3rem, 7cqi, 5.5rem);
+  --raio: 6px;
+  --raio-g: 12px;
+
+  --sombra:      0 1px 2px rgba(7,27,52,.05), 0 6px 22px rgba(7,27,52,.07);
+  --sombra-alta: 0 2px 6px rgba(7,27,52,.09), 0 22px 54px rgba(7,27,52,.16);
+
+  --mx-logo: url("data:image/webp;base64,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");
+
+  --display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --texto: "Public Sans", "Segoe UI", system-ui, sans-serif;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{ -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.01ms !important; transition-duration:.01ms !important;
+     scroll-behavior: auto !important; }
+}
+
+body{
+  margin: 0;
+  background: var(--navy-fundo);
+  color: var(--corpo);
+  font-family: var(--texto);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,h2,h3,h4{
+  margin: 0;
+  font-family: var(--display);
+  color: var(--tinta);
+  font-weight: 700;
+  letter-spacing: -.022em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+h1{ font-size: clamp(1.9rem, 4.6cqi, 3rem); font-weight: 800; }
+h2{ font-size: clamp(1.5rem, 3.2cqi, 2.1rem); line-height: 1.16; }
+h3{ font-size: 1.15rem; line-height: 1.28; letter-spacing: -.012em; }
+h4{ font-size: 1rem; letter-spacing: -.008em; }
+p{ margin: 0; }
+strong{ color: var(--tinta); font-weight: 700; }
+a{ color: inherit; }
+img{ max-width: 100%; height: auto; display: block; }
+ul,ol{ margin: 0; padding: 0; list-style: none; }
+
+/* ==========================================================================
+   2. CASCA DO PROTOTIPO — barra de controle + palco
+   ========================================================================== */
+.proto{
+  position: fixed; inset: 0 0 auto 0; z-index: 900;
+  display: flex; align-items: center; gap: .75rem;
+  height: 52px; padding-inline: .85rem;
+  background: var(--navy-fundo);
+  border-bottom: 1px solid rgba(176,175,148,.2);
+  overflow-x: auto; scrollbar-width: thin;
+}
+.proto__marca{
+  display: flex; align-items: baseline; gap: .5rem; flex: 0 0 auto;
+  font-family: var(--display); font-weight: 700; font-size: .8125rem;
+  color: var(--sage); letter-spacing: .02em;
+}
+.proto__marca span{ font-weight: 500; color: rgba(195,203,215,.55); font-size: .6875rem; }
+.proto__abas{ display: flex; gap: .2rem; flex: 0 0 auto; }
+.proto__aba{
+  appearance: none; border: 0; background: transparent; cursor: pointer;
+  padding: .4rem .7rem; border-radius: 5px;
+  font: 600 .8125rem/1.2 var(--texto); color: rgba(195,203,215,.72);
+  white-space: nowrap;
+}
+.proto__aba:hover{ background: rgba(255,255,255,.07); color: var(--tinta-neg); }
+.proto__aba[aria-current="true"]{ background: var(--sage); color: var(--navy); }
+.proto__dir{ display: flex; align-items: center; gap: .4rem; margin-left: auto; flex: 0 0 auto; }
+.proto__botao{
+  appearance: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .38rem .65rem; border-radius: 5px;
+  border: 1px solid rgba(176,175,148,.32);
+  background: transparent; color: rgba(195,203,215,.8);
+  font: 600 .75rem/1.2 var(--texto); white-space: nowrap;
+}
+.proto__botao:hover{ border-color: var(--sage); color: var(--tinta-neg); }
+.proto__botao[aria-pressed="true"]{ background: var(--acao); border-color: var(--acao); color: var(--navy); }
+
+.palco{
+  container-type: inline-size; container-name: palco;
+  position: fixed; top: 52px; left: 0; right: 0; bottom: 0;
+  overflow-y: auto; overscroll-behavior: contain;
+  background: var(--papel);
+}
+.palco[data-vista="mobile"]{
+  left: 50%; transform: translateX(-50%);
+  width: 390px; right: auto;
+  bottom: 16px; top: 68px;
+  border: 1px solid rgba(176,175,148,.35);
+  border-radius: 20px;
+  box-shadow: 0 30px 70px rgba(0,0,0,.5);
+}
+
+/* Modo anotacao: marca qual problema do diagnostico cada elemento resolve. */
+.anot{ position: relative; }
+.palco[data-notas="1"] [data-fix]{ outline: 2px dashed var(--acao); outline-offset: 5px; }
+.palco[data-notas="1"] [data-fix]::after{
+  content: attr(data-fix); position: absolute; z-index: 70;
+  top: -12px; left: -12px;
+  padding: .2rem .4rem; border-radius: 4px;
+  background: var(--acao); color: var(--navy);
+  font: 800 .6875rem/1 var(--display); letter-spacing: .02em;
+  box-shadow: 0 2px 8px rgba(7,27,52,.35);
+}
+
+/* ==========================================================================
+   3. UTILITARIOS
+   ========================================================================== */
+.env{ width: 100%; max-width: var(--largura); margin-inline: auto; padding-inline: var(--gutter); }
+.secao{ padding-block: var(--secao); }
+.secao--curta{ padding-block: clamp(2rem, 4.5cqi, 3.25rem); }
+.pilha{ display: flex; flex-direction: column; }
+.g6{gap:.375rem} .g8{gap:.5rem} .g12{gap:.75rem} .g16{gap:1rem}
+.g20{gap:1.25rem} .g24{gap:1.5rem} .g32{gap:2rem} .g40{gap:2.5rem} .g48{gap:3rem}
+.medida{ max-width: 64ch; }
+.num{ font-variant-numeric: tabular-nums; }
+.claro{ background: var(--papel); }
+.claro2{ background: var(--papel-2); }
+.escuro{ background: var(--navy); color: var(--corpo-neg); }
+.escuro h1,.escuro h2,.escuro h3,.escuro h4,.escuro strong{ color: var(--tinta-neg); }
+
+.chapeu{
+  font-family: var(--display); font-size: .75rem; font-weight: 700;
+  letter-spacing: .13em; text-transform: uppercase; color: var(--sage-escuro);
+}
+.chapeu--neg{ color: var(--sage); }
+.lide{ font-size: 1.09rem; color: var(--corpo-fraco); }
+.escuro .lide{ color: var(--corpo-neg); }
+
+.token{
+  display: inline-block; padding: .05em .38em; border-radius: 3px;
+  background: rgba(246,163,26,.16); border: 1px dashed rgba(246,163,26,.6);
+  color: #7A4F04; font: 600 .9em/1.4 var(--texto); white-space: nowrap;
+}
+.escuro .token{ color: var(--acao-hover); background: rgba(246,163,26,.14); }
+
+.nota{
+  border-left: 3px solid var(--sage); padding: .5rem 0 .5rem .85rem;
+  font-size: .875rem; color: var(--corpo-fraco); font-style: italic;
+}
+.escuro .nota{ color: var(--corpo-neg); border-color: var(--sage); }
+
+.pular{
+  position: absolute; left: .5rem; top: -100%; z-index: 800;
+  padding: .7rem 1.1rem; background: var(--acao); color: var(--navy);
+  font-weight: 700; border-radius: var(--raio); text-decoration: none;
+}
+.pular:focus{ top: .5rem; }
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible{
+  outline: 3px solid var(--acao); outline-offset: 2px; border-radius: 3px;
+}
+.escuro :where(a,button,input,select,summary):focus-visible{ outline-color: var(--acao-hover); }
+.oculto{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+/* ==========================================================================
+   4. BOTOES
+   ========================================================================== */
+.btn{
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: 50px; padding: .75rem 1.4rem;
+  border: 2px solid transparent; border-radius: var(--raio);
+  font-family: var(--texto); font-size: 1rem; font-weight: 700;
+  letter-spacing: -.005em; text-decoration: none; text-align: center;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease, transform .1s ease;
+}
+.btn:active{ transform: translateY(1px); }
+.btn--acao{ background: var(--acao); color: var(--navy); }
+.btn--acao:hover{ background: var(--acao-hover); }
+.btn--socorro{ background: var(--socorro); color: #fff; }
+.btn--socorro:hover{ background: var(--socorro-alto); }
+.btn--linha{ background: transparent; color: var(--tinta); border-color: var(--linha-forte); }
+.btn--linha:hover{ border-color: var(--navy); background: var(--papel-2); }
+.btn--linha-neg{ background: transparent; color: var(--tinta-neg); border-color: rgba(255,253,251,.34); }
+.btn--linha-neg:hover{ border-color: var(--tinta-neg); background: rgba(255,253,251,.08); }
+.btn--zap{ background: #1E8E4E; color: #fff; }
+.btn--zap:hover{ background: #17753F; }
+.btn--peq{ min-height: 42px; padding: .45rem 1rem; font-size: .9rem; }
+.btn--largo{ width: 100%; }
+.acoes{ display: flex; flex-wrap: wrap; gap: .7rem; }
+.acoes > .btn{ flex: 1 1 14rem; }
+.acoes--solta > .btn{ flex: 0 0 auto; }
+
+/* ==========================================================================
+   5. HEADER DO SITE + PAINEL DE PRODUTOS
+   ========================================================================== */
+.logo{
+  display: block; width: 148px; height: 25px; flex: 0 0 auto;
+  background-color: var(--tinta-neg);
+  -webkit-mask: var(--mx-logo) center/contain no-repeat;
+          mask: var(--mx-logo) center/contain no-repeat;
+}
+.logo--sage{ background-color: var(--sage); }
+.logo--navy{ background-color: var(--navy); }
+
+.topo{ position: sticky; top: 0; z-index: 200; background: var(--navy); }
+.topo__aviso{
+  background: var(--navy-fundo); border-bottom: 1px solid rgba(176,175,148,.14);
+  font-size: .78rem; color: var(--corpo-neg);
+}
+.topo__aviso .env{ display: flex; flex-wrap: wrap; gap: .2rem 1.25rem; padding-block: .4rem; }
+.topo__aviso b{ color: var(--sage-claro); font-weight: 600; }
+.topo__linha{
+  display: flex; align-items: center; gap: .6rem;
+  min-height: 66px; padding-block: .55rem;
+  border-bottom: 1px solid rgba(176,175,148,.22);
+}
+.topo__nav{ display: none; margin-left: 1.1rem; gap: .1rem; }
+.topo__link{
+  appearance: none; border: 0; background: transparent; cursor: pointer;
+  display: inline-flex; align-items: center; gap: .3rem;
+  padding: .5rem .62rem; border-radius: 5px;
+  font: 600 .9375rem/1.2 var(--texto); color: var(--corpo-neg);
+  text-decoration: none; white-space: nowrap;
+}
+.topo__link:hover, .topo__link[aria-expanded="true"]{ background: rgba(255,255,255,.09); color: var(--tinta-neg); }
+.topo__link[aria-current="page"]{ color: var(--tinta-neg); box-shadow: inset 0 -2px 0 var(--sage); border-radius: 5px 5px 0 0; }
+.topo__link svg{ width: 11px; height: 11px; transition: transform .15s ease; }
+.topo__link[aria-expanded="true"] svg{ transform: rotate(180deg); }
+.topo__dir{ display: flex; align-items: center; gap: .45rem; margin-left: auto; }
+.topo__hamb{
+  appearance: none; cursor: pointer; display: inline-flex;
+  width: 44px; height: 44px; align-items: center; justify-content: center;
+  border: 1px solid rgba(176,175,148,.34); border-radius: var(--raio);
+  background: transparent; color: var(--tinta-neg);
+}
+.topo__socorro{
+  display: inline-flex; align-items: center; gap: .4rem;
+  min-height: 42px; padding: .4rem .75rem; border-radius: var(--raio);
+  background: var(--socorro); color: #fff; text-decoration: none;
+  font: 700 .8125rem/1.15 var(--texto);
+}
+.topo__socorro:hover{ background: var(--socorro-alto); }
+.topo__socorro strong{ color: #fff; }
+.topo__socorro span{ display: none; }
+.topo__cta{ display: none; }
+
+@container palco (min-width: 900px){
+  .logo{ width: 176px; height: 30px; }
+  .topo__nav{ display: flex; }
+  .topo__hamb{ display: none; }
+  .topo__cta{ display: inline-flex; }
+  .topo__socorro span{ display: block; font-size: .66rem; letter-spacing: .09em;
+                       text-transform: uppercase; opacity: .85; }
+}
+
+.painel{
+  display: none; background: var(--papel);
+  border-bottom: 3px solid var(--sage);
+  box-shadow: var(--sombra-alta);
+  max-height: min(70vh, 620px); overflow-y: auto;
+}
+.painel[data-aberto="1"]{ display: block; }
+.painel__busca{ position: sticky; top: 0; background: var(--papel);
+  padding: 1rem 0 .85rem; border-bottom: 1px solid var(--linha); z-index: 2; }
+.campo-busca{ position: relative; display: block; max-width: 26rem; }
+.campo-busca svg{ position: absolute; left: .8rem; top: 50%; transform: translateY(-50%);
+  width: 17px; height: 17px; color: var(--corpo-fraco); pointer-events: none; }
+.campo-busca input{
+  width: 100%; min-height: 46px; padding: .6rem .9rem .6rem 2.4rem;
+  border: 1px solid var(--linha-forte); border-radius: var(--raio);
+  background: var(--papel); font: 400 1rem/1.4 var(--texto); color: var(--tinta);
+}
+.campo-busca input::placeholder{ color: var(--corpo-fraco); }
+.painel__grade{ display: grid; gap: 1.5rem 2rem; padding-block: 1.25rem 1.5rem; }
+@container palco (min-width: 760px){ .painel__grade{ grid-template-columns: repeat(3, 1fr); } }
+.painel__col h4{ font-size: .75rem; letter-spacing: .13em; text-transform: uppercase;
+  color: var(--sage-escuro); margin-bottom: .55rem; font-family: var(--display); }
+.painel__col ul{ display: flex; flex-direction: column; }
+.painel__col a{
+  display: block; padding: .36rem .5rem; margin-left: -.5rem; border-radius: 5px;
+  font-size: .9375rem; color: var(--corpo); text-decoration: none;
+}
+.painel__col a:hover{ background: var(--papel-2); color: var(--tinta); }
+.painel__col a mark{ background: rgba(246,163,26,.4); color: inherit; border-radius: 2px; }
+.painel__vazio{ padding: .5rem 0 1.5rem; color: var(--corpo-fraco); font-style: italic; }
+.painel__rodape{
+  display: flex; flex-wrap: wrap; gap: .7rem 1.25rem; align-items: center;
+  padding: .85rem 0 1.4rem; border-top: 1px solid var(--linha);
+  font-size: .875rem; color: var(--corpo-fraco);
+}
+
+/* ==========================================================================
+   6. HERO
+   ========================================================================== */
+.hero{
+  position: relative; isolation: isolate; overflow: hidden;
+  background: var(--navy); color: var(--corpo-neg);
+  padding-block: clamp(2.5rem, 6cqi, 4.5rem) clamp(3rem, 7cqi, 5rem);
+}
+/* Textura ambiente: o chevron do simbolo M/X do logo, em escala grande,
+   quase invisivel. Nao ha foto de qualidade disponivel para o hero. */
+.hero::before{
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    repeating-linear-gradient(115deg,
+      rgba(176,175,148,.075) 0 3px, transparent 3px 30px),
+    radial-gradient(120% 90% at 82% 12%, rgba(176,175,148,.13), transparent 62%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-fundo) 100%);
+}
+.hero h1, .hero h2, .hero h3, .hero h4, .hero strong{ color: var(--tinta-neg); }
+.hero__grade{ display: grid; gap: clamp(2rem, 5cqi, 3.5rem); align-items: start; }
+@container palco (min-width: 940px){
+  .hero__grade{ grid-template-columns: 1.15fr .85fr; }
+}
+.hero h1 .destaque{ color: var(--sage-claro); }
+.hero__lide{ font-size: clamp(1.02rem, 1.7cqi, 1.19rem); color: var(--corpo-neg); max-width: 46ch; }
+
+/* Cartao de entrada: o seletor de produto e o caminho primario da home */
+.entrada{
+  background: var(--papel); color: var(--corpo);
+  border-radius: var(--raio-g); box-shadow: var(--sombra-alta);
+  padding: clamp(1.25rem, 3cqi, 1.75rem);
+  border-top: 4px solid var(--acao);
+}
+.entrada h2{ font-size: 1.22rem; }
+.campo{ display: flex; flex-direction: column; gap: .35rem; }
+.campo > span{ font-size: .8125rem; font-weight: 600; color: var(--corpo-fraco); }
+.campo select, .campo input, .campo textarea{
+  width: 100%; min-height: 50px; padding: .65rem .8rem;
+  border: 1px solid var(--linha-forte); border-radius: var(--raio);
+  background: var(--papel); color: var(--tinta);
+  font: 400 1rem/1.4 var(--texto);
+}
+.campo textarea{ min-height: 96px; resize: vertical; }
+.campo select{
+  appearance: none; cursor: pointer; padding-right: 2.4rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%236B6B6B' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right .85rem center; background-size: 12px 8px;
+}
+.campos-2{ display: grid; gap: .85rem; }
+@container palco (min-width: 620px){ .campos-2{ grid-template-columns: 1fr 1fr; } }
+.consent{ display: flex; gap: .6rem; align-items: flex-start; font-size: .8125rem; color: var(--corpo-fraco); }
+.consent input{ width: 20px; height: 20px; margin-top: .18rem; flex: 0 0 auto; accent-color: var(--navy); }
+.saida{
+  display: none; gap: .6rem; align-items: flex-start;
+  padding: .85rem 1rem; border-radius: var(--raio);
+  background: #EAF5EE; border: 1px solid #B7DCC4; color: #14572F; font-size: .9rem;
+}
+.saida[data-visivel="1"]{ display: flex; }
+
+/* ==========================================================================
+   7. BARRA DE CONFIANCA
+   ========================================================================== */
+.confianca{ background: var(--papel-2); border-bottom: 1px solid var(--linha); }
+.confianca__grade{
+  display: grid; grid-template-columns: 1fr; gap: 0;
+  padding-block: 0;
+}
+@container palco (min-width: 780px){ .confianca__grade{ grid-template-columns: repeat(3, 1fr); } }
+.confianca__item{
+  display: flex; gap: .85rem; align-items: center;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid var(--linha);
+}
+@container palco (min-width: 780px){
+  .confianca__item{ border-bottom: 0; border-right: 1px solid var(--linha); padding-inline: 1.5rem; }
+  .confianca__item:first-child{ padding-left: 0; }
+  .confianca__item:last-child{ border-right: 0; padding-right: 0; }
+}
+.confianca__item:last-child{ border-bottom: 0; }
+.confianca__num{
+  font-family: var(--display); font-size: 1.85rem; font-weight: 800;
+  color: var(--navy); line-height: 1; letter-spacing: -.03em;
+}
+.confianca__txt{ font-size: .875rem; color: var(--corpo-fraco); line-height: 1.35; }
+.confianca__txt b{ display: block; color: var(--tinta); font-size: .9375rem; font-weight: 700; }
+
+/* ==========================================================================
+   8. CARDS E GRADES
+   ========================================================================== */
+.grade{ display: grid; gap: 1rem; }
+.grade--2{ grid-template-columns: 1fr; }
+.grade--3{ grid-template-columns: 1fr; }
+.grade--4{ grid-template-columns: repeat(2, 1fr); }
+@container palco (min-width: 620px){
+  .grade--2{ grid-template-columns: repeat(2, 1fr); }
+  .grade--3{ grid-template-columns: repeat(2, 1fr); }
+}
+@container palco (min-width: 900px){
+  .grade--3{ grid-template-columns: repeat(3, 1fr); }
+  .grade--4{ grid-template-columns: repeat(4, 1fr); }
+}
+
+.card{
+  display: flex; flex-direction: column; gap: .55rem;
+  padding: 1.35rem; background: var(--papel);
+  border: 1px solid var(--linha); border-radius: var(--raio-g);
+  transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+.card p{ font-size: .9375rem; color: var(--corpo-fraco); }
+a.card{ text-decoration: none; color: inherit; }
+a.card:hover{ border-color: var(--sage); box-shadow: var(--sombra); transform: translateY(-2px); }
+.card__icone{
+  width: 42px; height: 42px; display: grid; place-items: center;
+  border-radius: 9px; background: var(--papel-2); color: var(--navy);
+  border: 1px solid var(--linha);
+}
+.card__icone svg{ width: 22px; height: 22px; }
+a.card:hover .card__icone{ background: var(--navy); color: var(--sage-claro); border-color: var(--navy); }
+.card__seta{ margin-top: auto; padding-top: .35rem; font-size: .8125rem; font-weight: 700;
+  color: var(--sage-escuro); font-family: var(--display); letter-spacing: .01em; }
+a.card:hover .card__seta{ color: var(--navy); }
+
+.card--fundo{ background: var(--papel-2); border-color: var(--linha); }
+
+/* ==========================================================================
+   9. COMPARATIVO
+   ========================================================================== */
+.comparativo{ width: 100%; border-collapse: collapse; font-size: .9375rem; }
+.comparativo caption{ text-align: left; padding-bottom: .9rem; color: var(--corpo-fraco); font-size: .875rem; }
+.comparativo th, .comparativo td{
+  padding: .85rem .9rem; text-align: left; vertical-align: top;
+  border-bottom: 1px solid var(--linha);
+}
+.comparativo thead th{
+  font-family: var(--display); font-size: .78rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--corpo-fraco); font-weight: 700;
+  border-bottom: 2px solid var(--linha-forte);
+}
+.comparativo tbody th{ font-weight: 600; color: var(--tinta); width: 32%; font-family: var(--texto); }
+.comparativo .col-mx{ background: var(--papel); }
+.comparativo thead .col-mx{ color: var(--navy); background: var(--papel); }
+.comparativo td b{ color: var(--tinta); }
+.rolagem{ overflow-x: auto; -webkit-overflow-scrolling: touch; }
+code{ font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: .875em;
+  background: var(--papel-2); border: 1px solid var(--linha); border-radius: 3px; padding: .06em .32em; }
+
+/* ==========================================================================
+   10. BLOCO DE SOCORRO (sinistro / assistencia)
+   ========================================================================== */
+.socorro{
+  background: var(--socorro); color: #fff;
+  border-radius: var(--raio-g); overflow: hidden;
+}
+.socorro h2, .socorro h3, .socorro strong{ color: #fff; }
+.socorro__corpo{ padding: clamp(1.4rem, 3.5cqi, 2.25rem); display: grid; gap: 1.5rem; }
+@container palco (min-width: 860px){
+  .socorro__corpo{ grid-template-columns: 1.1fr .9fr; align-items: center; }
+}
+.socorro__tel{
+  display: flex; flex-direction: column; gap: .15rem;
+  background: rgba(0,0,0,.22); border-radius: var(--raio);
+  padding: 1rem 1.15rem; text-decoration: none; color: #fff;
+  border: 1px solid rgba(255,255,255,.22);
+}
+.socorro__tel:hover{ background: rgba(0,0,0,.34); border-color: rgba(255,255,255,.5); }
+.socorro__tel small{ font-size: .72rem; letter-spacing: .11em; text-transform: uppercase; opacity: .85; }
+.socorro__tel b{ font-family: var(--display); font-size: 1.55rem; letter-spacing: -.02em; color: #fff; }
+
+.faixa-socorro{
+  background: var(--socorro-tenue); border: 1px solid #EDC9C0;
+  border-left: 4px solid var(--socorro); border-radius: var(--raio);
+  padding: 1rem 1.15rem;
+}
+.faixa-socorro h3{ color: var(--socorro-alto); }
+
+/* ==========================================================================
+   11. LOGOS, FOTOS E CARROSSEL
+   ========================================================================== */
+.logos{ display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+  background: var(--linha); border: 1px solid var(--linha); border-radius: var(--raio-g); overflow: hidden; }
+@container palco (min-width: 560px){ .logos{ grid-template-columns: repeat(3, 1fr); } }
+@container palco (min-width: 880px){ .logos{ grid-template-columns: repeat(5, 1fr); } }
+.logos__item{
+  display: grid; place-items: center; min-height: 86px; padding: 1rem .75rem;
+  background: var(--papel); font-family: var(--display); font-weight: 600;
+  font-size: .95rem; color: var(--corpo-fraco); letter-spacing: -.01em; text-align: center;
+}
+.trilho{
+  display: flex; gap: .5rem; overflow-x: auto; padding-bottom: .5rem;
+  scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+}
+.trilho__item{
+  flex: 0 0 auto; scroll-snap-align: start;
+  display: grid; place-items: center; min-width: 148px; min-height: 62px;
+  padding: .6rem 1rem; background: var(--papel); border: 1px solid var(--linha);
+  border-radius: var(--raio); font-size: .875rem; color: var(--corpo-fraco); white-space: nowrap;
+}
+.foto{
+  display: grid; place-items: center; gap: .3rem; text-align: center;
+  min-height: 220px; padding: 1.5rem;
+  background: var(--papel-3);
+  border: 1px dashed var(--linha-forte); border-radius: var(--raio-g);
+  color: var(--corpo-fraco);
+}
+.foto b{ font-family: var(--display); font-size: .8rem; letter-spacing: .11em;
+  text-transform: uppercase; color: var(--sage-escuro); }
+.foto small{ font-size: .8125rem; max-width: 30ch; }
+
+/* ==========================================================================
+   12. UNIDADES
+   ========================================================================== */
+.unidade{
+  display: flex; flex-direction: column;
+  background: var(--papel); border: 1px solid var(--linha);
+  border-radius: var(--raio-g); overflow: hidden;
+}
+.unidade__mapa{
+  min-height: 168px; display: grid; place-items: center; gap: .2rem; text-align: center;
+  background:
+    repeating-linear-gradient(0deg, rgba(7,27,52,.05) 0 1px, transparent 1px 24px),
+    repeating-linear-gradient(90deg, rgba(7,27,52,.05) 0 1px, transparent 1px 24px),
+    var(--papel-2);
+  border-bottom: 1px solid var(--linha); color: var(--corpo-fraco); font-size: .8125rem;
+}
+.unidade__corpo{ display: flex; flex-direction: column; gap: .9rem; padding: 1.35rem; }
+.unidade__selo{
+  align-self: flex-start; padding: .18rem .5rem; border-radius: 3px;
+  background: var(--navy); color: var(--sage-claro);
+  font: 700 .68rem/1.5 var(--display); letter-spacing: .12em; text-transform: uppercase;
+}
+.dados{ display: flex; flex-direction: column; gap: .55rem; font-size: .9375rem; }
+.dados__item{ display: flex; gap: .6rem; align-items: flex-start; }
+.dados__item svg{ width: 17px; height: 17px; flex: 0 0 auto; margin-top: .22rem; color: var(--sage-escuro); }
+.dados__item a{ color: var(--tinta); font-weight: 600; text-decoration: none; }
+.dados__item a:hover{ text-decoration: underline; }
+.dados__rot{ display: block; font-size: .75rem; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--corpo-fraco); }
+
+/* ==========================================================================
+   13. ACORDEAO, FAQ E PASSOS
+   ========================================================================== */
+.acord{ border: 1px solid var(--linha); border-radius: var(--raio-g); overflow: hidden; background: var(--papel); }
+.acord + .acord{ margin-top: .6rem; }
+.acord summary{
+  cursor: pointer; list-style: none;
+  display: flex; align-items: center; gap: .8rem;
+  padding: 1rem 1.15rem; font-family: var(--display); font-weight: 700;
+  color: var(--tinta); font-size: 1.02rem;
+}
+.acord summary::-webkit-details-marker{ display: none; }
+.acord summary:hover{ background: var(--papel-2); }
+.acord summary .mais{
+  margin-left: auto; flex: 0 0 auto; width: 22px; height: 22px;
+  display: grid; place-items: center; color: var(--sage-escuro);
+  transition: transform .18s ease;
+}
+.acord[open] summary .mais{ transform: rotate(45deg); }
+.acord__corpo{ padding: 0 1.15rem 1.25rem; display: flex; flex-direction: column; gap: .9rem; }
+.acord__corpo p, .acord__corpo li{ font-size: .9375rem; }
+
+.checklist{ display: flex; flex-direction: column; gap: .45rem; }
+.checklist li{ position: relative; padding-left: 1.7rem; font-size: .9375rem; }
+.checklist li::before{
+  content: ""; position: absolute; left: 0; top: .34em; width: 16px; height: 16px;
+  border: 1.5px solid var(--sage-escuro); border-radius: 3px; background: var(--papel);
+}
+.lista-x{ display: flex; flex-direction: column; gap: .45rem; }
+.lista-x li{ position: relative; padding-left: 1.8rem; font-size: .9375rem; }
+.lista-x li::before{
+  content: "\00d7"; position: absolute; left: 0; top: .18em; width: 18px; height: 18px;
+  display: grid; place-items: center; border-radius: 50%;
+  background: var(--socorro-tenue); color: var(--socorro); font-weight: 700; font-size: .8rem;
+}
+.lista-v{ display: flex; flex-direction: column; gap: .45rem; }
+.lista-v li{ position: relative; padding-left: 1.7rem; font-size: .9375rem; }
+.escuro .lista-v li::before, .hero .lista-v li::before{ background: var(--sage); }
+.lista-v li::before{
+  content: ""; position: absolute; left: 0; top: .38em; width: 16px; height: 16px;
+  background: var(--sage-escuro);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.5 6 12.5 14 3.5' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.5 6 12.5 14 3.5' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+.passos{ counter-reset: passo; display: grid; gap: 1rem; }
+@container palco (min-width: 760px){ .passos{ grid-template-columns: repeat(4, 1fr); } }
+.passo{ display: flex; flex-direction: column; gap: .45rem; padding-top: 1.1rem; border-top: 2px solid var(--linha-forte); }
+.passo::before{
+  counter-increment: passo; content: counter(passo);
+  font-family: var(--display); font-weight: 800; font-size: .8rem;
+  color: var(--navy); background: var(--sage-claro);
+  width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+}
+.passo h3{ font-size: 1rem; }
+.passo p{ font-size: .9rem; color: var(--corpo-fraco); }
+
+/* ==========================================================================
+   14. TABELA DE ASSISTENCIA 24H
+   ========================================================================== */
+.assist{ width: 100%; border-collapse: collapse; font-size: .9375rem; }
+.assist th, .assist td{ padding: .8rem .9rem; text-align: left; border-bottom: 1px solid var(--linha); }
+.assist thead th{
+  position: sticky; top: 0; background: var(--papel-2); z-index: 1;
+  font-family: var(--display); font-size: .75rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--corpo-fraco);
+  border-bottom: 2px solid var(--linha-forte);
+}
+.assist tbody tr:hover{ background: var(--papel-2); }
+.assist td:first-child{ font-weight: 700; color: var(--tinta); font-family: var(--display); }
+.assist .btn{ min-height: 40px; padding: .35rem .85rem; font-size: .875rem; }
+
+/* ==========================================================================
+   15. MIGALHAS, PRODUTO, FAQ
+   ========================================================================== */
+.migalhas{ font-size: .8125rem; color: var(--corpo-fraco); padding-block: 1rem .35rem; }
+.migalhas ol{ display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; }
+.migalhas a{ color: var(--corpo-fraco); text-decoration: none; }
+.migalhas a:hover{ color: var(--tinta); text-decoration: underline; }
+.migalhas li[aria-current]{ color: var(--tinta); font-weight: 600; }
+.migalhas li + li::before{ content: "/"; margin-right: .35rem; color: var(--linha-forte); }
+
+.produto__topo{ display: grid; gap: 2rem; align-items: start; padding-bottom: var(--secao); }
+@container palco (min-width: 900px){ .produto__topo{ grid-template-columns: 1.25fr .75fr; } }
+.selo-lista{ display: flex; flex-wrap: wrap; gap: .45rem; }
+.selo{
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .3rem .65rem; border-radius: 999px;
+  background: var(--papel-2); border: 1px solid var(--linha);
+  font-size: .8125rem; font-weight: 600; color: var(--corpo);
+}
+
+/* ==========================================================================
+   16. RODAPE
+   ========================================================================== */
+.rodape{ background: var(--navy); color: var(--corpo-neg); font-size: .9375rem; }
+.rodape__topo{ display: grid; gap: 2rem; padding-block: clamp(2.5rem, 5cqi, 3.75rem); }
+@container palco (min-width: 760px){ .rodape__topo{ grid-template-columns: 1.25fr 1fr 1fr; } }
+@container palco (min-width: 1000px){ .rodape__topo{ grid-template-columns: 1.3fr .8fr .8fr 1.1fr; } }
+.rodape h4{ color: var(--sage); font-size: .75rem; letter-spacing: .13em;
+  text-transform: uppercase; margin-bottom: .8rem; }
+.rodape ul{ display: flex; flex-direction: column; gap: .42rem; }
+.rodape a{ color: var(--corpo-neg); text-decoration: none; }
+.rodape a:hover{ color: var(--tinta-neg); text-decoration: underline; }
+.rodape__contato{ display: flex; flex-direction: column; gap: .7rem; }
+.rodape__linha-contato{ display: flex; gap: .6rem; align-items: flex-start; }
+.rodape__linha-contato svg{ width: 17px; height: 17px; flex: 0 0 auto; margin-top: .2rem; color: var(--sage); }
+.rodape__linha-contato b{ color: var(--tinta-neg); font-weight: 700; }
+.rodape__rot{ display: block; font-size: .72rem; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--sage); font-weight: 600; }
+.rodape__base{
+  border-top: 1px solid rgba(176,175,148,.22); padding-block: 1.35rem;
+  display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; align-items: center;
+  font-size: .8125rem; color: rgba(195,203,215,.8);
+}
+.rodape__legal{ font-size: .8125rem; color: rgba(195,203,215,.72); max-width: 74ch; }
+
+/* Barra fixa de acao no mobile — some no desktop */
+.barra-mobile{
+  position: sticky; bottom: 0; z-index: 150;
+  display: flex; gap: .5rem; padding: .6rem;
+  background: rgba(7,27,52,.97); border-top: 1px solid rgba(176,175,148,.28);
+  backdrop-filter: blur(6px);
+}
+.barra-mobile .btn{ flex: 1; min-height: 46px; font-size: .9rem; padding-inline: .6rem; }
+@container palco (min-width: 900px){ .barra-mobile{ display: none; } }
+
+/* ==========================================================================
+   17. PAGINA DO SISTEMA
+   ========================================================================== */
+.swatch{ display: flex; flex-direction: column; border-radius: var(--raio-g);
+  overflow: hidden; border: 1px solid var(--linha); }
+.swatch__cor{ height: 82px; }
+.swatch__info{ padding: .7rem .85rem; background: var(--papel); display: flex; flex-direction: column; gap: .1rem; }
+.swatch__info b{ font-family: var(--display); font-size: .875rem; }
+.swatch__info code{ align-self: flex-start; background: none; border: 0; padding: 0;
+  font-size: .8125rem; color: var(--corpo-fraco); }
+.swatch__info small{ font-size: .78rem; color: var(--corpo-fraco); line-height: 1.4; }
+
+.regua{ display: flex; flex-direction: column; gap: 1rem; }
+.regua__item{ display: flex; gap: 1.25rem; align-items: baseline; flex-wrap: wrap;
+  padding-bottom: 1rem; border-bottom: 1px solid var(--linha); }
+.regua__meta{ flex: 0 0 9.5rem; font-size: .78rem; color: var(--corpo-fraco);
+  font-family: ui-monospace, Consolas, monospace; }
+
+.diag{ width: 100%; border-collapse: collapse; font-size: .9375rem; }
+.diag th, .diag td{ padding: .75rem .85rem; text-align: left; vertical-align: top;
+  border-bottom: 1px solid var(--linha); }
+.diag thead th{ font-family: var(--display); font-size: .75rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--corpo-fraco); border-bottom: 2px solid var(--linha-forte); }
+.diag td:first-child{ font-family: var(--display); font-weight: 800; color: var(--navy); width: 3.2rem; }
+.marca-p{ display: inline-block; padding: .12rem .42rem; border-radius: 3px;
+  background: var(--navy); color: var(--sage-claro); font: 800 .75rem/1.5 var(--display); }
+
+/* ==========================================================================
+   18. TELAS
+   ========================================================================== */
+.tela[hidden]{ display: none; }
+[id]{ scroll-margin-top: 96px; }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="i-baixo"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g id="i-lupa"><circle cx="7.5" cy="7.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M11.6 11.6 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></g>
+    <g id="i-fone"><path d="M4.2 2.5h3l1.2 3-1.6 1.3a10 10 0 0 0 4.4 4.4l1.3-1.6 3 1.2v3c0 .8-.7 1.5-1.5 1.4C7.6 14.6 3.4 10.4 2.8 4C2.7 3.2 3.4 2.5 4.2 2.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></g>
+    <g id="i-zap"><path d="M3 17l1-3.6A7 7 0 1 1 6.6 16L3 17Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.4 7.2c.2 1.6 1.6 3.4 3.4 4.1.5.2 1 .1 1.3-.3l.4-.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></g>
+    <g id="i-pin"><path d="M10 17.5s5.5-5 5.5-9.2A5.5 5.5 0 0 0 4.5 8.3C4.5 12.5 10 17.5 10 17.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="10" cy="8.2" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/></g>
+    <g id="i-relogio"><circle cx="10" cy="10" r="7.3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 5.8V10l3 1.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></g>
+    <g id="i-mail"><rect x="2.5" y="4.5" width="15" height="11" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 5.5 10 11l7-5.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></g>
+    <g id="i-mais"><path d="M11 4v14M4 11h14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></g>
+    <g id="i-alerta"><path d="M10 2.6 18.4 17H1.6L10 2.6Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10 7.6v4.1M10 14.4h.01" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></g>
+    <g id="i-carro"><path d="M2.5 12.5h15M4 12.5V9.2l1.7-3.6c.2-.5.7-.8 1.2-.8h6.2c.5 0 1 .3 1.2.8L16 9.2v3.3M4 12.5v2.2h2.4v-2.2M13.6 12.5v2.2H16v-2.2M4.4 9.4h11.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></g>
+    <g id="i-casa"><path d="M3 9.2 10 3.5l7 5.7M4.8 10.6v6h10.4v-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></g>
+    <g id="i-vida"><path d="M10 16.5S3 12.4 3 8.1a3.6 3.6 0 0 1 7-1.3 3.6 3.6 0 0 1 7 1.3c0 4.3-7 8.4-7 8.4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></g>
+    <g id="i-predio"><path d="M3.5 17V4.2c0-.4.3-.7.7-.7h7.1c.4 0 .7.3.7.7V17M12 8.5h4.1c.3 0 .6.3.6.6V17M2.5 17h15M6 6.5h1.5M6 9.5h1.5M6 12.5h1.5M9.5 6.5H11M9.5 9.5H11M9.5 12.5H11M14 11.5h1.2M14 14h1.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></g>
+    <g id="i-escudo"><path d="M10 2.8 16.2 5v5c0 3.7-2.6 6.4-6.2 7.4C6.4 16.4 3.8 13.7 3.8 10V5L10 2.8Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.4 10 9.3 12l3.4-3.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <g id="i-caminhao"><path d="M1.8 13.5V5.6h9.4v7.9M11.2 8h3l2.4 2.9v2.6M2 13.5h1.4M7.6 13.5h3.4M14.6 13.5h1.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="5.5" cy="14.4" r="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="13" cy="14.4" r="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/></g>
+    <g id="i-imprimir"><path d="M5.5 7.5V3.2h9v4.3M5.5 14h-2A1.5 1.5 0 0 1 2 12.5v-3.5A1.5 1.5 0 0 1 3.5 7.5h13A1.5 1.5 0 0 1 18 9v3.5a1.5 1.5 0 0 1-1.5 1.5h-2M5.5 11.5h9v5.3h-9Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></g>
+    <g id="i-seta"><path d="M3.5 10h12M11 5.5l4.5 4.5L11 14.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </defs>
+</svg>
+
+<div class="proto">
+  <p class="proto__marca">MX · Protótipo <span>Fase 2 — G2</span></p>
+  <nav class="proto__abas" aria-label="Telas do protótipo">
+    <button class="proto__aba" aria-current="true" data-tela="home">Home</button>
+    <button class="proto__aba" aria-current="false" data-tela="produto">Produto</button>
+    <button class="proto__aba" aria-current="false" data-tela="sinistro">Sinistro e Assistência</button>
+    <button class="proto__aba" aria-current="false" data-tela="contato">Contato e unidades</button>
+    <button class="proto__aba" aria-current="false" data-tela="sistema">Design system</button>
+  </nav>
+  <div class="proto__dir">
+    <button class="proto__botao" id="btn-notas" aria-pressed="false">Ver correções P1–P12</button>
+    <button class="proto__botao" id="btn-vista" aria-pressed="false">Mobile 390px</button>
+  </div>
+</div>
+
+<div class="palco" id="palco" data-vista="desktop" data-notas="0">
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="topo">
+  <div class="topo__aviso">
+    <div class="env">
+      <span><b>Seg a sex, 08:00 às 18:00</b></span>
+      <span>Itapira e Águas de Lindóia · SP</span>
+      <span>SUSEP <span class="token">«SUSEP»</span></span>
+    </div>
+  </div>
+  <div class="env">
+    <div class="topo__linha">
+      <a href="#home" class="logo" data-ir="home" aria-label="MX Corretora de Seguros — página inicial"></a>
+      <nav class="topo__nav" aria-label="Principal">
+        <button class="topo__link" id="abre-painel" aria-expanded="false" aria-controls="painel-seguros">
+          Seguros <svg viewBox="0 0 12 8" aria-hidden="true"><use href="#i-baixo"/></svg>
+        </button>
+        <a class="topo__link" href="#consorcios">Consórcios</a>
+        <a class="topo__link" href="#sinistro" data-ir="sinistro">Sinistro e Assistência</a>
+        <a class="topo__link" href="#a-mx">A MX</a>
+        <a class="topo__link" href="#contato" data-ir="contato">Contato</a>
+      </nav>
+      <div class="topo__dir">
+        <a class="topo__socorro" href="#sinistro" data-ir="sinistro" data-fix="P1">
+          <svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-alerta"/></svg>
+          <span>Sinistro</span><strong>24h</strong>
+        </a>
+        <a class="btn btn--acao btn--peq topo__cta" href="#cotar">Fazer cotação</a>
+        <button class="topo__hamb" id="abre-painel-mobile" aria-expanded="false" aria-controls="painel-seguros" aria-label="Abrir menu">
+          <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="painel" id="painel-seguros" data-aberto="0">
+    <div class="env">
+      <div class="painel__busca">
+        <label class="campo-busca">
+          <span class="oculto">Buscar seguro pelo nome</span>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-lupa"/></svg>
+          <input type="search" id="busca-produto" placeholder="Buscar seguro — ex.: caminhão, condomínio, vida" autocomplete="off">
+        </label>
+      </div>
+      <div class="painel__grade" id="grade-produtos">
+        <div class="painel__col" data-grupo>
+          <h4>Para você</h4>
+          <ul>
+            <li><a href="#produto" data-ir="produto">Automóvel</a></li>
+            <li><a href="#p">Acidentes Pessoais</a></li>
+            <li><a href="#p">Bike</a></li>
+            <li><a href="#p">Caminhão</a></li>
+            <li><a href="#p">Equipamentos Portáteis</a></li>
+            <li><a href="#p">Festas e Eventos</a></li>
+            <li><a href="#p">Fiança Locatícia</a></li>
+            <li><a href="#p">Moto</a></li>
+            <li><a href="#p">Residencial</a></li>
+            <li><a href="#p">RC Profissional</a></li>
+            <li><a href="#p">RC Médico e Dentista</a></li>
+            <li><a href="#p">Vida Individual</a></li>
+            <li><a href="#p">Viagem</a></li>
+          </ul>
+        </div>
+        <div class="painel__col" data-grupo>
+          <h4>Para sua empresa</h4>
+          <ul>
+            <li><a href="#p">Agronegócios</a></li>
+            <li><a href="#p">Condomínio</a></li>
+            <li><a href="#p">Empresarial</a></li>
+            <li><a href="#p">Estagiário</a></li>
+            <li><a href="#p">Frota</a></li>
+            <li><a href="#p">Garantia</a></li>
+            <li><a href="#p">Grandes Riscos</a></li>
+            <li><a href="#p">Máquinas Agrícolas</a></li>
+            <li><a href="#p">Riscos Cibernéticos</a></li>
+            <li><a href="#p">Riscos de Engenharia</a></li>
+            <li><a href="#p">Transportes</a></li>
+            <li><a href="#p">Vida em Grupo</a></li>
+          </ul>
+        </div>
+        <div class="painel__col" data-grupo>
+          <h4>Consórcios e outros</h4>
+          <ul>
+            <li><a href="#p">Consórcio de Automóveis</a></li>
+            <li><a href="#p">Consórcio de Imóveis</a></li>
+            <li><a href="#p">Consórcio de Serviços</a></li>
+            <li><a href="#p">Odontológico</a></li>
+            <li><a href="#p">Previdência</a></li>
+            <li><a href="#p">Saúde</a></li>
+            <li><a href="#p">Saúde para Pets</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="painel__vazio" id="busca-vazia" hidden>Nenhum seguro com esse nome. Fale com a gente no WhatsApp — trabalhamos com dez seguradoras e cotamos ramos que não estão nesta lista.</p>
+      <div class="painel__rodape">
+        <span>33 produtos, todos acessíveis em um nível.</span>
+        <a class="btn btn--linha btn--peq" href="#sinistro" data-ir="sinistro">Sinistro e Assistência 24h</a>
+        <a class="btn btn--acao btn--peq" href="#cotar">Fazer cotação</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- ======================================================================
+     TELA 1 — HOME
+     ====================================================================== -->
+<div class="tela" id="tela-home">
+
+  <!-- 2. Hero -->
+  <section class="hero anot" data-fix="P7">
+    <div class="env">
+      <div class="hero__grade">
+        <div class="pilha g24">
+          <p class="chapeu chapeu--neg">Corretora de seguros desde 2002</p>
+          <h1>Você fala com uma pessoa que <span class="destaque">mora na mesma cidade</span> que você.</h1>
+          <p class="hero__lide">Comparamos dez seguradoras, explicamos a diferença entre elas em português e, no dia do sinistro, é a MX que liga para a seguradora — não você.</p>
+          <ul class="lista-v" style="color:var(--corpo-neg)">
+            <li>Escritório físico em Itapira e em Águas de Lindóia</li>
+            <li>Atendimento de sinistro por WhatsApp direto com a corretora</li>
+            <li>Cotação sem custo e sem compromisso</li>
+          </ul>
+        </div>
+
+        <div class="entrada anot" data-fix="P10">
+          <div class="pilha g16">
+            <div class="pilha g6">
+              <p class="chapeu">Cotação em 1 minuto</p>
+              <h2>O que você quer proteger?</h2>
+            </div>
+            <form class="pilha g12" id="form-hero" novalidate>
+              <label class="campo">
+                <span>Seguro</span>
+                <select name="produto" required>
+                  <option value="">Selecione o produto</option>
+                  <optgroup label="Para você">
+                    <option>Automóvel</option><option>Moto</option><option>Caminhão</option>
+                    <option>Residencial</option><option>Vida Individual</option><option>Viagem</option>
+                    <option>Bike</option><option>Acidentes Pessoais</option><option>Fiança Locatícia</option>
+                  </optgroup>
+                  <optgroup label="Para sua empresa">
+                    <option>Empresarial</option><option>Condomínio</option><option>Frota</option>
+                    <option>Transportes</option><option>Agronegócios</option><option>Vida em Grupo</option>
+                    <option>Riscos Cibernéticos</option>
+                  </optgroup>
+                  <optgroup label="Outros">
+                    <option>Saúde</option><option>Odontológico</option><option>Previdência</option>
+                    <option>Consórcio</option><option>Não sei — me ajuda a escolher</option>
+                  </optgroup>
+                </select>
+              </label>
+              <div class="campos-2">
+                <label class="campo"><span>Nome</span><input name="nome" required autocomplete="name"></label>
+                <label class="campo"><span>WhatsApp</span><input name="fone" type="tel" inputmode="tel" placeholder="(19) 99999-9999" required autocomplete="tel"></label>
+              </div>
+              <label class="consent">
+                <input type="checkbox" required>
+                <span>Autorizo a MX a entrar em contato sobre esta cotação. <a href="#privacidade">Política de Privacidade</a>.</span>
+              </label>
+              <button class="btn btn--acao btn--largo" type="submit">Quero minha cotação</button>
+              <div class="saida" id="saida-hero" role="status">
+                <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" style="flex:0 0 auto;margin-top:2px"><use href="#i-escudo"/></svg>
+                <span>Protótipo — nada é enviado. No site final o lead vai para o destino definido na pendência 1.</span>
+              </div>
+            </form>
+            <p style="font-size:.8125rem;color:var(--corpo-fraco);text-align:center">
+              Prefere falar agora? <a href="https://wa.me/5519971386794" style="color:var(--tinta);font-weight:700">WhatsApp comercial (19) 97138-6794</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Barra de confiança -->
+  <section class="confianca anot" data-fix="P8">
+    <div class="env">
+      <div class="confianca__grade">
+        <div class="confianca__item">
+          <span class="confianca__num num">24</span>
+          <span class="confianca__txt"><b>anos de mercado</b>Atuando em seguros desde 2002</span>
+        </div>
+        <div class="confianca__item">
+          <span class="confianca__num num">10</span>
+          <span class="confianca__txt"><b>seguradoras parceiras</b>Uma cotação, dez propostas comparadas</span>
+        </div>
+        <div class="confianca__item">
+          <span class="confianca__num num">2</span>
+          <span class="confianca__txt"><b>escritórios de porta aberta</b>Itapira e Águas de Lindóia</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Seletor de seguros -->
+  <section class="secao claro">
+    <div class="env pilha g32">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Seguros</p>
+        <h2>Comece pelo que você quer proteger</h2>
+        <p class="lide">Seis produtos concentram a maior parte das cotações. Os outros 27 estão a um clique, na busca do menu.</p>
+      </div>
+      <div class="grade grade--3">
+        <a class="card" href="#produto" data-ir="produto">
+          <span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-carro"/></svg></span>
+          <h3>Automóvel</h3>
+          <p>Colisão, roubo, terceiros e assistência 24h. Com carro reserva e vidros, se você quiser.</p>
+          <span class="card__seta">Ver coberturas →</span>
+        </a>
+        <a class="card" href="#p">
+          <span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-casa"/></svg></span>
+          <h3>Residencial</h3>
+          <p>Incêndio, roubo, danos elétricos e vendaval — com assistência para chaveiro e encanador.</p>
+          <span class="card__seta">Ver coberturas →</span>
+        </a>
+        <a class="card" href="#p">
+          <span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-vida"/></svg></span>
+          <h3>Vida</h3>
+          <p>Proteção para quem depende de você, individual ou em grupo pela empresa.</p>
+          <span class="card__seta">Ver coberturas →</span>
+        </a>
+        <a class="card" href="#p">
+          <span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-predio"/></svg></span>
+          <h3>Condomínio</h3>
+          <p>Cobertura obrigatória por lei, mais responsabilidade civil e equipamentos.</p>
+          <span class="card__seta">Ver coberturas →</span>
+        </a>
+        <a class="card" href="#p">
+          <span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-escudo"/></svg></span>
+          <h3>Empresarial</h3>
+          <p>Patrimônio, lucros cessantes e responsabilidade civil para o seu CNPJ.</p>
+          <span class="card__seta">Ver coberturas →</span>
+        </a>
+        <a class="card" href="#p">
+          <span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-caminhao"/></svg></span>
+          <h3>Transportes e Frota</h3>
+          <p>RCTR-C, RC-DC, RC-V e frota — para transportadora e para quem embarca carga.</p>
+          <span class="card__seta">Ver coberturas →</span>
+        </a>
+      </div>
+      <div class="acoes acoes--solta">
+        <button class="btn btn--linha" id="ver-todos">Ver os 33 seguros</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Por que uma corretora -->
+  <section class="secao claro2">
+    <div class="env pilha g32">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Por que uma corretora</p>
+        <h2>O site da seguradora vende. A corretora resolve.</h2>
+        <p class="lide">Contratar direto no aplicativo é rápido. A diferença aparece depois — na renovação e, principalmente, no dia do sinistro.</p>
+      </div>
+      <div class="rolagem">
+        <table class="comparativo">
+          <caption>Comparação entre contratar direto na seguradora e contratar com a MX.</caption>
+          <thead>
+            <tr><th scope="col">&nbsp;</th><th scope="col">Direto na seguradora</th><th scope="col" class="col-mx">Com a MX</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Quantas propostas você compara</th><td>Uma</td><td class="col-mx"><b>Até dez, lado a lado</b></td></tr>
+            <tr><th scope="row">Quem lê a apólice por você</th><td>Você</td><td class="col-mx"><b>Um corretor, antes de assinar</b></td></tr>
+            <tr><th scope="row">No dia do sinistro</th><td>Central de atendimento, senha e protocolo</td><td class="col-mx"><b>WhatsApp direto com quem já conhece o seu caso</b></td></tr>
+            <tr><th scope="row">Na renovação</th><td>Renova sozinho, no preço que vier</td><td class="col-mx"><b>Recotamos o mercado antes do vencimento</b></td></tr>
+            <tr><th scope="row">Se der divergência</th><td>Você negocia sozinho</td><td class="col-mx"><b>A corretora defende o seu lado</b></td></tr>
+            <tr><th scope="row">Atendimento presencial</th><td>Não existe</td><td class="col-mx"><b>Av. Rio Branco, 221 — pode entrar</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="nota">O custo da corretagem já está embutido no prêmio que a seguradora cobra — com ou sem corretor. Não há taxa adicional para o cliente.</p>
+    </div>
+  </section>
+
+  <!-- 6. Canais — resolve P6 -->
+  <section class="secao claro anot" data-fix="P6">
+    <div class="env pilha g32">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Canais</p>
+        <h2>Cada número tem um dono e um horário</h2>
+        <p class="lide">Hoje existem quatro telefones circulando pelo site sem rótulo. Esta é a política proposta — depende da decisão da pendência 2.</p>
+      </div>
+      <div class="grade grade--3">
+        <div class="card">
+          <span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap"/></svg></span>
+          <h3>Quero cotar ou contratar</h3>
+          <p>WhatsApp comercial, das 08:00 às 18:00.</p>
+          <a class="btn btn--zap btn--peq" href="https://wa.me/5519971386794">(19) 97138-6794</a>
+        </div>
+        <div class="card">
+          <span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-fone"/></svg></span>
+          <h3>Assunto de apólice, boleto ou dúvida</h3>
+          <p>Telefone da matriz, das 08:00 às 18:00.</p>
+          <a class="btn btn--linha btn--peq" href="tel:+551938638150">(19) 3863-8150</a>
+        </div>
+        <div class="card" style="border-color:#EDC9C0;background:var(--socorro-tenue)">
+          <span class="card__icone" style="background:#fff;border-color:#EDC9C0;color:var(--socorro)"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-alerta"/></svg></span>
+          <h3>Aconteceu alguma coisa</h3>
+          <p>WhatsApp de sinistro. Fora do horário comercial, use a assistência 24h da sua seguradora.</p>
+          <a class="btn btn--socorro btn--peq" href="https://wa.me/5519982036147">(19) 98203-6147</a>
+        </div>
+      </div>
+      <p class="nota">Proposta: <b>(19) 98112-7038</b> sai do rodapé ou ganha uma função declarada. Um número sem rótulo no site é um número que ninguém sabe quando usar.</p>
+    </div>
+  </section>
+
+  <!-- 7. Sinistro e assistência -->
+  <section class="secao claro2">
+    <div class="env">
+      <div class="socorro anot" data-fix="P1">
+        <div class="socorro__corpo">
+          <div class="pilha g16">
+            <p class="chapeu" style="color:rgba(255,255,255,.78)">Já é cliente e precisa agora</p>
+            <h2>Sinistro e assistência 24 horas</h2>
+            <p style="color:rgba(255,255,255,.92)">O telefone da assistência da sua seguradora fica aberto na tela, sem clique e sem acordeão. A página abre em conexão ruim e pode ser salva no celular.</p>
+            <div class="acoes acoes--solta">
+              <a class="btn btn--linha-neg" href="#sinistro" data-ir="sinistro">Abrir sinistro e assistência</a>
+            </div>
+          </div>
+          <div class="pilha g12">
+            <a class="socorro__tel" href="https://wa.me/5519982036147">
+              <small>WhatsApp de sinistro · MX</small>
+              <b class="num">(19) 98203-6147</b>
+            </a>
+            <a class="socorro__tel" href="#sinistro" data-ir="sinistro">
+              <small>Assistência 24h da sua seguradora</small>
+              <b>Ver os 10 telefones →</b>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Seguradoras parceiras -->
+  <section class="secao claro">
+    <div class="env pilha g24">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Seguradoras parceiras</p>
+        <h2>Dez seguradoras cotando o seu risco ao mesmo tempo</h2>
+      </div>
+      <div class="logos">
+        <div class="logos__item">Azul</div>
+        <div class="logos__item">Itaú</div>
+        <div class="logos__item">MSIG</div>
+        <div class="logos__item">Tokio Marine</div>
+        <div class="logos__item">HDI</div>
+        <div class="logos__item">Yelum</div>
+        <div class="logos__item">Allianz</div>
+        <div class="logos__item">Zurich</div>
+        <div class="logos__item">Sompo</div>
+        <div class="logos__item">Bradesco</div>
+      </div>
+      <p class="nota">No site final, os dez logos oficiais em SVG monocromático, com o nome como texto alternativo.</p>
+    </div>
+  </section>
+
+  <!-- 9. Depoimentos -->
+  <section class="secao claro2 anot" data-fix="P8">
+    <div class="env pilha g24">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Quem já é cliente</p>
+        <h2>A prova social que falta</h2>
+        <p class="lide">Esta seção está construída e vazia de propósito. Ela só é publicada com depoimento real, nome real e cidade — pendência 4.</p>
+      </div>
+      <div class="grade grade--3">
+        <div class="card card--fundo">
+          <p class="chapeu">Depoimento 1</p>
+          <p><span class="token">«DEPOIMENTOS»</span> — cliente de seguro auto, Itapira. Ideal: cita um sinistro resolvido.</p>
+          <p style="font-size:.8125rem">Formato: 2 a 3 linhas · nome · cidade · ramo · ano em que virou cliente.</p>
+        </div>
+        <div class="card card--fundo">
+          <p class="chapeu">Depoimento 2</p>
+          <p><span class="token">«DEPOIMENTOS»</span> — síndico ou administradora de condomínio.</p>
+          <p style="font-size:.8125rem">Alternativa aceitável: avaliação do Google Business com link para o perfil.</p>
+        </div>
+        <div class="card card--fundo">
+          <p class="chapeu">Depoimento 3</p>
+          <p><span class="token">«DEPOIMENTOS»</span> — empresa da região, seguro empresarial ou frota.</p>
+          <p style="font-size:.8125rem">Se não houver nenhum até a Fase 3, a seção não entra no ar. Sem depoimento inventado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Sobre a MX -->
+  <section class="secao claro" id="a-mx">
+    <div class="env">
+      <div class="grade grade--2" style="gap:clamp(1.5rem,4cqi,3rem);align-items:center">
+        <div class="pilha g20">
+          <p class="chapeu">A MX</p>
+          <h2>Formada por consultores que moram onde os clientes moram</h2>
+          <p>Formada por consultores experientes e preparados, atuando no mercado de seguros desde 2002 com eficiência, inovação e preços competitivos, a MX Seguros é uma das principais empresas do ramo de seguro na região.</p>
+          <div class="grade grade--2" style="gap:1rem">
+            <div class="card card--fundo">
+              <h3>Missão</h3>
+              <p>Através da excelência no atendimento, levar segurança e tranquilidade aos nossos clientes.</p>
+            </div>
+            <div class="card card--fundo">
+              <h3>Visão</h3>
+              <p>Ser referência no mercado de seguros, em constante evolução em tecnologia e inovação.</p>
+            </div>
+          </div>
+          <div class="selo-lista" data-fix="P9" style="position:relative">
+            <span class="selo">Ética</span><span class="selo">Pontualidade</span><span class="selo">Transparência</span>
+            <span class="selo">Integridade</span><span class="selo">Comprometimento</span>
+          </div>
+          <div class="acoes acoes--solta"><a class="btn btn--linha" href="#a-mx">Conhecer a MX</a></div>
+        </div>
+        <div class="foto">
+          <b>Foto real</b>
+          <small>Equipe MX, 2022 — já existe no site atual. Pendência 7: há material novo?</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Parceiros locais -->
+  <section class="secao--curta claro2 anot" data-fix="P12">
+    <div class="env pilha g16">
+      <div class="pilha g6">
+        <p class="chapeu">Parceiros locais</p>
+        <h3>Empresas da região que confiam na MX</h3>
+      </div>
+      <div class="trilho" role="group" aria-label="Parceiros locais — role para o lado">
+        <div class="trilho__item">Lojacor</div><div class="trilho__item">Big Soccer</div>
+        <div class="trilho__item">Shopping Fer</div><div class="trilho__item">Lotus</div>
+        <div class="trilho__item">ACL</div><div class="trilho__item">GPO</div>
+        <div class="trilho__item">Óticas Vivi</div><div class="trilho__item">Organza</div>
+        <div class="trilho__item">Nilson Despachante</div><div class="trilho__item">Método</div>
+        <div class="trilho__item">Fazfarma</div><div class="trilho__item">Edubikes</div>
+        <div class="trilho__item">Colibri</div><div class="trilho__item">Chopp Germânia</div>
+        <div class="trilho__item">Avanti</div><div class="trilho__item">Atifer</div>
+        <div class="trilho__item">Arte Própria</div><div class="trilho__item">Wine Experts</div>
+        <div class="trilho__item">+ 6 parceiros</div>
+      </div>
+      <p class="nota">Carrossel com carregamento tardio: os 24 logos só baixam quando a seção entra na tela. Hoje eles pesam na primeira dobra.</p>
+    </div>
+  </section>
+
+  <!-- 12. Unidades -->
+  <section class="secao claro">
+    <div class="env pilha g24">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Unidades</p>
+        <h2>Duas portas abertas, de segunda a sexta</h2>
+      </div>
+      <div class="grade grade--2">
+        <div class="unidade">
+          <div class="unidade__mapa"><span class="token">«MAPA»</span><small>Google Maps — Itapira</small></div>
+          <div class="unidade__corpo">
+            <span class="unidade__selo">Matriz</span>
+            <h3>Itapira / SP</h3>
+            <div class="dados">
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin"/></svg><span>Av. Rio Branco, 221 — Centro<br>Itapira/SP · CEP 13970-070</span></p>
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio"/></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-fone"/></svg><span><span class="dados__rot">Telefone</span><a href="tel:+551938638150" class="num">(19) 3863-8150</a></span></p>
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap"/></svg><span><span class="dados__rot">WhatsApp comercial</span><a href="https://wa.me/5519971386794" class="num">(19) 97138-6794</a></span></p>
+            </div>
+            <div class="acoes"><a class="btn btn--linha btn--peq" href="#mapa">Como chegar</a></div>
+          </div>
+        </div>
+        <div class="unidade">
+          <div class="unidade__mapa"><span class="token">«MAPA»</span><small>Google Maps — Águas de Lindóia</small></div>
+          <div class="unidade__corpo">
+            <span class="unidade__selo">Filial</span>
+            <h3>Águas de Lindóia / SP</h3>
+            <div class="dados">
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin"/></svg><span>Rua Argentina, 15 — Salas 2 e 3 — Centro<br>Águas de Lindóia/SP · CEP <span class="token">«CEP-FILIAL»</span></span></p>
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio"/></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-fone"/></svg><span><span class="dados__rot">Telefone</span><a href="tel:+551938638150" class="num">(19) 3863-8150</a></span></p>
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap"/></svg><span><span class="dados__rot">WhatsApp comercial</span><a href="https://wa.me/5519971386794" class="num">(19) 97138-6794</a></span></p>
+            </div>
+            <div class="acoes"><a class="btn btn--linha btn--peq" href="#mapa">Como chegar</a></div>
+          </div>
+        </div>
+      </div>
+      <p class="nota">As duas unidades saem da lista corrida do rodapé e viram cards com endereço, mapa, horário e telefone — e cada uma vira um JSON-LD de LocalBusiness.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ======================================================================
+     TELA 2 — PRODUTO (template único dos 33 produtos, usando Automóvel)
+     ====================================================================== -->
+<div class="tela" id="tela-produto" hidden>
+  <section class="claro2" style="border-bottom:1px solid var(--linha)">
+    <div class="env">
+      <nav class="migalhas" aria-label="Trilha de navegação">
+        <ol>
+          <li><a href="#home" data-ir="home">Início</a></li>
+          <li><a href="#seguros">Seguros</a></li>
+          <li><a href="#seguros">Para você</a></li>
+          <li aria-current="page">Automóvel</li>
+        </ol>
+      </nav>
+      <div class="produto__topo">
+        <div class="pilha g20">
+          <p class="chapeu">Seguro para você</p>
+          <h1>Seguro de Automóvel</h1>
+          <p class="lide medida">Cobre o seu carro contra colisão, incêndio e roubo, paga o prejuízo que você causar a terceiros e coloca um guincho na sua porta quando o carro para.</p>
+          <div class="selo-lista">
+            <span class="selo">Assistência 24h</span>
+            <span class="selo">Carro reserva</span>
+            <span class="selo">Vidros</span>
+            <span class="selo">Cotação em até 10 seguradoras</span>
+          </div>
+          <div class="acoes"><a class="btn btn--acao" href="#cotar-produto">Cotar seguro de automóvel</a>
+            <a class="btn btn--zap" href="https://wa.me/5519971386794">Tirar dúvida no WhatsApp</a></div>
+        </div>
+        <div class="card card--fundo" style="gap:.85rem">
+          <h3>Para quem é</h3>
+          <ul class="lista-v">
+            <li><b>Quem depende do carro para trabalhar</b> — a prioridade é carro reserva e guincho rápido.</li>
+            <li><b>Primeiro carro na família</b> — a prioridade é o valor da franquia e a cobertura a terceiros.</li>
+            <li><b>Carro financiado</b> — o banco costuma exigir apólice vigente durante todo o contrato.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao claro">
+    <div class="env pilha g32">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Coberturas</p>
+        <h2>O que a apólice cobre</h2>
+        <p class="lide">Nem toda seguradora chama a mesma coisa pelo mesmo nome. Na cotação a gente compara item por item.</p>
+      </div>
+      <div class="grade grade--3">
+        <div class="card"><h3>Colisão, incêndio e roubo</h3><p>Conserto do seu veículo ou indenização integral em caso de perda total.</p></div>
+        <div class="card"><h3>Danos a terceiros (RCF)</h3><p>Danos materiais e corporais que você causar a outra pessoa, dentro do limite contratado.</p></div>
+        <div class="card"><h3>Assistência 24 horas</h3><p>Guincho, chaveiro, pane seca, troca de pneu e táxi, conforme o plano.</p></div>
+        <div class="card"><h3>Carro reserva</h3><p>Veículo à disposição durante o conserto, pelo número de diárias contratado.</p></div>
+        <div class="card"><h3>Vidros, faróis e retrovisores</h3><p>Contratação separada na maioria das seguradoras. Vale a conta em cidade com muita obra.</p></div>
+        <div class="card"><h3>Acidentes pessoais de passageiros</h3><p>Indenização por morte ou invalidez de quem estava no carro.</p></div>
+      </div>
+      <p class="nota">Rascunho de estrutura. O texto final é o conteúdo migrado da página atual, reescrito sem caixa alta na Fase 3.</p>
+    </div>
+  </section>
+
+  <section class="secao claro2">
+    <div class="env">
+      <div class="grade grade--2" style="gap:clamp(1.5rem,4cqi,3rem)">
+        <div class="pilha g16">
+          <p class="chapeu">Transparência</p>
+          <h2>O que normalmente não está coberto</h2>
+          <p>Este bloco não existe no site atual e é o maior ganho de confiança do template. Dizer o que não cobre é o que separa corretora de anúncio.</p>
+          <ul class="lista-x">
+            <li>Condutor sem CNH válida no momento do acidente</li>
+            <li>Direção sob efeito de álcool ou de substância que reduza o reflexo</li>
+            <li>Uso do veículo em competição, racha ou fora de estrada</li>
+            <li>Desgaste natural, defeito mecânico e falta de manutenção</li>
+            <li>Uso comercial não declarado — aplicativo, entrega, transporte remunerado</li>
+            <li>Acessórios e blindagem que não foram declarados na proposta</li>
+          </ul>
+          <p class="nota">A lista definitiva depende da seguradora e da apólice. Na Fase 3, cada item é conferido contra as condições gerais das dez parceiras.</p>
+        </div>
+        <div class="pilha g16">
+          <p class="chapeu">Como contratar</p>
+          <h2>Quatro passos, sem sair do lugar</h2>
+          <div class="passos" style="grid-template-columns:1fr">
+            <div class="passo"><h3>Você conta o básico</h3><p>Carro, CEP de pernoite, quem dirige e como usa o veículo.</p></div>
+            <div class="passo"><h3>A MX cota o mercado</h3><p>Enviamos o mesmo risco para as seguradoras parceiras e comparamos as propostas.</p></div>
+            <div class="passo"><h3>Você escolhe com o corretor</h3><p>Explicamos a diferença entre franquia, cobertura e assistência antes de você decidir.</p></div>
+            <div class="passo"><h3>Apólice emitida</h3><p>Você recebe a apólice e o número da assistência 24h. A MX guarda a data da renovação.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao claro">
+    <div class="env pilha g24">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Perguntas frequentes</p>
+        <h2>Seguro de automóvel: as dúvidas que mais chegam</h2>
+      </div>
+      <div>
+        <details class="acord"><summary>O seguro cobre se outra pessoa estiver dirigindo?<span class="mais"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><use href="#i-mais"/></svg></span></summary>
+          <div class="acord__corpo"><p>Em regra sim, desde que a pessoa tenha CNH válida e o perfil declarado na proposta esteja correto. Se o carro é dirigido com frequência por alguém mais jovem, isso precisa constar — é o que evita discussão no sinistro.</p></div></details>
+        <details class="acord"><summary>Franquia é o mesmo que participação obrigatória?<span class="mais"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><use href="#i-mais"/></svg></span></summary>
+          <div class="acord__corpo"><p>É o valor que fica por sua conta no conserto. Franquia menor significa prêmio maior. Na cotação a gente mostra as duas contas para você escolher com número na mão.</p></div></details>
+        <details class="acord"><summary>Uso o carro para aplicativo. Muda alguma coisa?<span class="mais"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><use href="#i-mais"/></svg></span></summary>
+          <div class="acord__corpo"><p>Muda, e precisa ser declarado. Existem seguradoras que aceitam e outras que não. Contratar sem declarar é o caminho mais rápido para ter o sinistro negado.</p></div></details>
+        <details class="acord"><summary>Quanto tempo leva para a apólice sair?<span class="mais"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><use href="#i-mais"/></svg></span></summary>
+          <div class="acord__corpo"><p>Varia por seguradora e por perfil. Assim que a proposta é aceita, você já está coberto — a apólice formal chega depois. <span class="token">«PRAZO»</span> — a Fase 3 define se o site promete algum prazo.</p></div></details>
+        <details class="acord"><summary>E se eu já tiver seguro em outra corretora?<span class="mais"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><use href="#i-mais"/></svg></span></summary>
+          <div class="acord__corpo"><p>Guarde a data do vencimento e nos procure cerca de 30 dias antes. É quando dá para recotar o mercado sem perder bônus nem ficar um dia sem cobertura.</p></div></details>
+      </div>
+      <p class="nota">Este bloco vira JSON-LD de FAQPage — é o que abre espaço para a MX aparecer em busca com resposta direta.</p>
+    </div>
+  </section>
+
+  <section class="secao claro2" id="cotar-produto">
+    <div class="env">
+      <div class="grade grade--2" style="gap:clamp(1.5rem,4cqi,3rem);align-items:center">
+        <div class="pilha g16">
+          <p class="chapeu">Cotação</p>
+          <h2>Cotar seguro de automóvel</h2>
+          <p class="lide">O mesmo formulário da home, já com o produto preenchido. Um corretor responde no horário comercial.</p>
+          <ul class="lista-v">
+            <li>Sem custo e sem compromisso</li>
+            <li>Comparamos até dez seguradoras com o mesmo risco</li>
+            <li>Seus dados não são vendidos nem repassados</li>
+          </ul>
+        </div>
+        <div class="entrada">
+          <form class="pilha g12" id="form-produto" novalidate>
+            <label class="campo"><span>Seguro</span>
+              <select name="produto"><option selected>Automóvel</option><option>Moto</option><option>Caminhão</option><option>Frota</option></select></label>
+            <div class="campos-2">
+              <label class="campo"><span>Nome</span><input name="nome" required autocomplete="name"></label>
+              <label class="campo"><span>WhatsApp</span><input name="fone" type="tel" inputmode="tel" placeholder="(19) 99999-9999" required autocomplete="tel"></label>
+            </div>
+            <label class="campo"><span>Marca, modelo e ano (opcional)</span><input name="veiculo" placeholder="Ex.: Fiat Argo 2021"></label>
+            <label class="consent"><input type="checkbox" required><span>Autorizo a MX a entrar em contato sobre esta cotação. <a href="#privacidade">Política de Privacidade</a>.</span></label>
+            <button class="btn btn--acao btn--largo" type="submit">Quero minha cotação</button>
+            <div class="saida" id="saida-produto" role="status">
+              <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" style="flex:0 0 auto;margin-top:2px"><use href="#i-escudo"/></svg>
+              <span>Protótipo — nada é enviado.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao--curta claro">
+    <div class="env pilha g16">
+      <p class="chapeu">Produtos relacionados</p>
+      <div class="grade grade--4">
+        <a class="card" href="#p"><h3>Moto</h3><span class="card__seta">Ver →</span></a>
+        <a class="card" href="#p"><h3>Caminhão</h3><span class="card__seta">Ver →</span></a>
+        <a class="card" href="#p"><h3>Frota</h3><span class="card__seta">Ver →</span></a>
+        <a class="card" href="#p"><h3>Acidentes Pessoais</h3><span class="card__seta">Ver →</span></a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================================================================
+     TELA 3 — SINISTRO E ASSISTÊNCIA
+     ====================================================================== -->
+<div class="tela" id="tela-sinistro" hidden>
+  <section style="background:var(--socorro);padding-block:clamp(1.75rem,4cqi,2.75rem)" class="anot" data-fix="P1">
+    <div class="env">
+      <div class="pilha g20">
+        <p class="chapeu" style="color:rgba(255,255,255,.8)">Emergência</p>
+        <h1 style="color:#fff">Aconteceu alguma coisa. Comece por aqui.</h1>
+        <div class="grade grade--2" style="gap:.75rem">
+          <a class="socorro__tel" href="https://wa.me/5519982036147">
+            <small>Abrir sinistro com a MX · WhatsApp</small>
+            <b class="num">(19) 98203-6147</b>
+          </a>
+          <a class="socorro__tel" href="#tabela-assistencia">
+            <small>Guincho, chaveiro, pane — assistência 24h</small>
+            <b>Achar o telefone da minha seguradora →</b>
+          </a>
+        </div>
+        <p style="color:rgba(255,255,255,.9);font-size:.9375rem;max-width:66ch">Se houver ferido, ligue primeiro para o <b style="color:#fff">SAMU 192</b> ou <b style="color:#fff">Bombeiros 193</b>. Em caso de roubo ou colisão com terceiro, registre o boletim de ocorrência antes de acionar a seguradora.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao--curta claro">
+    <div class="env pilha g24">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Primeiras 24 horas</p>
+        <h2>O que fazer, na ordem</h2>
+      </div>
+      <div class="passos">
+        <div class="passo"><h3>Garanta a segurança</h3><p>Sinalize o local, saia da pista se possível e cuide de quem se machucou. Ferido tem prioridade sobre qualquer telefonema.</p></div>
+        <div class="passo"><h3>Registre a ocorrência</h3><p>Boletim de ocorrência em roubo, furto, incêndio e colisão com terceiro. Fotografe tudo antes de mexer.</p></div>
+        <div class="passo"><h3>Acione a assistência</h3><p>Guincho e reboque saem pela assistência 24h da seguradora, não pela corretora. Os telefones estão logo abaixo.</p></div>
+        <div class="passo"><h3>Avise a MX</h3><p>Mande a documentação pelo WhatsApp de sinistro. A partir daí, é a corretora que fala com a seguradora.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao claro2" id="tabela-assistencia">
+    <div class="env pilha g20">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Assistência 24 horas</p>
+        <h2>Telefone das seguradoras, aberto na tela</h2>
+        <p class="lide">Sem acordeão, sem clique. Busque pelo nome da seguradora que está na sua apólice.</p>
+      </div>
+      <label class="campo-busca" style="max-width:24rem">
+        <span class="oculto">Buscar seguradora</span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-lupa"/></svg>
+        <input type="search" id="busca-seguradora" placeholder="Buscar seguradora — ex.: Tokio" autocomplete="off">
+      </label>
+      <div class="rolagem" style="background:var(--papel);border:1px solid var(--linha);border-radius:var(--raio-g)">
+        <table class="assist" id="tab-assist">
+          <thead><tr><th scope="col">Seguradora</th><th scope="col">Assistência 24h</th><th scope="col">Ligar</th></tr></thead>
+          <tbody>
+            <tr><td>Azul Seguros</td><td><span class="token">«TEL-24H»</span></td><td><a class="btn btn--socorro" href="#t">Ligar</a></td></tr>
+            <tr><td>Itaú Seguros</td><td><span class="token">«TEL-24H»</span></td><td><a class="btn btn--socorro" href="#t">Ligar</a></td></tr>
+            <tr><td>MSIG Seguros</td><td><span class="token">«TEL-24H»</span></td><td><a class="btn btn--socorro" href="#t">Ligar</a></td></tr>
+            <tr><td>Tokio Marine</td><td><span class="token">«TEL-24H»</span></td><td><a class="btn btn--socorro" href="#t">Ligar</a></td></tr>
+            <tr><td>HDI Seguros</td><td><span class="token">«TEL-24H»</span></td><td><a class="btn btn--socorro" href="#t">Ligar</a></td></tr>
+            <tr><td>Yelum Seguradora</td><td><span class="token">«TEL-24H»</span></td><td><a class="btn btn--socorro" href="#t">Ligar</a></td></tr>
+            <tr><td>Allianz Seguros</td><td><span class="token">«TEL-24H»</span></td><td><a class="btn btn--socorro" href="#t">Ligar</a></td></tr>
+            <tr><td>Zurich Seguros</td><td><span class="token">«TEL-24H»</span></td><td><a class="btn btn--socorro" href="#t">Ligar</a></td></tr>
+            <tr><td>Sompo Seguros</td><td><span class="token">«TEL-24H»</span></td><td><a class="btn btn--socorro" href="#t">Ligar</a></td></tr>
+            <tr><td>Bradesco Seguros</td><td><span class="token">«TEL-24H»</span></td><td><a class="btn btn--socorro" href="#t">Ligar</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="painel__vazio" id="assist-vazia" hidden>Não achamos essa seguradora na lista. Chame a MX no WhatsApp de sinistro que a gente localiza o número da sua apólice.</p>
+      <div class="faixa-socorro">
+        <h3>Risco conhecido: telefone errado é pior que telefone escondido</h3>
+        <p style="font-size:.9375rem">Os dez números serão levantados um a um na Fase 3 e a tabela ganha um responsável por revisão semestral. Enquanto isso, ficam como <span class="token">«TEL-24H»</span> — o protótipo não inventa telefone de emergência.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao claro">
+    <div class="env pilha g24">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Documentação</p>
+        <h2>O que juntar antes de abrir o sinistro</h2>
+        <p class="lide">O conteúdo mais útil do site atual, hoje em texto corrido. Aqui vira checklist, com opção de imprimir e de mandar no WhatsApp.</p>
+      </div>
+      <div class="acoes acoes--solta">
+        <button class="btn btn--linha btn--peq" id="btn-imprimir"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-imprimir"/></svg> Imprimir checklists</button>
+        <a class="btn btn--zap btn--peq" href="https://wa.me/5519982036147"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap"/></svg> Enviar documentos no WhatsApp</a>
+      </div>
+      <div>
+        <details class="acord" open><summary>Automóvel — documentos gerais<span class="mais"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><use href="#i-mais"/></svg></span></summary>
+          <div class="acord__corpo">
+            <ul class="checklist">
+              <li>Aviso de sinistro com data, hora, local e descrição do ocorrido</li>
+              <li>Boletim de ocorrência</li>
+              <li>CNH de quem estava dirigindo no momento</li>
+              <li>CRLV do veículo</li>
+              <li>Apólice ou número da proposta</li>
+              <li>Comprovante de residência do segurado</li>
+              <li>Fotos do veículo e do local</li>
+            </ul>
+          </div></details>
+        <details class="acord"><summary>Automóvel — perda total (documentos adicionais)<span class="mais"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><use href="#i-mais"/></svg></span></summary>
+          <div class="acord__corpo">
+            <ul class="checklist">
+              <li>ATPV-e ou DUT preenchido e assinado, com firma reconhecida</li>
+              <li>Todas as chaves do veículo</li>
+              <li>Manual e cópia do documento do veículo</li>
+              <li>Comprovante de quitação do financiamento ou autorização do banco</li>
+              <li>IPVA, licenciamento e multas quitados</li>
+              <li>Dados bancários em nome do segurado</li>
+            </ul>
+          </div></details>
+        <details class="acord"><summary>Residencial<span class="mais"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><use href="#i-mais"/></svg></span></summary>
+          <div class="acord__corpo">
+            <ul class="checklist">
+              <li>Apólice e documento do segurado</li>
+              <li>Boletim de ocorrência em roubo, furto ou incêndio</li>
+              <li>Fotos dos danos, antes de qualquer conserto</li>
+              <li>Relação dos bens danificados</li>
+              <li>Notas fiscais ou orçamentos de reparo</li>
+              <li>Laudo do Corpo de Bombeiros, em caso de incêndio</li>
+            </ul>
+          </div></details>
+        <details class="acord"><summary>Vida<span class="mais"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><use href="#i-mais"/></svg></span></summary>
+          <div class="acord__corpo">
+            <ul class="checklist">
+              <li>Formulário de aviso de sinistro</li>
+              <li>Certidão de óbito</li>
+              <li>Declaração médica com a causa</li>
+              <li>Documentos do segurado e de cada beneficiário</li>
+              <li>Certificado individual ou apólice</li>
+              <li>Boletim de ocorrência, em morte acidental</li>
+            </ul>
+          </div></details>
+        <details class="acord"><summary>Condomínio<span class="mais"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><use href="#i-mais"/></svg></span></summary>
+          <div class="acord__corpo">
+            <ul class="checklist">
+              <li>Apólice e CNPJ do condomínio</li>
+              <li>Ata de eleição do síndico</li>
+              <li>Fotos dos danos</li>
+              <li>Orçamentos de reparo</li>
+              <li>Boletim de ocorrência, quando houver</li>
+              <li>Laudo técnico, quando a seguradora pedir</li>
+            </ul>
+          </div></details>
+        <details class="acord"><summary>Empresarial<span class="mais"><svg viewBox="0 0 22 22" width="22" height="22" aria-hidden="true"><use href="#i-mais"/></svg></span></summary>
+          <div class="acord__corpo">
+            <ul class="checklist">
+              <li>Apólice, CNPJ e contrato social</li>
+              <li>Boletim de ocorrência</li>
+              <li>Relação de bens atingidos, com notas fiscais</li>
+              <li>Fotos do local e dos danos</li>
+              <li>Laudo do Corpo de Bombeiros, em caso de incêndio</li>
+              <li>Balancete ou faturamento, em lucros cessantes</li>
+            </ul>
+          </div></details>
+      </div>
+      <p class="nota">Rascunho de estrutura. Na Fase 3 cada lista é conferida item a item contra a página Sinistro do site atual — nada some na migração.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ======================================================================
+     TELA 4 — CONTATO E UNIDADES
+     ====================================================================== -->
+<div class="tela" id="tela-contato" hidden>
+  <section class="claro2" style="border-bottom:1px solid var(--linha)">
+    <div class="env">
+      <nav class="migalhas" aria-label="Trilha de navegação">
+        <ol><li><a href="#home" data-ir="home">Início</a></li><li aria-current="page">Contato</li></ol>
+      </nav>
+      <div class="pilha g16" style="padding-bottom:var(--secao);padding-top:.5rem">
+        <p class="chapeu">Contato</p>
+        <h1>Fale com a MX</h1>
+        <p class="lide medida">Três canais, cada um com um assunto. Escolha pelo motivo da sua ligação, não pelo número.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao claro anot" data-fix="P2">
+    <div class="env pilha g32">
+      <div class="grade grade--3">
+        <div class="card">
+          <span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap"/></svg></span>
+          <h3>Cotar ou contratar</h3>
+          <p>WhatsApp comercial · seg a sex, 08:00 às 18:00</p>
+          <a class="btn btn--zap btn--peq num" href="https://wa.me/5519971386794">(19) 97138-6794</a>
+        </div>
+        <div class="card">
+          <span class="card__icone"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-fone"/></svg></span>
+          <h3>Apólice, boleto, dúvida</h3>
+          <p>Telefone da matriz · seg a sex, 08:00 às 18:00</p>
+          <a class="btn btn--linha btn--peq num" href="tel:+551938638150">(19) 3863-8150</a>
+        </div>
+        <div class="card" style="border-color:#EDC9C0;background:var(--socorro-tenue)">
+          <span class="card__icone" style="background:#fff;border-color:#EDC9C0;color:var(--socorro)"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-alerta"/></svg></span>
+          <h3>Sinistro</h3>
+          <p>WhatsApp de sinistro · assistência 24h pela seguradora</p>
+          <a class="btn btn--socorro btn--peq num" href="https://wa.me/5519982036147">(19) 98203-6147</a>
+        </div>
+      </div>
+      <div class="faixa-socorro" style="background:var(--papel-2);border-color:var(--linha);border-left-color:var(--acao)">
+        <h3 style="color:var(--tinta)">Correção que vale em todas as 41 páginas</h3>
+        <p style="font-size:.9375rem">O texto exibido do rodapé sempre esteve certo; o <code>href</code> do primeiro telefone é que apontava para <code>tel:44133438</code>, um número que não existe, e o do header omitia o DDD. Neste protótipo todo telefone é <code>tel:+55DD9XXXXXXXX</code> e todo WhatsApp é <code>wa.me/55DD...</code>, com rótulo dizendo qual é qual.</p>
+      </div>
+      <div class="grade grade--2" style="gap:clamp(1.5rem,4cqi,3rem);align-items:start">
+        <div class="pilha g16">
+          <p class="chapeu">Escreva para a gente</p>
+          <h2>Prefere por escrito?</h2>
+          <p class="lide">Respondemos no próximo dia útil. Para urgência, use o WhatsApp de sinistro.</p>
+          <div class="dados">
+            <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-mail"/></svg><span><span class="dados__rot">E-mail</span><a href="mailto:mxseguros@mxseguros.com.br">mxseguros@mxseguros.com.br</a></span></p>
+            <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio"/></svg><span><span class="dados__rot">Atendimento</span>Segunda a sexta, 08:00 às 18:00</span></p>
+            <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin"/></svg><span><span class="dados__rot">Redes</span>@mxsegurositapira no Instagram e no Facebook</span></p>
+          </div>
+        </div>
+        <div class="entrada">
+          <form class="pilha g12" id="form-contato" novalidate>
+            <label class="campo"><span>Assunto</span>
+              <select name="assunto">
+                <option value="">Selecione</option>
+                <option>Quero uma cotação</option>
+                <option>Dúvida sobre apólice ou boleto</option>
+                <option>Sinistro</option>
+                <option>Trabalhe conosco</option>
+                <option>Outro assunto</option>
+              </select></label>
+            <div class="campos-2">
+              <label class="campo"><span>Nome</span><input name="nome" required autocomplete="name"></label>
+              <label class="campo"><span>Telefone</span><input name="fone" type="tel" inputmode="tel" required autocomplete="tel"></label>
+            </div>
+            <label class="campo"><span>E-mail</span><input name="email" type="email" autocomplete="email"></label>
+            <label class="campo"><span>Mensagem</span><textarea name="msg" rows="4"></textarea></label>
+            <label class="consent"><input type="checkbox" required><span>Autorizo o contato da MX. <a href="#privacidade">Política de Privacidade</a>.</span></label>
+            <button class="btn btn--acao btn--largo" type="submit">Enviar mensagem</button>
+            <div class="saida" id="saida-contato" role="status">
+              <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" style="flex:0 0 auto;margin-top:2px"><use href="#i-escudo"/></svg>
+              <span>Protótipo — nada é enviado.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao claro2">
+    <div class="env pilha g24">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Unidades</p>
+        <h2>Onde a MX fica</h2>
+      </div>
+      <div class="grade grade--2">
+        <div class="unidade">
+          <div class="unidade__mapa"><span class="token">«MAPA»</span><small>Google Maps — Itapira</small></div>
+          <div class="unidade__corpo">
+            <span class="unidade__selo">Matriz</span>
+            <h3>Itapira / SP</h3>
+            <div class="dados">
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin"/></svg><span>Av. Rio Branco, 221 — Centro<br>Itapira/SP · CEP 13970-070</span></p>
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio"/></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-fone"/></svg><span><span class="dados__rot">Telefone</span><a href="tel:+551938638150" class="num">(19) 3863-8150</a></span></p>
+            </div>
+            <div class="foto" style="min-height:150px"><b>Foto real</b><small>Fachada da matriz — já existe no site atual</small></div>
+          </div>
+        </div>
+        <div class="unidade">
+          <div class="unidade__mapa"><span class="token">«MAPA»</span><small>Google Maps — Águas de Lindóia</small></div>
+          <div class="unidade__corpo">
+            <span class="unidade__selo">Filial</span>
+            <h3>Águas de Lindóia / SP</h3>
+            <div class="dados">
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin"/></svg><span>Rua Argentina, 15 — Salas 2 e 3 — Centro<br>Águas de Lindóia/SP · CEP <span class="token">«CEP-FILIAL»</span></span></p>
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio"/></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
+              <p class="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-fone"/></svg><span><span class="dados__rot">Telefone</span><a href="tel:+551938638150" class="num">(19) 3863-8150</a></span></p>
+            </div>
+            <div class="foto" style="min-height:150px"><b>Foto real</b><small>Fachada da filial — já existe no site atual</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================================================================
+     TELA 5 — DESIGN SYSTEM
+     ====================================================================== -->
+<div class="tela" id="tela-sistema" hidden>
+  <section class="escuro" style="padding-block:clamp(2.5rem,6cqi,4rem)">
+    <div class="env pilha g16">
+      <p class="chapeu chapeu--neg">Entregável da Fase 2</p>
+      <h1>Guia do design system</h1>
+      <p class="lide medida">Herdado do projeto da landing do transportador e estendido para site institucional. Uma decisão nova: a cor de socorro.</p>
+    </div>
+  </section>
+
+  <section class="secao claro">
+    <div class="env pilha g32">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Cor</p>
+        <h2>Duas urgências, duas cores. Nunca a mesma.</h2>
+        <p class="lide">O site atual usa o mesmo destaque para vender e para socorrer. Aqui, âmbar só aparece onde há conversão e vermelho só aparece onde há sinistro. Quem está com o carro quebrado não é convidado a cotar.</p>
+      </div>
+      <div class="grade grade--4">
+        <div class="swatch"><div class="swatch__cor" style="background:#071B34"></div><div class="swatch__info"><b>Navy</b><code>#071B34</code><small>Institucional. Header, rodapé e seções escuras.</small></div></div>
+        <div class="swatch"><div class="swatch__cor" style="background:#B0AF94"></div><div class="swatch__info"><b>Sage</b><code>#B0AF94</code><small>Cor do símbolo M/X. Chapéus, filetes e detalhe sobre navy.</small></div></div>
+        <div class="swatch"><div class="swatch__cor" style="background:#F6A31A"></div><div class="swatch__info"><b>Ação</b><code>#F6A31A</code><small>Exclusiva de botão de conversão. Nunca decorativa.</small></div></div>
+        <div class="swatch"><div class="swatch__cor" style="background:#B32D19"></div><div class="swatch__info"><b>Socorro</b><code>#B32D19</code><small>Decisão nova. Exclusiva de sinistro e assistência 24h.</small></div></div>
+        <div class="swatch"><div class="swatch__cor" style="background:#FFFDFB;border-bottom:1px solid var(--linha)"></div><div class="swatch__info"><b>Papel</b><code>#FFFDFB</code><small>Fundo padrão, levemente quente.</small></div></div>
+        <div class="swatch"><div class="swatch__cor" style="background:#F4F2ED"></div><div class="swatch__info"><b>Papel 2</b><code>#F4F2ED</code><small>Alternância de seção, sem linha divisória.</small></div></div>
+        <div class="swatch"><div class="swatch__cor" style="background:#E4E1D9"></div><div class="swatch__info"><b>Linha</b><code>#E4E1D9</code><small>Bordas de card e de tabela.</small></div></div>
+        <div class="swatch"><div class="swatch__cor" style="background:#484848"></div><div class="swatch__info"><b>Corpo</b><code>#484848</code><small>Texto corrido. Títulos usam navy.</small></div></div>
+      </div>
+      <p class="nota">Neutros puxados para o sage, não cinza de sistema. Contraste conferido: âmbar sobre navy 7,4:1 · branco sobre socorro 5,4:1 · corpo sobre papel 8,9:1.</p>
+    </div>
+  </section>
+
+  <section class="secao claro2">
+    <div class="env pilha g32">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Tipografia</p>
+        <h2>Archivo para títulos, Public Sans para leitura</h2>
+        <p class="lide">Duas famílias com trabalho separado. Archivo é uma grotesca de peso alto que segura título grande; Public Sans tem abertura larga e foi desenhada para serviço público — texto denso, tela pequena, leitor apressado.</p>
+      </div>
+      <div class="regua">
+        <div class="regua__item"><span class="regua__meta">H1 · Archivo 800<br>clamp 30→48px</span><h1 style="margin:0">Seguro de Automóvel</h1></div>
+        <div class="regua__item"><span class="regua__meta">H2 · Archivo 700<br>clamp 24→34px</span><h2 style="margin:0">O que a apólice cobre</h2></div>
+        <div class="regua__item"><span class="regua__meta">H3 · Archivo 700<br>18px</span><h3 style="margin:0">Danos a terceiros (RCF)</h3></div>
+        <div class="regua__item"><span class="regua__meta">Corpo · Public Sans 400<br>17px / 1,62</span><p class="medida">Comparamos dez seguradoras, explicamos a diferença entre elas em português e, no dia do sinistro, é a MX que liga para a seguradora.</p></div>
+        <div class="regua__item"><span class="regua__meta">Chapéu · Archivo 700<br>12px / +0,13em</span><p class="chapeu">Seguradoras parceiras</p></div>
+      </div>
+      <div class="faixa-socorro" style="background:var(--papel);border-color:var(--linha);border-left-color:var(--acao)">
+        <h3 style="color:var(--tinta)">Fim da caixa alta em parágrafo</h3>
+        <p style="font-size:.9375rem">Caixa alta fica só em chapéu e em rótulo curto, com espacejamento. Título e texto corrido nunca. É o problema P9 do diagnóstico e também um ganho de leitor de tela.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao claro">
+    <div class="env pilha g32">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Componentes</p>
+        <h2>Botões, e quando usar cada um</h2>
+      </div>
+      <div class="grade grade--2">
+        <div class="card"><h3>Ação — âmbar</h3><p>Um por tela, no máximo. Só conversão: cotar, enviar formulário.</p><div class="acoes acoes--solta"><a class="btn btn--acao btn--peq" href="#s">Fazer cotação</a></div></div>
+        <div class="card"><h3>Socorro — vermelho</h3><p>Só sinistro e assistência 24h. Nunca aparece em página de venda.</p><div class="acoes acoes--solta"><a class="btn btn--socorro btn--peq" href="#s">Abrir sinistro</a></div></div>
+        <div class="card"><h3>WhatsApp — verde</h3><p>Canal, não conversão. Verde reconhecível, sempre com o número visível.</p><div class="acoes acoes--solta"><a class="btn btn--zap btn--peq" href="#s">(19) 97138-6794</a></div></div>
+        <div class="card"><h3>Contorno — neutro</h3><p>Ação secundária: ver todos, como chegar, saber mais.</p><div class="acoes acoes--solta"><a class="btn btn--linha btn--peq" href="#s">Ver os 33 seguros</a></div></div>
+      </div>
+      <p class="nota">Altura mínima de 50px no botão principal e 44px em qualquer alvo de toque. Foco visível em âmbar, 3px, com deslocamento — teclado é requisito de aceite.</p>
+    </div>
+  </section>
+
+  <section class="secao claro2">
+    <div class="env pilha g24">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Rastreabilidade</p>
+        <h2>Onde cada problema do diagnóstico foi resolvido</h2>
+        <p class="lide">Ligue o botão <b>Ver correções P1–P12</b> na barra do protótipo para ver as marcas em cima dos elementos.</p>
+      </div>
+      <div class="rolagem">
+        <table class="diag">
+          <thead><tr><th scope="col">#</th><th scope="col">Problema</th><th scope="col">Onde está resolvido no protótipo</th></tr></thead>
+          <tbody>
+            <tr><td>P1</td><td>Contatos de emergência escondidos em acordeão</td><td>Botão vermelho fixo no header, bloco de socorro na home e tabela de assistência aberta, com busca</td></tr>
+            <tr><td>P2</td><td>Link de telefone quebrado no rodapé das 41 páginas</td><td>Todo telefone em <code>tel:+55DD…</code> e todo WhatsApp em <code>wa.me/55DD…</code>, com rótulo separando os dois</td></tr>
+            <tr><td>P3</td><td>Telefone do header sem DDD</td><td>Mesmo padrão do P2; a barra de aviso do topo mostra horário e cidade em vez de número solto</td></tr>
+            <tr><td>P4</td><td>Cards de Vida e Residencial levando para a página errada</td><td>Grade de produtos com destino único por card; conferência de link vira item do aceite na Fase 5</td></tr>
+            <tr><td>P5</td><td>"Seguros Online" prometia cotador para 20 produtos</td><td>A página deixa de existir. Cotação é uma só, no formulário do site — o cotador externo é etapa, não destino (pendência 1)</td></tr>
+            <tr><td>P6</td><td>Quatro telefones sem lógica aparente</td><td>Seção "Canais" na home e na página de contato: um número por motivo, com horário declarado</td></tr>
+            <tr><td>P7</td><td>CTA principal mandava o visitante para fora do domínio</td><td>Formulário próprio no hero; o Aggilizador passa a ser passo interno, com evento medido</td></tr>
+            <tr><td>P8</td><td>Nenhuma prova social</td><td>Barra de confiança com 24 anos, 10 seguradoras e 2 escritórios; seção de depoimentos pronta e vazia</td></tr>
+            <tr><td>P9</td><td>Caixa alta em blocos de texto</td><td>Escala tipográfica com caixa alta restrita a chapéu e rótulo</td></tr>
+            <tr><td>P10</td><td>Quatro formulários idênticos na home</td><td>Um único formulário, com seletor de produto</td></tr>
+            <tr><td>P11</td><td>Rodapé com ano desatualizado</td><td>Ano gerado por código, não digitado</td></tr>
+            <tr><td>P12</td><td>Peso e performance</td><td>Sem Elementor, sem carrossel na primeira dobra, logos em SVG, fotos em WebP com carregamento tardio</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao claro">
+    <div class="env pilha g24">
+      <div class="pilha g8 medida">
+        <p class="chapeu">Ainda depende da MX</p>
+        <h2>O que trava e o que não trava</h2>
+        <p class="lide">Nenhuma pendência parou o protótipo. Cada uma virou um token visível, trocável por achar-e-substituir antes de publicar.</p>
+      </div>
+      <div class="grade grade--2">
+        <div class="card" style="border-left:4px solid var(--socorro)">
+          <h3>Trava a publicação</h3>
+          <ul class="lista-x">
+            <li><span class="token">«SUSEP»</span> registro da corretora — exigência regulatória no rodapé (pendência 3)</li>
+            <li><span class="token">«TEL-24H»</span> os dez telefones de assistência — número errado de emergência é pior que número ausente</li>
+            <li><span class="token">«CNPJ»</span> CNPJ da corretora no rodapé</li>
+          </ul>
+        </div>
+        <div class="card" style="border-left:4px solid var(--sage)">
+          <h3>Não trava — segue sem</h3>
+          <ul class="lista-v">
+            <li><span class="token">«DEPOIMENTOS»</span> a seção existe e só entra no ar com depoimento real (pendência 4)</li>
+            <li><span class="token">«MAPA»</span> embed dos dois mapas</li>
+            <li><span class="token">«CEP-FILIAL»</span> CEP de Águas de Lindóia</li>
+            <li>Fotos novas: as de 2022 seguram a Fase 4 (pendência 7)</li>
+          </ul>
+        </div>
+      </div>
+      <p class="nota">Antes de qualquer publicação, buscar por « no código. É a mesma convenção usada na landing do transportador.</p>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer class="rodape">
+  <div class="env">
+    <div class="rodape__topo">
+      <div class="pilha g16">
+        <span class="logo logo--sage" role="img" aria-label="MX Corretora de Seguros"></span>
+        <p style="font-size:.9375rem;max-width:36ch">Corretora de seguros em Itapira e Águas de Lindóia, no mercado desde 2002.</p>
+        <div class="rodape__contato">
+          <p class="rodape__linha-contato"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-fone"/></svg>
+            <span><span class="rodape__rot">Telefone</span><a href="tel:+551938638150"><b class="num">(19) 3863-8150</b></a></span></p>
+          <p class="rodape__linha-contato"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap"/></svg>
+            <span><span class="rodape__rot">WhatsApp comercial</span><a href="https://wa.me/5519971386794"><b class="num">(19) 97138-6794</b></a></span></p>
+          <p class="rodape__linha-contato"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-alerta"/></svg>
+            <span><span class="rodape__rot">WhatsApp de sinistro</span><a href="https://wa.me/5519982036147"><b class="num">(19) 98203-6147</b></a></span></p>
+          <p class="rodape__linha-contato"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-mail"/></svg>
+            <span><span class="rodape__rot">E-mail</span><a href="mailto:mxseguros@mxseguros.com.br">mxseguros@mxseguros.com.br</a></span></p>
+        </div>
+      </div>
+
+      <div>
+        <h4>Seguros</h4>
+        <ul>
+          <li><a href="#produto" data-ir="produto">Automóvel</a></li>
+          <li><a href="#p">Residencial</a></li>
+          <li><a href="#p">Vida</a></li>
+          <li><a href="#p">Condomínio</a></li>
+          <li><a href="#p">Empresarial</a></li>
+          <li><a href="#p">Transportes e Frota</a></li>
+          <li><a href="#p"><b>Ver os 33 seguros</b></a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>A MX</h4>
+        <ul>
+          <li><a href="#a-mx">Sobre nós</a></li>
+          <li><a href="#sinistro" data-ir="sinistro">Sinistro</a></li>
+          <li><a href="#sinistro" data-ir="sinistro">Assistência 24h</a></li>
+          <li><a href="#contato" data-ir="contato">Contato</a></li>
+          <li><a href="#privacidade">Política de Privacidade</a></li>
+          <li><a href="#cnsp">Resolução CNSP 382/2020</a></li>
+        </ul>
+      </div>
+
+      <div class="pilha g20">
+        <div>
+          <h4>Unidades</h4>
+          <ul>
+            <li><span class="rodape__rot">Matriz</span>Av. Rio Branco, 221 — Centro<br>Itapira/SP · CEP 13970-070</li>
+            <li style="margin-top:.6rem"><span class="rodape__rot">Filial</span>Rua Argentina, 15, Salas 2 e 3 — Centro<br>Águas de Lindóia/SP</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Horário</h4>
+          <p>Segunda a sexta, 08:00 às 18:00</p>
+        </div>
+        <div>
+          <h4>Redes</h4>
+          <p><a href="https://instagram.com/mxsegurositapira">@mxsegurositapira</a> — Instagram e Facebook</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="rodape__legal" style="padding-bottom:1.1rem">
+      MX Corretora de Seguros · CNPJ <span class="token">«CNPJ»</span> · Registro SUSEP <span class="token">«SUSEP»</span>.
+      A MX atua como corretora de seguros e não assume risco: a cobertura é da seguradora emissora da apólice.
+      Informações em conformidade com a Resolução CNSP 382/2020. Tratamento de dados conforme a LGPD.
+    </p>
+
+    <div class="rodape__base">
+      <span>© <span id="ano">2026</span> MX Corretora de Seguros. Todos os direitos reservados.</span>
+      <a href="#privacidade">Privacidade</a>
+      <a href="#cnsp">CNSP 382/2020</a>
+      <a href="#lgpd">LGPD</a>
+    </div>
+  </div>
+</footer>
+
+<div class="barra-mobile">
+  <a class="btn btn--acao" href="#cotar" data-ir="home">Fazer cotação</a>
+  <a class="btn btn--zap" href="https://wa.me/5519971386794">WhatsApp</a>
+  <a class="btn btn--socorro" href="#sinistro" data-ir="sinistro">Sinistro</a>
+</div>
+
+</div><!-- /palco -->
+
+<script>
+(function(){
+  "use strict";
+  var palco   = document.getElementById("palco");
+  var abas    = Array.prototype.slice.call(document.querySelectorAll(".proto__aba"));
+  var telas   = { home:0, produto:0, sinistro:0, contato:0, sistema:0 };
+  var painel  = document.getElementById("painel-seguros");
+  var gatilhos= [document.getElementById("abre-painel"), document.getElementById("abre-painel-mobile")];
+
+  Object.keys(telas).forEach(function(k){ telas[k] = document.getElementById("tela-" + k); });
+
+  /* --- troca de tela ---------------------------------------------------- */
+  function irPara(nome){
+    if(!telas[nome]) return;
+    Object.keys(telas).forEach(function(k){ telas[k].hidden = (k !== nome); });
+    abas.forEach(function(b){ b.setAttribute("aria-current", String(b.dataset.tela === nome)); });
+    fecharPainel();
+    palco.scrollTop = 0;
+    var atual = { produto:"", home:"", sinistro:"Sinistro e Assistência", contato:"Contato" }[nome];
+    document.querySelectorAll(".topo__nav .topo__link").forEach(function(a){
+      if(atual && a.textContent.trim() === atual){ a.setAttribute("aria-current","page"); }
+      else { a.removeAttribute("aria-current"); }
+    });
+  }
+  abas.forEach(function(b){ b.addEventListener("click", function(){ irPara(b.dataset.tela); }); });
+
+  /* Qualquer link com data-ir navega entre telas do protótipo */
+  document.addEventListener("click", function(e){
+    var alvo = e.target.closest("[data-ir]");
+    if(!alvo) return;
+    e.preventDefault();
+    irPara(alvo.dataset.ir);
+  });
+
+  /* --- painel de produtos ----------------------------------------------- */
+  function abrirPainel(){
+    painel.dataset.aberto = "1";
+    gatilhos.forEach(function(g){ if(g) g.setAttribute("aria-expanded","true"); });
+    var campo = document.getElementById("busca-produto");
+    if(campo && palco.clientWidth >= 900) campo.focus();
+  }
+  function fecharPainel(){
+    painel.dataset.aberto = "0";
+    gatilhos.forEach(function(g){ if(g) g.setAttribute("aria-expanded","false"); });
+  }
+  gatilhos.forEach(function(g){
+    if(!g) return;
+    g.addEventListener("click", function(){
+      painel.dataset.aberto === "1" ? fecharPainel() : abrirPainel();
+    });
+  });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") fecharPainel(); });
+  painel.addEventListener("click", function(e){ if(e.target.closest("a")) fecharPainel(); });
+  var verTodos = document.getElementById("ver-todos");
+  if(verTodos) verTodos.addEventListener("click", function(){
+    abrirPainel();
+    palco.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  /* --- busca de produto -------------------------------------------------- */
+  function normalizar(s){
+    return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+  var buscaProduto = document.getElementById("busca-produto");
+  var vazioProduto = document.getElementById("busca-vazia");
+  if(buscaProduto){
+    var itens = Array.prototype.slice.call(document.querySelectorAll("#grade-produtos a"));
+    itens.forEach(function(a){ a.dataset.rotulo = a.textContent; });
+    buscaProduto.addEventListener("input", function(){
+      var q = normalizar(buscaProduto.value.trim());
+      var achou = 0;
+      itens.forEach(function(a){
+        var rotulo = a.dataset.rotulo;
+        var pos = q ? normalizar(rotulo).indexOf(q) : -1;
+        var mostra = !q || pos > -1;
+        a.parentNode.hidden = !mostra;
+        if(mostra) achou++;
+        a.innerHTML = (q && pos > -1)
+          ? rotulo.slice(0,pos) + "<mark>" + rotulo.slice(pos, pos+q.length) + "</mark>" + rotulo.slice(pos+q.length)
+          : rotulo;
+      });
+      document.querySelectorAll("#grade-produtos [data-grupo]").forEach(function(col){
+        var visiveis = col.querySelectorAll("li:not([hidden])").length;
+        col.hidden = visiveis === 0;
+      });
+      vazioProduto.hidden = achou !== 0;
+    });
+  }
+
+  /* --- busca de seguradora na tabela de assistência ---------------------- */
+  var buscaSeg = document.getElementById("busca-seguradora");
+  if(buscaSeg){
+    var linhas = Array.prototype.slice.call(document.querySelectorAll("#tab-assist tbody tr"));
+    var vazioSeg = document.getElementById("assist-vazia");
+    buscaSeg.addEventListener("input", function(){
+      var q = normalizar(buscaSeg.value.trim());
+      var achou = 0;
+      linhas.forEach(function(tr){
+        var mostra = !q || normalizar(tr.cells[0].textContent).indexOf(q) > -1;
+        tr.hidden = !mostra;
+        if(mostra) achou++;
+      });
+      vazioSeg.hidden = achou !== 0;
+    });
+  }
+
+  /* --- formulários: no protótipo nada é enviado -------------------------- */
+  [["form-hero","saida-hero"],["form-produto","saida-produto"],["form-contato","saida-contato"]]
+    .forEach(function(par){
+      var f = document.getElementById(par[0]);
+      if(!f) return;
+      f.addEventListener("submit", function(e){
+        e.preventDefault();
+        if(!f.reportValidity()) return;
+        document.getElementById(par[1]).dataset.visivel = "1";
+      });
+    });
+
+  /* --- controles do protótipo ------------------------------------------- */
+  var btnNotas = document.getElementById("btn-notas");
+  btnNotas.addEventListener("click", function(){
+    var ligado = palco.dataset.notas === "1";
+    palco.dataset.notas = ligado ? "0" : "1";
+    btnNotas.setAttribute("aria-pressed", String(!ligado));
+  });
+
+  var btnVista = document.getElementById("btn-vista");
+  btnVista.addEventListener("click", function(){
+    var mobile = palco.dataset.vista === "mobile";
+    palco.dataset.vista = mobile ? "desktop" : "mobile";
+    btnVista.setAttribute("aria-pressed", String(!mobile));
+    btnVista.textContent = mobile ? "Mobile 390px" : "Voltar ao desktop";
+  });
+
+  var imprimir = document.getElementById("btn-imprimir");
+  if(imprimir) imprimir.addEventListener("click", function(){
+    document.querySelectorAll("#tela-sinistro .acord").forEach(function(d){ d.open = true; });
+    try { window.print(); } catch(err){ /* impressão bloqueada no protótipo */ }
+  });
+
+  /* Ano do rodapé gerado, nunca digitado — problema P11 */
+  document.getElementById("ano").textContent = String(new Date().getFullYear());
+})();
+</script>
