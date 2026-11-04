@@ -3,15 +3,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { PRODUTOS, porGrupo, type Grupo } from '@/content/produtos';
+import { PRODUTOS, porGrupo } from '@/content/produtos';
+import { PILARES } from '@/content/pilares';
+import { LEMA, WHATSAPP } from '@/content/empresa';
 
-/* O painel tem três colunas, não um grupo por coluna: Consórcios fica
-   embaixo de Saúde e previdência, na mesma coluna. */
-const COLUNAS: Grupo[][] = [
-  ['Para você'],
-  ['Para sua empresa'],
-  ['Saúde e previdência', 'Consórcios'],
-];
+/* O menu principal são os pilares, não a lista de produtos: 32 itens com o
+   mesmo peso comunicavam "vendemos de tudo". No desktop cada pilar é um link, e
+   a lista completa fica em /seguros. O painel só existe no menu do celular. */
 
 export default function Topo() {
   const rota = usePathname();
@@ -19,7 +17,6 @@ export default function Topo() {
   /** Altura máxima do painel, medida pelo espaço livre abaixo dele. */
   const [alturaMax, setAlturaMax] = useState<string | undefined>();
   const painel = useRef<HTMLDivElement>(null);
-  const fechar = useRef<number | null>(null);
 
   /* O painel mostra tudo quando cabe, e só rola quando não cabe.
      O header é sticky, então o topo do painel é estável na viewport:
@@ -44,20 +41,6 @@ export default function Topo() {
     return () => document.removeEventListener('keydown', esc);
   }, [aberto]);
 
-  /* Recolhe sozinho ao tirar o mouse, com folga — e só em ponteiro fino.
-     No toque não fecha sozinho: o dedo sai da área o tempo todo. */
-  const fino = () =>
-    typeof window !== 'undefined' &&
-    window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-  function saiu() {
-    if (!fino()) return;
-    fechar.current = window.setTimeout(() => setAberto(false), 350);
-  }
-  function voltou() {
-    if (fechar.current) window.clearTimeout(fechar.current);
-  }
-
   /* O logo é sempre "voltar ao começo". Em outra página o Link já leva para
      a home no topo; na própria home a navegação seria um no-op, então aqui
      ele vira âncora e sobe a página. */
@@ -73,8 +56,10 @@ export default function Topo() {
     <>
       <div className="util">
         <div className="env">
+          <span className="util__lema">{LEMA}</span>
           <Link href="/a-mx">A MX</Link>
           <Link href="/contato">Unidades</Link>
+          <Link href="/seguros">Todos os seguros</Link>
           <Link href="/trabalhe-conosco">Trabalhe conosco</Link>
           <Link className="util__socorro" href="/sinistro">
             <svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true">
@@ -85,41 +70,28 @@ export default function Topo() {
         </div>
       </div>
 
-      <header className="topo" onMouseLeave={saiu} onMouseEnter={voltou}>
+      <header className="topo">
         <div className="env">
           <div className="topo__linha">
-            <Link
-              href="/"
-              className="logo"
-              aria-label="MX Corretora de Seguros — página inicial"
-              onClick={clicouNoLogo}
-            />
+            <Link href="/" className="logo" onClick={clicouNoLogo}>
+              <span className="oculto">MX Corretora de Seguros — página inicial</span>
+            </Link>
             <nav className="topo__nav" aria-label="Principal">
-              <button
-                className="topo__link"
-                aria-expanded={aberto}
-                aria-controls="painel-seguros"
-                onClick={() => setAberto((v) => !v)}
-              >
-                Seguros{' '}
-                <svg viewBox="0 0 12 8" aria-hidden="true">
-                  <use href="#i-baixo" />
-                </svg>
-              </button>
-              <Link className="topo__link" href="/sinistro">
-                Sinistro e Assistência
-              </Link>
-              <Link className="topo__link" href="/a-mx">
-                A MX
-              </Link>
-              <Link className="topo__link" href="/contato">
-                Contato
-              </Link>
+              {PILARES.map((p) => (
+                <Link
+                  className="topo__link"
+                  href={p.rota}
+                  key={p.id}
+                  aria-current={rota === p.rota ? 'page' : undefined}
+                >
+                  {p.rotuloMenu}
+                </Link>
+              ))}
             </nav>
             <div className="topo__dir">
               <a
                 className="btn btn--zap btn--peq topo__cta topo__zap"
-                href="https://wa.me/551938638150"
+                href={WHATSAPP.link}
                 aria-label="Falar no WhatsApp da MX"
               >
                 <svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true">
@@ -162,7 +134,7 @@ export default function Topo() {
             <button
               className="painel__fechar"
               type="button"
-              aria-label="Fechar menu de seguros"
+              aria-label="Fechar menu"
               onClick={() => setAberto(false)}
             >
               <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
@@ -176,55 +148,33 @@ export default function Topo() {
               </svg>
             </button>
 
-            <div className="painel__grade">
-              {COLUNAS.map((coluna) => {
-                const comItens = coluna.filter((g) => porGrupo(g).length);
-                if (!comItens.length) return null;
-                return (
-                  <div className="painel__col" key={coluna.join('+')}>
-                    {comItens.map((grupo) => (
-                      <div className="painel__bloco" key={grupo}>
-                        <h4>{grupo}</h4>
-                        <ul>
-                          {porGrupo(grupo).map((slug) => (
-                              <li key={slug}>
-                                <Link
-                                  href={`/seguros/${slug}`}
-                                  onClick={() => setAberto(false)}
-                                >
-                                  {PRODUTOS[slug].rotuloMenu}
-                                </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+            <div className="painel__grade painel__grade--4">
+              {PILARES.map((p) => (
+                <div className="painel__col" key={p.id}>
+                  <h4>
+                    <Link href={p.rota} onClick={() => setAberto(false)}>
+                      {p.grupo}
+                    </Link>
+                  </h4>
+                  <ul>
+                    {porGrupo(p.grupo).map((slug) => (
+                      <li key={slug}>
+                        <Link href={`/seguros/${slug}`} onClick={() => setAberto(false)}>
+                          {PRODUTOS[slug].rotuloMenu}
+                        </Link>
+                      </li>
                     ))}
-                    {coluna.includes('Consórcios') && (
-                      <div className="painel__ajuda">
-                        <h4>Não achou o que procura?</h4>
-                        <p>
-                          Trabalhamos com mais de 40 seguradoras e cotamos ramos que não estão
-                          nesta lista.
-                        </p>
-                        <a
-                          className="btn btn--zap btn--peq btn--largo"
-                          href="https://wa.me/551938638150"
-                        >
-                          <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
-                            <use href="#i-zap" />
-                          </svg>{' '}
-                          Contar o que preciso
-                        </a>
-                        <span className="painel__ajuda__rot">
-                          WhatsApp da MX · seg a sex, 08:00 às 18:00
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+                  </ul>
+                </div>
+              ))}
             </div>
 
+            <div className="painel__extra">
+              <Link href="/a-mx" onClick={() => setAberto(false)}>A MX</Link>
+              <Link href="/contato" onClick={() => setAberto(false)}>Unidades</Link>
+              <Link href="/seguros" onClick={() => setAberto(false)}>Todos os seguros</Link>
+              <Link href="/trabalhe-conosco" onClick={() => setAberto(false)}>Trabalhe conosco</Link>
+            </div>
           </div>
         </div>
       </header>

@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import MapaUnidade from '@/components/MapaUnidade';
+import Unidades from '@/components/Unidades';
 
 export const metadata: Metadata = {
   title: 'Contato e unidades',
-  description: 'Três canais, cada um com um assunto. Itapira e Águas de Lindóia.',
+  description: 'Dois números de WhatsApp, cada um com um assunto. Itapira e Águas de Lindóia.',
 };
 
 export default function Pagina() {
@@ -13,11 +13,11 @@ export default function Pagina() {
       <section className="secao--curta">
           <div className="env">
             <nav className="migalhas" aria-label="Trilha de navegação">
-              <ol><li><a href="/">Início</a></li><li aria-current="page">Contato</li></ol>
+              <ol><li><Link href="/">Início</Link></li><li aria-current="page">Contato</li></ol>
             </nav>
             <div className="pilha g12" style={{ paddingTop: '.4rem' }}>
               <h1>Fale com a MX</h1>
-              <p className="lide medida">Três canais, cada um com um assunto. Escolha pelo motivo da sua ligação, não pelo número.</p>
+              <p className="lide medida">Dois números de WhatsApp, cada um com um assunto. Escolha pelo motivo do contato, não pelo número.</p>
             </div>
           </div>
         </section>
@@ -89,36 +89,7 @@ export default function Pagina() {
               <span className="olho">Unidades</span>
               <h2>Onde a MX fica</h2>
             </div>
-            <div className="grade grade--2">
-              <div className="unidade">
-                <MapaUnidade endereco="Av. Rio Branco, 221 - Centro, Itapira - SP, 13970-070" descricao="Mapa da matriz da MX em Itapira" />
-                <div className="unidade__corpo">
-                  <span className="selo">Matriz</span>
-                  <h3>Itapira / SP</h3>
-                  <div className="dados">
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin" /></svg><span>Av. Rio Branco, 221 — Centro<br />Itapira/SP · CEP 13970-070</span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio" /></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
-                  </div>
-                  <div className="foto-vazia" style={{ minHeight: '140px' }}><b>Foto real</b><small>Fachada da matriz — já existe no site atual</small></div>
-                  <a className="seta" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.%20Rio%20Branco%2C%20221%20-%20Centro%2C%20Itapira%20-%20SP%2C%2013970-070" target="_blank" rel="noopener">Como chegar a Itapira <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></a>
-                </div>
-              </div>
-              <div className="unidade">
-                <MapaUnidade endereco="Rua Argentina, 15 - Águas de Lindóia - SP" descricao="Mapa da filial da MX em Águas de Lindóia" />
-                <div className="unidade__corpo">
-                  <span className="selo">Filial</span>
-                  <h3>Águas de Lindóia / SP</h3>
-                  <div className="dados">
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin" /></svg><span>Rua Argentina, 15 — Salas 2 e 3 — Centro<br />Águas de Lindóia/SP · CEP <span className="token">«CEP-FILIAL»</span></span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio" /></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
-                  </div>
-                  <div className="foto-vazia" style={{ minHeight: '140px' }}><b>Foto real</b><small>Fachada da filial — já existe no site atual</small></div>
-                  <a className="seta" href="https://www.google.com/maps/dir/?api=1&amp;destination=Rua%20Argentina%2C%2015%20-%20%C3%81guas%20de%20Lind%C3%B3ia%20-%20SP" target="_blank" rel="noopener">Como chegar a Águas de Lindóia <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></a>
-                </div>
-              </div>
-            </div>
+            <Unidades />
           </div>
         </section>
     </>

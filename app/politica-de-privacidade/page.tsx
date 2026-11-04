@@ -12,7 +12,7 @@ export default function Pagina() {
       <section className="secao--curta">
           <div className="env">
             <nav className="migalhas" aria-label="Trilha de navegação">
-              <ol><li><a href="/">Início</a></li><li><a href="/a-mx">A MX</a></li>
+              <ol><li><Link href="/">Início</Link></li><li><a href="/a-mx">A MX</a></li>
                   <li aria-current="page">Política de Privacidade</li></ol>
             </nav>
             <div className="pilha g12" style={{ paddingTop: '.4rem' }}>

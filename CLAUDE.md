@@ -2,13 +2,13 @@
 
 # Site da MX Corretora
 
-Redesign de mxseguros.com.br. O protótipo aprovado está fora deste repositório, em
-`../MX Novo Site/prototipo.html` — é a referência visual de tudo aqui, e continua sendo
-mantido como documento de design.
+Redesign de mxseguros.com.br. O protótipo aprovado é `Docs/prototipo-v3-pilares.html`, montado
+por `Docs/prototipo-v3/montar.mjs` — é a referência visual de tudo aqui, e continua sendo mantido
+como documento de design. O v2 (`Docs/prototipo.html`) fica como histórico.
 
 ## Antes de mexer no CSS
 
-**`.palco` não é um wrapper decorativo.** São 16 `@container palco` contra uma única
+**`.palco` não é um wrapper decorativo.** São 22 `@container palco` contra uma única
 `@media`: sem um elemento com `container-type: inline-size; container-name: palco`
 envolvendo o conteúdo, o site inteiro para de responder, em silêncio. Nenhum teste pega.
 
@@ -31,25 +31,34 @@ Vieram de rodadas de revisão e não devem ser reintroduzidas por conta própria
 - **Sem barra fixa de conversão.** O par WhatsApp + "Fazer cotação" no header é o padrão.
 - `.foto-card--grade` precisa de `background-position: 74% center`: as fotos foram recortadas
   com o sujeito à direita, e `center` cai no vazio.
+- **Herói único, sem carrossel.** Uma promessa só, de saúde empresarial. Consórcio e seguro
+  empresarial são entradas fixas logo abaixo da faixa de números.
+- **O menu principal são os pilares**, não a lista de produtos. Auto, residencial, moto e pets
+  ficam em "Para você", como porta de entrada.
 
 ## Conteúdo
 
-`content/produtos.ts` é a fonte única dos 27 seguros. Link de produto sai daí, nunca digitado.
-Slug preservado do site antigo — mudar um exige 301.
+`content/produtos.ts` é a fonte única dos produtos. Link de produto sai daí, nunca digitado, e a
+quantidade sai de `SLUGS.length`. Slug preservado do site antigo — mudar um exige 301.
+
+`content/pilares.ts` define pilares, chamadas e páginas de pilar. `content/empresa.ts` guarda
+canais, unidades, especialistas e o que ainda está pendente, entre « ». Dado pendente não se
+inventa: `grep «` precisa voltar vazio antes da virada de DNS.
 
 **Comentário de projeto não mora na página.** Nota na tela só se for texto que o visitante
 final leria: disclaimer real, aviso de papel de corretora, limite de cobertura.
 
 ## Conformidade — não é opcional
 
-A MX é corretora, não assume risco e não administra plano. Consórcio nunca é investimento;
-previdência sem projeção de rentabilidade; em saúde não prometer movimentação cadastral.
-Rodapé com CNPJ, registro SUSEP e CNSP 382/2020.
+A MX é corretora, não assume risco e não administra plano. Consórcio nunca é investimento, não
+é seguro e não promete prazo de contemplação: o texto passa pelo jurídico. Previdência sem projeção
+de rentabilidade; em saúde não prometer movimentação cadastral nem "a vida inteira". Rodapé com
+CNPJ, registro SUSEP e CNSP 382/2020.
 
 **Nunca publicar depoimento inventado.** Prova social falsa em site de corretora é infração ao
 CDC. Os textos do protótipo são exemplos rotulados e não podem migrar para cá.
 
 ## Antes de commitar
 
-`npm run lint` e `npx tsc --noEmit`. O `satisfies` em `produtos.ts` valida os 27 produtos na
+`npm run lint` e `npx tsc --noEmit`. O `satisfies` em `produtos.ts` valida os produtos na
 compilação — se quebrou lá, é campo faltando, não erro de tipo.

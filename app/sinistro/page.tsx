@@ -15,15 +15,16 @@ export default function Pagina() {
             <h1 style={{ color: '#fff' }}>Aconteceu alguma coisa. Comece por aqui.</h1>
             <div className="grade grade--2" style={{ gap: '.7rem' }}>
               <a className="card" href="https://wa.me/5519982036147" style={{ background: 'rgba(0,0,0,.2)', borderColor: 'rgba(255,255,255,.28)', gap: '.15rem', textDecoration: 'none' }}>
-                <span style={{ fontSize: '.75rem', color: 'rgba(255,255,255,.85)' }}>Abrir sinistro com a MX · WhatsApp</span>
+                <span style={{ fontSize: '.75rem', color: 'rgba(255,255,255,.85)' }}>Abrir sinistro com a MX · WhatsApp · seg a sex, 08:00 às 18:00</span>
                 <b className="num" style={{ color: '#fff', fontSize: '1.5rem', fontWeight: '500', letterSpacing: '-.02em' }}>(19) 98203-6147</b>
               </a>
               <a className="card" href="#tabela-assistencia" style={{ background: 'rgba(0,0,0,.2)', borderColor: 'rgba(255,255,255,.28)', gap: '.15rem', textDecoration: 'none' }}>
-                <span style={{ fontSize: '.75rem', color: 'rgba(255,255,255,.85)' }}>Guincho, chaveiro, pane — assistência 24h</span>
+                <span style={{ fontSize: '.75rem', color: 'rgba(255,255,255,.85)' }}>Guincho, chaveiro, pane — assistência 24h da seguradora</span>
                 <b style={{ color: '#fff', fontSize: '1.2rem', fontWeight: '500', letterSpacing: '-.02em' }}>Achar o telefone da minha seguradora →</b>
               </a>
             </div>
             <p style={{ color: 'rgba(255,255,255,.92)', fontSize: '.9375rem', maxWidth: '68ch' }}>Se houver ferido, ligue primeiro para o <b style={{ color: '#fff' }}>SAMU 192</b> ou <b style={{ color: '#fff' }}>Bombeiros 193</b>. Em caso de roubo ou colisão com terceiro, registre o boletim de ocorrência antes de acionar a seguradora.</p>
+            <p style={{ color: 'rgba(255,255,255,.92)', fontSize: '.9375rem', maxWidth: '68ch' }}>A assistência 24 horas é da sua seguradora. O WhatsApp de sinistro da MX atende de segunda a sexta, das 08:00 às 18:00. Fora desse horário, comece pela assistência e mande a mensagem: a MX responde no próximo dia útil.</p>
           </div>
         </section>
       

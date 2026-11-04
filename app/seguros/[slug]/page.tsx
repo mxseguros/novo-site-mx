@@ -5,7 +5,7 @@ import { PRODUTOS, SLUGS, type Produto, type Slug } from '@/content/produtos';
 import FormProduto from '@/components/FormProduto';
 
 /**
- * As 27 páginas de produto, de uma rota só.
+ * Todas as páginas de produto, de uma rota só.
  *
  * Porta o motor renderProduto() do protótipo. A estrutura muda conforme o
  * template do produto:
@@ -345,7 +345,7 @@ export default async function PaginaProduto({ params }: Props) {
                     </span>
                     <h3>{r.rotuloMenu}</h3>
                     {/* o protótipo tinha fallback para promessa; o as const
-                        prova que resumo nunca é vazio nos 27 */}
+                        prova que resumo nunca é vazio em nenhum produto */}
                     <p>{r.resumo}</p>
                     <span className="foto-card__btn">Ver seguro</span>
                   </Link>

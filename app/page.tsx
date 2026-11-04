@@ -1,16 +1,20 @@
 import Link from 'next/link';
 import Hero from '@/components/Hero';
-import VitrineProdutos from '@/components/VitrineProdutos';
+import Pilares from '@/components/Pilares';
+import Especialistas from '@/components/Especialistas';
 import FormCotacao from '@/components/FormCotacao';
-import MapaUnidade from '@/components/MapaUnidade';
+import GuiasCards from '@/components/GuiasCards';
+import Unidades from '@/components/Unidades';
+import Dado from '@/components/Dado';
+import { pilar } from '@/content/pilares';
+import { NOTA_GOOGLE, TOTAL_AVALIACOES, WHATSAPP, WHATSAPP_SINISTRO } from '@/content/empresa';
 
 /**
- * Home — portada do protótipo aprovado no Portão G2.
+ * Home — aprovada no protótipo v3 (Docs/prototipo-v3-pilares.html).
  *
- * As seções estáticas vieram da marcação do protótipo; hero, vitrine de
- * produtos e formulário viraram componentes de cliente porque têm estado.
- * Os links de produto apontam para /seguros/[slug] e saem do produtos.ts —
- * nenhum destino é digitado à mão.
+ * Abre com uma promessa só e apresenta a MX pelos três pilares: saúde,
+ * consórcio e seguro empresarial. Os links de produto saem do produtos.ts e os
+ * de pilar do pilares.ts — nenhum destino é digitado à mão.
  */
 export default function Home() {
   return (
@@ -29,85 +33,62 @@ export default function Home() {
               <div className="numeros__item">
                 <span className="numeros__n num">+40</span>
                 <span className="numeros__t">seguradoras parceiras</span>
-                <span className="numeros__d">Uma cotação, dezenas de propostas comparadas</span>
+                <span className="numeros__d">A seguradora certa para cada risco</span>
               </div>
               <div className="numeros__item">
                 <span className="numeros__n num">2</span>
                 <span className="numeros__t">escritórios de porta aberta</span>
-                <span className="numeros__d">Itapira e Águas de Lindóia</span>
+                <span className="numeros__d">Consultores que moram em Itapira e em Águas de Lindóia</span>
               </div>
             </div>
           </div>
         </section>
 
-      <VitrineProdutos />
-
-      {/* Cards cinza — padrao de oferta */}
-        <section className="secao--curta">
-          <div className="env pilha g16">
-            <div className="grade grade--3">
-              <a className="oferta" href="#cotar">
-                <span className="olho">Cotação</span>
-                <h3>Uma cotação, mais de 40 seguradoras</h3>
-                <p>Você preenche uma vez. A MX manda o mesmo risco para as parceiras e compara as propostas.</p>
-                <span className="seta">Cotar agora <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></span>
-              </a>
-              <a className="oferta" href="#cotar">
-                <span className="olho">Renovação</span>
-                <h3>Vence em 30 dias? Dá tempo</h3>
-                <p>Recotamos o mercado antes do vencimento, sem você perder bônus nem ficar um dia sem cobertura.</p>
-                <span className="seta">Avisar meu vencimento <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></span>
-              </a>
-              <Link className="oferta oferta--socorro" href="/sinistro">
-                <span className="olho">Sinistro</span>
-                <h3>Aconteceu alguma coisa</h3>
-                <p>Telefone da assistência 24h da sua seguradora e WhatsApp direto com a corretora.</p>
-                <span className="seta seta--socorro">Abrir sinistro <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></span>
+      {/* Entradas fixas dos outros dois pilares */}
+        <section className="entradas">
+          <div className="env">
+            <div className="grade grade--2">
+              <Link className="oferta oferta--entrada" href={pilar('financeiras').rota}>
+                <span className="olho">Consórcio</span>
+                <h3>Imóvel, veículo ou serviço sem juros de financiamento</h3>
+                <p>Compra planejada com acompanhamento até a contemplação. Consórcio não é seguro nem investimento, e a MX explica isso antes de você aderir.</p>
+                <span className="seta">{pilar('financeiras').chamada} <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></span>
+              </Link>
+              <Link className="oferta oferta--entrada" href={pilar('empresarial').rota}>
+                <span className="olho">Seguro empresarial</span>
+                <h3>Seguro dimensionado pelo que a sua empresa realmente tem</h3>
+                <p>Patrimônio, responsabilidade civil, frota e carga. A gente lê a apólice atual com você e mostra o que sobra e o que falta.</p>
+                <span className="seta">{pilar('empresarial').chamada} <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></span>
               </Link>
             </div>
-            <div className="grade grade--2">
-              <div className="oferta oferta--larga">
-                <span className="olho">Canais</span>
-                <h3>São dois números, e cada um tem um dono</h3>
-                <p>Um resolve tudo — cotação, apólice, boleto, dúvida. O outro é só para sinistro, e por isso não fica preso em conversa de venda.</p>
-                <div className="acoes" style={{ marginTop: 'auto', paddingTop: '.7rem' }}>
-                  <a className="btn btn--zap btn--peq num" href="https://wa.me/551938638150"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><use href="#i-zap" /></svg> (19) 3863-8150</a>
-                  <a className="btn btn--socorro btn--peq num" href="https://wa.me/5519982036147">(19) 98203-6147 · sinistro</a>
-                </div>
-              </div>
-              <a className="oferta oferta--larga oferta--azul" href="#unidades">
-                <span className="olho" style={{ color: 'var(--sage)' }}>Unidades</span>
-                <h3>Você pode simplesmente entrar</h3>
-                <p>Av. Rio Branco, 221, em Itapira, e Rua Argentina, 15, em Águas de Lindóia. De segunda a sexta, das 08:00 às 18:00.</p>
-                <span className="seta seta--neg">Ver endereços e mapa <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></span>
-              </a>
+          </div>
+        </section>
+
+      <Pilares />
+
+      {/* Especialistas por pilar */}
+        <section className="secao cinza">
+          <div className="env pilha g24">
+            <div className="pilha g8">
+              <span className="olho">Quem cuida de cada área</span>
+              <h2>Você sabe o nome de quem atende a sua empresa</h2>
+              <p className="lide medida">Cada pilar tem um consultor responsável, que mora na região e acompanha a sua conta da cotação à renovação.</p>
             </div>
+            <Especialistas />
           </div>
         </section>
 
       <FormCotacao />
 
-      {/* Destaque saude empresarial — o beneficio de maior retorno */}
-        <section className="secao">
-          <div className="env">
-            <div className="grade grade--2" style={{ gap: 'clamp(1.5rem,4cqi,3rem)', alignItems: 'center' }}>
-              <div className="pilha g16">
-                <span className="olho">Saúde para empresas</span>
-                <h2>Todo seguro espera o pior. A saúde trabalha todo mês.</h2>
-                <p className="lide">O único benefício que a empresa contrata torcendo para ser usado.</p>
-                <ul className="lista-v">
-                  <li>A MX compara operadoras, rede credenciada e carência antes de a empresa assinar.</li>
-                  <li>Portabilidade de carências para quem já vem de outro plano, quando os requisitos são cumpridos.</li>
-                  <li>Coparticipação avaliada caso a caso, para baixar a mensalidade sem derrubar a rede.</li>
-                  <li>Recotação do contrato antes do vencimento, todo ano.</li>
-                </ul>
-                <div className="acoes">
-                  <a className="btn btn--azul" href="#cotar">Cotar plano para o meu time</a>
-                  <a className="btn btn--zap" href="https://wa.me/551938638150"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap" /></svg> Falar com um consultor</a>
-                </div>
-              </div>
-              <div className="foto-larga" style={{ backgroundImage: 'var(--f-ph-saude)', backgroundPosition: '60% center' }} role="img" aria-label="Profissional de saúde em atendimento a um paciente"></div>
+      {/* Conteúdo para quem está decidindo: saúde empresarial leva meses */}
+        <section className="secao cinza">
+          <div className="env pilha g24">
+            <div className="pilha g8">
+              <span className="olho">Antes de decidir</span>
+              <h2>Antes de trocar o plano de saúde da empresa</h2>
+              <p className="lide medida">Escolher um plano leva meses. Estes guias explicam os pontos em que as propostas mais diferem.</p>
             </div>
+            <GuiasCards />
           </div>
         </section>
 
@@ -117,23 +98,39 @@ export default function Home() {
             <div className="grade grade--2" style={{ gap: 'clamp(1.5rem,4cqi,3rem)', alignItems: 'center' }}>
               <div className="pilha g16">
                 <span className="olho" style={{ color: 'var(--sage)' }}>Já é cliente e precisa agora</span>
-                <h2>Sinistro e assistência 24 horas</h2>
+                <h2>Sinistro e assistência</h2>
                 <p className="lide">O telefone da assistência da sua seguradora fica aberto na tela, sem clique e sem acordeão. A página abre em conexão ruim e pode ser salva no celular.</p>
                 <div className="acoes">
                   <Link className="btn btn--socorro" href="/sinistro">Abrir sinistro e assistência</Link>
-                  <a className="btn btn--zap num" href="https://wa.me/5519982036147"><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap" /></svg> (19) 98203-6147</a>
+                  <a className="btn btn--zap num" href={WHATSAPP_SINISTRO.link}><svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true"><use href="#i-zap" /></svg> {WHATSAPP_SINISTRO.numero}</a>
                 </div>
               </div>
-              <div className="pilha g12">
-                <div className="card" style={{ background: 'rgba(255,255,255,.06)', borderColor: 'rgba(255,255,255,.18)' }}>
-                  <h4 style={{ color: '#fff' }}>Nas primeiras 24 horas</h4>
-                  <ul className="lista-v" style={{ color: 'var(--neg-fraco)' }}>
-                    <li>Ferido primeiro: SAMU 192 ou Bombeiros 193</li>
-                    <li>Boletim de ocorrência em roubo, furto e colisão com terceiro</li>
-                    <li>Guincho sai pela assistência da seguradora, não pela corretora</li>
-                    <li>Documentação pelo WhatsApp de sinistro — daí em diante é a MX que fala</li>
-                  </ul>
+              <div className="horarios">
+                <div className="horario">
+                  <span className="horario__quando">24 horas, todos os dias</span>
+                  <h4>Assistência da sua seguradora</h4>
+                  <p>Guincho, chaveiro, socorro mecânico e aviso de sinistro. Os telefones de cada seguradora estão na página de sinistro.</p>
                 </div>
+                <div className="horario">
+                  <span className="horario__quando">Segunda a sexta, 08:00 às 18:00</span>
+                  <h4>WhatsApp de sinistro da MX</h4>
+                  <p>Documentação e acompanhamento do processo com a seguradora. Fora desse horário, comece pela assistência 24 horas e mande a mensagem: a MX responde no próximo dia útil.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      {/* Os dois canais */}
+        <section className="secao--curta">
+          <div className="env">
+            <div className="oferta oferta--larga oferta--faixa" style={{ minHeight: 'auto' }}>
+              <span className="olho">Canais</span>
+              <h3>São dois números, e cada um tem um dono</h3>
+              <p>Um resolve tudo: cotação, apólice, boleto e dúvida. O outro é só para sinistro, e por isso não fica preso em conversa de venda.</p>
+              <div className="acoes" style={{ paddingTop: '.7rem' }}>
+                <a className="btn btn--zap btn--peq num" href={WHATSAPP.link}><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><use href="#i-zap" /></svg> {WHATSAPP.numero}</a>
+                <a className="btn btn--socorro btn--peq num" href={WHATSAPP_SINISTRO.link}>{WHATSAPP_SINISTRO.numero} · sinistro</a>
               </div>
             </div>
           </div>
@@ -144,7 +141,7 @@ export default function Home() {
           <div className="env pilha g20">
             <div className="pilha g8">
               <span className="olho">Seguradoras parceiras</span>
-              <h2>A seguradora certa que atende a sua necessidade</h2>
+              <h2>A seguradora certa para o risco da sua empresa</h2>
             </div>
             <div className="logos">
               <div className="logos__item"><img src="/seguradoras/seg_azul.webp" alt="Azul Seguros" /></div>
@@ -174,7 +171,10 @@ export default function Home() {
           <div className="env pilha g20">
             <div className="pilha g8">
               <span className="olho">Quem já é cliente</span>
-              <h2>Conheça alguns dos nossos milhares de clientes satisfeitos</h2>
+              <div className="prova">
+                <span className="prova__n num"><Dado>{NOTA_GOOGLE}</Dado></span>
+                <h2 className="prova__t">de 5 no Google, em <Dado>{TOTAL_AVALIACOES}</Dado> avaliações</h2>
+              </div>
             </div>
             <div className="grade grade--3">
               <figure className="depo">
@@ -229,26 +229,16 @@ export default function Home() {
               <div className="pilha g16">
                 <span className="olho">A MX</span>
                 <h2>Consultores que moram onde os clientes moram</h2>
-                <p>Formada por consultores experientes e preparados, atuando no mercado de seguros desde 2002 com eficiência, inovação e preços competitivos, a MX Seguros é uma das principais empresas do ramo de seguro na região.</p>
-                <div className="grade grade--2" style={{ gap: '.75rem' }}>
-                  <div className="oferta" style={{ minHeight: 'auto', padding: '1.1rem 1.2rem' }}>
-                    <span className="olho">Missão</span>
-                    <p style={{ fontSize: '.9375rem' }}>Através da excelência no atendimento, levar segurança e tranquilidade aos nossos clientes.</p>
-                  </div>
-                  <div className="oferta" style={{ minHeight: 'auto', padding: '1.1rem 1.2rem' }}>
-                    <span className="olho">Visão</span>
-                    <p style={{ fontSize: '.9375rem' }}>Ser referência no mercado de seguros, em constante evolução em tecnologia e inovação.</p>
-                  </div>
-                </div>
-                <div className="chip-lista">
-                  <span className="chip">Ética</span><span className="chip">Pontualidade</span><span className="chip">Transparência</span>
-                  <span className="chip">Integridade</span><span className="chip">Comprometimento</span>
-                </div>
+                <p>A MX atende Itapira, Águas de Lindóia e as cidades em volta desde 2002. Quem cota o seu seguro é a mesma pessoa que você encontra no escritório da Avenida Rio Branco ou da Rua Argentina. É ela que acompanha a renovação e o sinistro.</p>
+                <ul className="lista-v">
+                  <li>Somos corretora: não assumimos o risco nem administramos planos. Nosso trabalho é escolher a seguradora certa, ler a apólice com você e ficar do seu lado quando algo acontece.</li>
+                  <li>Cada área tem um consultor responsável: saúde, consórcio e seguro empresarial.</li>
+                  <li>No sinistro, a MX acompanha o processo com a seguradora do primeiro contato até o encerramento.</li>
+                </ul>
                 <Link className="seta" href="/a-mx">Conhecer a MX <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></Link>
               </div>
-              <div className="foto-larga" style={{ backgroundImage: 'var(--f-foto-equipe)' }} role="img" aria-label="Consultores da MX em atendimento"></div>
+              <div className="foto-larga" style={{ backgroundImage: 'var(--f-predio-mx)' }} role="img" aria-label="Prédio da MX"></div>
             </div>
-            <p className="nota" style={{ paddingTop: '.9rem' }}>Atendimento presencial em Itapira e em Águas de Lindóia, de segunda a sexta, das 08:00 às 18:00.</p>
           </div>
         </section>
 
@@ -259,42 +249,7 @@ export default function Home() {
               <span className="olho">Unidades</span>
               <h2>Duas portas abertas, de segunda a sexta</h2>
             </div>
-            <div className="grade grade--2">
-              <div className="unidade">
-                <MapaUnidade
-                  endereco="Av. Rio Branco, 221 - Centro, Itapira - SP, 13970-070"
-                  descricao="Mapa da matriz da MX na Avenida Rio Branco, no Centro de Itapira"
-                />
-                <div className="unidade__corpo">
-                  <span className="selo">Matriz</span>
-                  <h3>Itapira / SP</h3>
-                  <div className="dados">
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin" /></svg><span>Av. Rio Branco, 221 — Centro<br />Itapira/SP · CEP 13970-070</span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio" /></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
-                  </div>
-                  <a className="seta" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.%20Rio%20Branco%2C%20221%20-%20Centro%2C%20Itapira%20-%20SP%2C%2013970-070" target="_blank" rel="noopener">Como chegar a Itapira <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></a>
-                </div>
-              </div>
-              <div className="unidade">
-                <MapaUnidade
-                  endereco="Rua Argentina, 15 - Águas de Lindóia - SP"
-                  descricao="Mapa da filial da MX na Rua Argentina, em Águas de Lindóia"
-                />
-                <div className="unidade__corpo">
-                  <span className="selo">Filial</span>
-                  <h3>Águas de Lindóia / SP</h3>
-                  <div className="dados">
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-pin" /></svg><span>Rua Argentina, 15 — Salas 2 e 3 — Centro<br />Águas de Lindóia/SP · CEP <span className="token">«CEP-FILIAL»</span></span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-relogio" /></svg><span>Segunda a sexta, 08:00 às 18:00</span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
-                    <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-zap" /></svg><span><span className="dados__rot">WhatsApp · cotação, apólice, boleto e dúvidas</span><a href="https://wa.me/551938638150" className="num">(19) 3863-8150</a></span></p>
-                  </div>
-                  <a className="seta" href="https://www.google.com/maps/dir/?api=1&amp;destination=Rua%20Argentina%2C%2015%20-%20%C3%81guas%20de%20Lind%C3%B3ia%20-%20SP" target="_blank" rel="noopener">Como chegar a Águas de Lindóia <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta" /></svg></a>
-                </div>
-              </div>
-            </div>
+            <Unidades />
           </div>
         </section>
     </>

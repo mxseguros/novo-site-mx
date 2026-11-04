@@ -1,5 +1,6 @@
 /**
- * Conteúdo dos 27 seguros que a MX cota.
+ * Conteúdo de todos os produtos que a MX cota. A quantidade sai de SLUGS.length,
+ * nunca é digitada: o site chegou a dizer "27" com 32 produtos na lista.
  *
  * Portado do objeto PRODUTOS do protótipo v2 (Fase 2, Portão G2), com os
  * nomes de campo abertos. É a fonte única: o mega-menu, o índice, o carrossel
@@ -7,11 +8,11 @@
  * produto é digitado à mão — foi assim que o site atual acumulou link quebrado.
  */
 
-/** T1 massa · T2 técnico e B2B · T4 benefício. Não existe T3: as páginas de
- *  consórcio saíram do site em 21/08/2026 (a MX não representa administradora). */
+/** T1 massa · T2 técnico e B2B · T4 benefício. Não existe T3: consórcio usa o T2. */
 export type Template = 1 | 2 | 4;
 
-export type Grupo = 'Para você' | 'Para sua empresa' | 'Saúde e previdência' | 'Consórcios';
+/** Os três pilares da MX, mais a porta de entrada. Metadados em content/pilares.ts. */
+export type Grupo = 'Saúde para empresas' | 'Linhas financeiras' | 'Seguro empresarial' | 'Para você';
 
 export interface Item { titulo: string; descricao: string }
 export interface Pergunta { pergunta: string; resposta: string }
@@ -1010,7 +1011,7 @@ export const PRODUTOS = {
   "empresarial": {
     "nome": "Seguro Empresarial",
     "rotuloMenu": "Empresarial",
-    "grupo": "Para sua empresa",
+    "grupo": "Seguro empresarial",
     "template": 2,
     "foto": "h-loja",
     "url": "/empresarial/",
@@ -1090,7 +1091,7 @@ export const PRODUTOS = {
   "condominio": {
     "nome": "Seguro de Condomínio",
     "rotuloMenu": "Condomínio",
-    "grupo": "Para sua empresa",
+    "grupo": "Seguro empresarial",
     "template": 2,
     "foto": "hero-condominio",
     "url": "/condominio/",
@@ -1170,7 +1171,7 @@ export const PRODUTOS = {
   "frota": {
     "nome": "Seguro de Frota",
     "rotuloMenu": "Frota",
-    "grupo": "Para sua empresa",
+    "grupo": "Seguro empresarial",
     "template": 2,
     "foto": "h-veiculo",
     "url": "/frota/",
@@ -1250,7 +1251,7 @@ export const PRODUTOS = {
   "transportes": {
     "nome": "Seguros de Transporte de Carga",
     "rotuloMenu": "Transportes",
-    "grupo": "Para sua empresa",
+    "grupo": "Seguro empresarial",
     "template": 2,
     "foto": "ph-transportes",
     "url": "/transportes/",
@@ -1326,7 +1327,7 @@ export const PRODUTOS = {
   "agronegocios": {
     "nome": "Seguro para o Agronegócio",
     "rotuloMenu": "Agronegócios",
-    "grupo": "Para sua empresa",
+    "grupo": "Seguro empresarial",
     "template": 2,
     "foto": "h-maquina",
     "url": "/agronegocios/",
@@ -1406,7 +1407,7 @@ export const PRODUTOS = {
   "maquinas-agricolas": {
     "nome": "Seguro de Máquinas Agrícolas",
     "rotuloMenu": "Máquinas Agrícolas",
-    "grupo": "Para sua empresa",
+    "grupo": "Seguro empresarial",
     "template": 2,
     "foto": "ph-maquinas-agricolas",
     "url": "/maquinas-agricolas/",
@@ -1486,7 +1487,7 @@ export const PRODUTOS = {
   "vida-em-grupo": {
     "nome": "Seguro de Vida em Grupo",
     "rotuloMenu": "Vida em Grupo",
-    "grupo": "Para sua empresa",
+    "grupo": "Saúde para empresas",
     "template": 2,
     "foto": "ph-vida-em-grupo",
     "url": "/vida-em-grupo/",
@@ -1566,7 +1567,7 @@ export const PRODUTOS = {
   "estagiario": {
     "nome": "Seguro para Estagiário",
     "rotuloMenu": "Estagiário",
-    "grupo": "Para sua empresa",
+    "grupo": "Seguro empresarial",
     "template": 2,
     "foto": "ph-estagiario",
     "url": "/estagiario/",
@@ -1641,7 +1642,7 @@ export const PRODUTOS = {
   "garantia": {
     "nome": "Seguro Garantia",
     "rotuloMenu": "Garantia",
-    "grupo": "Para sua empresa",
+    "grupo": "Seguro empresarial",
     "template": 2,
     "foto": "ph-garantia",
     "url": "/garantia/",
@@ -1717,7 +1718,7 @@ export const PRODUTOS = {
   "riscos-de-engenharia": {
     "nome": "Seguro de Riscos de Engenharia",
     "rotuloMenu": "Riscos de Engenharia",
-    "grupo": "Para sua empresa",
+    "grupo": "Seguro empresarial",
     "template": 2,
     "foto": "ph-riscos-de-engenharia",
     "url": "/riscos-de-engenharia/",
@@ -1797,7 +1798,7 @@ export const PRODUTOS = {
   "riscos-ciberneticos": {
     "nome": "Seguro de Riscos Cibernéticos",
     "rotuloMenu": "Riscos Cibernéticos",
-    "grupo": "Para sua empresa",
+    "grupo": "Seguro empresarial",
     "template": 2,
     "foto": "ph-riscos-ciberneticos",
     "url": "/riscos-ciberneticos/",
@@ -1877,7 +1878,7 @@ export const PRODUTOS = {
   "grandes-riscos": {
     "nome": "Seguro de Grandes Riscos",
     "rotuloMenu": "Grandes Riscos",
-    "grupo": "Para sua empresa",
+    "grupo": "Seguro empresarial",
     "template": 2,
     "foto": "ph-grandes-riscos",
     "url": "/grandes-riscos/",
@@ -1957,7 +1958,7 @@ export const PRODUTOS = {
   "saude": {
     "nome": "Plano de Saúde",
     "rotuloMenu": "Saúde",
-    "grupo": "Saúde e previdência",
+    "grupo": "Saúde para empresas",
     "template": 4,
     "foto": "ph-saude",
     "url": "/saude/",
@@ -2065,7 +2066,7 @@ export const PRODUTOS = {
   "odontologico": {
     "nome": "Plano Odontológico",
     "rotuloMenu": "Odontológico",
-    "grupo": "Saúde e previdência",
+    "grupo": "Saúde para empresas",
     "template": 4,
     "foto": "ph-odontologico",
     "url": "/odontologico/",
@@ -2172,7 +2173,7 @@ export const PRODUTOS = {
   "previdencia": {
     "nome": "Previdência Privada",
     "rotuloMenu": "Previdência",
-    "grupo": "Saúde e previdência",
+    "grupo": "Linhas financeiras",
     "template": 4,
     "foto": "ph-previdencia",
     "url": "/previdencia/",
@@ -2263,7 +2264,7 @@ export const PRODUTOS = {
   "responsabilidade-civil-profissional": {
     "nome": "Seguro de Responsabilidade Civil Profissional",
     "rotuloMenu": "RC Profissional",
-    "grupo": "Para sua empresa",
+    "grupo": "Seguro empresarial",
     "template": 2,
     "foto": "h-documento",
     "url": "/responsabilidade-civil-profissional/",
@@ -2344,7 +2345,7 @@ export const PRODUTOS = {
   "responsabilidade-civil-medico-e-dentista": {
     "nome": "Seguro de Responsabilidade Civil para Médicos e Dentistas",
     "rotuloMenu": "RC Médico e Dentista",
-    "grupo": "Para sua empresa",
+    "grupo": "Seguro empresarial",
     "template": 2,
     "foto": "h-pessoas",
     "url": "/responsabilidade-civil-medico-e-dentista/",
@@ -2426,7 +2427,7 @@ export const PRODUTOS = {
   "consorcio-de-automoveis": {
     "nome": "Consórcio de Automóveis",
     "rotuloMenu": "Consórcio de Automóveis",
-    "grupo": "Consórcios",
+    "grupo": "Linhas financeiras",
     "template": 2,
     "foto": "hero-auto",
     "url": "/consorcio-de-automoveis/",
@@ -2505,7 +2506,7 @@ export const PRODUTOS = {
   "consorcio-de-imoveis": {
     "nome": "Consórcio de Imóveis",
     "rotuloMenu": "Consórcio de Imóveis",
-    "grupo": "Consórcios",
+    "grupo": "Linhas financeiras",
     "template": 2,
     "foto": "hero-condominio",
     "url": "/consorcio-de-imoveis/",
@@ -2584,7 +2585,7 @@ export const PRODUTOS = {
   "consorcio-de-servicos": {
     "nome": "Consórcio de Serviços",
     "rotuloMenu": "Consórcio de Serviços",
-    "grupo": "Consórcios",
+    "grupo": "Linhas financeiras",
     "template": 2,
     "foto": "h-documento",
     "url": "/consorcio-de-servicos/",
@@ -2666,7 +2667,7 @@ export type Slug = keyof typeof PRODUTOS;
 
 export const SLUGS = Object.keys(PRODUTOS) as Slug[];
 
-export const GRUPOS: Grupo[] = ['Para você', 'Para sua empresa', 'Saúde e previdência', 'Consórcios'];
+export const GRUPOS: Grupo[] = ['Saúde para empresas', 'Linhas financeiras', 'Seguro empresarial', 'Para você'];
 
 export function porGrupo(g: Grupo): Slug[] {
   return SLUGS.filter((s) => PRODUTOS[s].grupo === g)
