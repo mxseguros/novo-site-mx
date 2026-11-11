@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { PRODUTOS, porGrupo } from '@/content/produtos';
-import { SLA } from '@/content/empresa';
-import Dado from '@/components/Dado';
+import { RETORNO } from '@/content/empresa';
 import FormPilar from '@/components/FormPilar';
 
 export const metadata: Metadata = {
@@ -76,7 +75,7 @@ export default function Pagina() {
                 explica a diferença entre as propostas.
               </p>
               <ul className="lista-v">
-                <li><Dado>{`Retorno em ${SLA}, em dia útil.`}</Dado></li>
+                <li>{RETORNO}, por WhatsApp ou telefone.</li>
                 <li>Quem atende é corretor, não robô de triagem.</li>
               </ul>
             </div>

@@ -1,5 +1,4 @@
-import { SLA } from '@/content/empresa';
-import Dado from '@/components/Dado';
+import { RETORNO } from '@/content/empresa';
 import FormPilar from '@/components/FormPilar';
 
 /**
@@ -23,9 +22,7 @@ export default function FormCotacao() {
             </p>
             <ul className="lista-v">
               <li>Sem custo e sem compromisso. A corretagem já está no preço da apólice.</li>
-              <li>
-                <Dado>{`Retorno em ${SLA}, em dia útil, por WhatsApp ou telefone.`}</Dado>
-              </li>
+              <li>{RETORNO}, por WhatsApp ou telefone.</li>
               <li>Quem atende é corretor, não robô de triagem.</li>
             </ul>
           </div>

@@ -1,9 +1,9 @@
-import { PRODUTOS, type Grupo, type Slug } from '@/content/produtos';
+import { PRODUTOS, porGrupo, type Grupo, type Slug } from '@/content/produtos';
 import {
-  ADMINISTRADORAS,
   CARTAS_CONTEMPLADAS,
   CASE_SAUDE,
   CASOS_SINISTRO,
+  COM_ADMINISTRADORAS,
   NOTA_GOOGLE,
   NUM_ADMINISTRADORAS,
   TOTAL_AVALIACOES,
@@ -58,6 +58,10 @@ export interface ConteudoPilar {
     perfis: { icone: string; titulo: string; descricao: string }[];
   };
   passos: { titulo: string; itens: { titulo: string; descricao: string }[] };
+  /**
+   * Em ordem de preferência. A página mostra as três primeiras confirmadas:
+   * número pendente em content/empresa.ts fica de fora, e o seguinte sobe.
+   */
   provas: { valor: string; titulo: string; descricao: string }[];
   guias?: boolean;
   atendimento: string;
@@ -106,6 +110,9 @@ export const CONTEUDO: Record<'saude' | 'financeiras' | 'empresarial', ConteudoP
       { valor: VIDAS_ADMINISTRADAS, titulo: 'vidas em planos intermediados pela MX', descricao: 'Número da carteira atual' },
       { valor: NOTA_GOOGLE, titulo: 'de nota no Google', descricao: `${TOTAL_AVALIACOES} avaliações de clientes` },
       { valor: CASE_SAUDE, titulo: 'case real, com autorização do cliente', descricao: 'Empresa, problema e resultado' },
+      { valor: '24', titulo: 'anos de mercado', descricao: 'Atuando desde 2002' },
+      { valor: String(porGrupo('Saúde para empresas').length), titulo: 'benefícios para o seu time', descricao: 'Do plano médico ao seguro de vida' },
+      { valor: '2', titulo: 'escritórios na região', descricao: 'Itapira e Águas de Lindóia' },
     ],
     guias: true,
     atendimento: 'Fale direto com quem cuida de saúde na MX',
@@ -139,7 +146,7 @@ export const CONTEUDO: Record<'saude' | 'financeiras' | 'empresarial', ConteudoP
         'Não é investimento e não rende: é uma compra programada.',
         'A contemplação é por sorteio ou lance, sem data garantida.',
         'Não tem juros de financiamento, mas tem taxa de administração e fundo de reserva, informados antes da adesão.',
-        `O contrato, a carta de crédito e as assembleias são da administradora. A MX atua junto a ${ADMINISTRADORAS}.`,
+        `O contrato, a carta de crédito e as assembleias são da administradora. A MX atua junto a ${COM_ADMINISTRADORAS}.`,
       ],
     },
     paraQuem: {
@@ -167,6 +174,8 @@ export const CONTEUDO: Record<'saude' | 'financeiras' | 'empresarial', ConteudoP
       { valor: CARTAS_CONTEMPLADAS, titulo: 'cartas contempladas de clientes MX', descricao: 'Número real da carteira' },
       { valor: NUM_ADMINISTRADORAS, titulo: 'administradoras parceiras', descricao: 'Autorizadas pelo Banco Central' },
       { valor: '24', titulo: 'anos de mercado', descricao: 'Atuando desde 2002' },
+      { valor: '3', titulo: 'tipos de carta de crédito', descricao: 'Imóvel, veículo e serviços' },
+      { valor: '2', titulo: 'escritórios na região', descricao: 'Itapira e Águas de Lindóia' },
     ],
     atendimento: 'Fale com quem cuida de consórcio na MX',
     especialista: 'financeiras',
@@ -218,6 +227,8 @@ export const CONTEUDO: Record<'saude' | 'financeiras' | 'empresarial', ConteudoP
     provas: [
       { valor: CASOS_SINISTRO, titulo: 'casos de sinistro acompanhados', descricao: 'Com autorização do cliente' },
       { valor: '+40', titulo: 'seguradoras parceiras', descricao: 'Nem toda opera todos os ramos' },
+      { valor: String(porGrupo('Seguro empresarial').length), titulo: 'ramos empresariais cotados', descricao: 'Do comércio aos grandes riscos' },
+      { valor: '24', titulo: 'anos de mercado', descricao: 'Atuando desde 2002' },
     ],
     atendimento: 'Fale com quem cuida de seguro empresarial na MX',
     especialista: 'empresarial',
@@ -231,6 +242,11 @@ export const GUIAS = [
     id: 'operadoras',
     titulo: 'Como comparar operadoras',
     texto: 'Rede, abrangência e acomodação dizem mais do que o preço.',
+    corpo: [
+      'Duas propostas com a mesma mensalidade podem ter redes muito diferentes nas cidades onde o seu time mora. É a rede que decide se o plano vai ser usado ou vai virar reclamação no RH.',
+      'A abrangência define onde o plano cobre: um município, um grupo de municípios, o estado ou o país. Para empresa de Itapira e Águas de Lindóia, vale conferir hospitais e laboratórios nas cidades de referência da região, como Mogi Guaçu, Mogi Mirim, Amparo e Campinas.',
+      'A acomodação — enfermaria ou apartamento — pesa no preço e na percepção do benefício. A comparação justa é entre propostas com a mesma acomodação e a mesma abrangência.',
+    ],
     pontos: [
       'A rede credenciada nas cidades onde o time mora',
       'A abrangência: municipal, regional ou nacional',
@@ -242,6 +258,11 @@ export const GUIAS = [
     id: 'carencia',
     titulo: 'Carência e portabilidade',
     texto: 'Quem já tem plano pode levar o tempo cumprido, se os requisitos baterem.',
+    corpo: [
+      'Carência é o tempo entre a entrada no plano e o direito a usar cada cobertura. A lei fixa os prazos máximos: 24 horas para urgência e emergência, 300 dias para parto e 180 dias para os demais casos. A proposta pode ter prazos menores, nunca maiores.',
+      'No plano empresarial com 30 ou mais participantes, a regra da ANS proíbe carência para quem entra em até 30 dias da contratação do plano ou da admissão na empresa. Abaixo disso, a carência depende da proposta — e muitas operadoras aproveitam o tempo cumprido no plano anterior como condição comercial, o que precisa estar escrito.',
+      'A portabilidade de carências é um direito de quem já tem plano e cumpre os requisitos da ANS, como o tempo mínimo de permanência no plano de origem. Doença ou lesão preexistente declarada pode ter cobertura parcial temporária, e é um ponto para ler com cuidado em cada proposta.',
+    ],
     pontos: [
       'Os prazos de carência da proposta, dentro dos limites da ANS',
       'Se a portabilidade se aplica a quem já tem plano',
@@ -252,6 +273,11 @@ export const GUIAS = [
     id: 'coparticipacao',
     titulo: 'Coparticipação vale a pena?',
     texto: 'Ela baixa a mensalidade, mas muda quanto cada pessoa paga ao usar.',
+    corpo: [
+      'Na coparticipação, quem usa o plano paga uma parte de cada consulta ou exame, além da mensalidade. A mensalidade cai, e parte do custo passa a depender do uso.',
+      'A empresa define, junto com a operadora, se a coparticipação é descontada do funcionário ou absorvida por ela. Essa escolha muda a percepção do benefício tanto quanto o preço.',
+      'Ela tende a valer a pena quando o uso do time é previsível. Para quem faz tratamento contínuo, a soma das coparticipações pode passar da economia na mensalidade — por isso os tetos por procedimento e por mês são o primeiro ponto a conferir.',
+    ],
     pontos: [
       'Como a coparticipação é cobrada de cada pessoa',
       'Os tetos por procedimento e por mês',
@@ -262,6 +288,11 @@ export const GUIAS = [
     id: 'reajuste',
     titulo: 'Como funciona o reajuste',
     texto: 'No plano empresarial, o índice é negociado entre empresa e operadora.',
+    corpo: [
+      'O índice anual que a ANS divulga vale para planos individuais. No plano empresarial, o reajuste é negociado entre empresa e operadora e costuma levar em conta a sinistralidade: quanto o plano custou em uso, comparado ao que foi pago.',
+      'Contratos com menos de 30 vidas entram no agrupamento da operadora e recebem o mesmo percentual dos outros contratos pequenos. Isso dilui o efeito de um ano de uso alto, mas tira margem de negociação individual.',
+      'Há também o reajuste por faixa etária, previsto em contrato, quando alguém muda de faixa. São dez faixas, e a última começa aos 59 anos. Antes do aniversário do contrato, recotar o mercado é o que mostra se o índice proposto é razoável.',
+    ],
     pontos: [
       'O reajuste anual e a sinistralidade do contrato',
       'O reajuste por faixa etária',

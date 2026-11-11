@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 /**
  * Conteúdo para a fase de decisão: saúde empresarial leva de 3 a 5 meses, e o
- * site não pode ser só "cotar agora". Cada guia lista o que olhar na proposta;
- * o texto aprofundado entra quando houver revisão técnica de cada tema.
+ * site não pode ser só "cotar agora". Cada guia explica o tema e lista o que
+ * olhar na proposta. Regra da ANS citada aqui é revista quando a norma mudar.
  */
 export default function Pagina() {
   const saude = pilar('saude');
@@ -42,6 +42,9 @@ export default function Pagina() {
             <article className="guia pilha g12 medida" id={g.id} key={g.id}>
               <h2>{g.titulo}</h2>
               <p className="lide">{g.texto}</p>
+              {g.corpo.map((paragrafo) => (
+                <p key={paragrafo}>{paragrafo}</p>
+              ))}
               <span className="olho">O que olhar</span>
               <ul className="lista-v">
                 {g.pontos.map((ponto) => (

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { SLUGS } from '@/content/produtos';
-import { WHATSAPP } from '@/content/empresa';
+import { ESPECIALISTAS_CONFIRMADOS, WHATSAPP } from '@/content/empresa';
 import Especialistas from '@/components/Especialistas';
 import Unidades from '@/components/Unidades';
 
@@ -66,6 +66,8 @@ export default function Pagina() {
           </div>
         </section>
 
+        {/* Só com nome e foto dos três confirmados em content/empresa.ts */}
+        {ESPECIALISTAS_CONFIRMADOS && (
         <section className="secao cinza">
           <div className="env pilha g24">
             <div className="pilha g8">
@@ -75,6 +77,7 @@ export default function Pagina() {
             <Especialistas />
           </div>
         </section>
+        )}
 
         <section className="secao" id="unidades-amx">
           <div className="env pilha g20">

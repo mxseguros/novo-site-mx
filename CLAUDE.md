@@ -56,7 +56,8 @@ final leria: disclaimer real, aviso de papel de corretora, limite de cobertura.
 A MX é corretora, não assume risco e não administra plano. Consórcio nunca é investimento, não
 é seguro e não promete prazo de contemplação: o texto passa pelo jurídico. Previdência sem projeção
 de rentabilidade; em saúde não prometer movimentação cadastral nem "a vida inteira". Rodapé com
-CNPJ, registro SUSEP e CNSP 382/2020.
+CNPJ e CNSP 382/2020. O registro SUSEP saiu a pedido do cliente em 04/11/2026; o diagnóstico de
+marketing pedia o número no rodapé, sujeito a verificar a norma aplicável.
 
 **Nunca publicar depoimento inventado.** Prova social falsa em site de corretora é infração ao
 CDC. Os textos do protótipo são exemplos rotulados e não podem migrar para cá.

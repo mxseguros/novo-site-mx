@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { PRODUTOS, porGrupo } from '@/content/produtos';
 import { CONTEUDO, pilar } from '@/content/pilares';
-import { WHATSAPP } from '@/content/empresa';
-import Dado from '@/components/Dado';
+import { WHATSAPP, pendente } from '@/content/empresa';
 import { Especialista } from '@/components/Especialistas';
 import FormPilar from '@/components/FormPilar';
 import GuiasCards from '@/components/GuiasCards';
@@ -15,6 +14,7 @@ import GuiasCards from '@/components/GuiasCards';
 export default function PaginaPilar({ id }: { id: keyof typeof CONTEUDO }) {
   const c = CONTEUDO[id];
   const p = pilar(id);
+  const provas = c.provas.filter((prova) => !pendente(prova.valor) && !pendente(prova.descricao)).slice(0, 3);
 
   return (
     <>
@@ -78,9 +78,7 @@ export default function PaginaPilar({ id }: { id: keyof typeof CONTEUDO }) {
               <h3>{c.conformidade.titulo}</h3>
               <ul className="lista-v">
                 {c.conformidade.itens.map((item) => (
-                  <li key={item}>
-                    <Dado>{item}</Dado>
-                  </li>
+                  <li key={item}>{item}</li>
                 ))}
               </ul>
             </div>
@@ -131,24 +129,13 @@ export default function PaginaPilar({ id }: { id: keyof typeof CONTEUDO }) {
       <section className="numeros">
         <div className="env">
           <div className="numeros__grade">
-            {c.provas.map((prova) => (
+            {provas.map((prova) => (
               <div className="numeros__item" key={prova.titulo}>
-                <span className="numeros__n num">
-                  <Dado>{prova.valor}</Dado>
-                </span>
+                <span className="numeros__n num">{prova.valor}</span>
                 <span className="numeros__t">{prova.titulo}</span>
-                <span className="numeros__d">
-                  <Dado>{prova.descricao}</Dado>
-                </span>
+                <span className="numeros__d">{prova.descricao}</span>
               </div>
             ))}
-            {id === 'empresarial' && (
-              <div className="numeros__item">
-                <span className="numeros__n num">{porGrupo(p.grupo).length}</span>
-                <span className="numeros__t">ramos empresariais cotados</span>
-                <span className="numeros__d">Do comércio aos grandes riscos</span>
-              </div>
-            )}
           </div>
         </div>
       </section>

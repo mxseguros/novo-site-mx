@@ -664,6 +664,12 @@ a.card{ text-decoration: none; color: inherit; }
   border-radius: var(--raio); background: #E9F4EC; border: 1px solid #B4DCC0;
   color: #145730; font-size: .875rem; }
 .saida[data-visivel="1"]{ display: flex; }
+.saida__icone{ flex: 0 0 auto; margin-top: 3px; }
+/* O envio não funcionou: tom neutro, e o WhatsApp como saída. */
+.saida--alerta{ background: var(--cinza-card); border-color: var(--linha-forte); color: var(--texto); }
+.saida .btn{ align-self: flex-start; }
+/* Honeypot: fora da tela, sem display:none (robô ignora campo escondido assim). */
+.mel{ position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 
 /* ==========================================================================
    11. LISTAS, ACORDEAO, PASSOS
@@ -761,6 +767,17 @@ a.card{ text-decoration: none; color: inherit; }
 }
 .barra-mobile .btn{ flex: 1; min-height: 44px; font-size: .875rem; padding-inline: .5rem; }
 @container palco (min-width: 940px){ .barra-mobile{ display: none; } }
+
+/* Aviso de cookies: só aparece com o GA4 configurado e sem escolha feita.
+   No celular fica acima da .barra-mobile; não é barra de conversão. */
+.aviso-cookies{
+  position: fixed; z-index: 300; left: .75rem; right: .75rem; bottom: 4.6rem;
+  display: grid; gap: .7rem; padding: 1rem 1.1rem; max-width: 26rem;
+  background: #fff; border: 1px solid var(--linha); border-radius: var(--raio-card);
+  box-shadow: 0 10px 30px rgba(7,17,30,.16); font-size: .875rem; color: var(--texto);
+}
+.aviso-cookies .acoes{ gap: .5rem; }
+@container palco (min-width: 940px){ .aviso-cookies{ left: 1.25rem; right: auto; bottom: 1.25rem; } }
 
 /* ==========================================================================
    14. PAGINA DO SISTEMA
@@ -869,6 +886,8 @@ code{ font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size
 .esp__zap{ align-self: flex-start; }
 .esp--largo{ display: grid; gap: 1rem; align-items: start; }
 @container palco (min-width: 640px){ .esp--largo{ grid-template-columns: 11rem 1fr; } }
+/* Sem nome e foto confirmados, o cartão é a área: ícone em cima, como os outros cards. */
+@container palco (min-width: 640px){ .esp--largo.esp--sem-foto{ grid-template-columns: 1fr; } }
 
 /* Formulário por pilar. Sem o min-width, as abas (que não quebram linha) esticam
    a trilha da grade e a página inteira ganha rolagem lateral no celular. */

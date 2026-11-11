@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import { SLUGS } from '@/content/produtos';
 import { PILARES } from '@/content/pilares';
-import { CNPJ, EMAIL, HORARIO, SUSEP, UNIDADES, WHATSAPP, WHATSAPP_SINISTRO } from '@/content/empresa';
-import Dado from '@/components/Dado';
+import { CNPJ, EMAIL, HORARIO, UNIDADES, WHATSAPP, WHATSAPP_SINISTRO } from '@/content/empresa';
 
 /**
- * Rodapé de todas as páginas. Carrega a declaração de corretora, o CNPJ, o
- * registro SUSEP e a CNSP 382/2020 — exigências que não podem sumir de nenhuma
- * tela. O ano é calculado, nunca digitado (era o problema P11 do diagnóstico).
+ * Rodapé de todas as páginas. Carrega a declaração de corretora, o CNPJ e a
+ * CNSP 382/2020 — exigências que não podem sumir de nenhuma tela. O ano é
+ * calculado, nunca digitado (era o problema P11 do diagnóstico).
  */
 export default function Rodape() {
   return (
@@ -57,7 +56,7 @@ export default function Rodape() {
                     <span className="rodape__rot">{u.selo}</span>
                     {u.rua} — {u.bairro}
                     <br />
-                    {u.cidade}/{u.uf} · CEP <Dado>{u.cep}</Dado>
+                    {u.cidade}/{u.uf} · CEP {u.cep}
                   </li>
                 ))}
               </ul>
@@ -70,7 +69,7 @@ export default function Rodape() {
         </div>
 
         <p className="rodape__legal">
-          <Dado>{`MX Corretora de Seguros · CNPJ ${CNPJ} · Registro SUSEP ${SUSEP}.`}</Dado>{' '}
+          MX Corretora de Seguros · CNPJ {CNPJ}.{' '}
           A MX é corretora: não assume riscos nem administra planos, e a contratação é feita com a
           seguradora ou a operadora. Consórcio é intermediado junto a administradoras autorizadas
           pelo Banco Central e não é seguro nem investimento.

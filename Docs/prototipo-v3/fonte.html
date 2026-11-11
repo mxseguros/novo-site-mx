@@ -929,9 +929,6 @@ img.unidade__mapa{ object-fit: cover; height: 200px; }
         <div class="rolagem"><table class="tab-comp pend">
           <thead><tr><th scope="col">Token</th><th scope="col">O que é</th><th scope="col">Onde aparece</th></tr></thead>
           <tbody>
-            <tr><td><span class="token">«SUSEP»</span></td><td>Registro da corretora na SUSEP. É exigência regulatória e sinal de legitimidade.</td><td>Rodapé</td></tr>
-            <tr><td><span class="token">«CNPJ»</span></td><td>O site mostra 07.499.352/0001-82, mas o protótipo v2 registrou 45.154.654/0001-08 (MX Seguros e Créditos Ltda). Confirmar qual vale.</td><td>Rodapé</td></tr>
-            <tr><td><span class="token">«CEP-FILIAL»</span></td><td>CEP de Águas de Lindóia. Os Correios dão 13940-172 para a Rua Argentina, mas no Jardim São Francisco, não no Centro.</td><td>Unidades, rodapé</td></tr>
             <tr><td><span class="token">«SLA»</span></td><td>Prazo de retorno que o time cumpre, por exemplo "até 1 hora útil". Só publicar o que for cumprido.</td><td>Formulários</td></tr>
             <tr><td><span class="token">«ADMINISTRADORAS»</span></td><td>Administradoras de consórcio com que a MX trabalha, mais a revisão jurídica de todo o texto de consórcio.</td><td>Consórcio, rodapé</td></tr>
             <tr><td>WhatsApp</td><td>Confirmar que (19) 3863-8150 está ativo no WhatsApp Business. É o botão principal do site.</td><td>Todo o site</td></tr>
@@ -1010,13 +1007,13 @@ img.unidade__mapa{ object-fit: cover; height: 200px; }
           <h4>Unidades</h4>
           <ul>
             <li><span class="rodape__rot">Matriz</span>Av. Rio Branco, 221, Centro<br>Itapira/SP · CEP 13970-070</li>
-            <li style="margin-top:.5rem"><span class="rodape__rot">Filial</span>Rua Argentina, 15, Salas 2 e 3, Centro<br>Águas de Lindóia/SP · CEP <span class="token">«CEP-FILIAL»</span></li>
+            <li style="margin-top:.5rem"><span class="rodape__rot">Filial</span>Rua Argentina, 15, Salas 2 e 3, Centro<br>Águas de Lindóia/SP · CEP 13940-000</li>
           </ul>
         </div>
         <div><h4>Horário</h4><p>Segunda a sexta, 08:00 às 18:00</p></div>
       </div>
     </div>
-    <p class="rodape__legal">MX Corretora de Seguros · CNPJ <span class="token">«CNPJ»</span> · Registro SUSEP <span class="token">«SUSEP»</span>. A MX é corretora: não assume riscos nem administra planos, e a contratação é feita com a seguradora ou a operadora. Consórcio é intermediado junto a administradoras autorizadas pelo Banco Central e não é seguro nem investimento.</p>
+    <p class="rodape__legal">MX Corretora de Seguros · CNPJ 07.499.352/0001-82. A MX é corretora: não assume riscos nem administra planos, e a contratação é feita com a seguradora ou a operadora. Consórcio é intermediado junto a administradoras autorizadas pelo Banco Central e não é seguro nem investimento.</p>
     <div class="rodape__base">
       <span>© <span data-ano></span> MX Corretora de Seguros. Todos os direitos reservados.</span>
       <a href="https://novo-site-mx.vercel.app/politica-de-privacidade" target="_blank" rel="noopener">Privacidade</a>
@@ -1118,7 +1115,7 @@ img.unidade__mapa{ object-fit: cover; height: 200px; }
   const UNIDADES = [
     { selo: 'Matriz', cidade: 'Itapira / SP', mapa: '/fotos/mapa-itapira.webp', endereco: 'Av. Rio Branco, 221, Centro<br>Itapira/SP · CEP 13970-070',
       rota: 'https://www.google.com/maps/dir/?api=1&destination=Av.%20Rio%20Branco%2C%20221%20-%20Centro%2C%20Itapira%20-%20SP%2C%2013970-070', ir: 'Como chegar a Itapira' },
-    { selo: 'Filial', cidade: 'Águas de Lindóia / SP', mapa: '/fotos/mapa-lindoia.webp', endereco: 'Rua Argentina, 15, Salas 2 e 3, Centro<br>Águas de Lindóia/SP · CEP <span class="token">«CEP-FILIAL»</span>',
+    { selo: 'Filial', cidade: 'Águas de Lindóia / SP', mapa: '/fotos/mapa-lindoia.webp', endereco: 'Rua Argentina, 15, Salas 2 e 3, Centro<br>Águas de Lindóia/SP · CEP 13940-000',
       rota: 'https://www.google.com/maps/dir/?api=1&destination=Rua%20Argentina%2C%2015%20-%20%C3%81guas%20de%20Lind%C3%B3ia%20-%20SP', ir: 'Como chegar a Águas de Lindóia' },
   ];
 

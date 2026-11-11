@@ -4,8 +4,10 @@ Redesign completo de [mxseguros.com.br](https://mxseguros.com.br), saindo de Wor
 para Next.js. Corretora de Itapira e Águas de Lindóia, no mercado desde 2002, com mais de 40
 seguradoras parceiras.
 
-**Status:** rotas no ar em ambiente de teste, com a arquitetura por pilares do protótipo v3. Não
-publicar antes de preencher os dados pendentes de `content/empresa.ts` e ligar o `/api/lead`.
+**Status:** site completo em ambiente de teste, com a arquitetura por pilares do protótipo v3.
+Nenhuma seção mostra dado pendente. Antes da virada de DNS: configurar o envio de e-mail do
+`/api/lead` (`.env.example`), revisão jurídica da Política de Privacidade e conferir os
+redirecionamentos de `content/redirecionamentos.ts`.
 
 ---
 
@@ -17,6 +19,7 @@ npm run dev
 ```
 
 `npm run build` para o build de produção, `npm run lint` e `npx tsc --noEmit` para as verificações.
+As variáveis de ambiente estão descritas em `.env.example`.
 
 ---
 
@@ -32,6 +35,8 @@ content/
   produtos.ts        todos os produtos, tipados. Fonte única de conteúdo
   pilares.ts         os três pilares e "Para você": menu, chamadas e páginas
   empresa.ts         canais, unidades, especialistas e dados pendentes «…»
+  redirecionamentos.ts  URLs do site antigo que mudaram de endereço
+lib/leads/           contrato do lead e o sink (hoje: e-mail via Resend)
 public/
   fotos/             45 imagens WebP (headers de produto, cards, mapas)
   mx-logo.webp       logo em WebP lossless, usado via mask-image
@@ -88,9 +93,20 @@ três destaques, e o formulário (`components/FormPilar.tsx`) pede dados diferen
 
 ### 5. Valor entre « » é dado pendente
 
-`content/empresa.ts` guarda o que a MX ainda não confirmou. O componente `Dado` mostra esses valores
-como token na tela, e o JSON-LD os deixa de fora. **`grep «` no código precisa voltar vazio antes da
-virada de DNS.** O GA4 só carrega com `NEXT_PUBLIC_GA4_ID` definido.
+`content/empresa.ts` guarda o que a MX ainda não confirmou. Valor pendente nunca vai para a tela:
+cada seção tem uma versão verdadeira sem o dado e passa a usá-lo sozinha quando ele é preenchido —
+o prazo de retorno vira "em horário comercial", a nota do Google some do título, os números de prova
+pendentes dão lugar aos confirmados, e a seção "quem lidera cada área" só aparece com nome e foto
+dos três especialistas. O JSON-LD também deixa o pendente de fora. `grep «` lista o que a MX ainda
+precisa mandar.
+
+### 6. Formulários e cookies
+
+Todo formulário envia ao `/api/lead`, que valida de novo, descarta robô (honeypot), limita envio por
+IP e devolve protocolo. A entrega fica em `lib/leads/sink.ts`. Se o envio falhar ou não estiver
+configurado, o formulário mostra o botão de WhatsApp com a mensagem já escrita — nunca finge que
+enviou. O GA4 só carrega com `NEXT_PUBLIC_GA4_ID` definido **e** depois que a pessoa aceita o aviso
+de cookies.
 
 ---
 
@@ -103,11 +119,12 @@ respeitar isso.
 - Previdência sem projeção de rentabilidade
 - Em saúde, a MX é corretora e não administradora de benefícios — nada de prometer movimentação
   cadastral
-- CNPJ, registro SUSEP e a Resolução CNSP 382/2020 ficam visíveis no rodapé
+- CNPJ e a Resolução CNSP 382/2020 ficam visíveis no rodapé
 
 ---
 
 ## Migração
 
-Todos os slugs do site antigo são preservados. Seis URLs mudam de destino e precisam de 301, a
-serem declarados no `vercel.json` antes da virada de DNS.
+Os slugs de produto do site antigo são preservados, mas o produto saiu da raiz: `/automovel/` vira
+`/seguros/automovel`, por redirecionamento gerado de `SLUGS` em `next.config.ts`. As demais URLs do
+site antigo que mudaram estão em `content/redirecionamentos.ts`. Todos são permanentes (308).

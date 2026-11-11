@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { FormCnsp } from '@/components/FormMensagem';
 
 export const metadata: Metadata = {
   title: 'Resolução CNSP 382/2020',
@@ -59,20 +60,7 @@ export default function Pagina() {
                 </div>
               </div>
               <div className="form-caixa form-caixa--branca">
-                <form className="pilha g12" id="form-cnsp" noValidate={true}>
-                  <label className="campo"><span>Número da apólice ou da proposta</span><input name="apolice" placeholder="Se não tiver em mãos, deixe em branco" /></label>
-                  <div className="campos-2">
-                    <label className="campo"><span>Nome</span><input name="nome" required={true} autoComplete="name" /></label>
-                    <label className="campo"><span>WhatsApp</span><input name="fone" type="tel" inputMode="tel" required={true} autoComplete="tel" /></label>
-                  </div>
-                  <label className="campo"><span>E-mail</span><input name="email" type="email" autoComplete="email" /></label>
-                  <label className="consent"><input type="checkbox" required={true} /><span>Autorizo a MX a entrar em contato sobre esta solicitação. <a href="/politica-de-privacidade">Política de Privacidade</a>.</span></label>
-                  <button className="btn btn--azul btn--largo" type="submit">Solicitar o detalhe da comissão</button>
-                  <div className="saida" id="saida-cnsp" role="status">
-                    <svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true" style={{ flex: '0 0 auto', marginTop: '3px' }}><use href="#i-escudo" /></svg>
-                    <span>Protótipo — nada é enviado.</span>
-                  </div>
-                </form>
+                <FormCnsp />
               </div>
             </div>
           </div>

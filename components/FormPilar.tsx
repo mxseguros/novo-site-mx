@@ -6,7 +6,7 @@ import { PRODUTOS, porGrupo, type Slug } from '@/content/produtos';
 import { PILARES, pilar as dadosPilar, pilarDoProduto, type PilarId } from '@/content/pilares';
 import { WHATSAPP } from '@/content/empresa';
 import Campo from '@/components/Campo';
-import { rastrear } from '@/lib/rastrear';
+import { Mel, Saida, useEnvio } from '@/components/Envio';
 import {
   mascaraTelefone, mascaraMesAno, mascaraIdades,
   validaTelefone, validaNome, validaMesAno,
@@ -27,8 +27,8 @@ import {
  *                       por um caso específico (saúde também atende família)
  *
  * Previdência fica em Linhas financeiras, mas não tem carta nem grupo: usa os
- * campos gerais. Sem destino ainda: o /api/lead é o M1 do plano de go-live, e
- * até lá o formulário avisa em vez de fingir que enviou.
+ * campos gerais. O envio vai ao /api/lead; se não chegar, o formulário oferece
+ * o WhatsApp com a mensagem pronta, em vez de fingir que enviou.
  */
 
 const MESES = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto',
@@ -73,7 +73,7 @@ export default function FormPilar({ pilar = 'saude', fixo = false, produto }: {
   produto?: Slug;
 }) {
   const [atual, setAtual] = useState<PilarId>(produto ? camposDoProduto(produto) : pilar);
-  const [enviado, setEnviado] = useState(false);
+  const { estado, enviar, reinicia } = useEnvio('cotacao', WHATSAPP.link);
   const [tentou, setTentou] = useState(false);
   const [erros, setErros] = useState<Record<string, string | null>>({});
 
@@ -99,7 +99,7 @@ export default function FormPilar({ pilar = 'saude', fixo = false, produto }: {
               aria-selected={atual === p.id}
               onClick={() => {
                 setAtual(p.id);
-                setEnviado(false);
+                reinicia();
               }}
             >
               {p.rotuloMenu}
@@ -115,11 +115,11 @@ export default function FormPilar({ pilar = 'saude', fixo = false, produto }: {
           e.preventDefault();
           setTentou(true);
           // reportValidity aponta o campo que falta, inclusive o consentimento
-          if (temErro || !e.currentTarget.reportValidity()) return;
-          rastrear('envio_formulario', { pilar: atual, produto });
-          setEnviado(true);
+          if (temErro || !e.currentTarget.reportValidity() || estado.fase === 'enviando') return;
+          enviar(e.currentTarget, produto ? PRODUTOS[produto].nome : dadosPilar(atual).rotuloMenu);
         }}
       >
+        <Mel />
         {atual !== 'voce' && produto && <input type="hidden" name="produto" value={produto} />}
 
         {atual === 'saude' && (
@@ -275,26 +275,15 @@ export default function FormPilar({ pilar = 'saude', fixo = false, produto }: {
           </span>
         </label>
 
-        <button className="btn btn--azul btn--largo" type="submit">
+        <button className="btn btn--azul btn--largo" type="submit" disabled={estado.fase === 'enviando'}>
           {dadosPilar(atual).botao}
         </button>
 
-        <div className="saida" role="status" data-visivel="1">
-          <svg
-            viewBox="0 0 20 20"
-            width="17"
-            height="17"
-            aria-hidden="true"
-            style={{ flex: '0 0 auto', marginTop: '3px' }}
-          >
-            <use href="#i-escudo" />
-          </svg>
-          <span>
-            {enviado
-              ? `O envio ainda não está ligado. Enquanto isso, chame a MX no WhatsApp — ${WHATSAPP.numero}.`
-              : 'Seus dados vão para a corretora, não para uma lista de disparo.'}
-          </span>
-        </div>
+        <Saida
+          estado={estado}
+          padrao="Seus dados vão para a corretora, não para uma lista de disparo."
+          depois="Um consultor da MX fala com você pelo WhatsApp ou por telefone."
+        />
       </form>
     </div>
   );

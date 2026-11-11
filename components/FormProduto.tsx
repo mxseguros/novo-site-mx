@@ -1,7 +1,6 @@
 import { PRODUTOS, type Slug } from '@/content/produtos';
 import { pilarDoProduto } from '@/content/pilares';
-import { SLA } from '@/content/empresa';
-import Dado from '@/components/Dado';
+import { RETORNO } from '@/content/empresa';
 import FormPilar from '@/components/FormPilar';
 
 /**
@@ -14,7 +13,7 @@ function textos(slug: Slug) {
   if (slug === 'previdencia') {
     return {
       titulo: 'Planejar a sua previdência',
-      lide: `Um corretor explica PGBL e VGBL com você. Retorno em ${SLA}, em dia útil.`,
+      lide: `Um corretor explica PGBL e VGBL com você. ${RETORNO}.`,
       lista: [
         'Orientação sobre PGBL, VGBL e regime tributário',
         'Sem projeção de rentabilidade: o que existe é regra, prazo e custo',
@@ -57,7 +56,7 @@ function textos(slug: Slug) {
     default:
       return {
         titulo: `Cotar ${p.nome.toLowerCase()}`,
-        lide: `Sem custo, sem compromisso e sem repassar seus dados. Retorno em ${SLA}, em dia útil.`,
+        lide: `Sem custo, sem compromisso e sem repassar seus dados. ${RETORNO}.`,
         lista: [
           'Comparamos mais de 40 seguradoras com o mesmo risco',
           'Explicamos franquia e cobertura antes de você decidir',
@@ -80,9 +79,7 @@ export default function FormProduto({ slug }: { slug: Slug }) {
           <div className="pilha g16">
             <span className="olho">Cotação</span>
             <h2>{conteudo.titulo}</h2>
-            <p className="lide">
-              <Dado>{conteudo.lide}</Dado>
-            </p>
+            <p className="lide">{conteudo.lide}</p>
             <ul className="lista-v">
               {conteudo.lista.map((i) => (
                 <li key={i}>{i}</li>

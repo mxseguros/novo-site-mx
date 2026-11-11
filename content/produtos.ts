@@ -600,7 +600,7 @@ export const PRODUTOS = {
     "faq": [
       {
         "pergunta": "Qual destino exige seguro?",
-        "resposta": "Vários países exigem cobertura médica mínima para entrada, e o valor varia por bloco de países. Confirmamos a exigência do seu destino antes de emitir. «DESTINOS»"
+        "resposta": "Vários países exigem cobertura médica mínima para entrada, e o valor varia por bloco de países. Confirmamos a exigência do seu destino antes de emitir."
       },
       {
         "pergunta": "Posso contratar em cima da hora?",
@@ -834,7 +834,7 @@ export const PRODUTOS = {
     "faq": [
       {
         "pergunta": "Com quanto tempo preciso contratar?",
-        "resposta": "Quanto antes, melhor, e nunca no mesmo dia. As seguradoras trabalham com prazo mínimo entre a emissão e a data do evento. «PRAZO-EVENTO»"
+        "resposta": "Quanto antes, melhor, e nunca no mesmo dia. As seguradoras trabalham com prazo mínimo entre a emissão e a data do evento."
       },
       {
         "pergunta": "O buffet não tem seguro próprio?",
@@ -1390,7 +1390,7 @@ export const PRODUTOS = {
       },
       {
         "pergunta": "Existe subvenção do governo?",
-        "resposta": "Existe um programa federal de subvenção ao prêmio do seguro rural, com regras e orçamento que mudam por safra. Confirmamos a disponibilidade no ano da sua contratação. «SUBVENCAO»"
+        "resposta": "Existe um programa federal de subvenção ao prêmio do seguro rural, com regras e orçamento que mudam por safra. Confirmamos a disponibilidade no ano da sua contratação."
       },
       {
         "pergunta": "Preciso segurar tudo de uma vez?",
@@ -1625,7 +1625,7 @@ export const PRODUTOS = {
       },
       {
         "pergunta": "Quanto tempo leva para emitir?",
-        "resposta": "É um dos produtos mais rápidos da carteira, justamente porque trava a contratação do estagiário. «PRAZO»"
+        "resposta": "É um dos produtos mais rápidos da carteira, justamente porque trava a contratação do estagiário."
       },
       {
         "pergunta": "Posso incluir estagiários ao longo do ano?",
@@ -1701,7 +1701,7 @@ export const PRODUTOS = {
       },
       {
         "pergunta": "Quanto tempo leva a análise?",
-        "resposta": "Depende do porte e do histórico da empresa. Empresa com cadastro já aprovado na seguradora emite muito mais rápido — por isso vale abrir o cadastro antes de precisar. «PRAZO»"
+        "resposta": "Depende do porte e do histórico da empresa. Empresa com cadastro já aprovado na seguradora emite muito mais rápido — por isso vale abrir o cadastro antes de precisar."
       },
       {
         "pergunta": "Se eu não cumprir o contrato, a seguradora paga e esquece?",

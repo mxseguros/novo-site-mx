@@ -1,36 +1,42 @@
-import { ESPECIALISTAS, WHATSAPP, pendente } from '@/content/empresa';
-import Dado from '@/components/Dado';
+import { ESPECIALISTAS, WHATSAPP, especialistaConfirmado } from '@/content/empresa';
 
 type Id = keyof typeof ESPECIALISTAS;
+
+const ICONE: Record<Id, string> = {
+  saude: 'i-vida',
+  financeiras: 'i-predio',
+  empresarial: 'i-escudo',
+};
 
 /**
  * Quem lidera cada pilar. É a prova concreta de "consultores que moram onde os
  * clientes moram": nome, foto e área, sem banco de imagem no lugar do rosto.
- * É caixa: sem hover.
+ * Enquanto nome e foto não estão confirmados em content/empresa.ts, o cartão
+ * mostra a área, sem rosto e sem nome. É caixa: sem hover.
  */
 function Cartao({ id, largo }: { id: Id; largo: boolean }) {
   const e = ESPECIALISTAS[id];
+  const confirmado = especialistaConfirmado(id);
+
   return (
-    <div className={'card esp' + (largo ? ' esp--largo' : '')}>
-      {pendente(e.foto) ? (
-        <div className="foto-vazia esp__foto">
-          <b>
-            <Dado>{e.foto}</Dado>
-          </b>
-        </div>
-      ) : (
+    <div className={'card esp' + (largo ? ' esp--largo' : '') + (confirmado ? '' : ' esp--sem-foto')}>
+      {confirmado ? (
         <div
           className="foto-larga esp__foto"
           style={{ backgroundImage: `url("${e.foto}")` }}
           role="img"
           aria-label={`Foto de ${e.nome}`}
         />
+      ) : (
+        <span className="card__icone">
+          <svg viewBox="0 0 20 20" aria-hidden="true">
+            <use href={`#${ICONE[id]}`} />
+          </svg>
+        </span>
       )}
       <div className="pilha g8">
         <span className="esp__area">{e.area}</span>
-        <h4>
-          <Dado>{e.nome}</Dado>
-        </h4>
+        <h4>{confirmado ? e.nome : `Equipe de ${e.area.toLowerCase()}`}</h4>
         <p>{e.faz}</p>
         <p className="esp__onde">Atende Itapira, Águas de Lindóia e região</p>
         {largo && (
@@ -46,7 +52,10 @@ function Cartao({ id, largo }: { id: Id; largo: boolean }) {
   );
 }
 
-/** Os três, em grade. */
+/**
+ * Os três, em grade. Só é usado com ESPECIALISTAS_CONFIRMADOS: sem nome e foto,
+ * a grade repetiria a seção de pilares.
+ */
 export default function Especialistas() {
   return (
     <div className="grade grade--3">

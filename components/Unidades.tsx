@@ -1,6 +1,5 @@
 import { HORARIO, UNIDADES, WHATSAPP, WHATSAPP_SINISTRO } from '@/content/empresa';
 import MapaUnidade from '@/components/MapaUnidade';
-import Dado from '@/components/Dado';
 
 /**
  * As duas unidades, com mapa e os dois canais. Home, /a-mx e /contato usam este
@@ -26,7 +25,7 @@ export default function Unidades() {
                 <span>
                   {u.rua} — {u.bairro}
                   <br />
-                  {u.cidade}/{u.uf} · CEP <Dado>{u.cep}</Dado>
+                  {u.cidade}/{u.uf} · CEP {u.cep}
                 </span>
               </p>
               <p className="dados__item">

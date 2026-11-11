@@ -1,18 +1,17 @@
 /**
  * Dados da corretora, em um lugar só: canais, unidades, especialistas, registros.
  *
- * Valor entre « » é dado que a MX ainda não confirmou. O componente Dado mostra
- * esse valor como token na tela, e o JSON-LD o deixa de fora. Para preencher,
- * basta trocar aqui. Antes da virada de DNS, `grep «` no código precisa voltar
- * vazio — nenhum destes valores pode ser inventado.
+ * Valor entre « » é dado que a MX ainda não confirmou. Nenhum deles aparece na
+ * tela: enquanto está pendente, cada seção usa um texto que é verdadeiro sem o
+ * dado (ou some), e o JSON-LD o deixa de fora. Para publicar o dado, basta
+ * trocar aqui — a seção passa a usá-lo sozinha. Nenhum destes valores pode ser
+ * inventado; `grep «` lista o que a MX ainda precisa mandar.
  */
 
-/** Trava a publicação. */
-export const SUSEP = '«SUSEP»';
-/** O site mostrava 07.499.352/0001-82 e o protótipo v2 registrou 45.154.654/0001-08. */
-export const CNPJ = '«CNPJ»';
-/** Os Correios dão 13940-172 para a Rua Argentina, mas no Jardim São Francisco. */
-export const CEP_FILIAL = '«CEP-FILIAL»';
+export const pendente = (valor: string) => valor.includes('«');
+
+export const CNPJ = '07.499.352/0001-82';
+export const CEP_FILIAL = '13940-000';
 /** Só o prazo que o time cumpre, como "até 1 hora útil". */
 export const SLA = '«SLA»';
 /** Sem isso, e sem revisão jurídica, o texto de consórcio não vai ao ar. */
@@ -32,7 +31,16 @@ export const WHATSAPP_SINISTRO = { numero: '(19) 98203-6147', link: 'https://wa.
 export const EMAIL = 'mxseguros@mxseguros.com.br';
 export const HORARIO = 'Segunda a sexta, 08:00 às 18:00';
 
-export const pendente = (valor: string) => valor.includes('«');
+/** Frase de prazo de retorno. Sem o SLA confirmado, não se promete prazo. */
+export const RETORNO = pendente(SLA) ? 'Retorno em horário comercial' : `Retorno em ${SLA}, em dia útil`;
+
+/** Com quem a MX intermedia consórcio. */
+export const COM_ADMINISTRADORAS = pendente(ADMINISTRADORAS)
+  ? 'administradoras autorizadas pelo Banco Central'
+  : ADMINISTRADORAS;
+
+/** A nota do Google só aparece com nota e total confirmados. */
+export const GOOGLE_CONFIRMADO = !pendente(NOTA_GOOGLE) && !pendente(TOTAL_AVALIACOES);
 
 export const UNIDADES = [
   {
@@ -75,3 +83,13 @@ export const ESPECIALISTAS = {
     faz: 'Empresa, condomínio, frota, transportes, agro e responsabilidade civil.',
   },
 };
+
+/**
+ * Nome e foto só vão para a tela juntos e confirmados. A seção "quem lidera cada
+ * área" da home e da /a-mx só existe com os três; antes disso, a página de pilar
+ * mostra a área sem rosto, e nenhum banco de imagem entra no lugar.
+ */
+export const especialistaConfirmado = (id: keyof typeof ESPECIALISTAS) =>
+  !pendente(ESPECIALISTAS[id].nome) && !pendente(ESPECIALISTAS[id].foto);
+export const ESPECIALISTAS_CONFIRMADOS = (Object.keys(ESPECIALISTAS) as (keyof typeof ESPECIALISTAS)[])
+  .every(especialistaConfirmado);

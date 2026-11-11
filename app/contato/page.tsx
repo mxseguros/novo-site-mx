@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import Unidades from '@/components/Unidades';
+import { FormContato } from '@/components/FormMensagem';
 
 export const metadata: Metadata = {
   title: 'Contato e unidades',
@@ -55,29 +56,7 @@ export default function Pagina() {
                 </div>
               </div>
               <div className="form-caixa">
-                <form className="pilha g12" id="form-contato" noValidate={true}>
-                  <label className="campo"><span>Assunto</span>
-                    <select name="assunto">
-                      <option value="">Selecione</option>
-                      <option>Quero uma cotação</option>
-                      <option>Dúvida sobre apólice ou boleto</option>
-                      <option>Sinistro</option>
-                      <option>Trabalhe conosco</option>
-                      <option>Outro assunto</option>
-                    </select></label>
-                  <div className="campos-2">
-                    <label className="campo"><span>Nome</span><input name="nome" required={true} autoComplete="name" /></label>
-                    <label className="campo"><span>Telefone</span><input name="fone" type="tel" inputMode="tel" required={true} autoComplete="tel" /></label>
-                  </div>
-                  <label className="campo"><span>E-mail</span><input name="email" type="email" autoComplete="email" /></label>
-                  <label className="campo"><span>Mensagem</span><textarea name="msg" rows={4}></textarea></label>
-                  <label className="consent"><input type="checkbox" required={true} /><span>Autorizo o contato da MX. <a href="/politica-de-privacidade">Política de Privacidade</a>.</span></label>
-                  <button className="btn btn--azul btn--largo" type="submit">Enviar mensagem</button>
-                  <div className="saida" id="saida-contato" role="status">
-                    <svg viewBox="0 0 20 20" width="17" height="17" aria-hidden="true" style={{ flex: '0 0 auto', marginTop: '3px' }}><use href="#i-escudo" /></svg>
-                    <span>Protótipo — nada é enviado.</span>
-                  </div>
-                </form>
+                <FormContato />
               </div>
             </div>
           </div>

@@ -5,9 +5,10 @@ import Especialistas from '@/components/Especialistas';
 import FormCotacao from '@/components/FormCotacao';
 import GuiasCards from '@/components/GuiasCards';
 import Unidades from '@/components/Unidades';
-import Dado from '@/components/Dado';
 import { pilar } from '@/content/pilares';
-import { NOTA_GOOGLE, TOTAL_AVALIACOES, WHATSAPP, WHATSAPP_SINISTRO } from '@/content/empresa';
+import {
+  ESPECIALISTAS_CONFIRMADOS, GOOGLE_CONFIRMADO, NOTA_GOOGLE, TOTAL_AVALIACOES, WHATSAPP, WHATSAPP_SINISTRO,
+} from '@/content/empresa';
 
 /**
  * Home — aprovada no protótipo v3 (Docs/prototipo-v3-pilares.html).
@@ -66,7 +67,8 @@ export default function Home() {
 
       <Pilares />
 
-      {/* Especialistas por pilar */}
+      {/* Especialistas por pilar — só com nome e foto dos três confirmados */}
+      {ESPECIALISTAS_CONFIRMADOS && (
         <section className="secao cinza">
           <div className="env pilha g24">
             <div className="pilha g8">
@@ -77,6 +79,7 @@ export default function Home() {
             <Especialistas />
           </div>
         </section>
+      )}
 
       <FormCotacao />
 
@@ -171,10 +174,14 @@ export default function Home() {
           <div className="env pilha g20">
             <div className="pilha g8">
               <span className="olho">Quem já é cliente</span>
-              <div className="prova">
-                <span className="prova__n num"><Dado>{NOTA_GOOGLE}</Dado></span>
-                <h2 className="prova__t">de 5 no Google, em <Dado>{TOTAL_AVALIACOES}</Dado> avaliações</h2>
-              </div>
+              {GOOGLE_CONFIRMADO ? (
+                <div className="prova">
+                  <span className="prova__n num">{NOTA_GOOGLE}</span>
+                  <h2 className="prova__t">de 5 no Google, em {TOTAL_AVALIACOES} avaliações</h2>
+                </div>
+              ) : (
+                <h2>O que os clientes escrevem sobre a MX no Google</h2>
+              )}
             </div>
             <div className="grade grade--3">
               <figure className="depo">
