@@ -70,6 +70,20 @@ export default function PaginaPilar({ id }: { id: keyof typeof CONTEUDO }) {
         </article>
       </section>
 
+      <section className="numeros">
+        <div className="env">
+          <div className="numeros__grade">
+            {provas.map((prova) => (
+              <div className="numeros__item" key={prova.titulo}>
+                <span className="numeros__n num">{prova.valor}</span>
+                <span className="numeros__t">{prova.titulo}</span>
+                <span className="numeros__d">{prova.descricao}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {c.conformidade && (
         <section className="secao--curta">
           <div className="env">
@@ -120,20 +134,6 @@ export default function PaginaPilar({ id }: { id: keyof typeof CONTEUDO }) {
               <div className="passo" key={passo.titulo}>
                 <h4>{passo.titulo}</h4>
                 <p>{passo.descricao}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="numeros">
-        <div className="env">
-          <div className="numeros__grade">
-            {provas.map((prova) => (
-              <div className="numeros__item" key={prova.titulo}>
-                <span className="numeros__n num">{prova.valor}</span>
-                <span className="numeros__t">{prova.titulo}</span>
-                <span className="numeros__d">{prova.descricao}</span>
               </div>
             ))}
           </div>
