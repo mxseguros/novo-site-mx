@@ -7,7 +7,7 @@ import GuiasCards from '@/components/GuiasCards';
 import Unidades from '@/components/Unidades';
 import { pilar } from '@/content/pilares';
 import {
-  ESPECIALISTAS_CONFIRMADOS, GOOGLE_CONFIRMADO, NOTA_GOOGLE, TOTAL_AVALIACOES, WHATSAPP, WHATSAPP_SINISTRO,
+  ESPECIALISTAS_CONFIRMADOS, GOOGLE_CONFIRMADO, NOTA_GOOGLE, TOTAL_AVALIACOES, WHATSAPP_SINISTRO,
 } from '@/content/empresa';
 
 /**
@@ -119,21 +119,6 @@ export default function Home() {
                   <h4>WhatsApp de sinistro da MX</h4>
                   <p>Documentação e acompanhamento do processo com a seguradora. Fora desse horário, comece pela assistência 24 horas e mande a mensagem: a MX responde no próximo dia útil.</p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-      {/* Os dois canais */}
-        <section className="secao--curta">
-          <div className="env">
-            <div className="oferta oferta--larga oferta--faixa" style={{ minHeight: 'auto' }}>
-              <span className="olho">Canais</span>
-              <h3>São dois números, e cada um tem um dono</h3>
-              <p>Um resolve tudo: cotação, apólice, boleto e dúvida. O outro é só para sinistro, e por isso não fica preso em conversa de venda.</p>
-              <div className="acoes" style={{ paddingTop: '.7rem' }}>
-                <a className="btn btn--zap btn--peq num" href={WHATSAPP.link}><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><use href="#i-zap" /></svg> {WHATSAPP.numero}</a>
-                <a className="btn btn--socorro btn--peq num" href={WHATSAPP_SINISTRO.link}>{WHATSAPP_SINISTRO.numero} · sinistro</a>
               </div>
             </div>
           </div>

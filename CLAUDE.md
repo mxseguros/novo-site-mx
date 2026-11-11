@@ -35,6 +35,8 @@ Vieram de rodadas de revisão e não devem ser reintroduzidas por conta própria
   cliente pediu a volta em 04/11/2026, no lugar do herói único. O slide de saúde não volta a dizer
   "a vida inteira". Consórcio e seguro empresarial seguem como entradas fixas abaixo da faixa de
   números.
+- **Sem o bloco "São dois números" na home.** Saiu a pedido do cliente em 11/11/2026; os dois
+  WhatsApp continuam no header, na seção de sinistro e no rodapé.
 - **Sem slogan.** "MX. Junto no seu negócio." saiu do topo, do rodapé e da /a-mx a pedido do cliente.
 - **O menu principal são os pilares**, não a lista de produtos. Auto, residencial, moto e pets
   ficam em "Para você", como porta de entrada.
