@@ -104,8 +104,8 @@ export default function Pagina() {
             <Secao n={1} titulo="Quais dados pessoais são coletados" aberta>
               <p>No site, só o que você digita nos formulários de cotação, contato ou pedido de comissão:</p>
               <ul className="checklist">
-                <li>Nome, telefone ou WhatsApp, e-mail e cidade</li>
-                <li>As informações do pedido, como empresa, número de vidas e idades, vencimento do contrato atual, ramo de atividade ou o bem que você quer proteger</li>
+                <li>Nome, telefone ou WhatsApp e cidade</li>
+                <li>E-mail, mensagem e número da apólice, quando você preenche</li>
               </ul>
               <p>Na cotação e na contratação, a MX coleta o que a seguradora, a operadora ou a administradora exige na proposta:</p>
               <ul className="checklist">

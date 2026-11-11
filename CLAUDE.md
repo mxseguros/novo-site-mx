@@ -37,6 +37,8 @@ Vieram de rodadas de revisão e não devem ser reintroduzidas por conta própria
   números.
 - **Sem o bloco "São dois números" na home.** Saiu a pedido do cliente em 11/11/2026; os dois
   WhatsApp continuam no header, na seção de sinistro e no rodapé.
+- **Formulário de cotação genérico:** nome, WhatsApp, cidade e autorização, igual em todo o site.
+  O consultor de vendas levanta o resto na conversa. Sem abas nem campos por pilar (11/11/2026).
 - **Sem slogan.** "MX. Junto no seu negócio." saiu do topo, do rodapé e da /a-mx a pedido do cliente.
 - **O menu principal são os pilares**, não a lista de produtos. Auto, residencial, moto e pets
   ficam em "Para você", no menu. A faixa de atalhos "Para você" abaixo dos pilares da home saiu a

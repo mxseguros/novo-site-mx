@@ -4,8 +4,8 @@ import { RETORNO } from '@/content/empresa';
 import FormPilar from '@/components/FormPilar';
 
 /**
- * Bloco de cotação da página de produto. O texto e os campos seguem o pilar do
- * produto; os campos ficam em FormPilar.
+ * Bloco de cotação da página de produto. O texto segue o pilar do produto; o
+ * formulário é o mesmo de todo o site, e o produto vai como assunto do lead.
  */
 function textos(slug: Slug) {
   const p = PRODUTOS[slug];
@@ -26,7 +26,7 @@ function textos(slug: Slug) {
     case 'financeiras':
       return {
         titulo: 'Simular este consórcio',
-        lide: 'O consultor monta a simulação com as administradoras parceiras e explica o custo total antes da adesão.',
+        lide: 'Deixe seu contato e um consultor monta a simulação com você, explicando o custo total antes da adesão.',
         lista: [
           'Prazo, taxa de administração e regras de lance explicados',
           'Consórcio não é seguro nem investimento',
@@ -35,8 +35,8 @@ function textos(slug: Slug) {
       };
     case 'saude':
       return {
-        titulo: 'Sem número de vidas e idade, não existe cotação',
-        lide: 'Preço de plano é calculado por faixa etária. Estes campos são o que transforma um pedido em uma proposta de verdade.',
+        titulo: 'Cotar este plano',
+        lide: `Deixe seu contato e um consultor levanta com você o número de vidas, as idades e a rede que importa. ${RETORNO}.`,
         lista: [
           'Comparação entre operadoras e redes',
           'Explicação da regra de reajuste por faixa etária',
@@ -46,7 +46,7 @@ function textos(slug: Slug) {
     case 'empresarial':
       return {
         titulo: 'Falar com um especialista',
-        lide: 'Aqui o formulário não fecha a venda — ele evita que você repita a história. Um corretor liga com a cotação já comparada.',
+        lide: `Deixe seu contato e um consultor conversa com você sobre a empresa e o que já está segurado. ${RETORNO}.`,
         lista: [
           'Atendimento com quem cuida dessa carteira',
           'Comparação entre as seguradoras parceiras',

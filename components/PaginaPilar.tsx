@@ -164,7 +164,7 @@ export default function PaginaPilar({ id }: { id: keyof typeof CONTEUDO }) {
               <Especialista id={c.especialista} />
             </div>
             <div className="card">
-              <FormPilar pilar={id} fixo />
+              <FormPilar pilar={id} />
             </div>
           </div>
         </div>

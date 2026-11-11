@@ -879,16 +879,10 @@ code{ font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size
 /* Sem nome e foto confirmados, o cartão é a área: ícone em cima, como os outros cards. */
 @container palco (min-width: 640px){ .esp--largo.esp--sem-foto{ grid-template-columns: 1fr; } }
 
-/* Formulário por pilar. Sem o min-width, as abas (que não quebram linha) esticam
-   a trilha da grade e a página inteira ganha rolagem lateral no celular. */
+/* Sem o min-width, conteúdo que não quebra linha estica a trilha da grade e a
+   página inteira ganha rolagem lateral no celular. */
 .grade > *{ min-width: 0; }
 .token{ white-space: normal; overflow-wrap: anywhere; }
-.form-pilar .tabs{ margin-bottom: 1rem; }
-.checks{ display: grid; gap: .45rem .9rem; border: 0; margin: 0; padding: 0; min-width: 0; }
-@container palco (min-width: 520px){ .checks{ grid-template-columns: 1fr 1fr; } }
-.checks legend{ padding: 0; font-size: .8125rem; color: var(--texto); margin-bottom: .35rem; }
-.check{ display: flex; gap: .5rem; align-items: center; font-size: .9375rem; color: var(--preto); }
-.check input{ width: 18px; height: 18px; accent-color: var(--azul); flex: 0 0 auto; }
 
 /* Sinistro: o que é 24h e o que é horário comercial */
 .horarios{ display: grid; gap: .75rem; }

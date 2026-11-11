@@ -71,8 +71,8 @@ export default function Pagina() {
               <span className="olho">Cotação</span>
               <h2>Cotar um seguro pessoal</h2>
               <p className="lide">
-                Você preenche uma vez. A MX manda o risco às seguradoras que operam o produto e
-                explica a diferença entre as propostas.
+                Deixe seu contato. Um consultor da MX entende o que você quer proteger, cota nas
+                seguradoras que operam o produto e explica a diferença entre as propostas.
               </p>
               <ul className="lista-v">
                 <li>{RETORNO}, por WhatsApp ou telefone.</li>
@@ -80,7 +80,7 @@ export default function Pagina() {
               </ul>
             </div>
             <div className="card">
-              <FormPilar pilar="voce" fixo />
+              <FormPilar pilar="voce" />
             </div>
           </div>
         </div>

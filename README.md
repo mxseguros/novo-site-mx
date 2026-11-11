@@ -89,7 +89,8 @@ nenhuma administradora, e voltaram depois. Com o consórcio virando pilar, o tex
 
 Saúde para empresas, Linhas financeiras e Seguro empresarial, com "Para você" como porta de entrada.
 `content/pilares.ts` define o menu, a chamada de cada pilar e as páginas. O herói da home é um slider de
-três destaques, e o formulário (`components/FormPilar.tsx`) pede dados diferentes por pilar.
+três destaques. O formulário de cotação (`components/FormPilar.tsx`) é o mesmo em todo o site — nome,
+WhatsApp e cidade — e o pilar ou produto da página vai como assunto do lead.
 
 ### 5. Valor entre « » é dado pendente
 

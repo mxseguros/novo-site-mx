@@ -3,7 +3,7 @@ import FormPilar from '@/components/FormPilar';
 
 /**
  * Bloco de cotação da home. Substitui os quatro formulários duplicados do site
- * antigo (problema P10 do diagnóstico). Os campos ficam em FormPilar.
+ * antigo (problema P10 do diagnóstico). O formulário fica em FormPilar.
  */
 export default function FormCotacao() {
   return (
@@ -15,10 +15,10 @@ export default function FormCotacao() {
         >
           <div className="pilha g16">
             <span className="olho">Cotação</span>
-            <h2>Conte o que a sua empresa precisa</h2>
+            <h2>Peça sua cotação</h2>
             <p className="lide">
-              Cada assunto pede dados diferentes. Com eles, o consultor já chega na primeira
-              conversa sabendo o que comparar.
+              Deixe seu nome e WhatsApp. Um consultor da MX entra em contato para entender o que
+              você precisa e montar a cotação.
             </p>
             <ul className="lista-v">
               <li>Sem custo e sem compromisso. A corretagem já está no preço da apólice.</li>
