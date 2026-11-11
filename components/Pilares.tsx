@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { PRODUTOS, SLUGS, type Slug } from '@/content/produtos';
+import { SLUGS } from '@/content/produtos';
 import { pilar } from '@/content/pilares';
 
 /**
- * Os três pilares da home, mais a porta de entrada "Para você".
+ * Os três pilares da home. "Para você" fica no menu, não aqui.
  *
  * Substitui a vitrine de produtos em abas: a página deixa de dizer "vendemos de
  * tudo" e passa a contar uma história só. A saúde protege quem trabalha na
@@ -19,14 +19,6 @@ const CARDS = [
   { id: 'empresarial', chip: 'Patrimônio', icone: 'i-escudo', foto: '--f-card-empresa', titulo: 'Seguro empresarial',
     texto: 'Empresa, condomínio, frota, carga, agro e responsabilidade civil.' },
 ] as const;
-
-const PORTA: { slug: Slug; rotulo: string }[] = [
-  { slug: 'automovel', rotulo: PRODUTOS.automovel.rotuloMenu },
-  { slug: 'residencial', rotulo: PRODUTOS.residencial.rotuloMenu },
-  { slug: 'vida-individual', rotulo: 'Vida' },
-  { slug: 'moto', rotulo: PRODUTOS.moto.rotuloMenu },
-  { slug: 'pets', rotulo: 'Pets' },
-];
 
 export default function Pilares() {
   return (
@@ -60,26 +52,6 @@ export default function Pilares() {
               <span className="foto-card__btn">{pilar(c.id).chamada}</span>
             </Link>
           ))}
-        </div>
-
-        <div className="porta">
-          <div className="porta__rot">
-            <b>Para você</b>
-            <span>Carro, casa, vida e viagem, com o mesmo atendimento</span>
-          </div>
-          <div className="chip-lista">
-            {PORTA.map((p) => (
-              <Link className="chip chip--link" href={`/seguros/${p.slug}`} key={p.slug}>
-                {p.rotulo}
-              </Link>
-            ))}
-          </div>
-          <Link className="seta porta__seta" href={pilar('voce').rota}>
-            Ver os seguros para você{' '}
-            <svg viewBox="0 0 20 20" aria-hidden="true">
-              <use href="#i-seta" />
-            </svg>
-          </Link>
         </div>
 
         <Link className="seta" href="/seguros">

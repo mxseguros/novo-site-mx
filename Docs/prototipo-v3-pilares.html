@@ -874,16 +874,6 @@ code{ font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size
 .oferta--entrada h3{ max-width: 24ch; font-size: 1.2rem; }
 .oferta--entrada p{ max-width: 46ch; }
 
-/* Porta de entrada "Para você" */
-.porta{ display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem;
-  padding: 1rem 1.2rem; border: 1px solid var(--linha); border-radius: var(--raio-card); background: #fff; }
-.porta__rot{ display: flex; flex-direction: column; gap: .1rem; margin-right: .4rem; }
-.porta__rot b{ font-size: 1rem; }
-.porta__rot span{ font-size: .8125rem; color: var(--texto-fraco); }
-.porta__seta{ margin-left: auto; align-self: center; }
-.chip--link{ text-decoration: none; transition: background-color .16s ease, color .16s ease; }
-.chip--link:hover{ background: var(--azul-tenue-leve); color: var(--azul); }
-
 /* Especialista por pilar. É caixa: sem hover. */
 .esp{ gap: .6rem; }
 .esp__foto{ min-height: 0; aspect-ratio: 4 / 3; max-width: 100%; }
@@ -964,14 +954,6 @@ html, body{ background: var(--branco); }
 .oferta--entrada h3{ max-width: 24ch; font-size: 1.2rem; }
 .oferta--entrada p{ max-width: 46ch; }
 
-/* Porta de entrada "Para você" — linha de atalhos */
-.porta{ display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem;
-  padding: 1rem 1.2rem; border: 1px solid var(--linha); border-radius: var(--raio-card); background: #fff; }
-.porta__rot{ display: flex; flex-direction: column; gap: .1rem; margin-right: .4rem; }
-.porta__rot b{ font-size: 1rem; }
-.porta__rot span{ font-size: .8125rem; color: var(--texto-fraco); }
-.chip--link{ text-decoration: none; transition: background-color .16s ease, color .16s ease; }
-.chip--link:hover{ background: var(--azul-tenue-leve); color: var(--azul); }
 
 /* Especialista por pilar. É caixa: sem hover. */
 .esp{ gap: .6rem; }
@@ -1238,17 +1220,6 @@ img.unidade__mapa{ object-fit: cover; height: 200px; }
           <p>Empresa, condomínio, frota, carga, agro e responsabilidade civil.</p>
           <span class="foto-card__btn">Revisar meu seguro</span>
         </a>
-      </div>
-      <div class="porta">
-        <div class="porta__rot"><b>Para você</b><span>Carro, casa, vida e viagem, com o mesmo atendimento</span></div>
-        <div class="chip-lista">
-          <a class="chip chip--link" href="https://novo-site-mx.vercel.app/seguros/automovel" target="_blank" rel="noopener">Automóvel</a>
-          <a class="chip chip--link" href="https://novo-site-mx.vercel.app/seguros/residencial" target="_blank" rel="noopener">Residencial</a>
-          <a class="chip chip--link" href="https://novo-site-mx.vercel.app/seguros/vida-individual" target="_blank" rel="noopener">Vida</a>
-          <a class="chip chip--link" href="https://novo-site-mx.vercel.app/seguros/moto" target="_blank" rel="noopener">Moto</a>
-          <a class="chip chip--link" href="https://novo-site-mx.vercel.app/seguros/pets" target="_blank" rel="noopener">Pets</a>
-        </div>
-        <a class="seta" href="#para-voce" style="margin-left:auto;align-self:center">Ver os seguros para você <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta"/></svg></a>
       </div>
       <a class="seta" href="#seguros">Ver todos os <span data-total></span> seguros e soluções <svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-seta"/></svg></a>
     </div>

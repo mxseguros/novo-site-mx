@@ -39,7 +39,8 @@ Vieram de rodadas de revisão e não devem ser reintroduzidas por conta própria
   WhatsApp continuam no header, na seção de sinistro e no rodapé.
 - **Sem slogan.** "MX. Junto no seu negócio." saiu do topo, do rodapé e da /a-mx a pedido do cliente.
 - **O menu principal são os pilares**, não a lista de produtos. Auto, residencial, moto e pets
-  ficam em "Para você", como porta de entrada.
+  ficam em "Para você", no menu. A faixa de atalhos "Para você" abaixo dos pilares da home saiu a
+  pedido do cliente em 11/11/2026.
 
 ## Conteúdo
 
