@@ -8,14 +8,16 @@ import FormPilar from '@/components/FormPilar';
 export default function FormCotacao() {
   return (
     <section className="secao" id="cotar">
-      <div className="env">
+      <div className="env pilha g24">
+        <div className="pilha g8">
+          <span className="olho">Cotação</span>
+          <h2>Peça sua cotação</h2>
+        </div>
         <div
           className="grade grade--2"
           style={{ gap: 'clamp(1.5rem,4cqi,3rem)', alignItems: 'start' }}
         >
           <div className="pilha g16">
-            <span className="olho">Cotação</span>
-            <h2>Peça sua cotação</h2>
             <p className="lide">
               Deixe seu nome e WhatsApp. Um consultor da MX entra em contato para entender o que
               você precisa e montar a cotação.

@@ -153,14 +153,16 @@ export default function PaginaPilar({ id }: { id: keyof typeof CONTEUDO }) {
       )}
 
       <section className="secao cinza" id={c.ancora}>
-        <div className="env">
+        <div className="env pilha g24">
+          <div className="pilha g8">
+            <span className="olho">Quem atende</span>
+            <h2>{c.atendimento}</h2>
+          </div>
           <div
             className="grade grade--2"
             style={{ gap: 'clamp(1.5rem,4cqi,3rem)', alignItems: 'start' }}
           >
             <div className="pilha g16">
-              <span className="olho">Quem atende</span>
-              <h2>{c.atendimento}</h2>
               <Especialista id={c.especialista} />
             </div>
             <div className="card">

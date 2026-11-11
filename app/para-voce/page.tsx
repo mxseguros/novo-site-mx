@@ -62,14 +62,16 @@ export default function Pagina() {
       </section>
 
       <section className="secao cinza" id="cotar-voce">
-        <div className="env">
+        <div className="env pilha g24">
+          <div className="pilha g8">
+            <span className="olho">Cotação</span>
+            <h2>Cotar um seguro pessoal</h2>
+          </div>
           <div
             className="grade grade--2"
             style={{ gap: 'clamp(1.5rem,4cqi,3rem)', alignItems: 'start' }}
           >
             <div className="pilha g16">
-              <span className="olho">Cotação</span>
-              <h2>Cotar um seguro pessoal</h2>
               <p className="lide">
                 Deixe seu contato. Um consultor da MX entende o que você quer proteger, cota nas
                 seguradoras que operam o produto e explica a diferença entre as propostas.

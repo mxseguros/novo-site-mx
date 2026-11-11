@@ -71,14 +71,16 @@ export default function FormProduto({ slug }: { slug: Slug }) {
 
   return (
     <section className="secao" id="cotar-produto">
-      <div className="env">
+      <div className="env pilha g24">
+        <div className="pilha g8">
+          <span className="olho">Cotação</span>
+          <h2>{conteudo.titulo}</h2>
+        </div>
         <div
           className="grade grade--2"
-          style={{ gap: 'clamp(1.5rem,4cqi,3rem)', alignItems: 'center' }}
+          style={{ gap: 'clamp(1.5rem,4cqi,3rem)', alignItems: 'start' }}
         >
           <div className="pilha g16">
-            <span className="olho">Cotação</span>
-            <h2>{conteudo.titulo}</h2>
             <p className="lide">{conteudo.lide}</p>
             <ul className="lista-v">
               {conteudo.lista.map((i) => (

@@ -47,11 +47,13 @@ export default function Pagina() {
         </section>
       
         <section className="secao cinza">
-          <div className="env">
-            <div className="grade grade--2" style={{ gap: 'clamp(1.5rem,4cqi,3rem)', alignItems: 'center' }}>
+          <div className="env pilha g24">
+            <div className="pilha g8">
+              <span className="olho">Seu direito</span>
+              <h2>Você pode pedir o percentual de comissão da sua apólice</h2>
+            </div>
+            <div className="grade grade--2" style={{ gap: 'clamp(1.5rem,4cqi,3rem)', alignItems: 'start' }}>
               <div className="pilha g16">
-                <span className="olho">Seu direito</span>
-                <h2>Você pode pedir o percentual de comissão da sua apólice</h2>
                 <p>Para total transparência dos custos da apólice e dos descontos legais, colocamos à disposição a apólice e demais esclarecimentos sobre o percentual de comissão cobrado pela prestação dos nossos serviços, nos termos do <b>artigo 4º, § 1º, inciso IV, da Resolução CNSP nº 382/2020</b>.</p>
                 <p>Basta solicitar pelo formulário ao lado, por e-mail ou pelo WhatsApp. Respondemos no próximo dia útil.</p>
                 <div className="dados">

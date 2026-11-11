@@ -43,11 +43,13 @@ export default function Pagina() {
         </section>
       
         <section className="secao">
-          <div className="env">
+          <div className="env pilha g24">
+            <div className="pilha g8">
+              <span className="olho">Escreva para a gente</span>
+              <h2>Prefere por escrito?</h2>
+            </div>
             <div className="grade grade--2" style={{ gap: 'clamp(1.5rem,4cqi,3rem)', alignItems: 'start' }}>
               <div className="pilha g16">
-                <span className="olho">Escreva para a gente</span>
-                <h2>Prefere por escrito?</h2>
                 <p className="lide">Respondemos no próximo dia útil. Para urgência, use o WhatsApp de sinistro.</p>
                 <div className="dados">
                   <p className="dados__item"><svg viewBox="0 0 20 20" aria-hidden="true"><use href="#i-mail" /></svg><span><span className="dados__rot">E-mail</span><a href="mailto:mxseguros@mxseguros.com.br">mxseguros@mxseguros.com.br</a></span></p>
